@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/magicmap" element={<MagicMap />}></Route>
-
+        {/*  */}
         {/* <Route path="/about" element={<About />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/product/:num" element={<ProductDetail />}></Route> */}

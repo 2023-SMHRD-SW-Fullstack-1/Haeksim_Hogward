@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dayo = () => {
   return (
-    <div>Dayo</div>
+    <div>Dayo123123123</div>
   )
 }
 

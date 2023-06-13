@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header";
 import logo from "../logo.svg";
 
 const Main = () => {

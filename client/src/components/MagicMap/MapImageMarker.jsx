@@ -1,5 +1,7 @@
 import React from "react";
 import { MapMarker } from "react-kakao-maps-sdk";
+import moonimage from "../../assets/img/moonauthmark.png";
+import babimage from "../../assets/img/riceauthmark.png";
 
 const MapImageMarker = ({ lm, setClickedLandMark, setIsOpen }) => {
   // 지도 안의 마커 생성
@@ -11,10 +13,11 @@ const MapImageMarker = ({ lm, setClickedLandMark, setIsOpen }) => {
         lng: lm.t_landmark.lng,
       }}
       image={{
-        src: lm.t_landmark.lm_photo1, // 마커이미지의 주소입니다
+        // src: lm.t_landmark.lm_photo1, // 마커이미지의 주소입니다
+        src: lm.t_landmark.them_seq === 1 ? moonimage : babimage,
         size: {
-          width: 64,
-          height: 69,
+          width: 40,
+          height: 50,
         }, // 마커이미지의 크기입니다
         options: {
           offset: {

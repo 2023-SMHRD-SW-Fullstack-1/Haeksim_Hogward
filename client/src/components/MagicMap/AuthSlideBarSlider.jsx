@@ -1,18 +1,24 @@
 import React from "react";
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/effect-creative";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+// import required modules
+import { EffectCreative, Navigation, Pagination } from "swiper";
+
 import "../../assets/css/AuthSideBarSlider.css";
 
-// import required modules
-import { EffectCreative } from "swiper";
-const AuthSlideBarSlider = () => {
+const AuthSlideBarSlider = ({ clickedLandmark }) => {
+  const images = [
+    clickedLandmark?.t_landmark.lm_photo1,
+    clickedLandmark?.t_landmark.lm_photo2,
+    clickedLandmark?.t_landmark.lm_photo3,
+  ];
+
   return (
     <div>
       <Swiper
@@ -28,19 +34,21 @@ const AuthSlideBarSlider = () => {
             translate: ["120%", 0, -500],
           },
         }}
-        modules={[EffectCreative]}
+        // 좌우 네비게이션 버튼
+        navigation={true}
+        pagination={{
+          // 파지네이션
+          dynamicBullets: true,
+        }}
+        modules={[EffectCreative, Navigation, Pagination]}
+        loop={true}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <img
-            alt="close"
-            width="100%"
-            height="100%"
-            src="http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
-          ></img>
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
+        {images.map((item, index) => (
+          <SwiperSlide key={index}>
+            <img alt="close" width="100%" height="100%" src={item}></img>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

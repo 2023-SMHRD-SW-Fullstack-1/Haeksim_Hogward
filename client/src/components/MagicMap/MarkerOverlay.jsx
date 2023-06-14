@@ -4,7 +4,6 @@ import "../../assets/css/MarkerOverlay.css";
 
 const MarkerOverlay = ({ lm, setClickedLandMark, setIsOpen }) => {
   // 마커 위 오버레이창
-  console.log(lm);
   return (
     <CustomOverlayMap
       position={{ lat: lm.t_landmark.lat, lng: lm.t_landmark.lng }}

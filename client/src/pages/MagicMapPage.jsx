@@ -5,7 +5,7 @@ const MagicMapPage = () => {
   // 사용자의 테마선택
   const [selectedThema, setSelectedThema] = useState(0);
   // 현재 선택된 랜드마크
-  const [clickedLandmark, setClickedLandMark] = useState({});
+  const [clickedLandmark, setClickedLandMark] = useState();
   return (
     <div>
       <div>

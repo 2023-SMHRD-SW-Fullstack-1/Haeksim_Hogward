@@ -184,7 +184,11 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           )}
         </Map>
 
-        <AuthMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+        <AuthMenu
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          clickedLandmark={clickedLandmark}
+        />
       </div>
     </div>
   );

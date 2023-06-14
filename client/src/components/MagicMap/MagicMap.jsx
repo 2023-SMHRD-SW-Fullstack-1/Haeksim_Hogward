@@ -9,6 +9,7 @@ import {
 } from "react-kakao-maps-sdk";
 import MapImageMarker from "./MapImageMarker";
 import AuthMenu from "./AuthMenu";
+import MarkerOverlay from "./MarkerOverlay";
 
 const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   // 시군구 경계값 좌표
@@ -34,6 +35,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
 
   // 랜드마크 데이터 가져오는 함수
   const getLandMarksAPI = () => {
+    // setLandMarks(res.data)
     axios.get("auth_dummy.json").then((res) => setLandMarks(res.data));
   };
 
@@ -87,22 +89,28 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           {/* 맵 마커 생성 */}
           {selectedThema === 0
             ? landmarks?.map((lm) => (
-                <MapImageMarker
-                  key={lm.lm_seq}
-                  lm={lm}
-                  clickedLandmark={clickedLandmark}
-                  setClickedLandMark={setClickedLandMark}
-                  setIsOpen={setIsOpen}
-                />
+                <>
+                  <MapImageMarker key={`imgmarker-${lm.lm_seq}`} lm={lm} />
+                  <MarkerOverlay
+                    key={`overlay-${lm.lm_seq}`}
+                    lm={lm}
+                    clickedLandmark={clickedLandmark}
+                    setClickedLandMark={setClickedLandMark}
+                    setIsOpen={setIsOpen}
+                  />
+                </>
               ))
-            : newLandMarks.map((lm) => (
-                <MapImageMarker
-                  key={lm.lm_seq}
-                  lm={lm}
-                  clickedLandmark={clickedLandmark}
-                  setClickedLandMark={setClickedLandMark}
-                  setIsOpen={setIsOpen}
-                />
+            : newLandMarks.map((lm, index) => (
+                <>
+                  <MapImageMarker key={`imgmarker-${lm.lm_seq}`} lm={lm} />
+                  <MarkerOverlay
+                    key={`overlay-${lm.lm_seq}`}
+                    lm={lm}
+                    clickedLandmark={clickedLandmark}
+                    setClickedLandMark={setClickedLandMark}
+                    setIsOpen={setIsOpen}
+                  />
+                </>
               ))}
           {/* 경계구현 */}
           {areas.map((area, index) => (

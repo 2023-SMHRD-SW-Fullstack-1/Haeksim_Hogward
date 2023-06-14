@@ -1,6 +1,6 @@
-{
-    "member" : [
-        {
+[
+    {
+        "member" : {
             "mem_email" : "asdf@naver.com",
             "mem_pw" : "asdf",
             "mem_birthdate" : 198812051210,
@@ -11,8 +11,11 @@
             "admin_yn" : 0,
             "mem_nick" : "닉넴",
             "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
-        },
-        {
+
+        }
+    },
+    {
+        "member" : {
             "mem_email" : "asdf@naver.com",
             "mem_pw" : "asdf",
             "mem_birthdate" : 198812051210,
@@ -23,8 +26,12 @@
             "admin_yn" : 0,
             "mem_nick" : "닉넴2",
             "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
-        },
-        {
+
+        }
+
+    },
+    {
+        "member" : {
             "mem_email" : "asdf@naver.com",
             "mem_pw" : "asdf",
             "mem_birthdate" : 198812051210,
@@ -36,5 +43,5 @@
             "mem_nick" : "닉넴3",
             "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
         }
-    ]
-}
+    }
+]

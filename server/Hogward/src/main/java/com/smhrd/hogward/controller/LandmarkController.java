@@ -19,9 +19,9 @@ public class LandmarkController {
 	private LandmarkService landService;
 	
 	//랜드마크 리스트 모두 불러오기
-	@GetMapping("/")
-	public JSONArray landmarkList() {
-		JSONArray array = landService.landmarkList();
+	@GetMapping("/alllandmark")
+	public JSONArray lnadmarkList() {
+		JSONArray array = landService.lnadmarkList();
 		return array;
 	}
 	

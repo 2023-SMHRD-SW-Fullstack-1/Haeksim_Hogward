@@ -31,8 +31,8 @@ public class LandmarkService {
 	ResourceLoader resourceLoader;
 	
 	//랜드마크 리스트 모두 보기
-		public JSONArray landmarkList() {
-			List<T_Landmark> list = landMapper.landmarkList();
+		public JSONArray lnadmarkList() {
+			List<T_Landmark> list = landMapper.lnadmarkList();
 		
 		
 		JSONArray jsonArray = new JSONArray();
@@ -68,7 +68,7 @@ public class LandmarkService {
 			
 			//2.product 객체를 jsonObject(key:value) 형태로 변경하기
 			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-			obj.put("landmarkList", land); //비어있는 json object 에 값 추가
+			obj.put("t_landmark", land); //비어있는 json object 에 값 추가
 			
 			jsonArray.add(obj); 
 			

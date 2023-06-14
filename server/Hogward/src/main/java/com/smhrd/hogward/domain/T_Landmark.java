@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class T_Landmark {
-	private int t_landmark;
+	private int lm_seq;
 	private String lm_name;
 	private double lat;
 	private double lng;

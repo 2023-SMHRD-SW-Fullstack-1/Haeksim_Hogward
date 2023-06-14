@@ -1,22 +1,26 @@
-{
-  "verification": [
-    {
+[
+  {
+    "verification": {
       "veri_seq": 1,
       "im_seq": 1,
       "mem_email": "aaa@naver.com",
       "veri_datetime": 20230618100101,
       "veri_photo1": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwophones.tistory.com%2F254&psig=AOvVaw1rdJnqRDMJoBzBNvvbk-l8&ust=1686790940777000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNCs0ojIwf8CFQAAAAAdAAAAABAE",
       "veri_memo": "하하"
-    },
-    {
+    }
+  },
+  {
+    "verification": {
       "veri_seq": 2,
       "im_seq": 2,
       "mem_email": "aaa@naver.com",
       "veri_datetime": 20230618100101,
       "veri_photo1": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwophones.tistory.com%2F144&psig=AOvVaw1rdJnqRDMJoBzBNvvbk-l8&ust=1686790940777000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNCs0ojIwf8CFQAAAAAdAAAAABAJ",
       "veri_memo": "가가가가"
-    },
-    {
+    }
+  },
+  {
+    "verification": {
       "veri_seq": 3,
       "im_seq": 3,
       "mem_email": "aaa@naver.com",
@@ -24,5 +28,5 @@
       "veri_photo1": "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.dctc.or.kr%2Fbbs%2Fboard.php%3Fbo_table%3Dtour_gwangju%26wr_id%3D73&psig=AOvVaw1rdJnqRDMJoBzBNvvbk-l8&ust=1686790940777000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNCs0ojIwf8CFQAAAAAdAAAAABAR",
       "veri_memo": "나"
     }
-  ]
-}
+  }
+]

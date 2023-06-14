@@ -1,0 +1,12 @@
+{
+    "thema" : [
+        {
+            "them_seq" : 1,
+            "them_name" : "관광지"
+        },
+        {
+            "them_seq" : 2,
+            "them_name" : "밥집/카페"
+        }
+    ]
+}

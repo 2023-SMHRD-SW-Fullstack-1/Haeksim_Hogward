@@ -3,6 +3,7 @@ import "../../assets/css/AuthMenu.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import AuthSlideBarSlider from "./AuthSlideBarSlider";
+import { AuthBoard } from "./AuthBoard";
 
 // 지도페이지 우측 인증사이드바
 const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
@@ -20,14 +21,27 @@ const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
 
   return (
     <div className="authmenu" ref={authRef}>
+      {/* 슬라이드 */}
       <div className="authmenu_slider">
         <AuthSlideBarSlider clickedLandmark={clickedLandmark} />
       </div>
+      {/* 닫는버튼 */}
       <div
         className="authmenu_rightmark_container"
         onClick={() => setIsOpen(false)}
       >
         <FontAwesomeIcon icon={faAngleRight} className="authmenu_rightmark" />
+      </div>
+      {/* 제목, 주소 */}
+      <div className="authmenu_des">
+        <p>{clickedLandmark?.t_landmark.lm_name}</p>
+        <p>{clickedLandmark?.t_landmark.lm_addr}</p>
+      </div>
+      <div className="authmenu_authen">
+        <button>인증하기</button>
+      </div>
+      <div className="authmenu_authboard">
+        <AuthBoard clickedLandmark={clickedLandmark} />
       </div>
     </div>
   );

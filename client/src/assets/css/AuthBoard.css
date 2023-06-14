@@ -1,0 +1,13 @@
+.authboard {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding: 2%;
+  gap: 3px;
+}
+
+.authboard > .authboard_item {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}

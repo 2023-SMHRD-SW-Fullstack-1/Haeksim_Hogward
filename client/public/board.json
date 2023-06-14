@@ -1,55 +1,56 @@
 [
-    {
-        "board" : {
-            "b_seq" : 1,
-            "b_title" : "가나",
-            "b_content" : "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
-            "b_tag" : "가나다라마바사",
-            "b_datetime" : 202306141015,
-            "b_loc" : "경기장",
-            "lat" : 35.182583,
-            "lng" : 126.889532,
-            "mem_email" : "asd@naver.com",
-            "b_views" : 1,
-            "b_likes" : 10,
-            "b_file" : "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.sisaweek.com%2Fnews%2FarticleView.html%3Fidxno%3D129567&psig=AOvVaw3HBZ70vavDyMGEpbhTBwhv&ust=1686791839020000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLC49bTLwf8CFQAAAAAdAAAAABAE",
-            "b_rep" : "asdfsadf!!!!"
-        }
-    },
-    {
-        "board" : {
-            "b_seq" : 2,
-            "b_title" : "가asdㄴㅇㄹㄴㅇㄹ!!",
-            "b_content" : "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
-            "b_tag" : "야",
-            "b_datetime" : 202306141015,
-            "b_loc" : "호호호호",
-            "lat" : 35.182583,
-            "lng" : 126.889532,
-            "mem_email" : "aeeeeed@naver.com",
-            "b_views" : 1,
-            "b_likes" : 10,
-            "b_file" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wishbeen.com%2Fplan%2F2a06ec3488c838bf&psig=AOvVaw3HBZ70vavDyMGEpbhTBwhv&ust=1686791839020000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLC49bTLwf8CFQAAAAAdAAAAABAQ",
-            "b_rep" : "asdfsadf!!!!"
-
-        }
-    },
-    {
-        "board" : {
-            "b_seq" : 3,
-            "b_title" : "ㅏㅇ아올오로",
-            "b_content" : "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
-            "b_tag" : "가나다라마바사",
-            "b_datetime" : 202306141015,
-            "b_loc" : "그림",
-            "lat" : 35.182583,
-            "lng" : 126.889532,
-            "mem_email" : "asd@naver.com",
-            "b_views" : 1,
-            "b_likes" : 10,
-            "b_file" : "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.sisaweek.com%2Fnews%2FarticleView.html%3Fidxno%3D129567&psig=AOvVaw3HBZ70vavDyMGEpbhTBwhv&ust=1686791839020000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLC49bTLwf8CFQAAAAAdAAAAABAE",
-            "b_rep" : "asdfsadf!!!!"
-
-        }
+  {
+    "board": {
+      "b_seq": 1,
+      "b_title": "가나",
+      "b_content": "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
+      "b_tag": "가나다라마바사",
+      "b_datetime": 202306141015,
+      "b_loc": "경기장",
+      "lat": 35.182583,
+      "lng": 126.889532,
+      "mem_email": "asd@naver.com",
+      "b_views": 1,
+      "b_likes": 10,
+      "b_file": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MzFfNjUg%2FMDAxNjU5Mjc2NDEzNDMy.VV-E2Je0pkeXGID-NcpigtgVx0Km-y_kVDkPUZKZvaog.Sti3cDvyG-Qtr6Dm0Wqz3jxcs8rJ8sh5voAS8AVpDpIg.JPEG.sonpd1985%2F%25BC%25AD%25BF%25EF%25C1%25B6%25B0%25A8%25B5%25B5.jpg&type=a340",
+      "b_rep": "asdfsadf!!!!",
+      "lm_seq": "1"
     }
+  },
+  {
+    "board": {
+      "b_seq": 2,
+      "b_title": "가asdㄴㅇㄹㄴㅇㄹ!!",
+      "b_content": "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
+      "b_tag": "야",
+      "b_datetime": 202306141015,
+      "b_loc": "호호호호",
+      "lat": 35.182583,
+      "lng": 126.889532,
+      "mem_email": "aeeeeed@naver.com",
+      "b_views": 1,
+      "b_likes": 10,
+      "b_file": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160229_276%2Fsong20627_1456753066000eDjSo_JPEG%2FSketch29122720.jpg&type=ofullfill340_600_png",
+      "b_rep": "asdfsadf!!!!",
+      "lm_seq": "2"
+    }
+  },
+  {
+    "board": {
+      "b_seq": 3,
+      "b_title": "ㅏㅇ아올오로",
+      "b_content": "ㄴㅁㅇ로너아ㅣ로ㅓㄴ마ㅣㅇㄹ",
+      "b_tag": "가나다라마바사",
+      "b_datetime": 202306141015,
+      "b_loc": "그림",
+      "lat": 35.182583,
+      "lng": 126.889532,
+      "mem_email": "asd@naver.com",
+      "b_views": 1,
+      "b_likes": 10,
+      "b_file": "https://search.pstatic.net/common/?src=http%3A%2F%2Fpost.phinf.naver.net%2F20160810_143%2F1470813491467xu1gM_PNG%2FIYnHVMeWYNlz9tFS25Lf5suWXABQ.jpg&type=a340",
+      "b_rep": "asdfsadf!!!!",
+      "lm_seq": "2"
+    }
+  }
 ]

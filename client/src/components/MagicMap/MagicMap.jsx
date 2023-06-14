@@ -36,7 +36,9 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   // 랜드마크 데이터 가져오는 함수
   const getLandMarksAPI = () => {
     // setLandMarks(res.data)
-    axios.get("auth_dummy.json").then((res) => setLandMarks(res.data));
+    axios
+      .get("http://172.30.1.22:8087/hogward/alllandmark")
+      .then((res) => setLandMarks(res.data));
   };
 
   // 경계값 데이터 가져오기
@@ -53,7 +55,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   useEffect(() => {
     if (selectedThema !== 0) {
       setNewLandMarks(
-        landmarks.filter((item) => item.them_seq === selectedThema)
+        landmarks.filter((item) => item.t_landmark.them_seq === selectedThema)
       );
     }
   }, [selectedThema]);

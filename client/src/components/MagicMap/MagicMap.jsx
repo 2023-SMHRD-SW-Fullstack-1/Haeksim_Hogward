@@ -67,15 +67,15 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           id={`map`}
           center={{
             // 지도의 중심좌표
-            lat: 35.156108,
-            lng: 126.835141,
+            lat: 34.862417,
+            lng: 126.794141,
           }}
           style={{
             // 지도의 크기
             width: "100%",
             height: "600px",
           }}
-          level={10} // 지도의 확대 레벨
+          level={11} // 지도의 확대 레벨
           // draggable={false} // 지도 드래그 막기
           // options={{
           //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화

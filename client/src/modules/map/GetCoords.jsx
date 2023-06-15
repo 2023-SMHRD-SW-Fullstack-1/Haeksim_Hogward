@@ -29,7 +29,7 @@ const GetCoords = () => {
 
   useEffect(() => {
     console.log(coords);
-    GeofencingRegions(121011);
+    // GeofencingRegions(121011);
   }, []);
 
   return <div>GetCoords</div>;

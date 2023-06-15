@@ -129,7 +129,7 @@ export const AuthBoard = ({ clickedLandmark }) => {
   return (
     <div className="authboard">
       <ImageList
-        sx={{ width: 300, height: 260 }}
+        sx={{ width: 100, height: 260 }}
         variant="quilted"
         cols={4}
         rowHeight={90}
@@ -143,7 +143,7 @@ export const AuthBoard = ({ clickedLandmark }) => {
             <img
               {...srcset(
                 item.board.b_file,
-                121,
+                220,
                 item.board.rows,
                 item.board.cols
               )}

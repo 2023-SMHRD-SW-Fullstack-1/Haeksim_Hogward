@@ -90,7 +90,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
         >
           {/* 맵 마커 생성 */}
           {selectedThema === 0
-            ? landmarks?.map((lm) => (
+            ? landmarks?.map((lm, index) => (
                 <>
                   <MapImageMarker key={`imgmarker-${lm.lm_seq}`} lm={lm} />
                   <MarkerOverlay

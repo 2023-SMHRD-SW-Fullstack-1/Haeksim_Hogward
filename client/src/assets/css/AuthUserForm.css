@@ -1,0 +1,24 @@
+.signup-profileImg-label {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #0095f6;
+  cursor: pointer;
+  text-align: center;
+}
+
+.signup-profileImg-input {
+  display: none;
+}
+.authform {
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.authform_preview {
+  width: 100%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10%;
+  height: 170px;
+}

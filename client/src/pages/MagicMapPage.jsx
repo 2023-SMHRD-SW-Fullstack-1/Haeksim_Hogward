@@ -9,10 +9,10 @@ const MagicMapPage = () => {
   return (
     <div>
       <div>
+        <button onClick={() => setSelectedThema(3)}>지도만 보기</button>
         <button onClick={() => setSelectedThema(0)}>전체보기</button>
         <button onClick={() => setSelectedThema(1)}>테마1 : 문화재</button>
         <button onClick={() => setSelectedThema(2)}>테마2 : 밥집,카페</button>
-        <button onClick={() => setSelectedThema(3)}>지도만 보기</button>
       </div>
       <MagicMap
         selectedThema={selectedThema}

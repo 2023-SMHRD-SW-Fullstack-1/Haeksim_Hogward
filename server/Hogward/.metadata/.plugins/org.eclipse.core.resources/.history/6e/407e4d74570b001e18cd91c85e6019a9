@@ -1,0 +1,22 @@
+package com.smhrd.hogward.service;
+
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smhrd.shop.domain.Product;
+
+@Service
+public class BoardService {
+	
+	@Autowired
+	public BoardMapper boardMapper;
+	
+	public JSONArray productList() {
+		List<T_Board> list = boardMapper.productList();
+		
+	}
+
+}

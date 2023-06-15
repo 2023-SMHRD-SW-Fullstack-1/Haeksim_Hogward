@@ -1,0 +1,41 @@
+package com.smhrd.hogward.service;
+
+import java.io.File;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
+
+import com.smhrd.hogward.domain.T_Board;
+import com.smhrd.hogward.mapper.BoardMapper;
+import com.smhrd.shop.converter.ImageConverter;
+import com.smhrd.shop.converter.ImageToBase64;
+
+
+
+@Service
+public class BoardService {
+	
+	@Autowired
+	ResourceLoader resourceLoader;
+	
+	@Autowired
+	public BoardMapper boardMapper;
+	
+	public JSONArray boardList() {
+		List<T_Board> list = boardMapper.boardList();
+		
+		JSONArray jsonArray = new JSONArray();
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		
+		
+		
+		
+	
+	
+	}
+
+}

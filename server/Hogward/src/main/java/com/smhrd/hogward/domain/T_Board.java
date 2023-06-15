@@ -14,7 +14,7 @@ public class T_Board {
 	private String b_title;
 	private String b_content;
 	private String b_tag;
-	private int b_datetime;
+	private String b_datetime;
 	private String b_loc;
 	private double lat;
 	private double lng;

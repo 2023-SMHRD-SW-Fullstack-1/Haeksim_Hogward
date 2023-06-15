@@ -1094,3 +1094,6 @@ java.lang.InterruptedException
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-15 16:12:36.332
 !MESSAGE Classpath changed for project: Hogward
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-06-15 16:34:17.292
+!MESSAGE Classpath changed for project: Hogward

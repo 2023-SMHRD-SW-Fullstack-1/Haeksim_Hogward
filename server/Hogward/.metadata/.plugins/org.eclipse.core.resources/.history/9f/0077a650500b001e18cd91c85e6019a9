@@ -35,8 +35,8 @@ public class BoardService {
 		
 		for(UserFeed feed : list) {
 			
-			String filePath1 = "classpath:/static/boardImg/"+feed.getB_file();
-			String filePath2 = "classpath:/static/memberImg/"+feed.getMem_photo();
+			String filePath1 = "classpath:/static/lnadmarkImg/"+feed.getB_file();
+			String filePath2 = "classpath:/static/lnadmarkImg/"+feed.getMem_photo();
 			
 			Resource resource1 = resourceLoader.getResource(filePath1);
 			Resource resource2 = resourceLoader.getResource(filePath2);

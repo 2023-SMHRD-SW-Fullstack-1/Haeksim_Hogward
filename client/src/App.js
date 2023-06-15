@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 import Main from "./components/Main";
 import MagicMapPage from "./pages/MagicMapPage";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
+        <Route path="/mainpage" element={<MainPage/>}></Route>
         {/*  */}
         {/* <Route path="/about" element={<About />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>

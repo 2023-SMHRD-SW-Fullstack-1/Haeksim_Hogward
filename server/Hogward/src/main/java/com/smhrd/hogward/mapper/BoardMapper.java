@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.smhrd.hogward.domain.UserFeed;
-
-
+import com.smhrd.hogward.domain.T_Board;
 
 @Mapper
 public interface BoardMapper {
 	
-	//board 리스트 전체 불러오기
-	public List<UserFeed> boardList();
+	public List<T_Board> boardList();
 	
+	public T_Board boardOne(String b_seq);
+
 }

@@ -11,62 +11,82 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import com.smhrd.hogward.domain.T_Landmark;
-import com.smhrd.hogward.domain.UserFeed;
+import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.mapper.BoardMapper;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
+
+
 
 @Service
 public class BoardService {
 	
 	@Autowired
-	private BoardMapper boardMapper;
-	
-	@Autowired
 	ResourceLoader resourceLoader;
 	
+	@Autowired
+	public BoardMapper boardMapper;
+	
+	
+	//전체 게시판 불러오기
 	public JSONArray boardList() {
-		List<UserFeed> list = boardMapper.boardList();
-		System.out.println(list);
+		System.out.println("aasscs");
+		List<T_Board> list = boardMapper.boardList();
 		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
-		for(UserFeed feed : list) {
+	
+		for(T_Board board : list) {
 			
-			String filePath1 = "classpath:/static/boardImg/"+feed.getB_file();
-			String filePath2 = "classpath:/static/memberImg/"+feed.getMem_photo();
-			
-			Resource resource1 = resourceLoader.getResource(filePath1);
-			Resource resource2 = resourceLoader.getResource(filePath2);
-			
-			String fileStringValue1 = null;
-			String fileStringValue2 = null;
-			
+			String filePath = "classpath:/static/boardImg/"+board.getB_file();
+			Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
+			String fileStringValue = null;
 			try {
-				fileStringValue1 = converter.convert(resource1.getFile());
-				fileStringValue2 = converter.convert(resource2.getFile());
-				
-				
+				fileStringValue = converter.convert(resource.getFile());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			feed.setB_file(fileStringValue1);
-			feed.setMem_photo(fileStringValue2);
+			board.setB_file(fileStringValue);
 			
-			JSONObject obj = new JSONObject(); 
-			obj.put("userfeed", feed); 
+			JSONObject obj = new JSONObject();
+			obj.put("allboard", board);
 			
 			jsonArray.add(obj); 
 			
 		}
-		
 		return jsonArray;
+	}
+	
+	
+	//한사람의 게시글 불러오기
+	public JSONObject boardOne(String b_seq) {
+		T_Board board = boardMapper.boardOne(b_seq);
 		
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		String filePath = "classpath:/static/boardImg/"+board.getB_file();
+		Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
+		String fileStringValue = null;
+		try {
+			fileStringValue = converter.convert(resource.getFile());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		board.setB_file(fileStringValue);
+		
+		JSONObject obj = new JSONObject();
+		obj.put("oneBoard", board);
+		
+		return obj;
 		
 	}
 	
+	
+	
+
 }

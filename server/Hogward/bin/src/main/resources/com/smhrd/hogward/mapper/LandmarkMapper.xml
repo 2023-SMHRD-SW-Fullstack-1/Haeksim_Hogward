@@ -5,7 +5,11 @@
   
   
 <mapper namespace="com.smhrd.hogward.mapper.LandmarkMapper">
+<<<<<<< HEAD
+	<select id="lnadmarkList" resultType="com.smhrd.hogward.domain.T_Landmark">
+=======
 	<select id="landmarkList" resultType="com.smhrd.hogward.domain.T_Landmark">
+>>>>>>> 95564e404851e5f2f390fcccf086a3eaab9316c6
 		select * from T_Landmark
 	</select>
 	

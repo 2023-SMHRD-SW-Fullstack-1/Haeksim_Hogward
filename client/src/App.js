@@ -2,7 +2,7 @@ import "./assets/css/reset.css";
 import "./App.css";
 import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
-import Main from "./components/Main";
+// import Main from "./components/Main";
 import MagicMapPage from "./pages/MagicMapPage";
 
 import GetDongRegionId from "./modules/map/GetDongRegionId";
@@ -10,16 +10,19 @@ import GetCoords from "./modules/map/GetCoords";
 
 import MyFeed from "./components/Feed/MyFeed";
 import UserFeed from "./components/Feed/UserFeed";
+import MainPage from "./pages/MainPage"
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Main />}></Route>
+        <Route path="/" element={<MainPage />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
         <Route path="/myfeed" element={<MyFeed />}></Route>
         <Route path="/userfeed" element={<UserFeed />}></Route>
+    
+
         {/*  */}
         {/* <Route path="/about" element={<About />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>

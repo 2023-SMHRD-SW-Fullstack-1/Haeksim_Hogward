@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 import Main from "./components/Main";
 import MagicMapPage from "./pages/MagicMapPage";
+import GetDongRegionId from "./modules/map/GetDongRegionId";
+import GetCoords from "./modules/map/GetCoords";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/product/:num" element={<ProductDetail />}></Route> */}
         {/* path 가 * 라면, 위의 경로 이외에 경로들을 처리 */}
         {/* <Route path="*" element={<NotFound />}></Route> */}
+        {/* 임시  - 전처리*/}
+        <Route path="/module/getregion" element={<GetDongRegionId />}></Route>
+        <Route path="/module/getcoords" element={<GetCoords />}></Route>
       </Routes>
     </div>
   );

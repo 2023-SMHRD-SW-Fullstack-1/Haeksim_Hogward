@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("http://localhost:3000")
 public class MemberController {
 
-	//회원가입
+	//회원가입시 정보 저장
 	
 	
-	//로그인
+	//로그인시 홈화면에 발자국지도 정보와 사진 보내주기???
 	
 	
-	//회원정보 수정
+	//회원정보 수정시 비밀번호 제외한 내용 보내주기
 	
 	
 }

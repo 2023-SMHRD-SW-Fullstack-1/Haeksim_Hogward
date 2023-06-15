@@ -34,39 +34,43 @@ public class LandmarkService {
 		public JSONArray lnadmarkList() {
 			List<T_Landmark> list = landMapper.lnadmarkList();
 		
-		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
-		int i=1;
+
 		for(T_Landmark land : list) {
 			//1. img필드값 수정 (파일이름에서 -> byte 문자열 형태로)
 			//1-1. 변환할 파일 실제 경로 정의
 			String filePath1 = "classpath:/static/img/"+land.getLm_photo1();
 			String filePath2 = "classpath:/static/img/"+land.getLm_photo2();
 			String filePath3 = "classpath:/static/img/"+land.getLm_photo3();
-			Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터
-			Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터
-			Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터
+
+			Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터	
+			Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터	
+			Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터	
+
 			
 			String fileStringValue1 = null;
 			String fileStringValue2 = null;
 			String fileStringValue3 = null;
+		
 			try {
 				fileStringValue1 = converter.convert(resource1.getFile());
 				fileStringValue2 = converter.convert(resource2.getFile());
 				fileStringValue3 = converter.convert(resource3.getFile());
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 			
 			//System.out.println(fileStringValue);
 			land.setLm_photo1(fileStringValue1);
 			land.setLm_photo2(fileStringValue2);
 			land.setLm_photo3(fileStringValue3);
+		
 			
-			//2.product 객체를 jsonObject(key:value) 형태로 변경하기
+			//2.t_landmark 객체를 jsonObject(key:value) 형태로 변경하기
 			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
 			obj.put("t_landmark", land); //비어있는 json object 에 값 추가
 			

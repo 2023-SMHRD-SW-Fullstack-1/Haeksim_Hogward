@@ -14,7 +14,7 @@
 .authactive {
   right: 0 !important;
   background-color: white;
-  opacity: 0.9;
+  opacity: 1;
   transition: all 0.4s ease-in-out;
 }
 .authmenu_rightmark_container {

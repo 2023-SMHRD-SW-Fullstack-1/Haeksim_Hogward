@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../FestavaLive-1.0.0"
+		},
+		{
+			"path": "../../../../../Web-Study"
+		},
+		{
+			"path": "../../../../../React"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "haeksim",
+		"liveServer.settings.port": 5501
+	}
+}

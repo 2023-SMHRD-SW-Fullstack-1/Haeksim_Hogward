@@ -46,7 +46,12 @@ const AuthSlideBarSlider = ({ clickedLandmark }) => {
       >
         {images.map((item, index) => (
           <SwiperSlide key={index}>
-            <img alt="close" width="100%" height="100%" src={item}></img>
+            <img
+              alt="close"
+              width="100%"
+              height="100%"
+              src={"data:image/;base64," + item}
+            ></img>
           </SwiperSlide>
         ))}
       </Swiper>

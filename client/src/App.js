@@ -4,13 +4,12 @@ import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
 import Main from "./components/Main";
 import MagicMapPage from "./pages/MagicMapPage";
-<<<<<<< HEAD
+
 import GetDongRegionId from "./modules/map/GetDongRegionId";
 import GetCoords from "./modules/map/GetCoords";
-=======
+
 import MyFeed from "./components/Feed/MyFeed";
 import UserFeed from "./components/Feed/UserFeed";
->>>>>>> origin/kimterman
 
 function App() {
   return (

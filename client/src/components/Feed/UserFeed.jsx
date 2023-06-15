@@ -90,15 +90,15 @@ const UserFeed = () => {
   return (
     <div className="container">
       <div className="user-feed">
-        <div className="feed-content">
-          <div className="search-bar">
-            <input
+      <input
               type="text"
               placeholder="게시물 검색"
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
           </div>
+      <div className="search-bar">
+        <div className="feed-content">
           {filteredPosts.map((post) => (
             <div
               className={`post ${selectedPost && selectedPost.id === post.id ? 'selected' : ''}`}
@@ -108,8 +108,7 @@ const UserFeed = () => {
               <img src={post.image} alt="게시물 이미지" />
             </div>
           ))}
-        </div>
-        <div className="user-list">
+          <div className="user-list">
           <h2>유저 목록</h2>
           <ul>
             {userList.map((user) => (
@@ -119,6 +118,8 @@ const UserFeed = () => {
             ))}
           </ul>
         </div>
+        </div>
+
       </div>
       {selectedPost && (
         <div className="post-details-overlay" onClick={handleClosePost}>
@@ -149,7 +150,7 @@ const UserFeed = () => {
           </div>
         </div>
       )}
-      <div className="new-post">
+      {/* <div className="new-post">
         <h2>새 게시물 작성</h2>
         <form onSubmit={handlePostSubmit}>
           <textarea
@@ -159,7 +160,7 @@ const UserFeed = () => {
           />
           <button type="submit">게시</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,0 +1,12 @@
+package com.smhrd.hogward.domain;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.smhrd.hogward.mapper.LandmarkMapper;
+
+public class UserFeed {
+	
+	@Autowired
+	private T_Board board;
+	private T_Member member;
+}

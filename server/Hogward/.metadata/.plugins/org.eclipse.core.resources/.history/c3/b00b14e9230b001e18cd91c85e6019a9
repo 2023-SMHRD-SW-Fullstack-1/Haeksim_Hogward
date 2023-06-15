@@ -1,0 +1,13 @@
+package com.smhrd.hogward.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.smhrd.hogward.service.List;
+import com.smhrd.hogward.service.T_Board;
+
+@Mapper
+public interface BoardMapper {
+	
+	public List<T_Board> boardList();
+	
+}

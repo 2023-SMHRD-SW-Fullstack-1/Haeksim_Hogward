@@ -1,0 +1,71 @@
+package com.smhrd.hogward.service;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
+
+import com.smhrd.hogward.domain.T_Landmark;
+import com.smhrd.hogward.domain.UserFeed;
+import com.smhrd.hogward.mapper.BoardMapper;
+import com.smhrd.shop.converter.ImageConverter;
+import com.smhrd.shop.converter.ImageToBase64;
+
+@Service
+public class BoardService {
+	
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	@Autowired
+	ResourceLoader resourceLoader;
+	
+	public JSONArray boardList() {
+		List<UserFeed> list = boardMapper.boardList();
+		
+		JSONArray jsonArray = new JSONArray();
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		for(UserFeed feed : list) {
+			System.out.println(feed.board);
+			String filePath1 = "classpath:/static/lnadmarkImg/"+feed.board.getB_file();
+			String filePath2 = "classpath:/static/lnadmarkImg/"+feed.member.getMem_photo();
+			
+			Resource resource1 = resourceLoader.getResource(filePath1);
+			Resource resource2 = resourceLoader.getResource(filePath2);
+			
+			String fileStringValue1 = null;
+			String fileStringValue2 = null;
+			
+			try {
+				fileStringValue1 = converter.convert(resource1.getFile());
+				fileStringValue2 = converter.convert(resource2.getFile());
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			feed.board.setB_file(fileStringValue1);
+			feed.member.setMem_photo(fileStringValue2);
+			
+			JSONObject obj = new JSONObject(); 
+			obj.put("t_landmark", feed); 
+			
+			jsonArray.add(obj); 
+			
+		}
+		
+		return jsonArray;
+		
+		
+	}
+	
+}

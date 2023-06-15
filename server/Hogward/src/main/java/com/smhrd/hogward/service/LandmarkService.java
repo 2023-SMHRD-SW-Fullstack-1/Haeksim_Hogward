@@ -37,18 +37,17 @@ public class LandmarkService {
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
-
+		
 		for(T_Landmark land : list) {
 			//1. img필드값 수정 (파일이름에서 -> byte 문자열 형태로)
 			//1-1. 변환할 파일 실제 경로 정의
-			String filePath1 = "classpath:/static/img/"+land.getLm_photo1();
-			String filePath2 = "classpath:/static/img/"+land.getLm_photo2();
-			String filePath3 = "classpath:/static/img/"+land.getLm_photo3();
-
+			String filePath1 = "classpath:/static/lnadmarkImg/"+land.getLm_photo1();
+			String filePath2 = "classpath:/static/lnadmarkImg/"+land.getLm_photo2();
+			String filePath3 = "classpath:/static/lnadmarkImg/"+land.getLm_photo3();
+			
 			Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터	
 			Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터	
 			Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터	
-
 			
 			String fileStringValue1 = null;
 			String fileStringValue2 = null;
@@ -58,10 +57,10 @@ public class LandmarkService {
 				fileStringValue1 = converter.convert(resource1.getFile());
 				fileStringValue2 = converter.convert(resource2.getFile());
 				fileStringValue3 = converter.convert(resource3.getFile());
-
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-//				e.printStackTrace();
+				e.printStackTrace();
 			}
 			
 			//System.out.println(fileStringValue);

@@ -1,0 +1,23 @@
+package com.smhrd.hogward.domain;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.smhrd.hogward.mapper.LandmarkMapper;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class UserFeed {
+	
+	
+	@Autowired
+	private T_Board board;
+	private T_Member member;
+}

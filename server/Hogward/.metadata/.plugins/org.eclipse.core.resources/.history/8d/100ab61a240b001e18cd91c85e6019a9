@@ -1,0 +1,17 @@
+package com.smhrd.hogward.service;
+
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.springframework.stereotype.Service;
+
+import com.smhrd.hogward.domain.T_Board;
+
+@Service
+public class BoardService {
+	
+	public JSONArray boardList() {
+		List<T_Board> list = boardMapper.boardList();
+	}
+	
+}

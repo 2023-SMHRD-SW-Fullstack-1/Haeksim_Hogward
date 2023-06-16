@@ -61,7 +61,7 @@ const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
             <p>{clickedLandmark?.t_landmark.lm_addr}</p>
           </div>
           <div className="authmenu_authen">
-            <button onClick={handleClickOpen}>인증하기</button>
+            <button onClick={handleClickOpen}>인증</button>
           </div>
           <div className="authmenu_authboard">
             <AuthBoard clickedLandmark={clickedLandmark} />

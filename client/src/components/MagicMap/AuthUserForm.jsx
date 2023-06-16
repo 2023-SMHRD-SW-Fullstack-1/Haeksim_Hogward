@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../assets/css/AuthUserForm.css";
-import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 
@@ -107,11 +104,6 @@ const AuthUserForm = ({ clickedLandmark }) => {
         text: "올바른 위치에서 인증해주세요.",
         confirmButtonColor: "#e74c3c",
         confirmButtonText: "확인",
-        customClass: {
-          title: "my-title-class",
-          content: "my-content-class",
-          confirmButton: "my-confirm-button-class",
-        },
       });
     }
   };
@@ -134,7 +126,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
       method="post"
       action="#"
       className="authform"
-      enctype="multipart/form-data"
+      encType="multipart/form-data"
     >
       {/* 폼에서 보내야 할것 */}
       {/* 글 사진 */}

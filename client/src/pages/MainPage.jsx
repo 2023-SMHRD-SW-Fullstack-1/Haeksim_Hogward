@@ -2,13 +2,19 @@ import React from 'react'
 import "../assets/css/Main.css"
 
 import FootMap from '../components/Main/FootMap'
-
+import Carousel from '../components/Main/Carousel'
 
 const MainPage = () => {
   return (
+
+    
     <div>
-       <FootMap/>
+      <div width="100px">하이</div>
+      <FootMap/>
+      <Carousel/>
     </div>
+
+  
   )
 }
 

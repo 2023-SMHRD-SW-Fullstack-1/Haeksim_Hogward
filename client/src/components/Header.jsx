@@ -2,38 +2,39 @@ import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "../assets/css/Header.css";
 
+
+
 const Header = () => {
   return (
 
+
+
      <div>
         {/* 헤더 */}
-        <nav class="navbar navbar-expand-lg .bg-black">
-            <div class="container" >
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
                 <a class="navbar-brand">
-                    <Link to= "/"> Hogward </Link>
+                <a class="navbar-brand" href="/">
+                    Hogward
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                </a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to ="/" >홈</Link></a>
+                            <a class="nav-link click-scroll" href = "/">홈</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to ="/magicmap">마법지도</Link></a>
+                            <a class="nav-link click-scroll" href = "/magicmap">마법지도</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to="/myfeed">피드</Link></a>
+                            <a class="nav-link click-scroll" href = "/userfeed">피드</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to="/userfeed">마이페이지</Link></a>
+                            <a class="nav-link click-scroll" href = "/myfeed">마이페이지</a>
                         </li>
 
                        {/* 임시 전처리 작업공간 */}
@@ -47,9 +48,9 @@ const Header = () => {
 
                     </ul>
                  
-                    <a href="ticket.html" class="btn custom-btn d-lg-block d-none">회원가입</a>
+                    <a href="/join" class="btn custom-btn d-lg-block d-none">회원가입</a>
                     <span class="button-space"></span>
-                    <a href="ticket.html" class="btn custom-btn d-lg-block d-none">로그인</a>
+                    <a href="/login" class="btn custom-btn d-lg-block d-none">로그인</a>
                 </div>
             </div>
         </nav>

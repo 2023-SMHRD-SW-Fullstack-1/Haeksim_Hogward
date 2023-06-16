@@ -1,0 +1,464 @@
+#wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+  height: 400px;
+  width: 800px;
+  border: 1px solid black;
+  background: url("../img/footPringBg.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.name {
+  display: block;
+  height: 40px;
+  width: 150px;
+
+  text-align: center;
+  padding: 0px;
+  line-height: 5px;
+  position: absolute;
+  bottom: 80px;
+  -webkit-animation: textMove 21s infinite;
+  -moz-animation: textMove 21s infinite;
+  -ms-animation: textMove 21s infinite;
+  -o-animation: textMove 21s infinite;
+  animation: textMove 21s infinite;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -ms-animation-delay: 1s;
+  -o-animation-delay: 1s;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+@-webkit-keyframes textMove {
+  0% {
+    left: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  30% {
+    bottom: 100px;
+    left: 450px;
+  }
+  70% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes textMove {
+  0% {
+    left: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  30% {
+    bottom: 100px;
+    left: 450px;
+  }
+  70% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes textMove {
+  0% {
+    left: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  30% {
+    bottom: 100px;
+    left: 450px;
+  }
+  70% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 0;
+  }
+}
+
+@-o-keyframes textMove {
+  0% {
+    left: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  30% {
+    bottom: 100px;
+    left: 450px;
+  }
+  70% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 0;
+  }
+}
+
+@keyframes textMove {
+  0% {
+    left: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  30% {
+    bottom: 100px;
+    left: 450px;
+  }
+  70% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: 450px;
+    opacity: 0;
+  }
+}
+@import "https://fonts.googleapis.com/css?family=Galdeano";
+.name h2 {
+  font-family: "Galdeano";
+}
+
+.leftfoot1:nth-child(1) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  transform: rotateZ(90deg);
+  animation: one 22s infinite;
+  opacity: 0;
+}
+
+.right:nth-child(2) {
+  position: absolute;
+  height: 20px;
+  transform: rotateZ(90deg);
+  bottom: 40px;
+  left: 50px;
+  animation: one 22s infinite;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(3) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  transform: rotateZ(90deg);
+  left: 100px;
+  animation: one 22s infinite;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.right:nth-child(4) {
+  position: absolute;
+  height: 20px;
+  transform: rotateX(180deg) rotateZ(90deg);
+  bottom: 40px;
+  left: 150px;
+  animation: one 22s infinite;
+  animation-delay: 1.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(5) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+
+  transform: rotateZ(90deg);
+  left: 200px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 2s;
+  -ms-animation-delay: 2s;
+  -o-animation-delay: 2s;
+  animation-delay: 2s;
+  opacity: 0;
+}
+
+.right:nth-child(6) {
+  position: absolute;
+  height: 20px;
+  -webkit-transform: rotateX(180deg) rotateZ(90deg);
+  -moz-transform: rotateX(180deg) rotateZ(90deg);
+  -ms-transform: rotateX(180deg) rotateZ(90deg);
+  -o-transform: rotateX(180deg) rotateZ(90deg);
+  transform: rotateX(180deg) rotateZ(90deg);
+  bottom: 40px;
+  left: 250px;
+
+  animation: one 22s infinite;
+
+  animation-delay: 2.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(7) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+
+  transform: rotateZ(90deg);
+  left: 300px;
+
+  animation: one 22s infinite;
+
+  animation-delay: 3s;
+  opacity: 0;
+}
+
+.right:nth-child(8) {
+  position: absolute;
+  height: 20px;
+  transform: rotateX(180deg) rotateZ(90deg);
+  bottom: 40px;
+  left: 350px;
+
+  animation: one 22s infinite;
+  animation-delay: 3.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(9) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+
+  transform: rotateZ(90deg);
+  left: 400px;
+
+  animation: one 22s infinite;
+  animation-delay: 4s;
+  opacity: 0;
+}
+
+.right:nth-child(10) {
+  position: absolute;
+  height: 20px;
+  transform: rotateX(180deg) rotateZ(90deg);
+  bottom: 40px;
+  left: 450px;
+
+  animation: one 22s infinite;
+  animation-delay: 4.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(11) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+
+  transform: rotateZ(90deg);
+  left: 500px;
+
+  animation: one 22s infinite;
+  animation-delay: 5s;
+  opacity: 0;
+}
+
+.right:nth-child(12) {
+  position: absolute;
+  height: 20px;
+  transform: rotateX(180deg) rotateZ(190deg);
+  bottom: 40px;
+  left: 550px;
+
+  animation: one 22s infinite;
+  animation-delay: 5.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(13) {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  transform: rotateZ(150deg);
+  left: 600px;
+
+  animation: one 22s infinite;
+  animation-delay: 6s;
+  opacity: 0;
+}
+
+.right:nth-child(14) {
+  position: absolute;
+  height: 20px;
+  transform: rotateX(180deg) rotateZ(230deg);
+  bottom: 80px;
+  left: 630px;
+
+  animation: one 22s infinite;
+  animation-delay: 6.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(15) {
+  height: 20px;
+  position: absolute;
+  bottom: 90px;
+  -webkit-transform: rotateZ(100deg);
+  -moz-transform: rotateZ(100deg);
+  -ms-transform: rotateZ(100deg);
+  -o-transform: rotateZ(100deg);
+  transform: rotateZ(100deg);
+  left: 700px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 7s;
+  -moz-animation-delay: 7s;
+  -ms-animation-delay: 7s;
+  -o-animation-delay: 7s;
+  animation-delay: 7s;
+  opacity: 0;
+}
+
+.right:nth-child(16) {
+  position: absolute;
+  height: 20px;
+  -webkit-transform: rotateX(180deg) rotateZ(250deg);
+  -moz-transform: rotateX(180deg) rotateZ(250deg);
+  -ms-transform: rotateX(180deg) rotateZ(250deg);
+  -o-transform: rotateX(180deg) rotateZ(250deg);
+  transform: rotateX(180deg) rotateZ(250deg);
+  bottom: 150px;
+  left: 650px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 7.5s;
+  -moz-animation-delay: 7.5s;
+  -ms-animation-delay: 7.5s;
+  -o-animation-delay: 7.5s;
+  animation-delay: 7.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(17) {
+  height: 20px;
+  position: absolute;
+  bottom: 200px;
+  -webkit-transform: rotateZ(90deg);
+  -moz-transform: rotateZ(90deg);
+  -ms-transform: rotateZ(90deg);
+  -o-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+  left: 700px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 8s;
+  -moz-animation-delay: 8s;
+  -ms-animation-delay: 8s;
+  -o-animation-delay: 8s;
+  animation-delay: 8s;
+  opacity: 0;
+}
+
+.right:nth-child(18) {
+  position: absolute;
+  height: 20px;
+  -webkit-transform: rotateX(180deg) rotateZ(250deg);
+  -moz-transform: rotateX(180deg) rotateZ(250deg);
+  -ms-transform: rotateX(180deg) rotateZ(250deg);
+  -o-transform: rotateX(180deg) rotateZ(250deg);
+  transform: rotateX(180deg) rotateZ(250deg);
+  bottom: 250px;
+  left: 650px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 8.5s;
+  -moz-animation-delay: 8.5s;
+  -ms-animation-delay: 8.5s;
+  -o-animation-delay: 8.5s;
+  animation-delay: 8.5s;
+  opacity: 0;
+}
+
+.leftfoot1:nth-child(19) {
+  height: 20px;
+  position: absolute;
+  bottom: 300px;
+  -webkit-transform: rotateZ(90deg);
+  -moz-transform: rotateZ(90deg);
+  -ms-transform: rotateZ(90deg);
+  -o-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+  left: 700px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 9s;
+  -moz-animation-delay: 9s;
+  -ms-animation-delay: 9s;
+  -o-animation-delay: 9s;
+  animation-delay: 9s;
+  opacity: 0;
+}
+
+.right:nth-child(20) {
+  position: absolute;
+  height: 20px;
+  -webkit-transform: rotateX(180deg) rotateZ(250deg);
+  -moz-transform: rotateX(180deg) rotateZ(250deg);
+  -ms-transform: rotateX(180deg) rotateZ(250deg);
+  -o-transform: rotateX(180deg) rotateZ(250deg);
+  transform: rotateX(180deg) rotateZ(250deg);
+  bottom: 350px;
+  left: 650px;
+
+  animation: one 22s infinite;
+  -webkit-animation-delay: 9.5s;
+  -moz-animation-delay: 9.5s;
+  -ms-animation-delay: 9.5s;
+  -o-animation-delay: 9.5s;
+  animation-delay: 9.5s;
+  opacity: 0;
+}
+
+@keyframes one {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

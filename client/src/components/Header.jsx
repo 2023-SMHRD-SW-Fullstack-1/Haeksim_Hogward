@@ -2,61 +2,85 @@ import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "../assets/css/Header.css";
 
-
-
 const Header = () => {
   return (
+    <div>
+      {/* 헤더 */}
+      <nav class="navbar navbar-expand-lg .bg-black">
+        <div class="container">
+          <a class="navbar-brand">
+            <Link to="/"> Hogward </Link>
+          </a>
 
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-
-     <div>
-        {/* 헤더 */}
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand">
-                <a class="navbar-brand" href="/">
-                    HOGWARD
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/">홈</Link>
                 </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/magicmap">마법지도</Link>
                 </a>
+              </li>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/">HOME</a>
-                        </li>
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/foottracer">발자국지도</Link>
+                </a>
+              </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/magicmap">MAGIC MAP</a>
-                        </li>
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/feed">피드</Link>
+                </a>
+              </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="/feed">FEED</a>
-                        </li>
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/userfeed">마이페이지</Link>
+                </a>
+              </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll">MYPAGE</a>
-                        </li>
+              {/* 임시 전처리 작업공간 */}
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/module/getregion">전처리(리전)</Link>
+                </a>
+              </li>
 
-                       {/* 임시 전처리 작업공간 */}
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to="/module/getregion">전처리(리전)</Link></a>
-                        </li>
+              <li class="nav-item">
+                <a class="nav-link click-scroll">
+                  <Link to="/module/getcoords">전처리(좌표)</Link>
+                </a>
+              </li>
+            </ul>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to="/module/getcoords">전처리(좌표)</Link></a>
-                        </li>
-
-                    </ul>
-                 
-                    <a href="/join" class="btn custom-btn d-lg-block d-none">회원가입</a>
-                    <span class="button-space"></span>
-                    <a href="/login" class="btn custom-btn d-lg-block d-none">로그인</a>
-                </div>
-            </div>
-        </nav>
-
-     </div>
-
+            <a href="ticket.html" class="btn custom-btn d-lg-block d-none">
+              회원가입
+            </a>
+            <span class="button-space"></span>
+            <a href="ticket.html" class="btn custom-btn d-lg-block d-none">
+              로그인
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 };
 

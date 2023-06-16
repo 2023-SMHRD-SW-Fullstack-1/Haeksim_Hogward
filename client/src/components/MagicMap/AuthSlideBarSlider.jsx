@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import Swiper core and required modules
 
 // Import Swiper React components
@@ -11,13 +11,25 @@ import "swiper/css/pagination";
 import { EffectCreative, Navigation, Pagination } from "swiper";
 
 import "../../assets/css/AuthSideBarSlider.css";
+import axios from "axios";
 
 const AuthSlideBarSlider = ({ clickedLandmark }) => {
-  const images = [
-    clickedLandmark?.t_landmark.lm_photo1,
-    clickedLandmark?.t_landmark.lm_photo2,
-    clickedLandmark?.t_landmark.lm_photo3,
-  ];
+  // 선택된 랜드마크에 해당하는 사진
+  const [clImage, setClImages] = useState([]);
+
+  // 선택된 랜드마크에 해당하는 사진 불러오기
+  useEffect(() => {
+    if (clickedLandmark !== undefined) {
+      const url = `http://172.30.1.20:8087/hogward/alllandmark/photo/${clickedLandmark.t_landmark.lm_seq}`;
+      axios.get(url).then((res) => {
+        setClImages([
+          res.data.t_landmark.lm_photo1,
+          res.data.t_landmark.lm_photo2,
+          res.data.t_landmark.lm_photo3,
+        ]);
+      });
+    }
+  }, [clickedLandmark]);
 
   return (
     <div>
@@ -44,7 +56,7 @@ const AuthSlideBarSlider = ({ clickedLandmark }) => {
         loop={true}
         className="mySwiper2"
       >
-        {images.map((item, index) => (
+        {clImage?.map((item, index) => (
           <SwiperSlide key={index}>
             <img
               alt="close"

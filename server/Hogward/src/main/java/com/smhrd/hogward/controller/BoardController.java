@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,10 +64,9 @@ public class BoardController {
 	//유저의 인증글 작성 정보 받아와서 db 저장하기
 	//("insertboard /{mem_email}")
 	@PostMapping("/insertboard")
-	public void createboard(@RequestPart("b_file") MultipartFile file, @RequestParam("board")T_Board board ) {
+	public void createboard(@RequestPart("b__file") MultipartFile file, @ModelAttribute T_Board board ) {
 		
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
-		
 		try {
 			//이미지 file -> 저장(지정된 경로에)
 			file.transferTo(new File(newFileName));

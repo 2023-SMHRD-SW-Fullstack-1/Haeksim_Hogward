@@ -10,5 +10,7 @@ import com.smhrd.hogward.domain.T_Landmark;
 public interface LandmarkMapper {
 	
 	public List<T_Landmark> landmarkList();
+	
+	public T_Landmark landmarkPhotoList(String lm_seq);
 
 }

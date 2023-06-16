@@ -12,5 +12,7 @@ public interface BoardMapper {
 	public List<T_Board> boardList();
 	
 	public T_Board boardOne(String b_seq);
+	
+	public int writeboard(T_Board board);
 
 }

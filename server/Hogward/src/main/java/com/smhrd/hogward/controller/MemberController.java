@@ -1,6 +1,7 @@
 package com.smhrd.hogward.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -8,10 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("http://localhost:3000")
 public class MemberController {
 
-	//회원가입시 정보 저장
+	//회원가입시 정보 저장 
+	//("/joinInformation")
 	
 	
-	//로그인시 홈화면에 발자국지도 정보와 사진 보내주기???
+	//로그인 체크 기능
+	//("/logincheck")
+	
+
 	
 	
 	//회원정보 수정시 비밀번호 제외한 내용 보내주기

@@ -1,0 +1,26 @@
+[
+  {
+    "countdummy": {
+      "mem_email": "asdf@naver.com",
+      "mem_pw": "asdf",
+      "mem_birthdate": 198812051210,
+      "mem_gender": "남"
+    }
+  },
+  {
+    "countdummy": {
+      "mem_email": "asdf@naver.com",
+      "mem_pw": "asdf",
+      "mem_birthdate": 198812051210,
+      "mem_gender": "남"
+    }
+  },
+  {
+    "countdummy": {
+      "mem_email": "asdf@naver.com",
+      "mem_pw": "asdf",
+      "mem_birthdate": 198812051210,
+      "mem_gender": "남"
+    }
+  }
+]

@@ -24,6 +24,8 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
     lat: 0,
     lng: 0,
   });
+
+  // 클리이벤트 state
   const [clickedArea, setClickedArea] = useState();
 
   // sidebar onoff state
@@ -81,6 +83,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화
           //   disableDoubleClickZoom: true, // 더블 클릭으로 확대 비활성화
           // }}
+          maxLevel={11}
           onMouseMove={(_map, mouseEvent) =>
             setMousePosition({
               lat: mouseEvent.latLng.getLat(),
@@ -123,7 +126,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
               strokeColor={"#ffffff"}
               strokeOpacity={0.8}
               fillColor={area.isMouseover ? "#09f" : "#474747"}
-              fillOpacity={0.9}
+              fillOpacity={0.8}
               onMouseover={() =>
                 setAreas((prev) => [
                   ...prev.filter((_, i) => i !== index),
@@ -161,7 +164,8 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
               </div>
             </CustomOverlayMap>
           )}
-          {clickedArea && (
+          {/* 지역 클릭 이벤트 */}
+          {/* {clickedArea && (
             <MapInfoWindow position={clickedArea.position}>
               <img
                 alt="close"
@@ -183,7 +187,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
                 </div>
               </div>
             </MapInfoWindow>
-          )}
+          )} */}
         </Map>
 
         <AuthMenu

@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../assets/css/AuthBoard.css";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import { debounce } from "lodash";
 
 export const AuthBoard = ({ clickedLandmark }) => {
   // seq 넘버 가져오기 프론트에서 필터링할때 사용
@@ -70,13 +71,20 @@ export const AuthBoard = ({ clickedLandmark }) => {
   const [boxSize, setBoxSize] = useState(0);
   const authboardRef = useRef();
 
+  // 리사이즈시 사이즈 변경함수 디바운스처리
+  const handleResize = debounce(() => {
+    setBoxSize(authboardRef.current.offsetWidth);
+  }, 1000);
+
   // board 크기 반응형으로 조절
   // resize 이벤트리스너 처리
-  // 디바운스 처리
-  window.addEventListener("resize", () => {
-    setBoxSize(authboardRef.current.offsetWidth);
-  });
-
+  useEffect(() => {
+    window.addEventListener("resize", () => handleResize);
+    return () => {
+      // clean up
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="authboard" ref={authboardRef}>
       <ImageList

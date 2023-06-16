@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.smhrd.hogward.mapper.BoardMapper">
+  	<select id="boardList" resultType="com.smhrd.hogward.domain.T_Board">
+  		select * from t_board
+  	</select>
+  	
+  	<select id="boardOne" resultType="com.smhrd.hogward.domain.T_Board">
+  		select * from t_board where b_seq=#{b_seq} 
+  	</select>
+  	
+  	<insert id="writeboard" parameterType="com.smhrd.hogward.mapper.BoardMapper">
+  		INSERT INTO t_board (
+								b_title
+								, b_content
+								, b_tag
+								, b_loc
+								, lat
+								, lng
+								, mem_email
+								, b_file
+								, lm_seq) 
+				     VALUES (
+								'b_title 1'
+								, 'b_content 1'
+								, 'b_tag 1'
+								, 'b_loc 1'
+								, 1
+								, 1
+								, 'mem_email 01'
+								, 'b_file 1'
+								, 203)
+  	</insert>
+  	
+  
+  
+  </mapper>

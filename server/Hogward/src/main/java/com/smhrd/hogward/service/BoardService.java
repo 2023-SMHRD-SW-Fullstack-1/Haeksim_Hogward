@@ -88,5 +88,13 @@ public class BoardService {
 	
 	
 	
+	//유저가 작성한 인증 정보 저장하기
+	public int writeboard(T_Board board) {
+		return boardMapper.writeboard(board);
+	}
+	
+	
+	
+	
 
 }

@@ -4,7 +4,7 @@ import Header from '../components/Header'
 const JoinPage = () => {
   return (
     <div>
-        <div>  회원가입페이지 </div>
+       <h6>회원가입 페이지</h6>
     </div>
   )
 }

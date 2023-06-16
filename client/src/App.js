@@ -7,11 +7,12 @@ import MagicMapPage from "./pages/MagicMapPage";
 import GetDongRegionId from "./modules/map/GetDongRegionId";
 import GetCoords from "./modules/map/GetCoords";
 
-import MyFeed from "./components/Feed/MyFeed";
-import UserFeed from "./components/Feed/UserFeed";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage" ;
+import FeedPage from "./pages/FeedPage" ;
+
+
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
-        <Route path="/myfeed" element={<MyFeed />}></Route>
-        <Route path="/userfeed" element={<UserFeed />}></Route>
+        <Route path="/feed" element={<FeedPage/>}></Route>  
         <Route path="/login" element={<LoginPage/>}></Route>
         <Route path="/join" element={<JoinPage/>}></Route>
+       
+        
 
         {/*  */}
         {/* <Route path="/about" element={<About />}></Route>

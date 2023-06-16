@@ -15,26 +15,26 @@ const Header = () => {
             <div class="container">
                 <a class="navbar-brand">
                 <a class="navbar-brand" href="/">
-                    Hogward
+                    HOGWARD
                 </a>
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/">홈</a>
+                            <a class="nav-link click-scroll" href = "/">HOME</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/magicmap">마법지도</a>
+                            <a class="nav-link click-scroll" href = "/magicmap">MAGIC MAP</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/userfeed">피드</a>
+                            <a class="nav-link click-scroll" href="/feed">FEED</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href = "/myfeed">마이페이지</a>
+                            <a class="nav-link click-scroll">MYPAGE</a>
                         </li>
 
                        {/* 임시 전처리 작업공간 */}

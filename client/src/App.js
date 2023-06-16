@@ -8,8 +8,9 @@ import MagicMapPage from "./pages/MagicMapPage";
 import GetDongRegionId from "./modules/map/GetDongRegionId";
 import GetCoords from "./modules/map/GetCoords";
 
-import MainPage from "./pages/MainPage"
+import MainPage from "./pages/MainPage";
 import FeedPage from "./pages/FeedPage";
+import FootTracer from "./components/FootTracer";
 
 function App() {
   return (
@@ -18,10 +19,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
-        
+
         <Route path="/feed" element={<FeedPage />}></Route>
-        
-    
+
+        {/* 발자국지도 */}
+        <Route path="/foottracer" element={<FootTracer />}></Route>
 
         {/*  */}
         {/* <Route path="/about" element={<About />}></Route>

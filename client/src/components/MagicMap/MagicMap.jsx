@@ -39,7 +39,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   const getLandMarksAPI = () => {
     // setLandMarks(res.data)
     axios
-      .get("http://172.30.1.22:8087/hogward/alllandmark")
+      .get("http://172.30.1.20:8087/hogward/alllandmark")
       .then((res) => setLandMarks(res.data));
   };
 

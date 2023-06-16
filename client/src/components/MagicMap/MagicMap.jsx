@@ -81,6 +81,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화
           //   disableDoubleClickZoom: true, // 더블 클릭으로 확대 비활성화
           // }}
+          maxLevel={11}
           onMouseMove={(_map, mouseEvent) =>
             setMousePosition({
               lat: mouseEvent.latLng.getLat(),

@@ -46,7 +46,7 @@ const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
         // 인증탭
         <div className="authtab">
           <div className="authtab_innercontainer">
-            <AuthUserForm />
+            <AuthUserForm clickedLandmark={clickedLandmark} />
           </div>
         </div>
       ) : (

@@ -1,166 +1,95 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../assets/css/Feed.css';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import axios from 'axios';
 
 const UserFeed = () => {
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [newPostContent, setNewPostContent] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [userList, setUserList] = useState([
-    { id: 1, username: '뚱이', profileImage: 'https://i.pinimg.com/236x/46/1d/f7/461df750a734b8c580246e6618c6919a.jpg' },
-    { id: 2, username: '뚱&폰지', profileImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrheH9XCUreb5_zUFhGk3OdmxWCF6o5O0olkc7jPOqeMQ-G85g5nbKWD6FopgvhyFnxaQ&usqp=CAU' },
-    { id: 3, username: 'user3', profileImage: 'https://img.insight.co.kr/static/2017/03/01/700/8710JRR301036S434H25.jpg' },
-    { id: 4, username: 'user4', profileImage: 'https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201611/15/htm_2016111510552285703.jpg' },
-    { id: 5, username: 'user5', profileImage: 'https://pbs.twimg.com/media/Db_DLpjVwAEPZti.jpg' },
-  ]);
-  const [posts, setPosts] = useState([
+  // 기본 이미지 데이터 배열
+  const itemData = [
     {
-      id: 1,
-      image: 'https://img.insight.co.kr/static/2017/03/01/700/8710JRR301036S434H25.jpg',
-      content: '첫 번째 게시물입니다.',
-      likes: 10,
-      comments: [
-        { id: 1, user: 'user1', text: '댓글 1' },
-        { id: 2, user: 'user2', text: '댓글 2' },
-      ],
+      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+      title: 'Breakfast',
+      author: '@bkristastucchio',
     },
-    {
-      id: 2,
-      image: 'https://pbs.twimg.com/media/Db_DLpjVwAEPZti.jpg',
-      content: '두 번째 게시물입니다.',
-      likes: 5,
-      comments: [
-        { id: 1, user: 'user1', text: '댓글 1' },
-        { id: 2, user: 'user2', text: '댓글 2' },
-        { id: 3, user: 'user3', text: '댓글 3' },
-      ],
-    },
-    {
-      id: 3,
-      image: 'https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201611/15/htm_2016111510552285703.jpg',
-      content: '세 번째 게시물입니다.',
-      likes: 8,
-      comments: [
-        { id: 1, user: 'user1', text: '댓글 1' },
-        { id: 2, user: 'user2', text: '댓글 2' },
-        { id: 3, user: 'user3', text: '댓글 3' },
-        { id: 4, user: 'user4', text: '댓글 4' },
-      ],
-    },
-  ]);
+    // 다른 이미지 데이터 항목들도 동일한 형식으로 추가
+  ];
 
-  const handlePostClick = (post) => {
-    setSelectedPost((prevSelectedPost) => {
-      if (prevSelectedPost && prevSelectedPost.id === post.id) {
-        return null;
+  // API에서 가져온 피드 데이터를 저장할 상태 변수
+  const [feedData, setFeedData] = useState([]);
+
+  useEffect(() => {
+    // API 요청을 보낼 URL
+    const url = 'http://172.30.1.22:8087/hogward/allboard';
+
+    // useEffect 내부에서 async/await 사용하여 데이터 가져오기
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        // 응답 데이터를 상태 변수에 저장
+        setFeedData(response.data);
+      } catch (error) {
+        console.error(error);
       }
-      return post;
-    });
-  };
-
-  const handleClosePost = () => {
-    setSelectedPost(null);
-  };
-
-  const handleUserClick = (user) => {
-    setSelectedUser(user);
-  };
-
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      image: 'https://example.com/new-post.jpg',
-      content: newPostContent,
-      likes: 0,
-      comments: [],
     };
-    setPosts((prevPosts) => [...prevPosts, newPost]);
-    setNewPostContent('');
-  };
 
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+    fetchData();
+  }, []);
 
-  const filteredPosts = posts.filter((post) => {
-    return post.content.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+  // useNavigate 훅을 사용하여 네비게이션 기능 가져오기
+  const navigate = useNavigate();
+
+  // 게시물을 클릭했을 때 실행되는 함수
+  const handleItemClick = (itemId) => {
+    // 클릭한 게시물의 ID를 URL에 추가하여 상세 페이지로 이동
+    navigate(`/detail/${itemId}`);
+  };
 
   return (
-    <div className="container">
-      <div className="user-feed">
-      <input
-              type="text"
-              placeholder="게시물 검색"
-              value={searchQuery}
-              onChange={handleSearchInputChange}
+    <div className="feed-container">
+      {/* 이미지 목록을 표시할 ImageList 컴포넌트 */}
+      <ImageList sx={{ width: 800, height: 450 }} gap={8} cols={3}>
+        {/* 기본 이미지 데이터를 매핑하여 ImageListItem으로 렌더링 */}
+        {itemData?.map((item) => (
+          <ImageListItem
+            key={item.img}
+            onClick={() => handleItemClick(item.id)}
+          >
+            {/* 이미지 표시 */}
+            <img
+              src={item.img}
+              alt={item.title}
+              loading="lazy"
             />
-          </div>
-      <div className="search-bar">
-        <div className="feed-content">
-          {filteredPosts.map((post) => (
-            <div
-              className={`post ${selectedPost && selectedPost.id === post.id ? 'selected' : ''}`}
-              key={post.id}
-              onClick={() => handlePostClick(post)}
-            >
-              <img src={post.image} alt="게시물 이미지" />
-            </div>
-          ))}
-          <div className="user-list">
-          <h2>유저 목록</h2>
-          <ul>
-            {userList.map((user) => (
-              <li key={user.id} onClick={() => handleUserClick(user)}>
-                {user.username}
-              </li>
-            ))}
-          </ul>
-        </div>
-        </div>
-
-      </div>
-      {selectedPost && (
-        <div className="post-details-overlay" onClick={handleClosePost}>
-          <div className="post-details" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedPost.image} alt="게시물 이미지" />
-            <p>{selectedPost.content}</p>
-            <div className="post-info">
-              <span>좋아요: {selectedPost.likes}</span>
-              <ul>
-                {selectedPost.comments.map((comment) => (
-                  <li key={comment.id}>{comment.user}: {comment.text}</li>
-                ))}
-              </ul>
-            </div>
-            <button onClick={handleClosePost}>닫기</button>
-          </div>
-        </div>
-      )}
-      {selectedUser && (
-        <div className="user-profile-overlay" onClick={() => setSelectedUser(null)}>
-          <div className="user-profile-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="user-profile">
-              <img src={selectedUser.profileImage} alt="프로필 사진" />
-              <h3>{selectedUser.username}의 프로필</h3>
-              <p>팔로워: 100</p>
-              <p>팔로잉: 200</p>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* <div className="new-post">
-        <h2>새 게시물 작성</h2>
-        <form onSubmit={handlePostSubmit}>
-          <textarea
-            value={newPostContent}
-            onChange={(e) => setNewPostContent(e.target.value)}
-            placeholder="게시물 내용을 입력하세요."
-          />
-          <button type="submit">게시</button>
-        </form>
-      </div> */}
+            {/* 이미지에 대한 제목과 작성자 정보를 표시하는 ImageListItemBar */}
+            <ImageListItemBar
+              title={item.title}
+              subtitle={<span>by: {item.author}</span>}
+            />
+          </ImageListItem>
+        ))}
+        {/* API에서 가져온 피드 데이터를 매핑하여 ImageListItem으로 렌더링 */}
+        {feedData?.map((item) => (
+          <ImageListItem
+            key={item.allboard.b_id}
+            onClick={() => handleItemClick(item.allboard.b_id)}
+          >
+            {/* 이미지 표시 */}
+            <img
+              src={item.allboard.b_file}
+              alt={item.allboard.b_content}
+              loading="lazy"
+            />
+            {/* 이미지에 대한 내용과 작성자 정보를 표시하는 ImageListItemBar */}
+            <ImageListItemBar
+              title={item.allboard.b_content}
+              subtitle={<span>by: {item.allboard.mem_nick}</span>}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
     </div>
   );
 };

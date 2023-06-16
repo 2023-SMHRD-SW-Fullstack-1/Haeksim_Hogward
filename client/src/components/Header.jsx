@@ -29,7 +29,7 @@ const Header = () => {
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll"><Link to="/myfeed">피드</Link></a>
+                            <a class="nav-link click-scroll"><Link to="/feed">피드</Link></a>
                         </li>
 
                         <li class="nav-item">

@@ -5,7 +5,7 @@
   
   
 <mapper namespace="com.smhrd.hogward.mapper.LandmarkMapper">
-	<select id="landmarkList" resultType="com.smhrd.hogward.domain.T_Landmark">
+	<select id="lnadmarkList" resultType="com.smhrd.hogward.domain.T_Landmark">
 		select * from T_Landmark
 	</select>
 	

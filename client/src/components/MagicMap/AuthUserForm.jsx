@@ -124,7 +124,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
   return (
     <form
       method="post"
-      action="http://172.30.1.22:8087/hogward/insertboard"
+      action="http://localhost:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
     >
@@ -145,7 +145,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
         id="profileImg"
         onChange={saveImgFile}
         ref={imgRef}
-        name="b_file"
+        name="b__file"
       />
 
       {/* 글 제목 */}

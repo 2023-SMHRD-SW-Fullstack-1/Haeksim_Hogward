@@ -19,7 +19,6 @@ export const AuthBoard = ({ clickedLandmark }) => {
     getSelectedBoard();
   }, []);
   useEffect(() => {
-    console.log(board);
     console.log(getOneOrTwo());
   }, [board]);
   //srcset
@@ -31,8 +30,6 @@ export const AuthBoard = ({ clickedLandmark }) => {
       }&fit=crop&auto=format&dpr=2 2x`,
     };
   };
-
-  // 테스트용
 
   const rowscols = [
     {
@@ -64,14 +61,18 @@ export const AuthBoard = ({ clickedLandmark }) => {
     },
   ];
 
+  // 1또는 2 가져오는 함수
   const getOneOrTwo = () => {
     return Math.floor(Math.random() * 2) + 1;
   };
+
+  // 박스 사이즈 resize이벤트용(반응형)
   const [boxSize, setBoxSize] = useState(0);
   const authboardRef = useRef();
 
   // board 크기 반응형으로 조절
-
+  // resize 이벤트리스너 처리
+  // 디바운스 처리
   window.addEventListener("resize", () => {
     setBoxSize(authboardRef.current.offsetWidth);
   });

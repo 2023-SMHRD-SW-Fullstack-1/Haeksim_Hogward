@@ -103,8 +103,7 @@ const AuthUserForm = () => {
         {/* 글 인증장소 x*/}
         {/* 위도 x*/}
         {/* 경도 x*/}
-        {/* 글 작성자 x*/}
-        {/* 글 조회수 x*/}
+        {/* 글 작성자 x  이메일*/}
         {/* 랜드마크 식별자 x*/}
         <Button variant="outlined" color="error" type="submit">
           인증하기

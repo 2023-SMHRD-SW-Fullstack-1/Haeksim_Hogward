@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.smhrd.hogward.service.LandmarkService"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
+    <fullyQualifiedTypeName name="com.smhrd.hogward.domain.UserFeed"/>
+    <fullyQualifiedTypeName name="org.springframework.core.io.ResourceLoader"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Mapper"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.smhrd.hogward.mapper.BoardMapper"/>
+    <fullyQualifiedTypeName name="com.smhrd.hogward.domain.T_Board"/>
+    <fullyQualifiedTypeName name="com.smhrd.hogward.service.UserFeedService"/>
+    <fullyQualifiedTypeName name="com.smhrd.hogward.service.BoardService"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
 </qualifiedTypeNameHistroy>

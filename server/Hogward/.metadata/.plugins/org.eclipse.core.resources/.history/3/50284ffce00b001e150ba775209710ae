@@ -1,0 +1,34 @@
+package com.smhrd.hogward.controller;
+
+import org.json.simple.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.smhrd.hogward.service.LandmarkService;
+
+@RestController
+//CORS : Cross-Origin 문제가 발생함.
+@CrossOrigin("http://localhost:3000")
+public class LandmarkController {
+	
+	
+	@Autowired
+	private LandmarkService landService;
+	
+	//랜드마크 리스트 모두 불러오기
+	@GetMapping("/alllandmark")
+	public JSONArray lnadmarkList() {
+		JSONArray array = landService.lnadmarkList();
+		return array;
+	}
+	
+	
+	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
+	//("/certified/landmarkphoto")
+	
+	
+	
+}

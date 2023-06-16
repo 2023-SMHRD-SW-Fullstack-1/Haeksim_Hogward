@@ -1,8 +1,11 @@
 import React from 'react'
+import Post from '../components/Feed/Post'
 
 const FeedPage = () => {
   return (
-    <div>FeedPage</div>
+    <div>
+      <Post />
+    </div>
   )
 }
 

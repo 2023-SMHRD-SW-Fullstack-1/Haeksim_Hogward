@@ -45,7 +45,7 @@ const MyFeed = () => {
             </div>
           </div>
         </div>
-        <h1>인스타그램 나의 피드</h1>
+        {/* <h1>인스타그램 나의 피드</h1> */}
       </div>
       <div className="my-feed">
         {images.map((image, index) => (

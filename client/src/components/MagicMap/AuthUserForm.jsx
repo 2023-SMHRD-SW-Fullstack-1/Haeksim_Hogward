@@ -175,9 +175,9 @@ const AuthUserForm = ({ clickedLandmark }) => {
         value={selectedTags}
         onChange={handleTagChange}
         renderInput={(params) => (
-          <TextField {...params} variant="standard" placeholder="#태그" />
+          <TextField {...params} variant="standard" placeholder="#태그" name="b_tag"/>
         )}
-        name="b_tag"
+
       />
       {/* 글 인증장소*/}
       <input
@@ -193,7 +193,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
 
       {/* 글 작성자 x  이메일*/}
       {/* 테스트용 */}
-      <input type="hidden" readOnly value="member 01" name="mem_email" />
+      <input type="hidden" readOnly value="mem_email 01" name="mem_email" />
       {/* 랜드마크 식별자 */}
       <input
         type="hidden"

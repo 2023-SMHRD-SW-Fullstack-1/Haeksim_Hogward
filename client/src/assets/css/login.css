@@ -1,0 +1,65 @@
+
+
+/* 로그인 박스  */
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  padding: 90px;
+  transform: translate(-50%, -50%);
+  background: white;
+  border : 1px solid lightgray;
+  box-sizing: border-box;
+  border-radius: 10px; 
+}
+
+/* sign-in  */
+.login-box h1 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: black;
+  text-align: center;
+  font-size: 40px;
+}
+
+
+/* 아이디 비번 입력 BOX */
+.login-box .user-box {
+  position: relative;
+}
+
+/* 아이디 비번 입력 BOX */
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  /* color: black; */
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  outline: none;
+  background: transparent;
+}
+
+/* Login 버튼 */
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+

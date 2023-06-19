@@ -9,7 +9,8 @@ const MainPage = () => {
 
     
     <div>
-      <div width="100px">하이</div>
+      <div width="100px">
+      </div>
       <FootMap/>
       <Carousel/>
     </div>

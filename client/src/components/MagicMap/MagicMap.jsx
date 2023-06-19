@@ -1,6 +1,6 @@
 import axios from "axios";
 import "../../assets/css/MagicMap.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CustomOverlayMap,
   Polygon,
@@ -30,6 +30,9 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
 
   // sidebar onoff state
   const [isOpen, setIsOpen] = useState(false);
+
+  // 경계값 ref
+  const districtRef = useRef([]);
 
   // 경계값 데이터 가져오는 함수
   const getDistrictAPI = () =>
@@ -61,6 +64,17 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
       );
     }
   }, [selectedThema]);
+
+  // 구역 밝기 조절
+  const handleDistrictBrightness = (name) => {
+    // name = "영암군"...
+
+    let brightness = 0.8;
+    // name별 필터링
+    // count data 가져와서 count(*) - count(인증내역) 별로 0.8~0까지 구현
+
+    return 0.5;
+  };
 
   return (
     <div className="magicmap">
@@ -126,7 +140,8 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
               strokeColor={"#ffffff"}
               strokeOpacity={0.8}
               fillColor={area.isMouseover ? "#09f" : "#474747"}
-              fillOpacity={0.8}
+              // opacity 그대로 state로 변경
+              fillOpacity={handleDistrictBrightness(area.name)}
               onMouseover={() =>
                 setAreas((prev) => [
                   ...prev.filter((_, i) => i !== index),
@@ -195,6 +210,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           setIsOpen={setIsOpen}
           clickedLandmark={clickedLandmark}
         />
+        <button onClick={handleDistrictBrightness}>함수 테스트</button>
       </div>
     </div>
   );

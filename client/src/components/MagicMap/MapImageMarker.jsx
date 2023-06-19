@@ -16,9 +16,10 @@ const MapImageMarker = ({ lm, setClickedLandMark, setIsOpen }) => {
         // src: lm.t_landmark.lm_photo1, // 마커이미지의 주소입니다
         src: lm.t_landmark.them_seq === 1 ? moonimage : babimage,
         size: {
-          width: 40,
-          height: 50,
-        }, // 마커이미지의 크기입니다
+          // 마커이미지의 크기
+          width: 30,
+          height: 40,
+        },
         options: {
           offset: {
             x: 27,

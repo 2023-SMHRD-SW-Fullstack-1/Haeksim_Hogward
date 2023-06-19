@@ -175,9 +175,13 @@ const AuthUserForm = ({ clickedLandmark }) => {
         value={selectedTags}
         onChange={handleTagChange}
         renderInput={(params) => (
-          <TextField {...params} variant="standard" placeholder="#태그" name="b_tag"/>
+          <TextField
+            {...params}
+            variant="standard"
+            placeholder="#태그"
+            name="b_tag"
+          />
         )}
-
       />
       {/* 글 인증장소*/}
       <input

@@ -8,6 +8,7 @@ const MarkerOverlay = ({ lm, setClickedLandMark, setIsOpen }) => {
     <CustomOverlayMap
       position={{ lat: lm.t_landmark.lat, lng: lm.t_landmark.lng }}
       yAnchor={1}
+      xAnchor={0.54}
     >
       <div className="markercustomoverlay">
         <div

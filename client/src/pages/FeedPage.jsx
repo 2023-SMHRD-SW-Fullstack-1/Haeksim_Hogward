@@ -3,6 +3,8 @@ import MyFeed from '../components/Feed/MyFeed';
 import Post from '../components/Feed/Post';
 import Rank from '../components/Feed/Rank';
 import { Button } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css';
+
 
 
 const FeedPage = () => {

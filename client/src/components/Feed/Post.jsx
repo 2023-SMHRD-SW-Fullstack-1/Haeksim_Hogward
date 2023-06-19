@@ -50,7 +50,7 @@ const Post = () => {
   // //     likes: 41
   // //   }
   // // ];
-
+  
   useEffect(() => {
     const url = "board.json";
     axios.get(url).then(res => {

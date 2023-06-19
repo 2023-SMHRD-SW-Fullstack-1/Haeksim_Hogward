@@ -1,3 +1,9 @@
+.footContainer {
+  /* perspective: 600px; */
+  position: relative;
+  height: 400px;
+  width: 800px;
+}
 #wrap {
   position: absolute;
   left: 0;
@@ -5,12 +11,15 @@
   margin: 0px auto;
   height: 400px;
   width: 800px;
-  border: 1px solid black;
-  background: url("../img/footPringBg.png") no-repeat;
+  background: url("../img/FootPrintBg.png") no-repeat;
   background-size: 100% 100%;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  /* transform: rotateX(40deg); */
+  border-radius: 20px;
 }
 
-.name {
+/* .name {
   display: block;
   height: 40px;
   width: 150px;
@@ -31,99 +40,7 @@
   -o-animation-delay: 1s;
   animation-delay: 1s;
   opacity: 0;
-}
-
-@-webkit-keyframes textMove {
-  0% {
-    left: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  30% {
-    bottom: 100px;
-    left: 450px;
-  }
-  70% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 1;
-  }
-  100% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 0;
-  }
-}
-
-@-moz-keyframes textMove {
-  0% {
-    left: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  30% {
-    bottom: 100px;
-    left: 450px;
-  }
-  70% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 1;
-  }
-  100% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 0;
-  }
-}
-
-@-ms-keyframes textMove {
-  0% {
-    left: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  30% {
-    bottom: 100px;
-    left: 450px;
-  }
-  70% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 1;
-  }
-  100% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 0;
-  }
-}
-
-@-o-keyframes textMove {
-  0% {
-    left: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  30% {
-    bottom: 100px;
-    left: 450px;
-  }
-  70% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 1;
-  }
-  100% {
-    bottom: 300px;
-    left: 450px;
-    opacity: 0;
-  }
-}
+} */
 
 @keyframes textMove {
   0% {
@@ -147,11 +64,50 @@
     opacity: 0;
   }
 }
-@import "https://fonts.googleapis.com/css?family=Galdeano";
-.name h2 {
-  font-family: "Galdeano";
+
+.left {
+  position: absolute;
+  height: 20px;
+  /* 기본 우측보기 */
+  transform: rotateX(180deg) rotateZ(90deg);
+  /* transform: rotateX(180deg) rotateZ(180deg); */
+  bottom: 25px;
+  left: 20px;
+  /* animation: one 2s 1; */
+  animation: one 2s infinite;
+
+  opacity: 0;
 }
 
+.right {
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  /* 기본 우측보기 */
+  transform: rotateZ(90deg);
+  /* transform: rotateZ(90deg); */
+
+  /* animation: one 2s 1; */
+  animation: one 2s infinite;
+  opacity: 0;
+}
+
+@keyframes one {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 
 .leftfoot1:nth-child(1) {
   height: 20px;
   position: absolute;
@@ -164,7 +120,7 @@
 .right:nth-child(2) {
   position: absolute;
   height: 20px;
-  transform: rotateZ(90deg);
+  transform: rotateX(180deg) rotateZ(90deg);
   bottom: 40px;
   left: 50px;
   animation: one 22s infinite;
@@ -193,6 +149,7 @@
   animation-delay: 1.5s;
   opacity: 0;
 }
+
 
 .leftfoot1:nth-child(5) {
   height: 20px;
@@ -447,18 +404,4 @@
   animation-delay: 9.5s;
   opacity: 0;
 }
-
-@keyframes one {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  65% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+ */

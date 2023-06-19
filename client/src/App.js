@@ -9,10 +9,9 @@ import GetCoords from "./modules/map/GetCoords";
 
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
-import JoinPage from "./pages/JoinPage" ;
-import FeedPage from "./pages/FeedPage" ;
-import FootTracer from "./components/FootTracer.jsx"
-
+import JoinPage from "./pages/JoinPage";
+import FeedPage from "./pages/FeedPage";
+import FootTracer from "./components/FootTrace/FootTracer";
 
 function App() {
   return (

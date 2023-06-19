@@ -1,0 +1,164 @@
+[
+  {
+    "divcoords": {
+      "LM_DISTRICT": "고흥군",
+      "coords": [538, 257]
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [],
+      "LM_DISTRICT": "목포시"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [366, 142],
+      "LM_DISTRICT": "나주시"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [316, 264],
+      "LM_DISTRICT": "해남군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [283, 167],
+      "LM_DISTRICT": "무안군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [377, 57],
+      "LM_DISTRICT": "장성군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [396, 101],
+      "LM_DISTRICT": "동구"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [561, 147],
+      "LM_DISTRICT": "순천시"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [520, 86],
+      "LM_DISTRICT": "곡성군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [288, 68],
+      "LM_DISTRICT": "영광군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [354, 329],
+      "LM_DISTRICT": "완도군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [396, 101],
+      "LM_DISTRICT": "남구"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [595, 81],
+      "LM_DISTRICT": "구례군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [332, 200],
+      "LM_DISTRICT": "영암군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [217, 291],
+      "LM_DISTRICT": "진도군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [167, 155],
+      "LM_DISTRICT": "신안군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [396, 101],
+      "LM_DISTRICT": "서구"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [396, 101],
+      "LM_DISTRICT": "광산구"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [639, 136],
+      "LM_DISTRICT": "광양시"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [484, 195],
+      "LM_DISTRICT": "보성군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [373, 239],
+      "LM_DISTRICT": "강진군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [313, 107],
+      "LM_DISTRICT": "함평군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [436, 64],
+      "LM_DISTRICT": "담양군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [418, 213],
+      "LM_DISTRICT": "장흥군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [447, 143],
+      "LM_DISTRICT": "화순군"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [396, 101],
+      "LM_DISTRICT": "북구"
+    }
+  },
+  {
+    "divcoords": {
+      "coords": [638, 203],
+      "LM_DISTRICT": "여수시"
+    }
+  }
+]

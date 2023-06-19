@@ -1,0 +1,10 @@
+package com.smhrd.hogward.domain;
+
+
+
+public class CertifiedLand {
+	
+	private String lm_district;
+	private int authCount;
+
+}

@@ -14,6 +14,7 @@
   	
   	<insert id="writeboard" parameterType="com.smhrd.hogward.mapper.BoardMapper">
   		INSERT INTO t_board (
+  								b_seq,
 								b_title
 								, b_content
 								, b_tag
@@ -25,6 +26,7 @@
 								, lm_seq
 								) 
 				     VALUES (
+				     			t_board_SEQ.nextval,
 								#{b_title},
 								#{b_content},
 								#{b_tag},

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
@@ -27,15 +28,38 @@ public class LandmarkController {
 		return array;
 	}
 	
-	//랜드마크 사진만 모두 불러오기
+	//클릭한 랜드마크 사진정보 불러오기
 	@GetMapping("/alllandmark/photo/{lm_seq}")
 	public JSONObject landmarkPhotoList(@PathVariable("lm_seq")String lm_seq) {
 		 return landService.landmarkPhotoList(lm_seq);
 		
 	}
 	
+	//지역 랜드마크 갯수 카운트해서 정보 보내기
+	@GetMapping("/landmark/count")
+	public JSONArray landmarkCount() {
+		JSONArray array = landService.landmarkCount();
+		System.out.println(array);
+		return array;
+		
+	}
+	
+	
+	//회원별 인증한 랜드마크 정보 가져오기
+	@GetMapping("/certifiedlandmarks/{mem_email}")
+	public JSONArray certifiedLand(@PathVariable("mem_email")String mem_email) {
+		JSONArray array = landService.certifiedLand(mem_email);
+		System.out.println(array);
+		return array;
+	}
+	
+	
+	
 	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
-	//("/landmark/certifiedphoto")
+		//("/landmark/certifiedphoto")
+	
+	
+	
 	
 	
 	

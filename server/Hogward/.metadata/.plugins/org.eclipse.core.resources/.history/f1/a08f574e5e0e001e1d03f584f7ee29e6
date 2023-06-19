@@ -1,0 +1,8 @@
+package com.smhrd.hogward.domain;
+
+public class LandmarkAllCount {
+	
+	private String lm_district;
+	private int landmarkAllcount;
+
+}

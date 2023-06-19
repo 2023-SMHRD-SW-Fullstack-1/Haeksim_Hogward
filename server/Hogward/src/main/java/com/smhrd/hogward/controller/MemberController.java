@@ -2,6 +2,7 @@ package com.smhrd.hogward.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
 	//회원가입시 정보 저장 
-	//("/joinInformation")
+	//("/join")
+//	@PostMapping("/join")
+//	public void join()
+	
+	
 	
 	
 	//로그인 체크 기능

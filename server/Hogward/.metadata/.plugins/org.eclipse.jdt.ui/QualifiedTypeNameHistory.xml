@@ -10,9 +10,7 @@
     <fullyQualifiedTypeName name="com.smhrd.hogward.mapper.BoardMapper"/>
     <fullyQualifiedTypeName name="com.smhrd.hogward.service.UserFeedService"/>
     <fullyQualifiedTypeName name="com.smhrd.hogward.service.BoardService"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
@@ -21,4 +19,11 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
 </qualifiedTypeNameHistroy>

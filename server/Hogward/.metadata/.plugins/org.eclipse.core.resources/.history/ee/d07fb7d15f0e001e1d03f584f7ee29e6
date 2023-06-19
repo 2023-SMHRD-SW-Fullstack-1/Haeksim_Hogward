@@ -1,0 +1,55 @@
+package com.smhrd.hogward.controller;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.smhrd.hogward.service.LandmarkService;
+
+@RestController
+//CORS : Cross-Origin 문제가 발생함.
+@CrossOrigin("http://localhost:3000")
+public class LandmarkController {
+	
+	
+	@Autowired
+	private LandmarkService landService;
+	
+	//랜드마크 리스트 사진 뺴고 모두 불러오기
+	@GetMapping("/alllandmark")
+	public JSONArray landmarkList() {
+		JSONArray array = landService.landmarkList();
+		return array;
+	}
+	
+	//클릭한 랜드마크 사진정보 불러오기
+	@GetMapping("/alllandmark/photo/{lm_seq}")
+	public JSONObject landmarkPhotoList(@PathVariable("lm_seq")String lm_seq) {
+		 return landService.landmarkPhotoList(lm_seq);
+		
+	}
+	
+	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
+	//("/landmark/certifiedphoto")
+	
+	
+	
+	
+	//지역 랜드마크 갯수 카운트해서 정보 보내기
+	@GetMapping("/landmark/count")
+	public JSONArray landmarkCount() {
+		JSONArray array = landService.landmarkCount();
+		return array;
+	}
+	
+	
+	
+	
+	
+	
+}

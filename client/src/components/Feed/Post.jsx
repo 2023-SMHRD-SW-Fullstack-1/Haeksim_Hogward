@@ -52,7 +52,6 @@ const Post = () => {
   // // ];
 
   useEffect(() => {
-    // const url = "http://172.30.1.22:8087/hogward/allboard";
     const url = "board.json";
     axios.get(url).then(res => {
       setAllBoard(res.data);

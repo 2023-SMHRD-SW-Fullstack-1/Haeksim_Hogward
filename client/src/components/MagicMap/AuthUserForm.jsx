@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 
-const AuthUserForm = ({ clickedLandmark }) => {
+const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
 
@@ -227,7 +227,12 @@ const AuthUserForm = ({ clickedLandmark }) => {
         name="lm_seq"
       />
       {isLocOk ? (
-        <Button variant="outlined" color="error" type="submit">
+        <Button
+          variant="outlined"
+          color="error"
+          type="submit"
+          onClick={() => setReren(!reren)}
+        >
           인증하기
         </Button>
       ) : (

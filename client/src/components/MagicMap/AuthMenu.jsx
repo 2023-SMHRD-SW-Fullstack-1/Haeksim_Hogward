@@ -8,7 +8,7 @@ import { AuthBoard } from "./AuthBoard";
 import AuthUserForm from "./AuthUserForm";
 
 // 지도페이지 우측 인증사이드바
-const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
+const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark, reren, setReren }) => {
   const authRef = useRef();
   // 사이드 On/Off 구현
   useEffect(() => {
@@ -46,7 +46,11 @@ const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark }) => {
         // 인증탭
         <div className="authtab">
           <div className="authtab_innercontainer">
-            <AuthUserForm clickedLandmark={clickedLandmark} />
+            <AuthUserForm
+              clickedLandmark={clickedLandmark}
+              reren={reren}
+              setReren={setReren}
+            />
           </div>
         </div>
       ) : (

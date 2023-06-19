@@ -36,6 +36,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
 
   // 전체 랜드마크 카운트 state
   const [landmarkAllCount, setLandmarkAllCount] = useState([]);
+  const [reren, setReren] = useState(true);
 
   // 경계값 데이터 가져오는 함수
   const getDistrictAPI = () =>
@@ -93,7 +94,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   };
   useEffect(() => {
     getMemberAuthCount();
-  }, []);
+  }, [reren]);
 
   const filteredMemSite = memAuthCount.filter(
     (item) => item.certifiedLandmark.AUTHCOUNT !== 0
@@ -139,7 +140,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화
           //   disableDoubleClickZoom: true, // 더블 클릭으로 확대 비활성화
           // }}
-          maxLevel={11}
+          maxLevel={12}
           onMouseMove={(_map, mouseEvent) =>
             setMousePosition({
               lat: mouseEvent.latLng.getLat(),
@@ -251,6 +252,8 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           clickedLandmark={clickedLandmark}
+          setReren={setReren}
+          reren={reren}
         />
       </div>
     </div>

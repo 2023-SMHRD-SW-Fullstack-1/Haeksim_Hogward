@@ -37,7 +37,7 @@ public class BoardController {
 	private BoardService boardService;
 
 	
-	//유저들의 게시글이 모인 피드 불러오기   ---> 최신순으로 수정하기.
+	//유저들의 게시글이 모인 피드 불러오기   ---> 최신순으로 10개씩 보이게 수정하기.
 	@GetMapping("/userfeed")
 	public JSONArray userFeedList() {
 		JSONArray array = userFeedService.userFeedList();
@@ -65,6 +65,8 @@ public class BoardController {
 	//("insertboard /{mem_email}")
 	@PostMapping("/insertboard")
 	public void createboard(@RequestPart("b__file") MultipartFile file, @ModelAttribute T_Board board ) {
+		
+		System.out.println(board);
 		
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
 		try {

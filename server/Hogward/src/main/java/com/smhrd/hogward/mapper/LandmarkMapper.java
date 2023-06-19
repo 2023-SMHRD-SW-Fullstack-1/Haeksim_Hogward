@@ -1,9 +1,9 @@
 package com.smhrd.hogward.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import com.smhrd.hogward.domain.T_Landmark;
 
 @Mapper
@@ -12,5 +12,10 @@ public interface LandmarkMapper {
 	public List<T_Landmark> landmarkList();
 	
 	public T_Landmark landmarkPhotoList(String lm_seq);
+	
+	//public List<T_Landmark> landmarkCount();
+	public List<HashMap> landmarkCount();
+	
+	public List<HashMap> certifiedLand(String mem_email);
 
 }

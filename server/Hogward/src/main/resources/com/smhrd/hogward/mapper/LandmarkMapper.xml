@@ -10,11 +10,32 @@
 	</select>
 	
 	
-	<select id="landmarkList" resultType="com.smhrd.hogward.domain.T_Landmark">
+	<select id="landmarkPhotoList" resultType="com.smhrd.hogward.domain.T_Landmark">
 		select lm_photo1, lm_photo2, lm_photo3  from T_Landmark where lm_seq=#{lm_seq}
 	</select>
 	
+	<select id="landmarkCount" resultType="java.util.HashMap">
+		select lm_district , count(*) AS allcount
+  		  from t_landmark
+		group by lm_district
+
+	</select>
 	
+<!-- 	<select id="certifiedLand" resultType="java.util.HashMap">
+			select b.lm_district, count(a.lm_seq) AS authCount
+			  from t_board a , t_landmark b
+			 where a.lm_seq(+) = b.lm_seq
+			   and a.mem_email = #{mem_email}
+			 group by b.lm_district;
+	</select> -->
 	
+	<select id="certifiedLand" resultType="java.util.HashMap">
+	    <![CDATA[
+	    select b.lm_district, count(a.lm_seq) AS authCount
+	    from t_landmark b
+	    left join t_board a on a.lm_seq = b.lm_seq and a.mem_email = #{mem_email}
+	    group by b.lm_district
+	    ]]>
+    </select>
 
 </mapper>

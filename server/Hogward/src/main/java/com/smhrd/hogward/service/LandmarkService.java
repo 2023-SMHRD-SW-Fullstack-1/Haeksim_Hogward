@@ -1,7 +1,9 @@
 package com.smhrd.hogward.service;
 
 import java.io.File;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -15,9 +17,6 @@ import com.smhrd.hogward.domain.T_Landmark;
 import com.smhrd.hogward.mapper.LandmarkMapper;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
-
-
-
 
 @Service
 public class LandmarkService {
@@ -69,7 +68,7 @@ public class LandmarkService {
 //			land.setLm_photo2(fileStringValue2);
 //			land.setLm_photo3(fileStringValue3);
 		
-			
+	
 			//2.t_landmark 객체를 jsonObject(key:value) 형태로 변경하기
 			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
 			obj.put("t_landmark", land); //비어있는 json object 에 값 추가
@@ -128,11 +127,62 @@ public class LandmarkService {
 			obj.put("t_landmark", landmark); //비어있는 json object 에 값 추가
 			
 			return obj;
-		
-		
-		
-		
-		
+	
 		}
+		
+		
+		
+		//지역별 랜드마크수 카운트
+				public JSONArray landmarkCount() {
+					//List<T_Landmark> list = landMapper.landmarkCount();
+					List<HashMap> list = landMapper.landmarkCount();
+					
+					System.out.println("hash : "+ list);
+					System.out.println("--- : " + list.toString());
+					
+					JSONArray jsonArray = new JSONArray();
+					
+					ImageConverter<File, String> converter = new ImageToBase64();
+					
+					for(HashMap count : list) {
+						
+						JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+						obj.put("LandmarkAllCount", count); //비어있는 json object 에 값 추가
+						
+						jsonArray.add(obj); 
+						
+					}
+					return jsonArray;
+					
+					
+				}
+				
+		
+		//회원별 인증한 랜드마크 정보 가져오기
+				public JSONArray certifiedLand(String mem_email) {
+					List<HashMap> list = landMapper.certifiedLand(mem_email);
+					
+					System.out.println(list);
+					
+					JSONArray jsonArray = new JSONArray();
+					ImageConverter<File, String> converter = new ImageToBase64();
+					
+						for(HashMap landmark : list) {
+						
+						JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+						obj.put("certifiedLandmark", landmark); //비어있는 json object 에 값 추가
+						
+						jsonArray.add(obj); 
+						
+					}
+					return jsonArray;
+					
+					
+				}
+				
+				
+		
+		
+		
 		
 }

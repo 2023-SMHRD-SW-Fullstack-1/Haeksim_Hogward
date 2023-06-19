@@ -1,0 +1,5 @@
+package com.smhrd.hogward.domain;
+
+public class LandmarkAllCount {
+
+}

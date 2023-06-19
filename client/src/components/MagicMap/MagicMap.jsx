@@ -45,7 +45,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   const getLandMarksAPI = () => {
     // setLandMarks(res.data)
     axios
-      .get("http://172.30.1.20:8087/hogward/alllandmark")
+      .get("http://172.30.1.22:8087/hogward/alllandmark")
       .then((res) => setLandMarks(res.data));
   };
 
@@ -70,7 +70,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
 
   // 전체 랜드마크 카운트 가져오는 함수
   const getAllLandmarkCount = () => {
-    const url = "http://172.30.1.20:8087/hogward/landmark/count";
+    const url = "http://172.30.1.22:8087/hogward/landmark/count";
     axios.get(url).then((res) => {
       setLandmarkAllCount(res.data);
       console.log(res.data);
@@ -84,23 +84,38 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   const [memAuthCount, setMemAuthCount] = useState([]);
 
   const getMemberAuthCount = () => {
-    // const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/${mem_email}`;
-    const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/mem_email 01`;
+    // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
+    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/mem_email 01`;
     axios.get(url).then((res) => {
       console.log(res.data);
       setMemAuthCount(res.data);
     });
   };
+  useEffect(() => {
+    getMemberAuthCount();
+  }, []);
 
+  const filteredMemSite = memAuthCount.filter(
+    (item) => item.certifiedLandmark.AUTHCOUNT !== 0
+  );
   // 구역 밝기 조절
   const handleDistrictBrightness = (name) => {
     // name = "영암군"...
-
+    // console.log(filteredMemSite);
     let brightness = 0.8;
+    // 알고리즘
+    if (
+      filteredMemSite.filter(
+        (item) => item.certifiedLandmark.LM_DISTRICT === name
+      ).length > 0
+    ) {
+      brightness = 0;
+    }
+
     // name별 필터링
     // count data 가져와서 count(*) - count(인증내역) 별로 0.8~0까지 구현
 
-    return 0.8;
+    return brightness;
   };
 
   return (
@@ -237,7 +252,6 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           setIsOpen={setIsOpen}
           clickedLandmark={clickedLandmark}
         />
-        <button onClick={handleDistrictBrightness}>함수 테스트</button>
       </div>
     </div>
   );

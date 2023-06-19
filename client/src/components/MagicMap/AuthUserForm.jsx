@@ -64,7 +64,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
   // 반경 변수
   const dis = 0.006;
 
-  // 비교 알고리즘
+  // 비교 알고리즘 현재 위치 반경
   const isValidLocation = (
     landmarkLat,
     landmarkLng,
@@ -124,7 +124,7 @@ const AuthUserForm = ({ clickedLandmark }) => {
   return (
     <form
       method="post"
-      action="http://172.30.1.20:8087/hogward/insertboard"
+      action="http://172.30.1.22:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
     >
@@ -183,6 +183,27 @@ const AuthUserForm = ({ clickedLandmark }) => {
           />
         )}
       />
+      {/* <Autocomplete
+        multiple
+        id="size-small-standard-multi"
+        size="small"
+        options={tagNames}
+        getOptionLabel={(option) => option.title}
+        value={selectedTags}
+        onChange={(event, newValue) => {
+          const updatedTags = newValue.map((option) => option.title);
+          setBTag(updatedTags); // b_tag 업데이트
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="standard"
+            placeholder="#태그"
+            name="b_tag"
+          />
+        )}
+      /> */}
+      <input type="hidden" name="b_tag" value={handleTagChange} />
       {/* 글 인증장소*/}
       <input
         type="hidden"
@@ -210,9 +231,14 @@ const AuthUserForm = ({ clickedLandmark }) => {
           인증하기
         </Button>
       ) : (
-        <Button variant="outlined" color="error" onClick={handleIsOk}>
-          인증 위치 확인
+        // 테스트용
+        <Button variant="outlined" color="error" type="submit">
+          인증하기
         </Button>
+        // 찐
+        // <Button variant="outlined" color="error" onClick={handleIsOk}>
+        //   인증 위치 확인
+        // </Button>
       )}
     </form>
   );

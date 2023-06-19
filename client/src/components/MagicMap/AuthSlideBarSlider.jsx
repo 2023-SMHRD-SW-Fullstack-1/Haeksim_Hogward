@@ -20,7 +20,7 @@ const AuthSlideBarSlider = ({ clickedLandmark }) => {
   // 선택된 랜드마크에 해당하는 사진 불러오기
   useEffect(() => {
     if (clickedLandmark !== undefined) {
-      const url = `http://172.30.1.20:8087/hogward/alllandmark/photo/${clickedLandmark.t_landmark.lm_seq}`;
+      const url = `http://172.30.1.22:8087/hogward/alllandmark/photo/${clickedLandmark.t_landmark.lm_seq}`;
       axios.get(url).then((res) => {
         setClImages([
           res.data.t_landmark.lm_photo1,

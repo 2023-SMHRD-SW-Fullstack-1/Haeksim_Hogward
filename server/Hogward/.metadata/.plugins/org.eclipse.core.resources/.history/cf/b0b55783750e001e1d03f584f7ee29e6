@@ -1,0 +1,14 @@
+package com.smhrd.hogward.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.smhrd.hogward.domain.T_Member;
+
+
+
+@Mapper
+public interface MemMapper {
+	
+	public T_Member member join(T_Member member);
+
+}

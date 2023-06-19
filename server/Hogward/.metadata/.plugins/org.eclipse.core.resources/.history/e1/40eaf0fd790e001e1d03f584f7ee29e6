@@ -1,0 +1,14 @@
+package com.smhrd.hogward.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.HashMap;
+
+
+
+@Mapper
+public interface MemMapper {
+	
+	public List<HashMap> join(T_Member member);
+
+}

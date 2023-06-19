@@ -1,0 +1,22 @@
+package com.smhrd.hogward.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.smhrd.hogward.controller.T_Member;
+import com.smhrd.hogward.mapper.MemMapper;
+
+@Service
+public class MemService {
+	
+	@Autowired
+	private MemMapper memMapper;
+	
+	public int join(T_Member member) {
+		return memMapper.join(member);
+		
+		
+	}
+	
+
+}

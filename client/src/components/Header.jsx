@@ -6,44 +6,38 @@ const Header = () => {
   return (
     <div>
       {/* 헤더 */}
-      <nav class="navbar navbar-expand-lg .bg-black">
+      <nav class="navbar navbar-expand-lg" id="main">
         <div class="container">
-          <a href="/">HOGWARD</a>
+          <a href="/">로고</a>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="collapse navbar-collapse">
             <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
               <li>
-                <a class="nav-link click-scroll" href="/">
-                  HOME
-                </a>
-              </li>
-
-              <li>
-                <a class="nav-link click-scroll" href="/magicmap">
+                <a class="nav-link click-scroll" href="/magicmap" id="text">
                   MAGIC MAP
                 </a>
               </li>
 
               <li>
-                <a class="nav-link click-scroll" href="/foottracer">
+                <a class="nav-link click-scroll" href="/foottracer" id="text">
                   FOOTER TRACER
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="/feed">
+                <a class="nav-link click-scroll" href="/feed" id="text">
                   FEED
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="/userfeed">
+                <a class="nav-link click-scroll" href="/userfeed" id="text">
                   MYPAGE
                 </a>
               </li>
 
               {/* 임시 전처리 작업공간 */}
-              <li class="nav-item">
+              {/* <li class="nav-item">
                 <a class="nav-link click-scroll" href="//module/getregion">
                   전처리(리전)
                 </a>
@@ -53,16 +47,19 @@ const Header = () => {
                 <a class="nav-link click-scroll" href="/module/getcoords">
                   전처리(좌표)
                 </a>
-              </li>
+              </li> */}
             </ul>
 
-            <a href="/join" class="btn custom-btn d-lg-block d-none">
-              회원가입
-            </a>
+            {/* class="btn custom-btn d-lg-block d-none" */}
+            <a href="/join">회원가입</a>
+
             <span class="button-space"></span>
-            <a href="/login" class="btn custom-btn d-lg-block d-none">
-              로그인
-            </a>
+
+            <a href="/login">로그인</a>
+
+            {/* <button type="button" class="btn btn-primary" href="/loin">로그인</button>
+            <span class="button-space"></span>        
+            <button type="button" class="btn btn-primary" href="/join">회원가입</button>  */}
           </div>
         </div>
       </nav>

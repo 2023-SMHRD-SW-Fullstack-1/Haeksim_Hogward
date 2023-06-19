@@ -3,33 +3,29 @@ import { Link, Route, Routes } from "react-router-dom";
 import "../assets/css/Header.css";
 
 const Header = () => {
-    
- 
-    return (
+  return (
     <div>
       {/* 헤더 */}
       <nav class="navbar navbar-expand-lg .bg-black">
         <div class="container">
-          <a href="/">
-           HOGWARD 
-          </a>
+          <a href="/">HOGWARD</a>
 
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
               <li>
                 <a class="nav-link click-scroll" href="/">
-                 HOME
+                  HOME
                 </a>
               </li>
 
               <li>
                 <a class="nav-link click-scroll" href="/magicmap">
-                  MAGIC MAP 
+                  MAGIC MAP
                 </a>
               </li>
 
               <li>
-                <a class="nav-link click-scroll" href="/footertracer">
+                <a class="nav-link click-scroll" href="/foottracer">
                   FOOTER TRACER
                 </a>
               </li>

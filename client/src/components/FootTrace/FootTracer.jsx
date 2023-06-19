@@ -60,6 +60,7 @@ const FootTracer = () => {
 
   return (
     <div className="footContainer">
+      sdf
       <div id="wrap">
         {/* <div class="name">FF</div> */}
         <div>

@@ -1,6 +1,7 @@
 import "./assets/css/reset.css";
 import "./App.css";
 import Header from "./components/Header";
+
 import { Route, Routes } from "react-router-dom";
 import MagicMapPage from "./pages/MagicMapPage";
 

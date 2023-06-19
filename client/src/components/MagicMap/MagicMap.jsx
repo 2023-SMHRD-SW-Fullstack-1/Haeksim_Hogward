@@ -34,6 +34,9 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   // 경계값 ref
   const districtRef = useRef([]);
 
+  // 전체 랜드마크 카운트 state
+  const [landmarkAllCount, setLandmarkAllCount] = useState([]);
+
   // 경계값 데이터 가져오는 함수
   const getDistrictAPI = () =>
     axios.get("converted-district.json").then((res) => setAreas(res.data));
@@ -65,6 +68,30 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
     }
   }, [selectedThema]);
 
+  // 전체 랜드마크 카운트 가져오는 함수
+  const getAllLandmarkCount = () => {
+    const url = "http://172.30.1.20:8087/hogward/landmark/count";
+    axios.get(url).then((res) => {
+      setLandmarkAllCount(res.data);
+      console.log(res.data);
+    });
+  };
+  useEffect(() => {
+    getAllLandmarkCount();
+  }, []);
+
+  // 회원별 랜드마크 인증수 카운트
+  const [memAuthCount, setMemAuthCount] = useState([]);
+
+  const getMemberAuthCount = () => {
+    // const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/${mem_email}`;
+    const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/mem_email 01`;
+    axios.get(url).then((res) => {
+      console.log(res.data);
+      setMemAuthCount(res.data);
+    });
+  };
+
   // 구역 밝기 조절
   const handleDistrictBrightness = (name) => {
     // name = "영암군"...
@@ -73,7 +100,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
     // name별 필터링
     // count data 가져와서 count(*) - count(인증내역) 별로 0.8~0까지 구현
 
-    return 0.5;
+    return 0.8;
   };
 
   return (

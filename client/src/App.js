@@ -22,7 +22,7 @@ function App() {
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
         <Route path="/feed" element={<FeedPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/login" element={<JoinPage />}></Route>
+        <Route path="/join" element={<JoinPage />}></Route>
 
         {/* 발자국지도 */}
         <Route path="/foottracer" element={<FootTracer />}></Route>

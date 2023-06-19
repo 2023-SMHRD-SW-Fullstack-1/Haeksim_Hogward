@@ -1,19 +1,47 @@
 package com.smhrd.hogward.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.smhrd.hogward.domain.T_Member;
+import com.smhrd.hogward.service.MemService;
 
 @RestController
 //CORS : Cross-Origin 문제가 발생함.
 @CrossOrigin("http://localhost:3000")
 public class MemberController {
+	
+	@Autowired
+	public MemService memService;
+	
+	
+	//이메일 중복확인
+	
+	
+	//닉네임 중복확인
+	
+	
 
 	//회원가입시 정보 저장 
 	//("/join")
-//	@PostMapping("/join")
-//	public void join()
+	@PostMapping("/join")
+	public void join(@ModelAttribute T_Member member) {
+		
+		int cnt = memService.join(member);
+		System.out.println(cnt);
+		
+		if(cnt>0) {
+			System.out.println("회원가입 성공");
+		}else {
+			System.out.println("회원가입 실패!!");
+		}
+		
+	}
 	
 	
 	

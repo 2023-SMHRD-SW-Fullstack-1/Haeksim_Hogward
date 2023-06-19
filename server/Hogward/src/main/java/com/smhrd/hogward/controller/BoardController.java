@@ -86,6 +86,7 @@ public class BoardController {
 		
 		if(cnt>0) {
 			System.out.println("게시글 저장완료");
+
 		}else {
 			System.out.println("게시글 저장 실패!!");
 		}

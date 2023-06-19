@@ -1,23 +1,39 @@
-import React, { useState } from 'react'
-import Post from '../components/Feed/Post'
-import Rank from '../components/Feed/Rank'
+import React, { useState } from 'react';
+import MyFeed from '../components/Feed/MyFeed';
+import Post from '../components/Feed/Post';
+import Rank from '../components/Feed/Rank';
+import { Button } from 'semantic-ui-react'
+
 
 const FeedPage = () => {
 
   const [selectFeed, setSelectFeed] = useState();
 
   return (
-    <div>
-      <div>
-      <button onClick={() => setSelectFeed()}>내피드</button>
-      <button onClick={() => setSelectFeed()}>다른사람피드</button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ margin: '10px' }}>
+        <Button primary onClick={() => setSelectFeed('myFeed')}>내피드</Button>
+        <Button secondary onClick={() => setSelectFeed('otherFeed')}>다른사람피드</Button>
       </div>
-      <Post 
-       selectFeed={selectFeed}
-      />
 
+      <div style={{ display: 'flex', width: '100%' }}>
+        {selectFeed === 'myFeed' ? (
+          <div style={{ flex: 1, padding: '10px' }}>
+            <MyFeed />
+          </div>
+        ) : selectFeed === 'otherFeed' ? (
+          <>
+            <div style={{ flex: 1, padding: '10px' }}>
+              <Post />
+            </div>
+            <div style={{ flex: 1, padding: '10px' }}>
+              <Rank />
+            </div>
+          </>
+        ) : null}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default FeedPage
+export default FeedPage;

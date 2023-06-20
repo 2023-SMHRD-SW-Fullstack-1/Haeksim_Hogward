@@ -9,7 +9,7 @@
   	</select>
   	
   	<select id="boardOne" resultType="com.smhrd.hogward.domain.T_Board">
-  		select * from t_board where b_seq=#{b_seq} 
+  		select * from t_board where b_seq=#{b_seq}
   	</select>
   	
   	<insert id="writeboard" parameterType="com.smhrd.hogward.mapper.BoardMapper">
@@ -39,6 +39,9 @@
 								)
   	</insert>
   	
-  
+  	
+  	<select id="allUserPhoto" resultType="com.smhrd.hogward.domain.LandAllUserPhoto">
+  		select * from t_board where lm_seq=#{lm_seq}
+  	</select>
   
   </mapper>

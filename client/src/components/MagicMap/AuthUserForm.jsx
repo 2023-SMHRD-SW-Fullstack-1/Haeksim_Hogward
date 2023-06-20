@@ -124,7 +124,7 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   return (
     <form
       method="post"
-      action="http://172.30.1.22:8087/hogward/insertboard"
+      action="http://172.30.1.20:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
     >

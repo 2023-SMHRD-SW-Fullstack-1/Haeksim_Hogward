@@ -28,4 +28,5 @@ public class T_Board {
 	private String b_file; //
 	private String b_rep;
 	private int lm_seq; //
+	
 }

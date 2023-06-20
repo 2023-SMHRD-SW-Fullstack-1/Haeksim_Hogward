@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,21 +27,23 @@ public class MemberController {
 	//닉네임 중복확인
 	
 	
-
 	//회원가입시 정보 저장 
 	//("/join")
-	@PostMapping("/join")
-	public void join(@ModelAttribute T_Member member) {
+	@PostMapping("/joinmember")
+//	public void join(@ModelAttribute T_Member member) {
+	public int join(@RequestParam("mem_email") String mem_email) {
+		System.out.println(mem_email);
 		
-		int cnt = memService.join(member);
-		System.out.println(cnt);
-		
+//		System.out.println(member.getMem_email());
+//		int cnt = memService.join(member);
+//		System.out.println(cnt);
+		int cnt=0;
 		if(cnt>0) {
 			System.out.println("회원가입 성공");
 		}else {
 			System.out.println("회원가입 실패!!");
 		}
-		
+		return 1;
 	}
 	
 	
@@ -53,6 +56,14 @@ public class MemberController {
 	
 	
 	//회원정보 수정시 비밀번호 제외한 내용 보내주기
+	
+	
+	
+	//프로필 사진 수정요청 오면 db 저장하기
+	
+	
+	
+	//인증 랭킹 10위까지 프로필사진, 닉네임 보내기
 	
 	
 }

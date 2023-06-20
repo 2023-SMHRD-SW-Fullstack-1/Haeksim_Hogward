@@ -1,9 +1,12 @@
 package com.smhrd.hogward.mapper;
 
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.T_Board;
 
 @Mapper
@@ -14,5 +17,7 @@ public interface BoardMapper {
 	public T_Board boardOne(String b_seq);
 	
 	public int writeboard(T_Board board);
+	
+	public List<LandAllUserPhoto> allUserPhoto(String lm_seq);
 
 }

@@ -7,11 +7,9 @@
   	<insert id="join" parameterType="com.smhrd.hogward.mapper.MemMapper" >
   		INSERT INTO t_member (mem_email
   							, mem_pw
-  							, mem_gender
   							, mem_nick) 
   					VALUES (  #{mem_email}
   							, #{mem_pw}
-  							, #{mem_gender}
   							, #{mem_nick})
   		
   		

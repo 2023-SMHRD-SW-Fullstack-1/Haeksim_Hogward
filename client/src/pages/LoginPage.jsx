@@ -52,44 +52,33 @@ import "../assets/css/login.css";
       }, [])
 
 
-  // //아이디 입력 값 변경 이벤트 헨들러 
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // //비밀번호 입력 값 변경 이벤트 핸들러 
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
   //로그인 버튼 클릭 
   const handleLogin = () => {
     
-    //서버에서 가져온값과 연결 
-    console.log('Email:', email);
-    console.log('Password:', password);
-  
-    //서버로 로그인 요청 보내기 
-    // axios
-    // .post('http://localhost:8094/spofit/member/login', { m_id: username, m_pw: password },{ headers:{ 'Content-Type' : "application/json"}})
-    // .then((response) => {
-    //   const loginResult = response.data[1];
-    //   console.log('로그인 리저트 : '+loginResult);
-    //   if (loginResult != null) {
-    //     alert(username+'님 환영합니다!!');
-    //     console.log('로그인 성공!');
-    //     sessionStorage.setItem('accessMemberSeq', response.data[0]);
-    //     sessionStorage.setItem('accessMemberNick', response.data[1]);
-    //     window.location.href = '/';
-    //   } else{
-    //     alert('로그인에 실패하였습니다.');
-    //     console.log('로그인 실패');
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error('로그인 요청 실패:', error);
-    // });
-
+    const formData = new FormData();
+    formData.append('mem_email', email);
+    formData.append('mem_pw', password);
+    
+    axios
+    .post('http://172.30.1.20:8087/hogward/logincheck', formData)
+    .then((res) => {
+      console.log(res.data);
+      // 1이면 로그인 성공 
+        
+      if(res.data ==1 ) { // 1이면 로그인 성공
+        alert('환영합니다!');
+        window.location.href='/'; 
+      } else{ // 0이면 회원가입 실패 
+         alert('로그인에 실패했습니다. 다시 시도해 주세요.');
+         window.location.href='/login'; 
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      // alert('Error!');
+      console.log(error.res);
+      console.log(formData);
+    });
   };
    
 
@@ -99,9 +88,7 @@ import "../assets/css/login.css";
      {/* 로고 */}
 
      {/* 로그인 제목 */}
-     <h3>Welcome to the</h3>
      <h1>HOGWARD</h1>
-
 
       <form>
 
@@ -113,7 +100,7 @@ import "../assets/css/login.css";
             value={email}
             onChange={onChangeEmail}
             required=""
-            placeholder='이메일 '
+            placeholder='이메일을 입력해 주세요'
           />
           <p>{emailMsg}</p>
         </div>
@@ -126,7 +113,7 @@ import "../assets/css/login.css";
             value={password}
             onChange={onChangePwd}
             required=""
-            placeholder='비밀번호'
+            placeholder='비밀번호를 입력해 주세요'
           />
           <p>{pwdMsg}</p>
         </div>
@@ -135,7 +122,7 @@ import "../assets/css/login.css";
 
         {/* 로그인 버튼 */}
         <div class="d-grid gap-2">
-        <button type= "button" href="#" onClick={handleLogin} class="btn btn-dark btn btn-lg">
+        <button type= "button" onClick={handleLogin} class="btn btn-dark btn btn-lg">
         <span></span>
         <span></span>
         <span></span>

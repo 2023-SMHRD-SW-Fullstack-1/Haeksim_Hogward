@@ -36,9 +36,9 @@ const JoinPage = () => {
    const [pwdMsg, setPwdMsg] = useState('');  //비밀번호 형식
    const [confirmPwdMsg, setConfirmPwdMsg]= useState("") //비밀번호 확인
    const [nicknameMsg, setNicknameMsg] = useState("")  //닉네임중복
-    
+   
 
-   // 1-1에 잡아뒀던 유효성 검사 함수로 정리하기
+   // 유효성 검사 함수로 정리
     const isEmailValid = validateEmail(email);
     const isPwdValid = validatePwd(password);
     const isConfirmPwd = password === confirmPassword;
@@ -48,7 +48,9 @@ const JoinPage = () => {
     const onChangeEmail = useCallback( async (e) => {
     const currEmail = e.target.value;
     setEmail(currEmail);
+    
 
+   //이메일 유효성 검사
       if (!validateEmail(currEmail)) {
         setEmailMsg("이메일 형식이 올바르지 않습니다.")
       } else {
@@ -56,7 +58,7 @@ const JoinPage = () => {
         }
       })
 
-   //비밀번호
+    //비밀번호 유효성 검사
       const onChangePwd = useCallback((e) =>{
       const currPwd = e.target.value;
         setPassword(currPwd);
@@ -92,72 +94,52 @@ const JoinPage = () => {
       }
     }, []);
   
-    //이메일 닉네임 중복확인 
-    const [checkMail, setCheckMail] = useState(false)
-    // const [checkNickname, setCheckNickname] = useState(false)
 
-    //이메일중복확인
+    // 이메일서버로 보내기 
+    // 가져온값 0 이면 사용가능 , 1이면 사용불가능
+     const onCheckEmail = (e) => {
+      
+      const formData = new FormData();
+      formData.append('mem_email', email);
+    
+       axios 
+          .post('http://172.30.1.20:8087/hogward/emailcheck', formData)
+          .then((res) => {
+        
+             if(res.data == 0) {
+              alert("사용 가능한 이메일 입니다.")
+             } else{
+              alert("중복된 이메일 입니다.")
+             }
 
-    //const onCheckEmail = 
+          })
+          .catch((error)=>{
+            console.log(error);
+          });
+     }
+    
+    // 닉네임 서버로 보내기 
+    // 가져온값 0 이면 사용가능 , 1이면 사용불가능
+    const onCheckNick = (e) => {
 
+      const formData = new FormData();
+      formData.append('mem_nick', nick);
+    
+       axios 
+          .post('http://172.30.1.20:8087/hogward/nickcheck', formData)
+          .then((res) => {
+            
+            if(res.data == 0) {
+              alert("사용 가능한 닉네임 입니다.")
+            } else{
+              alert("중복된 닉네임 입니다.")
+            }
 
-      // 서버 post로 보내기 
-      // axios
-      //   .post(url, 
-      //   {
-      //     'mem_email' : email,
-      //     'mem_nick' : nick
-      //   })
-      //   .then(res)
-      // Spring =>  @RequestBody Mem
-      // Mem.mememail = email
-      // Mem.mem_pw = null
-
-
-
-
-    // const onCheckEmail = async (e) => {
-    //   e.preventDefault();
-  
-    //   try { 
-    //     const res = await Api.post("user/register/email", {email});
-    //     const { result } = res.data;
-  
-    //     if (!result) {
-    //         setEmailMsg("이미 등록된 메일입니다. 다시 입력해주세요.");
-    //         setCheckMail(false);
-    //     } else {
-    //       setEmailMsg("사용 가능한 메일입니다.😊");
-    //       setCheckMail(true);
-    //     }
-  
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
-
-    // //닉네임 중복확인
-    // const onCheckNickname = async (e) => {
-    //   e.preventDefault();
-  
-    //   try { 
-    //     const res = await Api.post("user/register/nickname", {nickname});
-  
-    //     const { result } = res.data;
-  
-    //     if (!result) {
-    //         setNicknameMsg("이미 등록된 닉네임입니다. 다시 입력해주세요.");
-    //         setCheckNickname(false);
-    //    } else {
-    //       setNicknameMsg("사용 가능한 닉네임입니다.😊");
-    //       setCheckNickname(true);
-    //     }
-  
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
-
+          })
+          .catch((error)=>{
+            console.log(error);
+          });
+    }
 
 
   //회원가입 버튼 
@@ -168,17 +150,26 @@ const JoinPage = () => {
       return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
       }
 
+      //이메일, 닉네임, 패스워드 서버로 보내기 
       const formData = new FormData();
       formData.append('mem_email', email);
       formData.append('mem_nick', nick);
       formData.append('mem_pw', password);
 
-      console.log(formData)
-
+    
       axios
       .post('http://172.30.1.20:8087/hogward/joinmember', formData)
       .then((res) => {
         console.log(res.data);
+        
+        if(res.data ==1 ) { // 1이면 회원가입 성공 
+          alert('회원가입이 성공적으로 완료되었습니다.');
+          window.location.href='/login'; 
+        } else{ // 0이면 회원가입 실패 
+           alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+        }
+
+        // res.data = 1 & window.location.href = '/join''
         // res.data = 1 & window.location.href =
         // alert('등록되었습니다.');
       })
@@ -235,7 +226,7 @@ const JoinPage = () => {
             required=""
             placeholder='이메일을 입력해 주세요'
           />
-          <button type="button" class="btn btn-dark">중복확인</button>
+          <button type="button" class="btn btn-dark" onClick={onCheckEmail}>중복확인</button>
           </div>
           <p>{emailMsg}</p>
         </div>
@@ -251,7 +242,7 @@ const JoinPage = () => {
             required=""
             placeholder='닉네임을 입력해 주세요'
           />
-          <button type="button" class="btn btn-dark">중복확인</button>
+          <button type="button" class="btn btn-dark" onClick={onCheckNick}>중복확인</button>
           </div>
           <p>{nicknameMsg}</p>
         </div>

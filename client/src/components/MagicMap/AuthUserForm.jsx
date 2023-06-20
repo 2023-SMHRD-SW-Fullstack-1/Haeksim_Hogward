@@ -97,7 +97,17 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
       )
     ) {
       setIslocOk(true);
+      Swal.fire({
+        icon: "success",
+        title: "인증 위치 일치",
+        text: "위치 확인 완료",
+        confirmButtonColor: "#e74c3c",
+        confirmButtonText: "확인",
+      });
     } else {
+      // 테스트용 (인증 비활성화)
+      setIslocOk(true);
+
       Swal.fire({
         icon: "error",
         title: "인증 위치 불일치",
@@ -183,26 +193,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
           />
         )}
       />
-      {/* <Autocomplete
-        multiple
-        id="size-small-standard-multi"
-        size="small"
-        options={tagNames}
-        getOptionLabel={(option) => option.title}
-        value={selectedTags}
-        onChange={(event, newValue) => {
-          const updatedTags = newValue.map((option) => option.title);
-          setBTag(updatedTags); // b_tag 업데이트
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="standard"
-            placeholder="#태그"
-            name="b_tag"
-          />
-        )}
-      /> */}
       <input type="hidden" name="b_tag" value={handleTagChange} />
       {/* 글 인증장소*/}
       <input
@@ -236,14 +226,9 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
           인증하기
         </Button>
       ) : (
-        // 테스트용
-        <Button variant="outlined" color="error" type="submit">
-          인증하기
+        <Button variant="outlined" color="error" onClick={handleIsOk}>
+          인증 위치 확인
         </Button>
-        // 찐
-        // <Button variant="outlined" color="error" onClick={handleIsOk}>
-        //   인증 위치 확인
-        // </Button>
       )}
     </form>
   );

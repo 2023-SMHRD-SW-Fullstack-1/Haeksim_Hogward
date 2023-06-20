@@ -8,7 +8,6 @@ import { debounce } from "lodash";
 export const AuthBoard = ({ clickedLandmark }) => {
   // seq 넘버 가져오기 프론트에서 필터링할때 사용
   const lm_seq = clickedLandmark?.t_landmark.lm_seq || 1;
-  // 2
   const [board, setBoard] = useState();
   // 게시판에 선택된 랜드마크에 해당하는번호의 게시글 가져오는 함수
   const getSelectedBoard = () => {
@@ -17,36 +16,29 @@ export const AuthBoard = ({ clickedLandmark }) => {
     const url = `http://172.30.1.20:8087/hogward/board/alluserphoto/${lm_seq}`;
     axios.get(url).then((res) => setBoard(res.data));
   };
+  // 선택된 랜드마크 게시글 가져오기
   useEffect(() => {
     getSelectedBoard();
   }, [clickedLandmark]);
   useEffect(() => {
     console.log(getOneOrTwo());
   }, [board]);
-  //srcset
+
   // const srcset = (image, size, rows = 1, cols = 1) => {
+  //   const base64Image = image.startsWith("data:image/")
+  //     ? image
+  //     : `data:image/;base64,${image}`;
   //   return {
-  //     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-  //     srcSet: `${image}?w=${size * cols}&h=${
+  //     src: `${base64Image}?w=${size * cols}&h=${
+  //       size * rows
+  //     }&fit=crop&auto=format`,
+  //     srcSet: `${base64Image}?w=${size * cols}&h=${
   //       size * rows
   //     }&fit=crop&auto=format&dpr=2 2x`,
   //   };
   // };
 
-  const srcset = (image, size, rows = 1, cols = 1) => {
-    const base64Image = image.startsWith("data:image/")
-      ? image
-      : `data:image/;base64,${image}`;
-    return {
-      src: `${base64Image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format`,
-      srcSet: `${base64Image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  };
-
+  // 이미지 리스트 rows,cols 갯수
   const rowscols = [
     {
       rows: 2,
@@ -118,23 +110,6 @@ export const AuthBoard = ({ clickedLandmark }) => {
               src={`data:image/;base64,${item.allUserPhoto.b_file}`}
               alt="noimg"
             />
-            {/* <img
-              // {...srcset(
-              //   item.allUserPhoto.b_file,
-              //   220,
-              //   rowscols[index % 12].cols || 1,
-              //   rowscols[index % 12].rows || 1
-              // )}
-              {...srcset(
-                `data:image/;base64,${item.allUserPhoto.b_file}`,
-                220,
-                rowscols[index % 12].cols || 1,
-                rowscols[index % 12].rows || 1
-              )}
-              // src={"data:image/;base64," + item.allUserPhoto.b_file}
-              alt={item.allUserPhoto.b_seq}
-              loading="lazy"
-            /> */}
           </ImageListItem>
         ))}
       </ImageList>

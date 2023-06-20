@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Swiper core and required modules
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles

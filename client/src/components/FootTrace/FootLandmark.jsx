@@ -1,5 +1,6 @@
 import React from "react";
 
+// 인증 위치 깃발
 const FootLandmark = ({ pingLeft, pingTop }) => {
   return (
     <>

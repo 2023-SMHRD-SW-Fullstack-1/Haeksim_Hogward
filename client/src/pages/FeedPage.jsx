@@ -9,13 +9,16 @@ import 'semantic-ui-css/semantic.min.css';
 
 const FeedPage = () => {
 
-  const [selectFeed, setSelectFeed] = useState();
+  const [selectFeed, setSelectFeed] = useState('otherFeed');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ margin: '10px' }}>
-        <Button primary onClick={() => setSelectFeed('myFeed')}>내피드</Button>
-        <Button secondary onClick={() => setSelectFeed('otherFeed')}>다른사람피드</Button>
+        <Button.Group suze='large'>
+        <Button onClick={() => setSelectFeed('myFeed')} >내피드</Button>
+        
+        <Button onClick={() => setSelectFeed('otherFeed')}>다른사람피드</Button>
+        </Button.Group>
       </div>
 
       <div style={{ display: 'flex', width: '100%' }}>

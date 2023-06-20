@@ -38,7 +38,7 @@
   {
     "divcoords": {
       "coords": [396, 101],
-      "LM_DISTRICT": "동구"
+      "LM_DISTRICT": "광주시"
     }
   },
   {
@@ -65,12 +65,7 @@
       "LM_DISTRICT": "완도군"
     }
   },
-  {
-    "divcoords": {
-      "coords": [396, 101],
-      "LM_DISTRICT": "남구"
-    }
-  },
+
   {
     "divcoords": {
       "coords": [595, 81],
@@ -95,18 +90,7 @@
       "LM_DISTRICT": "신안군"
     }
   },
-  {
-    "divcoords": {
-      "coords": [396, 101],
-      "LM_DISTRICT": "서구"
-    }
-  },
-  {
-    "divcoords": {
-      "coords": [396, 101],
-      "LM_DISTRICT": "광산구"
-    }
-  },
+
   {
     "divcoords": {
       "coords": [639, 136],
@@ -149,12 +133,7 @@
       "LM_DISTRICT": "화순군"
     }
   },
-  {
-    "divcoords": {
-      "coords": [396, 101],
-      "LM_DISTRICT": "북구"
-    }
-  },
+
   {
     "divcoords": {
       "coords": [638, 203],

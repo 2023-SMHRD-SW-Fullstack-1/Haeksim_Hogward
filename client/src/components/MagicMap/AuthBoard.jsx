@@ -7,26 +7,41 @@ import { debounce } from "lodash";
 
 export const AuthBoard = ({ clickedLandmark }) => {
   // seq 넘버 가져오기 프론트에서 필터링할때 사용
-  const lm_seq = clickedLandmark?.t_landmark.lm_seq;
+  const lm_seq = clickedLandmark?.t_landmark.lm_seq || 1;
   // 2
   const [board, setBoard] = useState();
   // 게시판에 선택된 랜드마크에 해당하는번호의 게시글 가져오는 함수
   const getSelectedBoard = () => {
     // 나중에 선택된 랜드마크에 해당하는 게시글 가져오는 url 로 변경 or 내가 필터링
-    const url = "board.json";
+    // const url = "board.json";
+    const url = `http://172.30.1.20:8087/hogward/board/alluserphoto/${lm_seq}`;
     axios.get(url).then((res) => setBoard(res.data));
   };
   useEffect(() => {
     getSelectedBoard();
-  }, []);
+  }, [clickedLandmark]);
   useEffect(() => {
     console.log(getOneOrTwo());
   }, [board]);
   //srcset
+  // const srcset = (image, size, rows = 1, cols = 1) => {
+  //   return {
+  //     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+  //     srcSet: `${image}?w=${size * cols}&h=${
+  //       size * rows
+  //     }&fit=crop&auto=format&dpr=2 2x`,
+  //   };
+  // };
+
   const srcset = (image, size, rows = 1, cols = 1) => {
+    const base64Image = image.startsWith("data:image/")
+      ? image
+      : `data:image/;base64,${image}`;
     return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
+      src: `${base64Image}?w=${size * cols}&h=${
+        size * rows
+      }&fit=crop&auto=format`,
+      srcSet: `${base64Image}?w=${size * cols}&h=${
         size * rows
       }&fit=crop&auto=format&dpr=2 2x`,
     };
@@ -88,27 +103,38 @@ export const AuthBoard = ({ clickedLandmark }) => {
   return (
     <div className="authboard" ref={authboardRef}>
       <ImageList
-        sx={{ width: { boxSize }, height: 260 }}
+        sx={{ width: { boxSize }, height: 200 }}
         variant="quilted"
         cols={4}
         rowHeight={90}
       >
         {board?.map((item, index) => (
           <ImageListItem
-            key={item.board.b_seq}
+            key={item.allUserPhoto.b_seq}
             cols={rowscols[index % 12].cols || 1}
             rows={rowscols[index % 12].rows || 1}
           >
             <img
+              src={`data:image/;base64,${item.allUserPhoto.b_file}`}
+              alt="noimg"
+            />
+            {/* <img
+              // {...srcset(
+              //   item.allUserPhoto.b_file,
+              //   220,
+              //   rowscols[index % 12].cols || 1,
+              //   rowscols[index % 12].rows || 1
+              // )}
               {...srcset(
-                item.board.b_file,
+                `data:image/;base64,${item.allUserPhoto.b_file}`,
                 220,
                 rowscols[index % 12].cols || 1,
                 rowscols[index % 12].rows || 1
               )}
-              alt={item.board.b_seq}
+              // src={"data:image/;base64," + item.allUserPhoto.b_file}
+              alt={item.allUserPhoto.b_seq}
               loading="lazy"
-            />
+            /> */}
           </ImageListItem>
         ))}
       </ImageList>

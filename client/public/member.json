@@ -10,7 +10,7 @@
             "mem_joindate" : 202304012315,
             "admin_yn" : 0,
             "mem_nick" : "닉넴",
-            "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1684431816433-1c03a9d41be5%3Fixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8%26w%3D1000%26q%3D80&type=a340"
 
         }
     },
@@ -25,7 +25,7 @@
             "mem_joindate" : 202304012315,
             "admin_yn" : 0,
             "mem_nick" : "닉넴2",
-            "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.utoimage.com%2Fpreview%2Fcp895413%2F2023%2F04%2F202304007536_500.jpg&type=a340"
 
         }
 
@@ -41,7 +41,79 @@
             "mem_joindate" : 202304012315,
             "admin_yn" : 0,
             "mem_nick" : "닉넴3",
-            "mem_photo" : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hidoc.co.kr%2Fhealthstory%2Fnews%2FC0000599407&psig=AOvVaw3XfOrB4AU7Y8pvod_MywAd&ust=1686792329579000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIiewJ_Nwf8CFQAAAAAdAAAAABAE"
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
+        }
+    },
+    {
+        "member" : {
+            "mem_email" : "asdf@naver.com",
+            "mem_pw" : "asdf",
+            "mem_birthdate" : 198812051210,
+            "mem_gender" : "남",
+            "mem_addr" : "주소",
+            "mem_landmark" : "광주국립박물관",
+            "mem_joindate" : 202304012315,
+            "admin_yn" : 0,
+            "mem_nick" : "닉넴3",
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
+        }
+    },
+    {
+        "member" : {
+            "mem_email" : "asdf@naver.com",
+            "mem_pw" : "asdf",
+            "mem_birthdate" : 198812051210,
+            "mem_gender" : "남",
+            "mem_addr" : "주소",
+            "mem_landmark" : "광주국립박물관",
+            "mem_joindate" : 202304012315,
+            "admin_yn" : 0,
+            "mem_nick" : "닉넴3",
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
+        }
+    },
+    {
+        "member" : {
+            "mem_email" : "asdf@naver.com",
+            "mem_pw" : "asdf",
+            "mem_birthdate" : 198812051210,
+            "mem_gender" : "남",
+            "mem_addr" : "주소",
+            "mem_landmark" : "광주국립박물관",
+            "mem_joindate" : 202304012315,
+            "admin_yn" : 0,
+            "mem_nick" : "닉넴3",
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
+        }
+    },
+    {
+        "member" : {
+            "mem_email" : "asdf@naver.com",
+            "mem_pw" : "asdf",
+            "mem_birthdate" : 198812051210,
+            "mem_gender" : "남",
+            "mem_addr" : "주소",
+            "mem_landmark" : "광주국립박물관",
+            "mem_joindate" : 202304012315,
+            "admin_yn" : 0,
+            "mem_nick" : "닉넴3",
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
+        }
+    },
+    {
+        "member" : {
+            "mem_email" : "asdf@naver.com",
+            "mem_pw" : "asdf",
+            "mem_birthdate" : 198812051210,
+            "mem_gender" : "남",
+            "mem_addr" : "주소",
+            "mem_landmark" : "광주국립박물관",
+            "mem_joindate" : 202304012315,
+            "admin_yn" : 0,
+            "mem_nick" : "닉넴3",
+            "mem_photo" : "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1680605804121-de56ca508437%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%253D%253D%26w%3D1000%26q%3D80&type=a340"
         }
     }
+
+    
 ]

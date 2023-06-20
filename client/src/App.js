@@ -1,6 +1,6 @@
 import "./assets/css/reset.css";
 import "./App.css";
-import Header from "./components/Header";
+//import Header from "./components/Header";
 
 import { Route, Routes } from "react-router-dom";
 import MagicMapPage from "./pages/MagicMapPage";
@@ -15,18 +15,20 @@ import FeedPage from "./pages/FeedPage";
 import FootTracer from "./components/FootTrace/FootTracer";
 import NavbarElements from "./components/NavbarElements";
 
+
 function App() {
   return (
     <div className="App">
       {/* <Header /> */}
       <NavbarElements/>
+
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>
         <Route path="/feed" element={<FeedPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/join" element={<JoinPage />}></Route>
-
+        
         {/* 발자국지도 */}
         <Route path="/foottracer" element={<FootTracer />}></Route>
 

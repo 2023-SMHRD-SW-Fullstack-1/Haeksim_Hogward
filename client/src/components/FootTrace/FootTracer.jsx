@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../assets/css/FootTracer.css";
 import axios from "axios";
+import FootLandmark from "./FootLandmark";
 
 const FootTracer = () => {
   // 좌표에 따른 발자국 각도 잡는함수
@@ -193,13 +194,19 @@ const FootTracer = () => {
 
     for (let i = 0; i < nowAuthCoords.length - 1; i++) {
       containers.push(
-        <FootContainer
-          key={`container${i}`}
-          startCoords={nowAuthCoords[i][0].divcoords.coords}
-          endCoords={nowAuthCoords[i + 1][0].divcoords.coords}
-          conDelay={3 * i}
-          divDelay={i}
-        />
+        <div>
+          <FootContainer
+            key={`container${i}`}
+            startCoords={nowAuthCoords[i][0].divcoords.coords}
+            endCoords={nowAuthCoords[i + 1][0].divcoords.coords}
+            conDelay={3 * i}
+            divDelay={i}
+          />
+          <FootLandmark
+            pingLeft={nowAuthCoords[i + 1][0].divcoords.coords[0]}
+            pingTop={nowAuthCoords[i + 1][0].divcoords.coords[1]}
+          />
+        </div>
       );
     }
     containers.push(<div key="end"></div>);

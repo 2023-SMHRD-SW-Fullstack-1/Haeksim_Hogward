@@ -55,8 +55,7 @@ public class LandmarkController {
 	
 	
 	
-	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
-		//("/landmark/certifiedphoto")
+	
 	
 	
 	

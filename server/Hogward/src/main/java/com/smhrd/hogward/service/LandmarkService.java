@@ -133,52 +133,55 @@ public class LandmarkService {
 		
 		
 		//지역별 랜드마크수 카운트
-				public JSONArray landmarkCount() {
-					//List<T_Landmark> list = landMapper.landmarkCount();
-					List<HashMap> list = landMapper.landmarkCount();
+		public JSONArray landmarkCount() {
+		//List<T_Landmark> list = landMapper.landmarkCount();
+		List<HashMap> list = landMapper.landmarkCount();
 					
-					System.out.println("hash : "+ list);
-					System.out.println("--- : " + list.toString());
+		System.out.println("hash : "+ list);
+		System.out.println("--- : " + list.toString());
 					
-					JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = new JSONArray();
 					
-					ImageConverter<File, String> converter = new ImageToBase64();
-					
-					for(HashMap count : list) {
-						
-						JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-						obj.put("LandmarkAllCount", count); //비어있는 json object 에 값 추가
-						
-						jsonArray.add(obj); 
-						
-					}
-					return jsonArray;
-					
-					
-				}
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		for(HashMap count : list) {
+			
+			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+			obj.put("LandmarkAllCount", count); //비어있는 json object 에 값 추가
+			
+			jsonArray.add(obj); 
+			
+		}
+		return jsonArray;
+		
+		
+	}
 				
 		
 		//회원별 인증한 랜드마크 정보 가져오기
-				public JSONArray certifiedLand(String mem_email) {
-					List<HashMap> list = landMapper.certifiedLand(mem_email);
+			public JSONArray certifiedLand(String mem_email) {
+			List<HashMap> list = landMapper.certifiedLand(mem_email);
 					
-					System.out.println(list);
+			System.out.println(list);
 					
-					JSONArray jsonArray = new JSONArray();
-					ImageConverter<File, String> converter = new ImageToBase64();
+			JSONArray jsonArray = new JSONArray();
+			ImageConverter<File, String> converter = new ImageToBase64();
 					
-						for(HashMap landmark : list) {
+			for(HashMap landmark : list) {
 						
-						JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-						obj.put("certifiedLandmark", landmark); //비어있는 json object 에 값 추가
+			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+			obj.put("certifiedLandmark", landmark); //비어있는 json object 에 값 추가
 						
-						jsonArray.add(obj); 
+			jsonArray.add(obj); 
 						
-					}
-					return jsonArray;
+		}
+			return jsonArray;
 					
 					
-				}
+	}
+				
+		
+		
 				
 				
 		

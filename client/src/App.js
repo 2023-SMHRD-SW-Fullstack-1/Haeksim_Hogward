@@ -13,11 +13,13 @@ import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
 import FeedPage from "./pages/FeedPage";
 import FootTracer from "./components/FootTrace/FootTracer";
+import NavbarElements from "./components/NavbarElements";
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
+      <NavbarElements/>
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/magicmap" element={<MagicMapPage />}></Route>

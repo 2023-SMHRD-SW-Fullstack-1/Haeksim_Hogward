@@ -1,6 +1,5 @@
 // 발자국 각 객체
 const Foot = ({ coordLeft, coordTop, delay, startCoords, endCoords }) => {
-  console.log(delay);
   // 시작 좌표 ~ 끝 좌표 사이의 각도 구하기(발자국rotate위해서)
   // 세타 = 역탄젠트(h/w)
   const calculateAngle = (startCoords, endCoords) => {

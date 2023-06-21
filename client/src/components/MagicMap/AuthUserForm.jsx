@@ -12,7 +12,14 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   // 현재 위치 기반 인증여부 확인
   const [isLocOk, setIslocOk] = useState(false);
 
+  // 이미지 업로드 검사(파일 업로드 안할시 인증하기 막음)
+  const [isImgUploaded, setIsImgUploaded] = useState(false);
+  const handleIsImgUploaded = () => {
+    setIsImgUploaded(true);
+  };
+
   const saveImgFile = () => {
+    handleIsImgUploaded();
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -41,8 +48,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         (position) => {
           setUlat(position.coords.latitude);
           setUlng(position.coords.longitude);
-          console.log("lat : ", position.coords.latitude);
-          console.log("lng : ", position.coords.longitude);
         },
         (error) => {
           console.error("위치 정보를 가져올 수 없습니다.", error);
@@ -55,7 +60,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
 
   useEffect(() => {
     getUserLocation();
-    console.log(clickedLandmark);
   }, []);
 
   // 사용자 위치 vs 선택된 랜드마크 맞나 비교 알고리즘
@@ -115,6 +119,16 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         confirmButtonColor: "#e74c3c",
         confirmButtonText: "확인",
       });
+    }
+    if (!isImgUploaded) {
+      Swal.fire({
+        icon: "error",
+        title: "이미지 파일 첨부 오류",
+        text: "인증 이미지를 첨부해주세요.",
+        confirmButtonColor: "#e74c3c",
+        confirmButtonText: "확인",
+      });
+      setIslocOk(false);
     }
   };
 

@@ -6,9 +6,6 @@ import Foot from "./Foot";
 import FootContainer from "./FootContainer";
 
 const FootTracer = () => {
-  // 좌표에 따른 발자국 각도 잡는함수
-  // 세타 = 역탄젠트(a/h)
-
   // 좌표 데이터 생성
   const [dataCoords, setDataCoords] = useState();
   // 지도 내 좌표 가져오기
@@ -22,54 +19,85 @@ const FootTracer = () => {
   const [userAuth, setUserAuth] = useState([]);
   const [nowAuthCoords, setNowAuthCoords] = useState(null);
   useEffect(() => {
-    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/mem_email 01`;
+    const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/mem_email 01`;
     // 데이터 가공(광주 합치기)
     // 광주 광역시 추가
     if (dataCoords !== undefined) {
       axios.get(url).then((res) => {
-        // 광주의 구들 광주 하나로표시
-        let isInvolvedGwangju = () => {
-          let result = false;
-          res.data.forEach((item) => {
-            if (
-              item.certifiedLandmark.LM_DISTRICT === "동구" ||
-              item.certifiedLandmark.LM_DISTRICT === "남구" ||
-              item.certifiedLandmark.LM_DISTRICT === "서구" ||
-              item.certifiedLandmark.LM_DISTRICT === "광산구" ||
-              item.certifiedLandmark.LM_DISTRICT === "북구"
-            ) {
-              return (result = true);
-            }
-          });
-          return result;
-        };
-        // 구 단위 다 제거, 구현안된 목포시 제거
-        const processedUserAuth = res.data
-          .filter((item) => item.certifiedLandmark.AUTHCOUNT !== 0)
-          .filter(
-            (item) =>
-              item.certifiedLandmark.LM_DISTRICT !== "동구" &&
-              item.certifiedLandmark.LM_DISTRICT !== "남구" &&
-              item.certifiedLandmark.LM_DISTRICT !== "서구" &&
-              item.certifiedLandmark.LM_DISTRICT !== "광산구" &&
-              item.certifiedLandmark.LM_DISTRICT !== "북구" &&
-              item.certifiedLandmark.LM_DISTRICT !== "목포시"
-          );
-        // 데이터에 광주 추가
-        if (isInvolvedGwangju) {
-          processedUserAuth.push({
-            certifiedLandmark: {
-              AUTHCOUNT: 1,
-              LM_DISTRICT: "광주시",
-            },
-          });
-        }
-        // 좌표값도 추가하기
-        setUserAuth(processedUserAuth);
+        // 광주 구단위로 이동, 구 제거 및 제거한 구에 광주시 데이터 추가
+        const filteredNotAuth = res.data.filter(
+          (item) => item.certifiedLandmark.AUTHCOUNT !== 0
+        );
+        filteredNotAuth.forEach((item, idx) => {
+          if (
+            item.certifiedLandmark.LM_DISTRICT === "동구" ||
+            item.certifiedLandmark.LM_DISTRICT === "남구" ||
+            item.certifiedLandmark.LM_DISTRICT === "서구" ||
+            item.certifiedLandmark.LM_DISTRICT === "광산구" ||
+            item.certifiedLandmark.LM_DISTRICT === "북구"
+          ) {
+            filteredNotAuth.splice(idx, 1, {
+              certifiedLandmark: {
+                AUTHCOUNT: 1,
+                LM_DISTRICT: "광주시",
+              },
+            });
+          }
+        });
+        // let isInvolvedGwangju = () => {
+        //   let result = false;
+        //   // 인증 안된곳 모두 제거된 데이터배열
+        //   const filteredNotAuth = res.data.filter(
+        //     (item) => item.certifiedLandmark.AUTHCOUNT !== 0
+        //   );
+        //   filteredNotAuth.forEach((item, idx) => {
+        //     if (
+        //       item.certifiedLandmark.LM_DISTRICT === "동구" ||
+        //       item.certifiedLandmark.LM_DISTRICT === "남구" ||
+        //       item.certifiedLandmark.LM_DISTRICT === "서구" ||
+        //       item.certifiedLandmark.LM_DISTRICT === "광산구" ||
+        //       item.certifiedLandmark.LM_DISTRICT === "북구"
+        //     ) {
+        //       console.log(idx);
+        //       filteredNotAuth.splice(idx, 1, {
+        //         certifiedLandmark: {
+        //           AUTHCOUNT: 1,
+        //           LM_DISTRICT: "광주시",
+        //         },
+        //       });
+        //       console.log("filt : ", filteredNotAuth);
+        //       result = true;
+        //     }
+        //   });
+        //   return result;
+        // };
+        // // 구 단위 다 제거, 구현안된 목포시 제거
+        // const processedUserAuth = res.data
+        //   .filter((item) => item.certifiedLandmark.AUTHCOUNT !== 0)
+        //   .filter(
+        //     (item) =>
+        //       item.certifiedLandmark.LM_DISTRICT !== "동구" &&
+        //       item.certifiedLandmark.LM_DISTRICT !== "남구" &&
+        //       item.certifiedLandmark.LM_DISTRICT !== "서구" &&
+        //       item.certifiedLandmark.LM_DISTRICT !== "광산구" &&
+        //       item.certifiedLandmark.LM_DISTRICT !== "북구" &&
+        //       item.certifiedLandmark.LM_DISTRICT !== "목포시"
+        //   );
+        // // 데이터에 광주 추가
+        // if (isInvolvedGwangju() === true) {
+        //   processedUserAuth.push({
+        //     certifiedLandmark: {
+        //       AUTHCOUNT: 1,
+        //       LM_DISTRICT: "광주시",
+        //     },
+        //   });
+        // }
+        // // 좌표값도 추가하기
+        // setUserAuth(processedUserAuth);
 
         // dataCoords 가공(인증된 좌표값 있는 데이터만 반환 )
         let temp = [];
-        processedUserAuth.forEach((item) => {
+        filteredNotAuth.forEach((item) => {
           temp.push(
             dataCoords?.filter(
               (elem) =>
@@ -88,12 +116,14 @@ const FootTracer = () => {
     const containers = [];
     containers.push(<div key="start"></div>);
     // 초기 깃발
+    console.log(nowAuthCoords);
     containers.push(
       <FootLandmark
         pingLeft={nowAuthCoords[0][0].divcoords.coords[0]}
         pingTop={nowAuthCoords[0][0].divcoords.coords[1]}
       />
     );
+
     for (let i = 0; i < nowAuthCoords.length - 1; i++) {
       containers.push(
         <div>
@@ -117,7 +147,11 @@ const FootTracer = () => {
 
   return (
     <div className="footContainer">
-      <div id="wrap">{nowAuthCoords !== null && makeFootContainer()}</div>
+      <div id="wrap">
+        {nowAuthCoords !== null &&
+          nowAuthCoords.length > 0 &&
+          makeFootContainer()}
+      </div>
     </div>
   );
 };

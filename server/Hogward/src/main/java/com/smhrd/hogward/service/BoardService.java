@@ -72,64 +72,6 @@ public class BoardService {
 	}
 	
 	
-	//게시글 모두 보기
-	public JSONArray boardList() {
-		System.out.println("aasscs");
-		List<T_Board> list = boardMapper.boardList();
-		
-		JSONArray jsonArray = new JSONArray();
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-	
-		for(T_Board board : list) {
-			
-			String filePath = "classpath:/static/boardImg/"+board.getB_file();
-			Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
-			String fileStringValue = null;
-			try {
-				fileStringValue = converter.convert(resource.getFile());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			board.setB_file(fileStringValue);
-			
-			JSONObject obj = new JSONObject();
-			obj.put("allboard", board);
-			
-			jsonArray.add(obj); 
-			
-		}
-		return jsonArray;
-	}
-	
-	
-	//자기 피드에서 게시물 클릭시 해당게시물 사진과 정보 보내기
-	public JSONObject boardOne(String b_seq) {
-		T_Board board = boardMapper.boardOne(b_seq);
-		
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-		String filePath = "classpath:/static/boardImg/"+board.getB_file();
-		Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
-		String fileStringValue = null;
-		try {
-			fileStringValue = converter.convert(resource.getFile());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		board.setB_file(fileStringValue);
-		
-		JSONObject obj = new JSONObject();
-		obj.put("oneBoard", board);
-		
-		return obj;
-		
-	}
-	
 	//마이 피드
 	public JSONArray myFeed(String mem_email) {
 		List<MyFeed> feed = boardMapper.myFeed(mem_email);
@@ -162,14 +104,38 @@ public class BoardService {
 	}
 	
 	
-	//유저가 작성한 인증 정보 저장하기
-	public int writeboard(T_Board board) {
-		return boardMapper.writeboard(board);
+	//본인피드 게시물 클릭시 해당게시물 사진,정보 보내기
+	public JSONObject boardOne(String b_seq) {
+		T_Board board = boardMapper.boardOne(b_seq);
+		
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		String filePath = "classpath:/static/boardImg/"+board.getB_file();
+		Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
+		String fileStringValue = null;
+		try {
+			fileStringValue = converter.convert(resource.getFile());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		board.setB_file(fileStringValue);
+		
+		JSONObject obj = new JSONObject();
+		obj.put("oneBoard", board);
+		
+		return obj;
+		
 	}
 	
+
+	//유저의 인증글(사진포함) DB 저장
+	public int insertBoard(T_Board board) {
+		return boardMapper.insertBoard(board);
+	}
 	
-	
-	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
+	//마법지도에서 랜드마크 클릭시 해당랜드마크 인증한 유저들의 사진들만 모두 보내주기
 	public JSONArray allUserPhoto(String lm_seq) {
 	
 		List<LandAllUserPhoto> list = boardMapper.allUserPhoto(lm_seq);
@@ -210,6 +176,41 @@ public class BoardService {
 }
 	
 	
+	
+	
+	
+	
+//	//게시글 모두 보기
+//	public JSONArray boardList() {
+//		System.out.println("aasscs");
+//		List<T_Board> list = boardMapper.boardList();
+//		
+//		JSONArray jsonArray = new JSONArray();
+//		ImageConverter<File, String> converter = new ImageToBase64();
+//		
+//	
+//		for(T_Board board : list) {
+//			
+//			String filePath = "classpath:/static/boardImg/"+board.getB_file();
+//			Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
+//			String fileStringValue = null;
+//			try {
+//				fileStringValue = converter.convert(resource.getFile());
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			board.setB_file(fileStringValue);
+//			
+//			JSONObject obj = new JSONObject();
+//			obj.put("allboard", board);
+//			
+//			jsonArray.add(obj); 
+//			
+//		}
+//		return jsonArray;
+//	}
 	
 	
 	

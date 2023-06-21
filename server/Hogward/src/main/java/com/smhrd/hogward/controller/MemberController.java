@@ -46,7 +46,7 @@ public class MemberController {
 		
 	}
 	
-	//닉네임 중복확인
+	//닉네임 중복체크
 	@PostMapping("/nickcheck")
 	public int nickCheck(@RequestParam("mem_nick") String mem_nick) {
 		System.out.println(mem_nick);
@@ -63,11 +63,10 @@ public class MemberController {
 		
 	}
 	
-	
 	//회원가입시 정보 저장 
 	@PostMapping("/joinmember")
 	public int join(@ModelAttribute T_Member member) {
-//	public int join(@RequestParam("mem_email") String mem_email) {
+		//	public int join(@RequestParam("mem_email") String mem_email) {
 		//System.out.println(mem_email);
 		
 		System.out.println(member.getMem_email()+member.getMem_nick());
@@ -85,14 +84,13 @@ public class MemberController {
 		
 	}
 	
-	//로그인 체크 기능
+	//로그인 체크
 	@PostMapping("/logincheck")
 	public String loginCheck(@ModelAttribute T_Member member) {
 		
-//		int cnt = memService.loginCheck(member);
+		//int cnt = memService.loginCheck(member);
 		String nick =  memService.loginCheck(member);
 		
-
 		System.out.println(nick);
 		
 		if(nick!=null) {
@@ -104,13 +102,8 @@ public class MemberController {
 		}
 		
 	}
-	
-	
-	//회원정보 수정시 비밀번호 제외한 내용 보내주기
-	
-	
-	
-	//프로필 사진 수정요청 오면 db 저장하기
+
+	//프로필 사진 수정
 	@PostMapping("/profileupdate/{mem_email}")
 	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, HttpServletResponse response) {
 		
@@ -149,6 +142,9 @@ public class MemberController {
 		}
 		
 	}
+	
+	
+	//회원정보 수정시 비밀번호 제외한 내용 보내주기
 	
 	
 	

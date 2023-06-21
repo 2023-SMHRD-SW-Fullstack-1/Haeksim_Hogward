@@ -29,23 +29,16 @@ import com.smhrd.hogward.service.UserFeedService;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
 
-
-
-
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class BoardController {
-	
-	
+
 	@Autowired
 	private UserFeedService userFeedService;
 	
 	@Autowired
 	private BoardService boardService;
-	
-	
 
-	
 	//유저들의 게시글이 모인 피드 불러오기   ---> 최신순으로 10개씩 보이게 수정하기.
 	@GetMapping("/userfeed")
 	public JSONArray userFeedList() {
@@ -63,7 +56,7 @@ public class BoardController {
 	}
 	
 
-	//한명의 사용자 피드 정보 불러오기 ----------------한개 게시물로 나옴..수정하기
+	//자기 피드에서 게시물 클릭시 해당게시물 사진과 정보 보내기
 	@GetMapping("/oneboard/{b_seq}")
 	public JSONObject boardOne(@PathVariable("b_seq")String b_seq ) {
 		return boardService.boardOne(b_seq);
@@ -71,8 +64,9 @@ public class BoardController {
 	
 	
 	//마이 피드보기
-	@GetMapping("/myFeed/{mem_email}")
+	@GetMapping("/myfeed/{mem_email}")
 	public JSONArray myFeed(@PathVariable("mem_email")String mem_email) {
+		
 		return boardService.myFeed(mem_email);
 	}
 	

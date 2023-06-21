@@ -33,7 +33,7 @@ public class BoardService {
 	public BoardMapper boardMapper;
 	
 	
-	//전체 게시판 불러오기
+	//전체 게시판 불러오기(유저피드)
 	public JSONArray boardList() {
 		System.out.println("aasscs");
 		List<T_Board> list = boardMapper.boardList();
@@ -66,7 +66,7 @@ public class BoardService {
 	}
 	
 	
-	//한사람의 게시글 불러오기
+	//자기 피드에서 게시물 클릭시 해당게시물 사진과 정보 보내기
 	public JSONObject boardOne(String b_seq) {
 		T_Board board = boardMapper.boardOne(b_seq);
 		

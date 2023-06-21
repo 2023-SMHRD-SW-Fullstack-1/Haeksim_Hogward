@@ -21,7 +21,7 @@ public interface MemMapper {
 	public int nickCheck(String mem_nick);
 	
 	//로그인 체크
-	public int loginCheck(T_Member member);
+	public String loginCheck(T_Member member);
 	
 	//프로필 사진 수정
 	public int profileUpdate(String newFileName, String mem_email);

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.MyFeed;
 import com.smhrd.hogward.domain.T_Board;
+import com.smhrd.hogward.domain.UsersFeed;
 import com.smhrd.hogward.mapper.BoardMapper;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
@@ -33,7 +34,45 @@ public class BoardService {
 	public BoardMapper boardMapper;
 	
 	
-	//전체 게시판 불러오기(유저피드)
+	//유저 게시글 모두보기(유저피드)
+	public JSONArray usersFeed() {
+		List<UsersFeed> list = boardMapper.usersFeed();
+		System.out.println(list);
+		
+		JSONArray jsonArray = new JSONArray();
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		
+		for(UsersFeed userfeed : list) {
+			
+			File file1 = new File("c:\\uploadimage\\"+userfeed.getB_file());
+			File file2 = new File("c:\\uploadimage\\"+userfeed.getMem_photo());
+	
+			String fileStringValue1 = null;
+			String fileStringValue2 = null;
+			
+			try {
+				fileStringValue1 = converter.convert(file1);
+				fileStringValue2 = converter.convert(file2);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			userfeed.setB_file(fileStringValue1);
+			userfeed.setMem_photo(fileStringValue2);
+			
+			JSONObject obj = new JSONObject();
+			obj.put("usersFeed", userfeed);
+			
+			jsonArray.add(obj); 
+		}
+		return jsonArray;
+	}
+	
+	
+	//게시글 모두 보기
 	public JSONArray boardList() {
 		System.out.println("aasscs");
 		List<T_Board> list = boardMapper.boardList();

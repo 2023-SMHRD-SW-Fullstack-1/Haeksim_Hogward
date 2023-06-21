@@ -20,7 +20,7 @@
   	</select>
   	
   	<select id="loginCheck">
-  		select count(*) from t_member where mem_email=#{mem_email} and mem_pw=#{mem_pw}
+  		select mem_nick from t_member where mem_email=#{mem_email} and mem_pw=#{mem_pw}
   	</select>
   	
   	<update id="profileUpdate" parameterType="com.smhrd.hogward.mapper.MemMapper" >

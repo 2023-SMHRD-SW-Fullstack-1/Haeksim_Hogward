@@ -9,9 +9,14 @@ import org.apache.ibatis.annotations.Mapper;
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.MyFeed;
 import com.smhrd.hogward.domain.T_Board;
+import com.smhrd.hogward.domain.UsersFeed;
 
 @Mapper
 public interface BoardMapper {
+	
+	
+	//유저피드
+	public List<UsersFeed> usersFeed();
 	
 	public List<T_Board> boardList();
 	

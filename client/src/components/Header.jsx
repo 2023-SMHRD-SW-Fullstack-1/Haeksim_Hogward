@@ -49,14 +49,10 @@ const Header = () => {
                 </a>
               </li> */}
             </ul>
-
             {/* class="btn custom-btn d-lg-block d-none" */}
             <a href="/join">회원가입</a>
-
             <span class="button-space"></span>
-
             <a href="/login">로그인</a>
-
             {/* <button type="button" class="btn btn-primary" href="/loin">로그인</button>
             <span class="button-space"></span>        
             <button type="button" class="btn btn-primary" href="/join">회원가입</button>  */}

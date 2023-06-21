@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Card, Feed, Button, Header, Image, Modal } from 'semantic-ui-react';
 
 const Rank = () => {
+  
   const [open, setOpen] = useState(false);
   const [selectedSummary, setSelectedSummary] = useState('');
 
+  
   const feedEvents = [
     {
       image: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg',

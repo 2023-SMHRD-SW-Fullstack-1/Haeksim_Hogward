@@ -7,7 +7,7 @@ import {
   Modal,
   Container,
   Label,
-  Icon,
+  Icon
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
@@ -218,8 +218,9 @@ const MyFeed = () => {
     <div>
       <div style={{ display: "flex", padding: "100px" }}>
         <div style={{ flex: 1, padding: "10px" }}>
-          <Card onClick={handleCardClick}>
+          <Card  onClick={handleCardClick}>
             <Image
+             circular
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6TmjJAzhQRsh8f0Rbt2yDn6mW9dV6T1EYeg&usqp=CAU"
               wrapped
               ui={false}
@@ -236,8 +237,8 @@ const MyFeed = () => {
         </div>
 
         <div classname="feedbutton" style={{ flex: 1, padding: "50px" }}>
-          <Button.Group vertical style={{ margin: "10px" }}>
-            <Button
+          {/* <Button.Group vertical style={{ margin: "10px" }}> */}
+            {/* <Button
               color="red"
               content="팔로우"
               // icon="user plus"
@@ -265,7 +266,7 @@ const MyFeed = () => {
               //     pointing: 'left',
               //     content: '0'
               // }}
-            />
+            /> */}
             <Button
               color="black"
               content="게시글"
@@ -280,7 +281,7 @@ const MyFeed = () => {
               //     content: '1'
               // }}
             />
-          </Button.Group>
+          {/* </Button.Group> */}
         </div>
       </div>
 

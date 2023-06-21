@@ -90,6 +90,36 @@ public class BoardService {
 		
 	}
 	
+	//마이 피드
+//	public JSONArray myFeed(String mem_email) {
+//		List<MyFeed> feed = boardMapper.myFeed(mem_email);
+//		
+//		JSONArray jsonArray = new JSONArray();
+//		ImageConverter<File, String> converter = new ImageToBase64();
+//	
+//		for(MyFeed myfeed : feed) {
+//			
+//			File file = new File("c:\\uploadimage\\"+myfeed.getB_file());
+//	
+//			String fileStringValue = null;
+//			
+//			try {
+//				fileStringValue = converter.convert(file);
+//				
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			myfeed.setB_file(fileStringValue);
+//			
+//			JSONObject obj = new JSONObject();
+//			obj.put("myFeed", myfeed);
+//			
+//			jsonArray.add(obj); 
+//		}
+//		return jsonArray;	
+//	}
 	
 	
 	//유저가 작성한 인증 정보 저장하기
@@ -99,63 +129,21 @@ public class BoardService {
 	
 	
 	
-	
 	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
-//	public JSONArray allUserPhoto(String lm_seq) {
-//		
-//		List<LandAllUserPhoto> list = boardMapper.allUserPhoto(lm_seq);
-//		
-//		JSONArray jsonArray = new JSONArray();
-//		ImageConverter<File, String> converter = new ImageToBase64();
-//		
-//	
-//		for(LandAllUserPhoto allphoto : list) {
-//			
-//			
-//			String filePath = "c:\\uploadimage"+allphoto.getB_file();
-//			Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
-//			String fileStringValue = null;
-//			try {
-//				fileStringValue = converter.convert(resource.getFile());
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			allphoto.setB_file(fileStringValue);
-//			
-//			JSONObject obj = new JSONObject();
-//			obj.put("allUserPhoto", allphoto);
-//			
-//			jsonArray.add(obj); 
-//			
-//		}
-//		return jsonArray;
-//		
-//	}
-	
-//	public List<LandAllUserPhoto> allUserPhoto(String lm_seq) {
-//		return boardMapper.allUserPhoto(lm_seq);
-//	}
-	
-	
-	
 	public JSONArray allUserPhoto(String lm_seq) {
-		
-		
+	
 		List<LandAllUserPhoto> list = boardMapper.allUserPhoto(lm_seq);
-		
 		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String > converter = new ImageToBase64();
 		
-		int num=0;
+	
 		for(LandAllUserPhoto userphoto : list) {
 			
 			
 			//File file = new File("c:\\uploadimage\\"+userphoto.getB_file()+".jpg");
 			File file = new File("c:\\uploadimage\\"+userphoto.getB_file());
-
+	
 			String fileStringValue = null;
 			
 			try {
@@ -172,14 +160,14 @@ public class BoardService {
 			obj.put("allUserPhoto", userphoto);
 			
 			jsonArray.add(obj); 
-			
-			num++;
-			
-		}
-		return jsonArray;
 		
+
 		
 	}
+	return jsonArray;
+	
+	
+}
 	
 	
 	

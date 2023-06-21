@@ -23,5 +23,9 @@
   		select count(*) from t_member where mem_email=#{mem_email} and mem_pw=#{mem_pw}
   	</select>
   	
+  	<update id="profileUpdate" parameterType="com.smhrd.hogward.mapper.MemMapper" >
+  		update t_member set mem_photo=#{newFileName} where mem_email=#{mem_email}
+  	</update>
+  	
   
   </mapper>

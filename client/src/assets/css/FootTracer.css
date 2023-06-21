@@ -1,19 +1,20 @@
 .footContainer {
-  perspective: 600px;
+  /* perspective: 600px; */
   position: relative;
   height: 400px;
-  width: 800px;
+  /* width: 800px; */
+  width: 100%;
 }
 
 #wrap {
   position: absolute;
-  height: 400px;
-  width: 800px;
+  height: 930px;
+  width: 2140px;
   background: url("../img/FootPrintBg.png") no-repeat;
   background-size: 100% 100%;
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
   transform-origin: bottom center;
-  transform: rotateX(40deg);
+  /* transform: rotateX(40deg); */
   border-radius: 20px;
 }
 

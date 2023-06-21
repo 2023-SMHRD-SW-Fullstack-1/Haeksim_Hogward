@@ -19,7 +19,7 @@ const FootTracer = () => {
   const [userAuth, setUserAuth] = useState([]);
   const [nowAuthCoords, setNowAuthCoords] = useState(null);
   useEffect(() => {
-    const url = `http://172.30.1.20:8087/hogward/certifiedlandmarks/mem_email 01`;
+    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/mem_email 01`;
     // 데이터 가공(광주 합치기)
     // 광주 광역시 추가
     if (dataCoords !== undefined) {

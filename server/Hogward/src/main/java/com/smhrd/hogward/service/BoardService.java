@@ -15,6 +15,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import com.smhrd.hogward.domain.LandAllUserPhoto;
+import com.smhrd.hogward.domain.MyFeed;
 import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.mapper.BoardMapper;
 import com.smhrd.shop.converter.ImageConverter;
@@ -91,35 +92,35 @@ public class BoardService {
 	}
 	
 	//마이 피드
-//	public JSONArray myFeed(String mem_email) {
-//		List<MyFeed> feed = boardMapper.myFeed(mem_email);
-//		
-//		JSONArray jsonArray = new JSONArray();
-//		ImageConverter<File, String> converter = new ImageToBase64();
-//	
-//		for(MyFeed myfeed : feed) {
-//			
-//			File file = new File("c:\\uploadimage\\"+myfeed.getB_file());
-//	
-//			String fileStringValue = null;
-//			
-//			try {
-//				fileStringValue = converter.convert(file);
-//				
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			myfeed.setB_file(fileStringValue);
-//			
-//			JSONObject obj = new JSONObject();
-//			obj.put("myFeed", myfeed);
-//			
-//			jsonArray.add(obj); 
-//		}
-//		return jsonArray;	
-//	}
+	public JSONArray myFeed(String mem_email) {
+		List<MyFeed> feed = boardMapper.myFeed(mem_email);
+		
+		JSONArray jsonArray = new JSONArray();
+		ImageConverter<File, String> converter = new ImageToBase64();
+	
+		for(MyFeed myfeed : feed) {
+			
+			File file = new File("c:\\uploadimage\\"+myfeed.getB_file());
+	
+			String fileStringValue = null;
+			
+			try {
+				fileStringValue = converter.convert(file);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			myfeed.setB_file(fileStringValue);
+			
+			JSONObject obj = new JSONObject();
+			obj.put("myFeed", myfeed);
+			
+			jsonArray.add(obj); 
+		}
+		return jsonArray;	
+	}
 	
 	
 	//유저가 작성한 인증 정보 저장하기

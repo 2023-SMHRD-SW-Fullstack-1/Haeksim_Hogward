@@ -70,11 +70,11 @@ public class BoardController {
 	}
 	
 	
-//	//마이 피드보기
-//	@GetMapping("/myFeed/{mem_email}")
-//	public JSONArray myFeed(@PathVariable("mem_email")String mem_email) {
-//		return boardService.myFeed(mem_email);
-//	}
+	//마이 피드보기
+	@GetMapping("/myFeed/{mem_email}")
+	public JSONArray myFeed(@PathVariable("mem_email")String mem_email) {
+		return boardService.myFeed(mem_email);
+	}
 	
 	
 	//유저의 인증글 작성 정보 받아와서 db 저장하기

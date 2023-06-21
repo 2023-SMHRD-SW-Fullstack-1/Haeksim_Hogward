@@ -43,5 +43,19 @@
   	<select id="allUserPhoto" resultType="com.smhrd.hogward.domain.LandAllUserPhoto">
   		select * from t_board where lm_seq=#{lm_seq}
   	</select>
+  	
+  	<select id="myFeed" resultType="com.smhrd.hogward.domain.MyFeed">
+  		select A.mem_photo
+       		 , A.mem_nick
+       		 , A.mem_joindate
+       		 , A.mem_Introduce
+       		 , B.b_file
+       		 , b.b_seq
+		from t_member a
+			 , t_board b
+		 where a.mem_email = b.mem_email
+		   and a.mem_email = #{mem_email}
+		group by A.mem_photo, A.mem_nick, A.mem_joindate, A.mem_Introduce, B.b_file, b.b_seq
+  	</select>
   
   </mapper>

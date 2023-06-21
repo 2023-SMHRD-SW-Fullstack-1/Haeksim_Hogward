@@ -14,6 +14,7 @@ import JoinPage from "./pages/JoinPage";
 import FeedPage from "./pages/FeedPage";
 import FootTracer from "./components/FootTrace/FootTracer";
 import NavbarElements from "./components/NavbarElements";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/module/getregion" element={<GetDongRegionId />}></Route>
         <Route path="/module/getcoords" element={<GetCoords />}></Route>
       </Routes>
+      <Footer/>
     </div>
   );
 }

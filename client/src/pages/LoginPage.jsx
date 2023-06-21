@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 import "../assets/css/login.css";
+import { colors } from "@mui/material";
 
 const LoginPage = () => {
   // 이메일, 비밀번호 유효성 검사
@@ -51,6 +52,8 @@ const LoginPage = () => {
 
   //로그인 버튼 클릭
   const handleLogin = () => {
+    
+    //아이디 비밀번호 일치 확인 여부 
     const formData = new FormData();
     formData.append("mem_email", email);
     formData.append("mem_pw", password);
@@ -89,7 +92,7 @@ const LoginPage = () => {
       <form>
         {/* 아이디 입력란 */}
         <div className="user-box">
-          <input
+          <input className="input-box"
             type="email"
             // id="email"
             value={email}
@@ -97,12 +100,12 @@ const LoginPage = () => {
             required=""
             placeholder="이메일을 입력해 주세요"
           />
-          <p>{emailMsg}</p>
+          <p className="red">{emailMsg}</p>
         </div>
         <br></br>
         {/* 비밀번호 입력란 */}
         <div className="user-box">
-          <input
+          <input className="input-box"
             type="password"
             id="password"
             value={password}
@@ -110,7 +113,7 @@ const LoginPage = () => {
             required=""
             placeholder="비밀번호를 입력해 주세요"
           />
-          <p>{pwdMsg}</p>
+          <p className="red">{pwdMsg}</p>
         </div>
         <br></br>
         <br></br>

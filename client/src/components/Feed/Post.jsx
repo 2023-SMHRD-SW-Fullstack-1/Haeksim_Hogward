@@ -65,11 +65,12 @@ const Post = ( ProfileModal) => {
   // 다른사람 피드 최신순 데이터
   const [allfeed, setAllFeed] = useState(null);
   useEffect(() => {
-    const url = "http://172.30.1.22:8087/hogward/userfeed"
-    axios.get(url).then((res) => {
-      console.log("allfeed",res.data)
-      setAllFeed(res.data);
-    })
+    const url = "http://172.30.1.22:8087/hogward/usersfeed"
+    // 다시 키기
+    // axios.get(url).then((res) => {
+    //   console.log("allfeed",res.data)
+    //   setAllFeed(res.data);
+    // })
   },[])
 
   useEffect(() => {
@@ -104,21 +105,22 @@ const Post = ( ProfileModal) => {
       {allfeed?.map((item, index) => (
         <Feed.Event key={index}>
           {/* 프로필 사진을 클릭하면 모달을 연다 */}
+          {console.log(item)}
           <Feed.Label style={{ cursor: 'pointer'}} onClick={() => handleProfileClick(item)} >
-            <img src={item.userfeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
+            <img src={item.usersFeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
-              <a>{item.userfeed.mem_nick}</a>
+              <a>{item.usersFeed.mem_nick}</a>
               {/* 각 타입에 따른 조건부 렌더링 */}
               {item.type === 'friend-addition' && ' 님이 친구로 추가했습니다'}
               {item.type === 'new-illustrations' && ' 님이 새로운 그림 2개를 추가했습니다'}
               {item.type === 'new-photos' && ' 님이 당신의 새로운 사진 2장을 추가했습니다'}
               {/* 게시물을 클릭하면 모달을 연다 */}
               {item.type === 'post' && <span style={{ cursor: 'pointer' }} onClick={() => handlePostClick(item.textContent)}> 님이 페이지에 게시글을 작성했습니다</span>}
-              <Feed.Date>{item.userfeed.b_datetime}</Feed.Date>
+              <Feed.Date>{item.usersFeed.b_datetime}</Feed.Date>
             </Feed.Summary>
-            {item.userfeed.b_content && <Feed.Extra text>{item.userfeed.b_content}</Feed.Extra>}
+            {item.usersFeed.b_content && <Feed.Extra text>{item.usersFeed.b_content}</Feed.Extra>}
             {item.contentImages  && (
               <Feed.Extra images>
                 {item.contentImages.map((imgSrc, imgIndex) => (
@@ -132,7 +134,7 @@ const Post = ( ProfileModal) => {
               <Feed.Like>
                 {/* <Icon name='like' /> */}좋아요{" "}
                 <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                {item.userfeed.b_likes} 
+                {item.usersFeed.b_likes} 
               </Feed.Like>
             </Feed.Meta>
           </Feed.Content>

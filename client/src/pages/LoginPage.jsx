@@ -19,6 +19,12 @@ const LoginPage = () => {
       .match(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,25}$/);
   };
 
+  // 세션
+  const handleLoginSession = async (user) => {
+    // 사용자 정보를 세션 스토리지에 저장
+    sessionStorage.setItem("user", JSON.stringify(user));
+  };
+
   const [email, setEmail] = useState(""); // 아이디 입력 상태
   const [emailMsg, setEmailMsg] = useState(""); //이메일 형식 확인
   const [password, setPassword] = useState(""); //비밀번호
@@ -52,8 +58,7 @@ const LoginPage = () => {
 
   //로그인 버튼 클릭
   const handleLogin = () => {
-    
-    //아이디 비밀번호 일치 확인 여부 
+    //아이디 비밀번호 일치 확인 여부
     const formData = new FormData();
     formData.append("mem_email", email);
     formData.append("mem_pw", password);
@@ -61,11 +66,14 @@ const LoginPage = () => {
     axios
       .post("http://172.30.1.22:8087/hogward/logincheck", formData)
       .then((res) => {
-        console.log(res.data);
         // 1이면 로그인 성공
 
-        if (res.data == 1) {
+        if (res.data) {
           // 1이면 로그인 성공
+          handleLoginSession({
+            email,
+            nick: res.data,
+          });
           alert("환영합니다!");
           window.location.href = "/";
         } else {
@@ -92,7 +100,8 @@ const LoginPage = () => {
       <form>
         {/* 아이디 입력란 */}
         <div className="user-box">
-          <input className="input-box"
+          <input
+            className="input-box"
             type="email"
             // id="email"
             value={email}
@@ -105,7 +114,8 @@ const LoginPage = () => {
         <br></br>
         {/* 비밀번호 입력란 */}
         <div className="user-box">
-          <input className="input-box"
+          <input
+            className="input-box"
             type="password"
             id="password"
             value={password}

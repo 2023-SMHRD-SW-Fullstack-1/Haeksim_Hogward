@@ -12,7 +12,7 @@ const MainPage = () => {
       <div className="main_foottracer">
         <FootTracer />
       </div>
-      <Carousel />
+      {/* <Carousel /> */}
     </div>
   );
 };

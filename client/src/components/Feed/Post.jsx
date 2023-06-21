@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Feed, Icon, Button, Image, Modal } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const Post = () => {
+const Post = ( ProfileModal) => {
   const [allboard, setAllBoard] = useState([]);
   const [memPic, setMemPic] = useState ([]);
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
@@ -50,7 +52,7 @@ const Post = () => {
   // //     likes: 41
   // //   }
   // // ];
-  
+
   useEffect(() => {
     const url = "board.json";
     axios.get(url).then(res => {
@@ -59,6 +61,16 @@ const Post = () => {
 
     });
   }, []);
+
+  // 다른사람 피드 최신순 데이터
+  const [allfeed, setAllFeed] = useState(null);
+  useEffect(() => {
+    const url = "http://172.30.1.22:8087/hogward/userfeed"
+    axios.get(url).then((res) => {
+      console.log("allfeed",res.data)
+      setAllFeed(res.data);
+    })
+  },[])
 
   useEffect(() => {
     const url = "member.json";
@@ -89,24 +101,24 @@ const Post = () => {
   return (
     <div>
       {/* feedData 배열을 순회하며 각 요소에 대한 JSX 구조를 동적으로 생성합니다. */}
-      {allboard?.map((item, index) => (
+      {allfeed?.map((item, index) => (
         <Feed.Event key={index}>
           {/* 프로필 사진을 클릭하면 모달을 연다 */}
           <Feed.Label style={{ cursor: 'pointer'}} onClick={() => handleProfileClick(item)} >
-            <img src={item.board.b_file} alt="" style={{ width: '120px', height: '120px' }} />
+            <img src={item.userfeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
-              <a>{item.board.mem_email}</a>
+              <a>{item.userfeed.mem_nick}</a>
               {/* 각 타입에 따른 조건부 렌더링 */}
               {item.type === 'friend-addition' && ' 님이 친구로 추가했습니다'}
               {item.type === 'new-illustrations' && ' 님이 새로운 그림 2개를 추가했습니다'}
               {item.type === 'new-photos' && ' 님이 당신의 새로운 사진 2장을 추가했습니다'}
               {/* 게시물을 클릭하면 모달을 연다 */}
               {item.type === 'post' && <span style={{ cursor: 'pointer' }} onClick={() => handlePostClick(item.textContent)}> 님이 페이지에 게시글을 작성했습니다</span>}
-              <Feed.Date>{item.board.b_datetime}</Feed.Date>
+              <Feed.Date>{item.userfeed.b_datetime}</Feed.Date>
             </Feed.Summary>
-            {item.board.b_content && <Feed.Extra text>{item.board.b_content}</Feed.Extra>}
+            {item.userfeed.b_content && <Feed.Extra text>{item.userfeed.b_content}</Feed.Extra>}
             {item.contentImages  && (
               <Feed.Extra images>
                 {item.contentImages.map((imgSrc, imgIndex) => (
@@ -118,8 +130,9 @@ const Post = () => {
             )}
             <Feed.Meta>
               <Feed.Like>
-                <Icon name='like' />
-                {item.board.b_likes} 좋아요
+                {/* <Icon name='like' /> */}좋아요{" "}
+                <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                {item.userfeed.b_likes} 
               </Feed.Like>
             </Feed.Meta>
           </Feed.Content>
@@ -133,6 +146,7 @@ const Post = () => {
       >
         <Modal.Content>
           {modalContent}
+          {/* {ProfileModal} */}
         </Modal.Content>
         <Modal.Actions>
           <Button color='black' onClick={() => setOpen(false)}>

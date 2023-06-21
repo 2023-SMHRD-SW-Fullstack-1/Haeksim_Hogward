@@ -29,10 +29,11 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   };
 
   // 태그 갯수 제한
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState();
 
   const handleTagChange = (event, value) => {
     if (value.length <= 3) {
+      console.log(value);
       setSelectedTags(value);
     }
     console.log(selectedTags);
@@ -146,12 +147,25 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     { title: "#음식" },
   ];
 
+  const tagNames2 = [
+    "#관광지",
+    "#여행",
+    "#맛집",
+    "#광주",
+    "#목포",
+    "#화순",
+    "#고기",
+    "#밥",
+    "#음식",
+  ];
+
   return (
     <form
-      method="post"
+      method="get"
       action="http://172.30.1.22:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
+      onSubmit={(e) => console.log(e)}
     >
       {/* 폼에서 보내야 할것 */}
       {/* 글 사진 */}
@@ -200,13 +214,9 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         value={selectedTags}
         onChange={handleTagChange}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="standard"
-            placeholder="#태그"
-            name="b_tag"
-          />
+          <TextField {...params} variant="standard" placeholder="#태그" />
         )}
+        name="b_tag"
       />
       <input type="hidden" name="b_tag" value={handleTagChange} />
       {/* 글 인증장소*/}

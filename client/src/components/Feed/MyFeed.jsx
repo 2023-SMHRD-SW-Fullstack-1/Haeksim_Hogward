@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState }  from 'react';
 import { Grid, Image, Card, Button, Modal, Container, Label, Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import axios from 'axios';
+import ProfileModal from './ProfileModal';
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -37,6 +38,38 @@ const MyFeed = () => {
         setImgFile(reader.result);
       };
     };
+
+    const [email, setEmail] = useState('');  // 아이디 입력 상태
+
+    //로그인 버튼 클릭 
+  const handlePicChange = () => {
+    
+    const formData = new FormData();
+    formData.append('mem_email', email);
+    // formData.append('mem_pw', password);
+    
+    axios
+    .post('http://172.30.1.20:8087/hogward/profileupdate/{mem_email}', formData)
+    .then((res) => {
+      console.log(res.data);
+      // 1이면 로그인 성공 
+        
+      if(res.data ==1 ) { // 1이면 로그인 성공
+        alert('환영합니다!');
+        window.location.href='/'; 
+      } else{ // 0이면 회원가입 실패 
+         alert('로그인에 실패했습니다. 다시 시도해 주세요.');
+         window.location.href='/login'; 
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      // alert('Error!');
+      console.log(error.res);
+      console.log(formData);
+    });
+  };
+   
 
     // Grid에 표시될 게시물을 저장할 state를 추가합니다.
 const [posts, setPosts] = useState([]);
@@ -91,7 +124,7 @@ const handleCardClick = () => {
     setModalContent(<div>
        <form
       method="post"
-      action="http://172.30.1.22:8087/hogward/insertboard"
+      action="http://172.30.1.22:8087/hogward/profileupdate/mem_email"
       className="authform"
       encType="multipart/form-data"
        >
@@ -114,96 +147,26 @@ const handleCardClick = () => {
         ref={imgRef}
         name="b__file"
       />
-      {/* 글 제목 */}
-      <TextField
-        label="닉네임"
-        id="outlined-size-small"
-        defaultValue=""
-        size="small"
-        name="b_title"
-      />
-      {/* 글 내용 */}
-      {/* <TextField
-        id="outlined-multiline-static"
-        label="자기소개"
-        multiline
-        rows={4}
-        defaultValue=""
-        name="b_content"
-      /> */}
-      {/* 글 태그 */}
-      {/* <Autocomplete
-    multiple
-    id="size-small-standard-multi"
-    size="small"
-    options={selectedTags} // selectedTags 또는 다른 옵션 배열을 사용하세요.
-    getOptionLabel={(option) => option.title} // 데이터에 따라 수정해야 할 수도 있습니다.
-    onChange={handleTagChange}
-    renderInput={(params) => (
-        <TextField
-            {...params}
-            variant="standard"
-            placeholder="#태그"
-            name="b_tag"
-        />
-    )} */}
-{/* /> */}
-      {/* <Autocomplete
-        multiple
-        id="size-small-standard-multi"
-        size="small"
-        options={tagNames}
-        getOptionLabel={(option) => option.title}
-        value={selectedTags}
-        onChange={(event, newValue) => {
-          const updatedTags = newValue.map((option) => option.title);
-          setBTag(updatedTags); // b_tag 업데이트
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="standard"
-            placeholder="#태그"
-            name="b_tag"
-          />
-        )}
-      /> */}
+     
       <input type="hidden" name="b_tag" value={handleTagChange} />
-      {/* 글 인증장소*/}
-      {/* <input
-        type="hidden"
-        readOnly
-        
-        // value={clickedLandmark.t_landmark.lm_name || ""}
-        name="b_loc"
-      /> */}
-      {/* 위도 */}
-      {/* <input type="hidden" readOnly value={uLat || 0} name="lat" /> */}
-      {/* 경도 */}
-      {/* <input type="hidden" readOnly value={uLng || 0} name="lng" /> */}
-
-      {/* 글 작성자 x  이메일*/}
-      {/* 테스트용 */}
-      {/* <input type="hidden" readOnly value="mem_email 01" name="mem_email" /> */}
-      {/* 랜드마크 식별자 */}
+     
       <input
         type="hidden"
         readOnly
-        // value={clickedLandmark.t_landmark.lm_seq || 0}
-        // name="lm_seq"
+       
       />
       {isLocOk ? (
         <Button
           variant="outlined"
           color="error"
           type="submit"
-          // onClick={() => setReren(!reren)}
+          
         >
           수정하기
         </Button>
       ) : (
         // 테스트용
-        <Button variant="outlined" color="error" type="submit">
+        <Button variant="outlined" color="error" type="submit" onChange="handlePicChange">
           수정하기
         </Button>
         // 찐
@@ -234,7 +197,7 @@ const handleGridItemClick = () => {
     <div style={{ display: 'flex', padding: '100px' }}>
         <div style={{ flex: 1, padding: '10px' }}>
         <Card onClick={handleCardClick}  >
-        <Image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHkGSS9rG_lVL-nFe1AFRZfA1YuarIHi0L6IJod6dkhmGPH1jUtDp3iDBv0-oRVjSxXPw&usqp=CAU' wrapped ui={false}  />
+        <Image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6TmjJAzhQRsh8f0Rbt2yDn6mW9dV6T1EYeg&usqp=CAU' wrapped ui={false}  />
         <Card.Content>
         <Card.Header>닉네임</Card.Header>
         <Card.Meta>

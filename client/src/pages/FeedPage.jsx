@@ -3,7 +3,7 @@ import MyFeed from '../components/Feed/MyFeed';
 import Post from '../components/Feed/Post';
 import Rank from '../components/Feed/Rank';
 import { Button } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
+import "../assets/css/feed/FeedPage.css"
 
 
 
@@ -12,7 +12,7 @@ const FeedPage = () => {
   const [selectFeed, setSelectFeed] = useState('otherFeed');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div tyle={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
       <div style={{ margin: '10px' }}>
         <Button.Group suze='large'>
         <Button onClick={() => setSelectFeed('myFeed')} >내피드</Button>
@@ -21,7 +21,7 @@ const FeedPage = () => {
         </Button.Group>
       </div>
 
-      <div style={{ display: 'flex', width: '100%' }}>
+      <div className='feedpage' style={{ display: 'flex', width: '100%' }}>
         {selectFeed === 'myFeed' ? (
           <div style={{ flex: 1, padding: '10px' }}>
             <MyFeed />

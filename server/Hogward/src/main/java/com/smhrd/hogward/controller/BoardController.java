@@ -70,8 +70,14 @@ public class BoardController {
 	}
 	
 	
+//	//마이 피드보기
+//	@GetMapping("/myFeed/{mem_email}")
+//	public JSONArray myFeed(@PathVariable("mem_email")String mem_email) {
+//		return boardService.myFeed(mem_email);
+//	}
+	
+	
 	//유저의 인증글 작성 정보 받아와서 db 저장하기
-	//("insertboard /{mem_email}")
 	@PostMapping("/insertboard")
 	public void createboard(@RequestPart("b__file") MultipartFile file, @ModelAttribute T_Board board, HttpServletResponse response ) {
 		
@@ -111,35 +117,6 @@ public class BoardController {
 	
 	
 	//마법지도에서 랜드마크 클릭시 그곳을 인증한 유저들의 사진들만 모두 보내주기
-//		@GetMapping("/board/alluserphoto/{lm_seq}")
-//		public JSONArray allUserLandPhoto(@PathVariable("lm_seq") String lm_seq){
-//			
-//			JSONArray jsonArray = new JSONArray();
-//			List<LandAllUserPhoto> list = boardService.allUserPhoto(lm_seq);
-//			
-//			//이미지 경로설정
-//			File file = new File("c:\\uploadimage\\"+list.get(0).getB_file());
-//			
-//			ImageConverter<File, String > converter = new ImageToBase64();
-//			try {
-//				String fileStringValue = converter.convert(file);
-//				System.out.println(fileStringValue);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			JSONObject obj = new JSONObject();
-//			obj.put("allUserPhoto", list);
-//			
-//			jsonArray.add(obj); 
-//			
-//			
-//			return jsonArray;
-//			
-//		}
-	
-	
 		@GetMapping("/board/alluserphoto/{lm_seq}")
 		public JSONArray allUserLandPhoto(@PathVariable("lm_seq") String lm_seq){
 			

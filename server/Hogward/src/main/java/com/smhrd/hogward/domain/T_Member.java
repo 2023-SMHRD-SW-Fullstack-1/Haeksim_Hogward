@@ -19,6 +19,7 @@ private int mem_joindate;
 private char admin_yn;
 private String mem_nick;
 private String mem_photo;
+private String mem_Introduce;
 
 }
 

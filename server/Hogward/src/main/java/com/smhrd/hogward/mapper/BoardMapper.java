@@ -16,6 +16,9 @@ public interface BoardMapper {
 	
 	public T_Board boardOne(String b_seq);
 	
+//	//마이피드
+//	public List<MyFeed> myFeed(String mem_email);
+	
 	public int writeboard(T_Board board);
 	
 	public List<LandAllUserPhoto> allUserPhoto(String lm_seq);

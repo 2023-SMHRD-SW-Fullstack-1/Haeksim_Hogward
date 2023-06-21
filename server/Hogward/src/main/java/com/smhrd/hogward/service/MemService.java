@@ -26,13 +26,19 @@ public class MemService {
 	
 	//닉 중복체크
 	public int nickCheck(String mem_nick) {
-		return memMapper.emailCheck(mem_nick);
+		return memMapper.nickCheck(mem_nick);
 	}
 	
 	//로그인 체크
-		public int loginCheck(T_Member member) {
-			return memMapper.loginCheck(member);
-		}
+	public int loginCheck(T_Member member) {
+		return memMapper.loginCheck(member);
+	}
+	
+	
+	//프로필사진 수정
+	public int profileUpdate(String newFileName, String mem_email) {
+		return memMapper.profileUpdate(newFileName, mem_email);
+	}
 	
 
 }

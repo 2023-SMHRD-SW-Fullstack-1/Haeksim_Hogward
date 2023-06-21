@@ -1,13 +1,21 @@
 package com.smhrd.hogward.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smhrd.hogward.domain.T_Member;
 import com.smhrd.hogward.service.MemService;
@@ -43,8 +51,8 @@ public class MemberController {
 	public int nickCheck(@RequestParam("mem_nick") String mem_nick) {
 		System.out.println(mem_nick);
 		
-		int cnt = memService.emailCheck(mem_nick);
-		
+		int cnt = memService.nickCheck(mem_nick);
+		System.out.println(cnt);
 		if(cnt==0) {
 			System.out.println("사용가능한 닉네임 입니다");
 			return 0;
@@ -101,6 +109,45 @@ public class MemberController {
 	
 	
 	//프로필 사진 수정요청 오면 db 저장하기
+	@PostMapping("/profileupdate/{mem_email}")
+	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, HttpServletResponse response) {
+		
+		System.out.println(mem_email);
+		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
+		try {
+			//이미지 file -> 저장(지정된 경로에)
+			file.transferTo(new File(newFileName));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//member.setMem_photo(newFileName);
+		
+		int cnt = memService.profileUpdate(newFileName, mem_email);
+		
+		if(cnt>0) {
+			System.out.println("프로필 수정 완료");
+			String redirect_uri="http://localhost:3000/magicmap";
+			
+	    	try {
+				response.sendRedirect(redirect_uri);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	return 1;
+
+		}else {
+			System.out.println("프로필 수정 실패!!");
+			return 0;
+		}
+		
+	}
+	
 	
 	
 	

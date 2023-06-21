@@ -77,7 +77,7 @@ const LoginPage = () => {
           alert("환영합니다!");
           window.location.href = "/";
         } else {
-          // 0이면 회원가입 실패
+          // 0이면 로그인 실패
           alert("로그인에 실패했습니다. 다시 시도해 주세요.");
           window.location.href = "/login";
         }

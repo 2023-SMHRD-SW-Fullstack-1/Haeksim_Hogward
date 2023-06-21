@@ -48,7 +48,8 @@ const JoinPage = () => {
     if (!validateEmail(currEmail)) {
       setEmailMsg("이메일 형식이 올바르지 않습니다.");
     } else {
-      setEmailMsg("올바른 이메일 형식입니다.");
+      // setEmailMsg("올바른 이메일 형식입니다.");
+      setEmailMsg(" ")
     }
   });
 
@@ -60,7 +61,8 @@ const JoinPage = () => {
     if (!validatePwd(currPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.");
     } else {
-      setPwdMsg("안전한 비밀번호입니다.");
+      // setPwdMsg("안전한 비밀번호입니다.");
+      setPwdMsg(" ");
     }
   }, []);
 
@@ -73,7 +75,8 @@ const JoinPage = () => {
       if (currConfirmPwd !== password) {
         setConfirmPwdMsg("비밀번호가 일치하지 않습니다.");
       } else {
-        setConfirmPwdMsg("올바른 비밀번호입니다.");
+        //setConfirmPwdMsg("올바른 비밀번호입니다.");
+        setConfirmPwdMsg(" ");
       }
     },
     [password]
@@ -87,16 +90,18 @@ const JoinPage = () => {
     if (!validateNickname(currNickname)) {
       setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.");
     } else {
-      setNicknameMsg("올바른 닉네임 형식입니다.");
+      //setNicknameMsg("올바른 닉네임 형식입니다.");
+      setNicknameMsg(" ");
     }
   }, []);
 
+  // 이메일 중복확인 버튼 
   // 이메일서버로 보내기
   // 가져온값 0 이면 사용가능 , 1이면 사용불가능
   const onCheckEmail = (e) => {
     const formData = new FormData();
     formData.append("mem_email", email);
-
+    
     axios
       .post("http://172.30.1.22:8087/hogward/emailcheck", formData)
       .then((res) => {
@@ -111,6 +116,7 @@ const JoinPage = () => {
       });
   };
 
+  // 닉네임 중복확인 버튼
   // 닉네임 서버로 보내기
   // 가져온값 0 이면 사용가능 , 1이면 사용불가능
   const onCheckNick = (e) => {
@@ -213,7 +219,7 @@ const JoinPage = () => {
               중복확인
             </button>
           </div>
-          <p>{emailMsg}</p>
+          <p className="red">{emailMsg}</p>
         </div>
 
         {/* 닉네임 입력 */}
@@ -231,7 +237,7 @@ const JoinPage = () => {
               중복확인
             </button>
           </div>
-          <p>{nicknameMsg}</p>
+          <p className="red">{nicknameMsg}</p>
         </div>
 
         {/* 비밀번호 입력 */}
@@ -244,7 +250,7 @@ const JoinPage = () => {
             required=""
             placeholder="비밀번호를 입력해 주세요"
           />
-          <p>{pwdMsg}</p>
+          <p className="red">{pwdMsg}</p>
         </div>
 
         {/* 비밀번호 다시 입력 */}
@@ -257,8 +263,7 @@ const JoinPage = () => {
             required=""
             placeholder="비밀번호를 다시 입력해주세요"
           />
-          <p>{confirmPwdMsg}</p>
-          <p>{isConfirmPwd}</p>
+          <p className="red">{confirmPwdMsg}</p>
         </div>
 
         <br></br>

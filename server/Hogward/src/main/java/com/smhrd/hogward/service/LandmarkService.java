@@ -29,155 +29,113 @@ public class LandmarkService {
 	@Autowired
 	ResourceLoader resourceLoader;
 	
-	//랜드마크 리스트 사진빼고 모두 보기
-		public JSONArray landmarkList() {
-			List<T_Landmark> list = landMapper.landmarkList();
+	
+	
+	//랜드마크 리스트 사진 제외 모두 불러오기
+	public JSONArray landmarkList() {
+		List<T_Landmark> list = landMapper.landmarkList();
 		
 		JSONArray jsonArray = new JSONArray();
-		
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
-		
 		for(T_Landmark land : list) {
-//			//1. img필드값 수정 (파일이름에서 -> byte 문자열 형태로)
-//			//1-1. 변환할 파일 실제 경로 정의
-//			String filePath1 = "classpath:/static/lnadmarkImg/"+land.getLm_photo1();
-//			String filePath2 = "classpath:/static/lnadmarkImg/"+land.getLm_photo2();
-//			String filePath3 = "classpath:/static/lnadmarkImg/"+land.getLm_photo3();
-//			
-//			Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터	
-//			Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터	
-//			Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터	
-//			
-//			String fileStringValue1 = null;
-//			String fileStringValue2 = null;
-//			String fileStringValue3 = null;
-//		
-//			try {
-//				fileStringValue1 = converter.convert(resource1.getFile());
-//				fileStringValue2 = converter.convert(resource2.getFile());
-//				fileStringValue3 = converter.convert(resource3.getFile());
-//				
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			//System.out.println(fileStringValue);
-//			land.setLm_photo1(fileStringValue1);
-//			land.setLm_photo2(fileStringValue2);
-//			land.setLm_photo3(fileStringValue3);
 		
-	
-			//2.t_landmark 객체를 jsonObject(key:value) 형태로 변경하기
 			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
 			obj.put("t_landmark", land); //비어있는 json object 에 값 추가
 			
 			jsonArray.add(obj); 
-			
 		}
-		
 		return jsonArray;
 
 	}
-		
-		
-		
-		
-		//랜드마크 리스트 사진만 보내기
-		public JSONObject landmarkPhotoList(String lm_seq) {
-			T_Landmark landmark = landMapper.landmarkPhotoList(lm_seq);
-		
-		JSONArray jsonArray = new JSONArray();
-		
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-		
 			
-			//1. img필드값 수정 (파일이름에서 -> byte 문자열 형태로)
-			//1-1. 변환할 파일 실제 경로 정의
-			String filePath1 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo1();
-			String filePath2 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo2();
-			String filePath3 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo3();
-			
-			Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터	
-			Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터	
-			Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터	
-			
-			String fileStringValue1 = null;
-			String fileStringValue2 = null;
-			String fileStringValue3 = null;
-		
-			try {
-				fileStringValue1 = converter.convert(resource1.getFile());
-				fileStringValue2 = converter.convert(resource2.getFile());
-				fileStringValue3 = converter.convert(resource3.getFile());
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			//System.out.println(fileStringValue);
-			landmark.setLm_photo1(fileStringValue1);
-			landmark.setLm_photo2(fileStringValue2);
-			landmark.setLm_photo3(fileStringValue3);			
-			
-			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-			obj.put("t_landmark", landmark); //비어있는 json object 에 값 추가
-			
-			return obj;
+	//클릭한 랜드마크 사진정보 불러오기
+	public JSONObject landmarkPhotoList(String lm_seq) {
+	T_Landmark landmark = landMapper.landmarkPhotoList(lm_seq);
 	
+	JSONArray jsonArray = new JSONArray();
+	
+	ImageConverter<File, String> converter = new ImageToBase64();
+	
+	//1. img필드값 수정 (파일이름에서 -> byte 문자열 형태로)
+	//1-1. 변환할 파일 실제 경로 정의
+	String filePath1 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo1();
+	String filePath2 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo2();
+	String filePath3 = "classpath:/static/lnadmarkImg/"+landmark.getLm_photo3();
+	
+	Resource resource1 = resourceLoader.getResource(filePath1); //파일의 메타데이터	
+	Resource resource2 = resourceLoader.getResource(filePath2); //파일의 메타데이터	
+	Resource resource3 = resourceLoader.getResource(filePath3); //파일의 메타데이터	
+	
+	String fileStringValue1 = null;
+	String fileStringValue2 = null;
+	String fileStringValue3 = null;
+
+	try {
+			fileStringValue1 = converter.convert(resource1.getFile());
+			fileStringValue2 = converter.convert(resource2.getFile());
+			fileStringValue3 = converter.convert(resource3.getFile());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	
+	//System.out.println(fileStringValue);
+	landmark.setLm_photo1(fileStringValue1);
+	landmark.setLm_photo2(fileStringValue2);
+	landmark.setLm_photo3(fileStringValue3);			
+	
+	JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+	obj.put("t_landmark", landmark); //비어있는 json object 에 값 추가
+	
+	return obj;
+
+}
+
+	//전지역 랜드마크 갯수 보내기
+	public JSONArray landmarkCount() {
+	
+	List<HashMap> list = landMapper.landmarkCount();
+				
+	System.out.println("hash : "+ list);
+	System.out.println("--- : " + list.toString());
+				
+	JSONArray jsonArray = new JSONArray();
+				
+	ImageConverter<File, String> converter = new ImageToBase64();
+	
+	for(HashMap count : list) {	
+		JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+		obj.put("LandmarkAllCount", count); //비어있는 json object 에 값 추가
 		
-		
-		
-		//지역별 랜드마크수 카운트
-		public JSONArray landmarkCount() {
-		//List<T_Landmark> list = landMapper.landmarkCount();
-		List<HashMap> list = landMapper.landmarkCount();
-					
-		System.out.println("hash : "+ list);
-		System.out.println("--- : " + list.toString());
-					
-		JSONArray jsonArray = new JSONArray();
-					
-		ImageConverter<File, String> converter = new ImageToBase64();
-		
-		for(HashMap count : list) {
+		jsonArray.add(obj); 	
+	}
+	return jsonArray;
+	
+	
+}
+				
+	//회원별 인증한 랜드마크 정보 가져오기
+	public JSONArray certifiedLand(String mem_email) {
+	List<HashMap> list = landMapper.certifiedLand(mem_email);
 			
-			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-			obj.put("LandmarkAllCount", count); //비어있는 json object 에 값 추가
+	System.out.println(list);
 			
-			jsonArray.add(obj); 
+	JSONArray jsonArray = new JSONArray();
+	ImageConverter<File, String> converter = new ImageToBase64();
 			
+	for(HashMap landmark : list) {
+				
+		JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
+		obj.put("certifiedLandmark", landmark); //비어있는 json object 에 값 추가
+					
+		jsonArray.add(obj); 
+						
 		}
 		return jsonArray;
-		
-		
-	}
 				
-		
-		//회원별 인증한 랜드마크 정보 가져오기
-			public JSONArray certifiedLand(String mem_email) {
-			List<HashMap> list = landMapper.certifiedLand(mem_email);
-					
-			System.out.println(list);
-					
-			JSONArray jsonArray = new JSONArray();
-			ImageConverter<File, String> converter = new ImageToBase64();
-					
-			for(HashMap landmark : list) {
-						
-			JSONObject obj = new JSONObject(); //비어있는 jsonobject 생성
-			obj.put("certifiedLandmark", landmark); //비어있는 json object 에 값 추가
-						
-			jsonArray.add(obj); 
-						
-		}
-			return jsonArray;
-					
-					
+				
 	}
 				
 		

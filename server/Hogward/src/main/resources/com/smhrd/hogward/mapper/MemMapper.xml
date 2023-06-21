@@ -4,10 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.smhrd.hogward.mapper.MemMapper">
-  	<insert id="join" parameterType="com.smhrd.hogward.mapper.MemMapper">
-  		INSERT INTO t_member (mem_email, mem_pw, mem_nick) 
-  					VALUES (#{mem_email}, #{mem_pw}, #{mem_nick})
-  	</insert>
+  
   	
   	<select id="emailCheck">
   		select count(*) from t_member where mem_email=#{mem_email}
@@ -18,7 +15,12 @@
   		select count(*) from t_member where mem_nick=#{mem_nick}
   	
   	</select>
-  	
+
+  	<insert id="join" parameterType="com.smhrd.hogward.mapper.MemMapper">
+  		INSERT INTO t_member (mem_email, mem_pw, mem_nick) 
+  					VALUES (#{mem_email}, #{mem_pw}, #{mem_nick})
+  	</insert>
+	
   	<select id="loginCheck">
   		select mem_nick from t_member where mem_email=#{mem_email} and mem_pw=#{mem_pw}
   	</select>

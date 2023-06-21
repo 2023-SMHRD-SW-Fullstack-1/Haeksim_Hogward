@@ -18,15 +18,18 @@ public interface BoardMapper {
 	//유저피드
 	public List<UsersFeed> usersFeed();
 	
-	public List<T_Board> boardList();
-	
-	public T_Board boardOne(String b_seq);
-	
 	//마이피드
 	public List<MyFeed> myFeed(String mem_email);
 	
-	public int writeboard(T_Board board);
+	//본인피드 게시물 클릭시 해당게시물 사진,정보 보내기
+	public T_Board boardOne(String b_seq);
 	
+	//유저의 인증글(사진포함) DB 저장
+	public int insertBoard(T_Board board);
+	
+	//마법지도에서 랜드마크 클릭시 해당랜드마크 인증한 유저들의 사진들만 모두 보내주기
 	public List<LandAllUserPhoto> allUserPhoto(String lm_seq);
 
+	
+	//public List<T_Board> boardList();
 }

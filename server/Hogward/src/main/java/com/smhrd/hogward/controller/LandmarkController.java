@@ -21,7 +21,7 @@ public class LandmarkController {
 	@Autowired
 	private LandmarkService landService;
 	
-	//랜드마크 리스트 사진 뺴고 모두 불러오기
+	//랜드마크 리스트 사진 제외 모두 불러오기
 	@GetMapping("/alllandmark")
 	public JSONArray landmarkList() {
 		JSONArray array = landService.landmarkList();
@@ -32,10 +32,9 @@ public class LandmarkController {
 	@GetMapping("/alllandmark/photo/{lm_seq}")
 	public JSONObject landmarkPhotoList(@PathVariable("lm_seq")String lm_seq) {
 		 return landService.landmarkPhotoList(lm_seq);
-		
 	}
 	
-	//지역 랜드마크 갯수 카운트해서 정보 보내기
+	//전지역 랜드마크 갯수 보내기
 	@GetMapping("/landmark/count")
 	public JSONArray landmarkCount() {
 		JSONArray array = landService.landmarkCount();
@@ -43,7 +42,6 @@ public class LandmarkController {
 		return array;
 		
 	}
-	
 	
 	//회원별 인증한 랜드마크 정보 가져오기
 	@GetMapping("/certifiedlandmarks/{mem_email}")

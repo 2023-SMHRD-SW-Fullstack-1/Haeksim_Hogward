@@ -13,20 +13,20 @@ public class MemService {
 	private MemMapper memMapper;
 	
 	
-	//회원가입시 정보 저장 
-	public int join(T_Member member) {
-		return memMapper.join(member);
-	}
-	
-	
+
 	//이메일 중복체크
 	public int emailCheck(String mem_email) {
 		return memMapper.emailCheck(mem_email);
 	}
 	
-	//닉 중복체크
+	//닉네임 중복체크
 	public int nickCheck(String mem_nick) {
 		return memMapper.nickCheck(mem_nick);
+	}
+	
+	//회원가입시 정보 저장 
+	public int join(T_Member member) {
+		return memMapper.join(member);
 	}
 	
 	//로그인 체크
@@ -34,8 +34,7 @@ public class MemService {
 		return memMapper.loginCheck(member);
 	}
 	
-	
-	//프로필사진 수정
+	//프로필 사진 수정
 	public int profileUpdate(String newFileName, String mem_email) {
 		return memMapper.profileUpdate(newFileName, mem_email);
 	}

@@ -57,7 +57,7 @@ const MyFeed = () => {
     // formData.append('mem_pw', password);
 
     axios
-      .post("http://172.30.1.20:8087/hogward/myfeed/{mem_email}", formData)
+      .post("http://172.30.1.22:8087/hogward/myfeed/{mem_email}", formData)
       .then((res) => {
         console.log(res.data);
         // 1이면 로그인 성공
@@ -88,7 +88,7 @@ const MyFeed = () => {
     // 여기에 게시물 데이터를 가져오는 API 엔드포인트의 URL을 입력하세요.
     // mem_email 01
     const sessionEmail = "mem_email 01";
-    const url = `172.30.1.20:8087/hogward/profileupdate/${sessionEmail}`;
+    const url = `172.30.1.22:8087/hogward/profileupdate/${sessionEmail}`;
     axios
       .get(url)
       .then((res) => {

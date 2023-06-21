@@ -35,6 +35,7 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     if (value.length <= 3) {
       setSelectedTags(value);
     }
+    console.log(selectedTags);
   };
 
   // 현재 내 위치 정보 state

@@ -29,14 +29,14 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   };
 
   // 태그 갯수 제한
-  const [selectedTags, setSelectedTags] = useState();
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const handleTagChange = (event, value) => {
     if (value.length <= 3) {
-      console.log(value);
+      console.log("v", value);
       setSelectedTags(value);
     }
-    console.log(selectedTags);
+    console.log("s", selectedTags);
   };
 
   // 현재 내 위치 정보 state
@@ -140,28 +140,15 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     { title: "#여행" },
     { title: "#맛집" },
     { title: "#광주" },
-    { title: "#목포" },
     { title: "#화순" },
     { title: "#고기" },
     { title: "#밥" },
     { title: "#음식" },
   ];
 
-  const tagNames2 = [
-    "#관광지",
-    "#여행",
-    "#맛집",
-    "#광주",
-    "#목포",
-    "#화순",
-    "#고기",
-    "#밥",
-    "#음식",
-  ];
-
   return (
     <form
-      method="get"
+      method="post"
       action="http://172.30.1.22:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
@@ -216,9 +203,13 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         renderInput={(params) => (
           <TextField {...params} variant="standard" placeholder="#태그" />
         )}
-        name="b_tag"
       />
-      <input type="hidden" name="b_tag" value={handleTagChange} />
+      {console.log("abcd", selectedTags.map((item) => item.title).toString())}
+      <input
+        type="hidden"
+        name="b_tag"
+        value={selectedTags.map((item) => item.title).toString()}
+      />
       {/* 글 인증장소*/}
       <input
         type="hidden"

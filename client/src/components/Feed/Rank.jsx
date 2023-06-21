@@ -25,6 +25,7 @@ const Rank = () => {
     },
   ];
 
+  //랭킹 사진 클릭 했을 떼 -> 
   const handleSummaryClick = (summary, image) => {
     setSelectedSummary(summary, image);
     setOpen(true);

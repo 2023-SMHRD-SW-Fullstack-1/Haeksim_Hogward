@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Grid,
   Image,
@@ -18,9 +18,11 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Swal from "sweetalert2";
 
+
 //아이콘
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import SessionContext from "../../contexts/SessionContext";
 
 const MyFeed = () => {
   const [allboard, setAllBoard] = useState([]);
@@ -48,37 +50,37 @@ const MyFeed = () => {
     };
   };
 
-  const [email, setEmail] = useState(""); // 아이디 입력 상태
+  // const [email, setEmail] = useState(""); // 아이디 입력 상태
 
-  //로그인 버튼 클릭
-  const handlePicChange = () => {
-    const formData = new FormData();
-    formData.append("mem_email", email);
-    // formData.append('mem_pw', password);
+  // //로그인 버튼 클릭
+  // const handlePicChange = () => {
+  //   const formData = new FormData();
+  //   formData.append("mem_email", email);
+  //   // formData.append('mem_pw', password);
 
-    axios
-      .post("http://172.30.1.22:8087/hogward/myfeed/{mem_email}", formData)
-      .then((res) => {
-        console.log(res.data);
-        // 1이면 로그인 성공
+  //   axios
+  //     .post("http://172.30.1.22:8087/hogward/myfeed/{mem_email}", formData)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       // 1이면 로그인 성공
 
-        if (res.data == 1) {
-          // 1이면 로그인 성공
-          alert("환영합니다!");
-          window.location.href = "/";
-        } else {
-          // 0이면 회원가입 실패
-          alert("로그인에 실패했습니다. 다시 시도해 주세요.");
-          window.location.href = "/login";
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        // alert('Error!');
-        console.log(error.res);
-        console.log(formData);
-      });
-  };
+  //       if (res.data == 1) {
+  //         // 1이면 로그인 성공
+  //         alert("환영합니다!");
+  //         window.location.href = "/";
+  //       } else {
+  //         // 0이면 회원가입 실패
+  //         alert("로그인에 실패했습니다. 다시 시도해 주세요.");
+  //         window.location.href = "/login";
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       // alert('Error!');
+  //       console.log(error.res);
+  //       console.log(formData);
+  //     });
+  // };
 
   // Grid에 표시될 게시물을 저장할 state를 추가합니다.
   const [posts, setPosts] = useState([]);
@@ -101,42 +103,42 @@ const MyFeed = () => {
       });
   }, []); // 빈 의존성 배열을 사용하여 컴포넌트가 마운트 될 때 한 번만 실행됩니다.
 
-  const rows = [
-    {
-      columns: 4,
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Ts_tAWo1l-pgKkO4xCGSm0rt1XechFSTkA&usqp=CAU",
-    },
-    {
-      columns: 4,
-      imageUrl: "https://react.semantic-ui.com/images/wireframe/image.png",
-    },
-    {
-      columns: 4,
-      imageUrl: "https://react.semantic-ui.com/images/wireframe/image.png",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     columns: 4,
+  //     imageUrl:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Ts_tAWo1l-pgKkO4xCGSm0rt1XechFSTkA&usqp=CAU",
+  //   },
+  //   {
+  //     columns: 4,
+  //     imageUrl: "https://react.semantic-ui.com/images/wireframe/image.png",
+  //   },
+  //   {
+  //     columns: 4,
+  //     imageUrl: "https://react.semantic-ui.com/images/wireframe/image.png",
+  //   },
+  // ];
 
-  useEffect(() => {
-    const url = "board.json";
-    axios.get(url).then((res) => {
-      setAllBoard(res.data);
-      console.log(res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const url = "board.json";
+  //   axios.get(url).then((res) => {
+  //     setAllBoard(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    const url = "member.json";
-    axios.get(url).then((res) => {
-      setMem(res.data);
-      console.log(res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const url = "member.json";
+  //   axios.get(url).then((res) => {
+  //     setMem(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
   // 사용자 데이터 가져오기
-  useEffect(() => {
-    const url = "";
-  });
+  // useEffect(() => {
+  //   const url = "";
+  // });
 
   const handleCloseModal = () => {
     setOpen(false);
@@ -158,7 +160,7 @@ const MyFeed = () => {
             src={
               imgFile
                 ? imgFile
-                : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6TmjJAzhQRsh8f0Rbt2yDn6mW9dV6T1EYeg&usqp=CAU`
+                : `????????`
             }
             alt="프로필 이미지"
             className="authform_preview"
@@ -191,7 +193,7 @@ const MyFeed = () => {
               type="submit"
               onChange="handlePicChange"
             >
-              Z수정하기Z
+              수정하기
             </Button>
             // 찐
             // <Button variant="outlined" color="error" onClick={handleIsOk}>
@@ -214,26 +216,47 @@ const MyFeed = () => {
     setOpen(true);
   };
 
-  return (
+  const sessionValue = useContext(SessionContext);
+  console.log(sessionValue?.email);
+  const [myFeed, setMyFeed] = useState([]);
+  const getMyFeed = () => {
+    const url = `http://172.30.1.22:8087/hogward/myfeed/mem_email%2001`
+    axios.get(url).then( res => {
+      console.log("myfeed : ",res.data)
+      setMyFeed(res.data);
+    })
+  }
+  useEffect(() => {
+    getMyFeed()
+  },[])
+  return (  
+    //프로필 
     <div>
       <div style={{ display: "flex", padding: "100px" }}>
         <div style={{ flex: 1, padding: "10px" }}>
           <Card  onClick={handleCardClick}>
-            <Image
-             circular
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6TmjJAzhQRsh8f0Rbt2yDn6mW9dV6T1EYeg&usqp=CAU"
-              wrapped
-              ui={false}
-            />
-            <Card.Content>
-              <Card.Header>닉네임</Card.Header>
-              <Card.Meta>
-                <span className="date">가입날짜</span>
-              </Card.Meta>
-              <Card.Description>자기소개</Card.Description>
-            </Card.Content>
-            <Card.Content extra></Card.Content>
-          </Card>
+            {myFeed.length > 0 && 
+             <Image
+           
+             src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
+             wrapped
+             ui={false}
+           />
+            }
+           
+           <Card.Content>
+    <Card.Header>{myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : '닉네임'}</Card.Header> {/* 닉네임 */}
+    <Card.Meta>
+      <span className="date">
+        {myFeed.length > 0 ? myFeed[0].myFeed.mem_joindate : '가입날짜'} {/* 가입 날짜 */}
+      </span>
+    </Card.Meta>
+    <Card.Description>
+      {myFeed.length > 0 ? myFeed[0].myFeed.mem_Introduce : '자기소개'} {/* 자기소개 */}
+    </Card.Description>
+  </Card.Content>
+  <Card.Content extra></Card.Content>
+</Card>
         </div>
 
         <div classname="feedbutton" style={{ flex: 1, padding: "50px" }}>
@@ -285,17 +308,18 @@ const MyFeed = () => {
         </div>
       </div>
 
+      {/* 사용자 게시물 */}
       <div>
         <Grid style={{ display: "flex" }}>
           {/* 단일 Grid.Row 내부에 여러 Grid.Column을 배치하여 가로로 정렬 */}
           <Grid.Row>
-            {posts.map((post, index) => (
+            {myFeed.map((post, index) => (
               <Grid.Column
                 key={index}
                 onClick={handleGridItemClick}
                 style={{ width: "25%" }}
               >
-                <Image src={post.member.mem_photo} />
+                <Image src={"data:image/;base64," + post.myFeed.b_file} />
               </Grid.Column>
             ))}
           </Grid.Row>

@@ -30,7 +30,7 @@ public class MemService {
 	}
 	
 	//로그인 체크
-	public int loginCheck(T_Member member) {
+	public String loginCheck(T_Member member) {
 		return memMapper.loginCheck(member);
 	}
 	

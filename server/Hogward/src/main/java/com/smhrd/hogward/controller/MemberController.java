@@ -87,18 +87,20 @@ public class MemberController {
 	
 	//로그인 체크 기능
 	@PostMapping("/logincheck")
-	public int loginCheck(@ModelAttribute T_Member member) {
+	public String loginCheck(@ModelAttribute T_Member member) {
 		
-		int cnt = memService.loginCheck(member);
+//		int cnt = memService.loginCheck(member);
+		String nick =  memService.loginCheck(member);
+		
 
-		System.out.println(cnt);
+		System.out.println(nick);
 		
-		if(cnt>0) {
+		if(nick!=null) {
 			System.out.println("로그인 성공");
-			return 1;
+			return nick;
 		}else {
 			System.out.println("로그인 실패!!");
-			return 0;
+			return null;
 		}
 		
 	}

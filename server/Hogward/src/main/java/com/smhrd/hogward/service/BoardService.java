@@ -64,7 +64,7 @@ public class BoardService {
 			userfeed.setMem_photo(fileStringValue2);
 			
 			JSONObject obj = new JSONObject();
-			obj.put("myFeed", userfeed);
+			obj.put("usersFeed", userfeed);
 			
 			jsonArray.add(obj); 
 		}

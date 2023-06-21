@@ -1,11 +1,30 @@
-* {
-  box-sizing: border-box;
-  font-family: "Pretendard-Regular" !important;
-}
-@font-face {
+/* @font-face {
   font-family: "Pretendard-Regular";
   src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
     format("woff");
   font-weight: 400;
   font-style: normal;
+} */
+
+@font-face {
+  font-family: HeirofLightRegular;
+  src: url("./assets/font/HeirofLightRegular.ttf");
+}
+@font-face {
+  font-family: HeirofLightBold;
+  src: url("./assets/font/HeirofLightBold.ttf");
+}
+
+* {
+  box-sizing: border-box;
+  /* font-family: "Pretendard-Regular" !important; */
+  font-family: "HeirofLightBold", sans-serif !important;
+  /* text-shadow: 3px 3px 20px #ffffff, -2px 1px 30px #ffffff; */
+  /* text-shadow: 10px 10px 25px rgb(255, 255, 255),
+    -10px 10px 25px rgb(81, 67, 21), -10px -10px 25px rgb(255, 255, 255),
+    10px -10px 25px rgb(255, 255, 255); */
+
+  /* text-shadow: -10px 10px 0px #00e6e6, -20px 20px 0px #01cccc,
+    -30px 30px 0px #00bdbd; */
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
 }

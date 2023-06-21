@@ -21,12 +21,17 @@ import { useEffect } from "react";
 
 function App() {
   const [sessionUser, setSessionUser] = useState(null);
+
   useEffect(() => {
     const user = sessionStorage.getItem("user");
     if (user) {
-      const parsedUser = JSON.parse(user);
-      setSessionUser(parsedUser);
-      console.log(parsedUser);
+      try {
+        const parsedUser = JSON.parse(user);
+        setSessionUser(parsedUser);
+        console.log("bbbb", parsedUser);
+      } catch (error) {
+        console.error("Failed to parse user data from session storage:", error);
+      }
     }
   }, [sessionStorage]);
   return (

@@ -1,6 +1,6 @@
 import axios from "axios";
 import "../../assets/css/MagicMap.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   CustomOverlayMap,
   Polygon,
@@ -10,8 +10,13 @@ import {
 import MapImageMarker from "./MapImageMarker";
 import AuthMenu from "./AuthMenu";
 import MarkerOverlay from "./MarkerOverlay";
+import SessionContext from "../../contexts/SessionContext";
 
 const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
+  // 세션값 가져오기
+  const sessionValue = useContext(SessionContext);
+  console.log("abcdefg", sessionValue);
+
   // 시군구 경계값 좌표
   const [areas, setAreas] = useState([]);
 
@@ -85,16 +90,20 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   const [memAuthCount, setMemAuthCount] = useState([]);
 
   const getMemberAuthCount = () => {
+    console.log("a", sessionValue);
+    console.log("b", sessionValue.email);
     // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
-    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/mem_email 01`;
-    axios.get(url).then((res) => {
-      console.log(res.data);
-      setMemAuthCount(res.data);
-    });
+    if (sessionValue) {
+      const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionValue.email}`;
+      axios.get(url).then((res) => {
+        console.log(res.data);
+        setMemAuthCount(res.data);
+      });
+    }
   };
   useEffect(() => {
     getMemberAuthCount();
-  }, [reren]);
+  }, [sessionValue]);
 
   const filteredMemSite = memAuthCount.filter(
     (item) => item.certifiedLandmark.AUTHCOUNT !== 0

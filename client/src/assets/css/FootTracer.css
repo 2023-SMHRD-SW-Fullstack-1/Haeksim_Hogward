@@ -8,14 +8,13 @@
 
 #wrap {
   position: absolute;
-  height: 930px;
-  width: 2140px;
+  height: 972px;
+  width: 1920px;
   background: url("../img/FootPrintBg.png") no-repeat;
   background-size: 100% 100%;
   /* transform-style: preserve-3d; */
   transform-origin: bottom center;
   /* transform: rotateX(40deg); */
-  border-radius: 20px;
 }
 
 /* .name {

@@ -25,24 +25,20 @@ import org.springframework.web.multipart.MultipartFile;
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.service.BoardService;
-import com.smhrd.hogward.service.UserFeedService;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class BoardController {
-
-	@Autowired
-	private UserFeedService userFeedService;
 	
 	@Autowired
 	private BoardService boardService;
 
-	//유저들의 게시글이 모인 피드 불러오기   ---> 최신순으로 10개씩 보이게 수정하기.
-	@GetMapping("/userfeed")
-	public JSONArray userFeedList() {
-		JSONArray array = userFeedService.userFeedList();
+	//유저들의 게시글 불러오기(유저피드)   ---> 최신순으로 10개씩 보이게 수정하기.
+	@GetMapping("/usersfeed")
+	public JSONArray usersFeed() {
+		JSONArray array = boardService.usersFeed();
 		return array;		
 	}
 	

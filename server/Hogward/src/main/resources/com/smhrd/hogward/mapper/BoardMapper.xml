@@ -4,6 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.smhrd.hogward.mapper.BoardMapper">
+  	
+  	<!-- 유저 피드 -->
+  	<select id="usersFeed" resultType="com.smhrd.hogward.domain.UsersFeed">
+		select A.mem_email 
+       		  ,A.mem_photo
+       		  , A.mem_nick
+       		  ,B.mem_email
+       		  , B.b_file
+       		  , B.b_content
+       		  , B.b_rep
+       		  , B.b_likes
+ 		from t_member A
+       	   , t_board B
+		where A.mem_email = B.mem_email
+	</select>
+  
+  
   	<select id="boardList" resultType="com.smhrd.hogward.domain.T_Board">
   		select * from t_board
   	</select>

@@ -16,7 +16,7 @@
   /* background-size: cover; */
   transform-style: preserve-3d;
   transform-origin: bottom center;
-  transform: rotateX(10deg);
+  transform: rotateX(4deg);
 }
 
 /* .name {

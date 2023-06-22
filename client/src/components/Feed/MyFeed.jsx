@@ -1,40 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-  Grid,
-  Image,
-  Card,
-  Button,
-  Modal,
-  Container,
-  Label,
-  Icon,
-} from "semantic-ui-react";
+import {Grid,Image,Card,Button,Modal} from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
-import "../../assets/css/feed/FeedButton.css";
-
-
-//아이콘
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { SessionContext } from "../../contexts/SessionContext";
 
+
 const MyFeed = () => {
-  const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
-  const [modalContent, setModalContent] = useState(null); // 모달에 표시될 내용을 관리하는 state
-  const [imgFile, setImgFile] = useState(""); //이미지파일
+  // 모달의 표시 여부와 내용을 관리하는 상태
+  const [open, setOpen] = useState(false); 
+  const [modalContent, setModalContent] = useState(null); 
+  
+  // 이미지 파일을 관리하는 상태와 ref
+  const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
   
-  const [isLocOk, setIslocOk] = useState(false);
-
-  const [selectedTags, setSelectedTags] = useState([]);
-
-  const handleTagChange = (event, value) => {
-    if (value && value.length <= 3) {
-      setSelectedTags(value);
-    }
-  };
-
+  // 선택된 이미지 파일을 저장하는 함수
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
@@ -44,36 +24,12 @@ const MyFeed = () => {
     };
   };
 
-  
-
-  // Grid에 표시될 게시물을 저장할 state를 추가합니다.
-  // const [posts, setPosts] = useState([]);
-
-  // // 데이터베이스에서 게시물 데이터를 가져옵니다.
-  // useEffect(() => {
-  //   // 여기에 게시물 데이터를 가져오는 API 엔드포인트의 URL을 입력하세요.
-  //   // mem_email 01
-  //   const sessionEmail = "mem_email 01";
-  //   const url = `172.30.1.22:8087/hogward/profileupdate/${sessionEmail}`;
-  //   axios
-  //     .get(url)
-  //     .then((res) => {
-  //       // 가져온 데이터를 posts state에 저장합니다.
-  //       setPosts(res.data);
-  //     })
-  //     .catch((err) => {
-  //       // 에러가 발생한 경우 콘솔에 에러를 출력합니다.
-  //       console.error("데이터를 가져오는데 실패했습니다! ", err);
-  //     });
-  // }, []); // 빈 의존성 배열을 사용하여 컴포넌트가 마운트 될 때 한 번만 실행됩니다.
-
-  
-
+  // 모달을 닫는 함수
   const handleCloseModal = () => {
     setOpen(false);
   };
 
-  //프로필 사진 클릭시 실행
+  // 프로필 카드 클릭 이벤트 핸들러
   const handleCardClick = () => {
     setModalContent(
       <div>
@@ -83,16 +39,16 @@ const MyFeed = () => {
           className="authform"
           encType="multipart/form-data"
         >
-          {/* 폼에서 보내야 할것 */}
-          {/* 글 사진 */}
+          {/* 선택된 프로필 이미지 미리보기 */}
           <img
-            src={imgFile ? imgFile : `????????`}
+            src={imgFile}
             alt="프로필 이미지"
             className="authform_preview"
           />
+          {/* 프로필 이미지 레이블 및 입력 */}
           <label className="signup-profileImg-label" htmlFor="profileImg">
             프로필 사진 변경
-          </label>
+          </label> <br></br>
           <input
             className="signup-profileImg-input"
             type="file"
@@ -102,120 +58,118 @@ const MyFeed = () => {
             ref={imgRef}
             name="b_file"
           />
-
-          <input type="hidden" name="b_tag" value={handleTagChange} />
-
-          <input type="hidden" readOnly />
-          {isLocOk ? (
-            <Button variant="outlined" color="error" type="submit">
+          {/* 수정 버튼 */}
+          <Button variant="outlined" color="error" type="submit">
               수정하기
-            </Button>
-          ) : (
-            // 테스트용
-            <Button
-              variant="outlined"
-              color="error"
-              type="submit"
-              onChange="handlePicChange"
-            >
-              수정하기
-            </Button>
-           
-          )}
+          </Button>
         </form>
       </div>
     );
     setOpen(true);
   };
 
-  //버튼 클릭시 
-  const handleButtonClick = () => {
-    setModalContent(<div>버튼을 클릭했습니다.</div>);
+  // 게시물 버튼 클릭 이벤트 핸들러
+  const handleGridItemClick = (b_seq) => {
+    axios.get(`http://172.30.1.22:8087/hogward/boardOne/${b_seq}`).then((res) => {
+      const oneb = res.data.oneBoard
+      console.log(oneb)
+
+      setModalContent(<div>
+          <h2>{oneb.b_title}</h2>
+        <p>{oneb.b_file}</p>
+        <p>{oneb.b_content}</p>
+      </div>);
+    })
+    
     setOpen(true);
   };
 
-  //게시물 클릭시
-  const handleGridItemClick = () => {
-    setModalContent(<div>게시물을 클릭했습니다.</div>);
-    setOpen(true);
-  };
-
+  // 사용자 세션 컨텍스트
   const { sessionUser } = useContext(SessionContext);
-  console.log(sessionUser?.email);
+  
+  // 사용자 피드 데이터를 가져오는 상태와 함수
   const [myFeed, setMyFeed] = useState([]);
   const getMyFeed = () => {
-    const url = `http://172.30.1.22:8087/hogward/myfeed/mem_email%2001`;
+    const url = `http://172.30.1.22:8087/hogward/myfeed/admin`;
+    
     axios.get(url).then((res) => {
-      console.log("myfeed : ", res.data);
       setMyFeed(res.data);
     });
   };
+  
+  // 컴포넌트 마운트 시 사용자 피드 데이터 가져오기
   useEffect(() => {
     getMyFeed();
   }, []);
+
   return (
-    //프로필
     <div>
       <div style={{ display: "flex", padding: "100px" }}>
         <div style={{ flex: 1, padding: "10px" }}>
+          {/* 프로필 카드 */}
           <Card onClick={handleCardClick}>
-            {myFeed.length > 0 && (
-              <Image
-                src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
-                wrapped
-                ui={false}
-              />
-            )}
+            {/* 프로필 이미지 */}
+            {myFeed.length > 0 ? (
+      <Image
+        src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
+       
+        wrapped
+        ui={false}
+      />
+    ) : (
+      // 프로필 사진 없을 때 기본 프로필 사진
+      <Image
+        src=" "
+        wrapped
+        ui={false}
+      />
+    )}
 
+            {/* 프로필 정보 (닉네임, 가입 날짜, 자기 소개) */}
             <Card.Content>
               <Card.Header>
                 {myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}
-              </Card.Header>{" "}
-              {/* 닉네임 */}
+              </Card.Header>
               <Card.Meta>
                 <span className="date">
                   {myFeed.length > 0
                     ? myFeed[0].myFeed.mem_joindate
-                    : "가입날짜"}{" "}
-                  {/* 가입 날짜 */}
+                    : "가입날짜"} 
                 </span>
               </Card.Meta>
               <Card.Description>
                 {myFeed.length > 0
                   ? myFeed[0].myFeed.mem_Introduce
-                  : "자기소개"}{" "}
-                {/* 자기소개 */}
+                  : "자기소개"} 
               </Card.Description>
             </Card.Content>
-            <Card.Content extra></Card.Content>
           </Card>
         </div>
 
-        {/* 게시글 버튼*/}
-        <div classname="feedbutton" style={{ flex: 1, padding: "50px" }}>
+        {/* 내정보수정 버튼*/}
+        <div style={{ flex: 1, padding: "50px" }}>
           <Button
               color="black"
-              content="게시글"
+              content="내 정보수정"
               icon="check circle"
-              onClick={handleButtonClick}
+              onClick={handleCardClick}
               style={{ fontSize: "14px" }}
            />  
-          
         </div>
-      
       </div>
 
       {/* 사용자 게시물 */}
-      <div>
+      <div >
         <Grid style={{ display: "flex" }}>
-          {/* 단일 Grid.Row 내부에 여러 Grid.Column을 배치하여 가로로 정렬 */}
+          
           <Grid.Row>
             {myFeed.map((post, index) => (
               <Grid.Column
                 key={index}
-                onClick={handleGridItemClick}
+                onClick={() => handleGridItemClick(post.myFeed.b_seq)}
                 style={{ width: "25%" }}
               >
+
                 <Image src={"data:image/;base64," + post.myFeed.b_file} />
               </Grid.Column>
             ))}
@@ -223,9 +177,7 @@ const MyFeed = () => {
         </Grid>
       </div>
 
-      
-      
-      {/* 모달 부분 */}
+      {/* 모달 */}
       <Modal open={open} onClose={handleCloseModal} size="small">
         <Modal.Content>{modalContent}</Modal.Content>
       </Modal>

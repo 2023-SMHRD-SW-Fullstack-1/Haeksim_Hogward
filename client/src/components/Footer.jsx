@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <div className="footer" style={{ background: "transparent" }}>
       <div className="container">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 2023 Hogward. All rights reserved.</p>
       </div>
     </div>
   );

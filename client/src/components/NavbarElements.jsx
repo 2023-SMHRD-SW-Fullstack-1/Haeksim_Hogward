@@ -39,7 +39,7 @@ function NavbarElements() {
                     navigate("/");
                   }}
                 >
-                  LOGOUT
+                  로그아웃
                 </Nav.Link>
               </>
             ) : (

@@ -114,7 +114,7 @@ const MagicMap = () => {
     console.log("a", sessionUser);
     console.log("bababab", sessionUser.email);
     // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
-    if (sessionUser) {
+    if (sessionUser.email) {
       const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
       axios.get(url).then((res) => {
         console.log(res.data);

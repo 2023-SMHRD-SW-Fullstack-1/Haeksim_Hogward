@@ -13,6 +13,9 @@ https://templatemo.com/tm-583-festava-live
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding-top: 13%;
+  height: 100%;
 }
 
 .section1 {
@@ -1034,4 +1037,11 @@ strong {
   h5 {
     font-size: 20px;
   }
+}
+.mainpage {
+  background: url("../img/mainbg.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #3d3533;
+  height: 100vh;
 }

@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import SessionContext from "../contexts/SessionContext";
+import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
 
 function NavbarElements() {
-  const sessionValue = useContext(SessionContext);
+  const { sessionUser, setSessionUser } = useContext(SessionContext);
   const navigate = useNavigate();
   return (
     <Navbar
@@ -26,14 +26,15 @@ function NavbarElements() {
             <Nav.Link href="/feed">피드</Nav.Link>
           </Nav>
           <Nav>
-            {sessionValue ? (
+            {sessionUser ? (
               <>
                 <Nav.Link style={{ color: "skyblue" }}>
-                  {sessionValue.nick}
+                  {sessionUser.nick}
                 </Nav.Link>
                 <Nav.Link
                   onClick={() => {
                     sessionStorage.clear();
+                    setSessionUser(null);
                     navigate(-1);
                   }}
                 >

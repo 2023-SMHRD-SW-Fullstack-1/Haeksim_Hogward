@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import { Feed, Icon, Button, Image, Modal } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+
 
 const UserPost = ( ) => {
   const [allboard, setAllBoard] = useState([]);
@@ -13,18 +14,12 @@ const UserPost = ( ) => {
 
   
 
-  // useEffect(() => {
-  //   const url = "board.json";
-  //   axios.get(url).then(res => {
-  //     setAllBoard(res.data);
-  //     console.log(res.data)
-
-  //   });
-  // }, []);
+  
 
   // 다른사람 피드 최신순 데이터
   const [allfeed, setAllFeed] = useState(null);
   useEffect(() => {
+ 
     const url = "http://172.30.1.22:8087/hogward/usersfeed"
     // 다시 키기
     axios.get(url).then((res) => {
@@ -33,14 +28,7 @@ const UserPost = ( ) => {
     })
   },[])
 
-  // useEffect(() => {
-  //   const url = "member.json";
-  //   axios.get(url).then(res => {
-  //     setMemPic(res.data);
-  //     console.log(res.data)
-
-  //   });
-  // }, []);
+  
 
   // 프로필 사진을 클릭했을 때 실행될 핸들러 함수
   const handleProfileClick = (item) => {
@@ -55,7 +43,8 @@ const UserPost = ( ) => {
 
   // 게시물을 클릭했을 때 실행될 핸들러 함수
   const handlePostClick = (item) => {
-    setModalContent(<div><p>{item.board.b_content}</p></div>);
+    setModalContent(<div><p>{item.usersFeed.b_content}</p></div>);
+    console.log("게시물 클릭 : ",handlePostClick);
     setOpen(true); // 모달 열기
   };
 
@@ -67,7 +56,7 @@ const UserPost = ( ) => {
           {/* 프로필 사진을 클릭하면 모달을 연다 */}
           {console.log(item)}
           <Feed.Label style={{ cursor: 'pointer'}} onClick={() => handleProfileClick(item)} >
-            <img src={item.usersFeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
+            <img src={"data:image/;base64," +item.usersFeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>

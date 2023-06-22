@@ -4,6 +4,9 @@ import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import { SessionContext } from "../../contexts/SessionContext";
 
+import "../../assets/css/feed/Modal.css";
+
+
 
 const MyFeed = () => {
   // 모달의 표시 여부와 내용을 관리하는 상태
@@ -27,23 +30,31 @@ const MyFeed = () => {
   const handleCloseModal = () => {
     setOpen(false);
   };
+  const [member, setMember] = useState(null);
 
   // 프로필 카드 클릭 이벤트 핸들러
   const handleCardClick = () => {
     setModalContent(
-      <div>
+      <div className="pfmodal">
         <form
           method="post"
-          action='http://172.30.1.22:8087/hogward/profileupdate/${mem_email}'
+          action='http://172.30.1.22:8087/hogward/profileupdate/admin'
           className="authform"
           encType="multipart/form-data"
         >
 
           {/* 선택된 프로필 이미지 미리보기 */}
           <img
-            src='http://172.30.1.22:8087/hogward/profileupdate/${mem_email}'
+            src={`data:image/;base64,${myFeed[0]?.myFeed.mem_photo}`}
             alt="프로필 이미지"
             className="authform_preview"
+            //사진 꾸미기
+            style={{
+              width: '200px',
+              height: '200px',
+              borderRadius: '50%',
+              objectFit: 'cover'
+          }}
           />
           {/* 프로필 이미지 레이블 및 입력 */}
           <label className="signup-profileImg-label" htmlFor="profileImg">
@@ -70,13 +81,14 @@ const MyFeed = () => {
 
   // 게시물 버튼 클릭 이벤트 핸들러
   const handleGridItemClick = (b_seq) => {
-    axios.get(`http://172.30.1.22:8087/hogward/boardOne/${b_seq}`).then((res) => {
-      const oneb = res.data.oneBoard
-      console.log("2",res.data.oneBoard)
-
+    console.log(b_seq);
+    axios.get(`http://172.30.1.22:8087/hogward/boardone/${b_seq}`).then((res) => {
+      const oneb = res.data.boardOne;
+      console.log("2",res.data);
+      setMember(res.data.boardOne);
       setModalContent(<div>
         <h2>제목 : {oneb.b_title}</h2>
-        <p>사진 : {oneb.b_file}</p>
+        <p>Photo: <img src={`data:image/;base64,${oneb.b_file}`}  /></p>
         <p>장소 : {oneb.b_loc}</p>
         <p>내용 : {oneb.b_content}</p>
         <p>좋아요 : {oneb.b_likes}</p>
@@ -94,10 +106,11 @@ const MyFeed = () => {
   // 사용자 피드 데이터를 가져오는 상태와 함수
   const [myFeed, setMyFeed] = useState([]);
   const getMyFeed = () => {
-    const url = `http://172.30.1.22:8087/hogward/myfeed/admin`;
+    const url = `http://172.30.1.22:8087/hogward/myfeed/23423@naver.com`;
     
     axios.get(url).then((res) => {
       setMyFeed(res.data);
+      console.log(res.data)
     });
   };
   
@@ -109,9 +122,9 @@ const MyFeed = () => {
   useEffect(()=> {},[])
 
   return (
-    <div>
+    <div >
       <div style={{ display: "flex", padding: "100px" }}>
-        <div style={{ flex: 1, padding: "10px" }}>
+        <div style={{ flex: 3, padding: "10px" }}>
           {/* 프로필 카드 */}
           <Card onClick={handleCardClick}>
             {/* 프로필 이미지 */}
@@ -122,10 +135,11 @@ const MyFeed = () => {
         wrapped
         ui={false}
       />
-    ) : (
+    ) 
+    : (
       // 프로필 사진 없을 때 기본 프로필 사진
       <Image
-        src=" "
+        src=""
         wrapped
         ui={false}
       />
@@ -177,16 +191,20 @@ const MyFeed = () => {
               >
 
                 <Image src={"data:image/;base64," + post.myFeed.b_file} />
+                
               </Grid.Column>
             ))}
           </Grid.Row>
         </Grid>
       </div>
-
+          
       {/* 모달 */}
-      <Modal open={open} onClose={handleCloseModal} size="small">
+
+
+      <Modal open={open} onClose={handleCloseModal} size="small" className="MyFeedModal" >
         <Modal.Content>{modalContent}</Modal.Content>
       </Modal>
+      
     </div>
   );
 };

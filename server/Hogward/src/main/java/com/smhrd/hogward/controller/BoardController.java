@@ -46,8 +46,8 @@ public class BoardController {
 	//마이 피드보기
 	@GetMapping("/myfeed/{mem_email}")
 	public JSONArray myFeed(@PathVariable("mem_email")String mem_email) {
-		
-		return boardService.myFeed(mem_email);
+		JSONArray array = boardService.myFeed(mem_email);
+		return array;
 	}
 	
 	

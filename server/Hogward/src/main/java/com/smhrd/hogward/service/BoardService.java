@@ -78,27 +78,66 @@ public class BoardService {
 		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
-	
 		for(MyFeed myfeed : feed) {
 			
-			File file = new File("c:\\uploadimage\\"+myfeed.getB_file());
-	
-			String fileStringValue = null;
-			
-			try {
-				fileStringValue = converter.convert(file);
+			if(myfeed.getB_file() == null) {
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				//File file2 = new File("c:\\uploadimage\\" + "defaultphoto.jpg");
+				File file2 = new File("c:\\uploadimage\\" + myfeed.getMem_photo());
+				System.out.println(file2);
+
+			
+				String fileStringValue2 = null;
+				
+				try {
+					
+					fileStringValue2 = converter.convert(file2);
+					System.out.println(fileStringValue2);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+				myfeed.setMem_photo(fileStringValue2);
+				
+				
+				JSONObject obj = new JSONObject();
+				obj.put("myFeed", myfeed);
+				
+				jsonArray.add(obj); 
+				
+			}else {
+				File file1 = new File("c:\\uploadimage\\"+myfeed.getB_file());
+				File file2 = new File("c:\\uploadimage\\" +myfeed.getMem_photo());
+				//File file2 = new File("c:\\uploadimage\\" + "defaultphoto.jpg");
+				System.out.println(file2);
+
+				String fileStringValue1 = null;
+				String fileStringValue2 = null;
+				
+				try {
+					fileStringValue1 = converter.convert(file1);
+					fileStringValue2 = converter.convert(file2);
+					System.out.println(fileStringValue2);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				myfeed.setB_file(fileStringValue1);
+				myfeed.setMem_photo(fileStringValue2);
+				
+				
+				JSONObject obj = new JSONObject();
+				obj.put("myFeed", myfeed);
+				
+				jsonArray.add(obj); 
 			}
 			
-			myfeed.setB_file(fileStringValue);
-			
-			JSONObject obj = new JSONObject();
-			obj.put("myFeed", myfeed);
-			
-			jsonArray.add(obj); 
 		}
 		return jsonArray;	
 	}

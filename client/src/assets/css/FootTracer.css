@@ -1,5 +1,5 @@
 .footContainer {
-  /* perspective: 600px; */
+  perspective: 500px;
   position: relative;
   height: 100%;
   /* width: 800px; */
@@ -14,9 +14,9 @@
   width: 1258px;
   background: url("../img/magicmap_bg.png") center no-repeat;
   /* background-size: cover; */
-  /* transform-style: preserve-3d; */
+  transform-style: preserve-3d;
   transform-origin: bottom center;
-  /* transform: rotateX(40deg); */
+  transform: rotateX(10deg);
 }
 
 /* .name {

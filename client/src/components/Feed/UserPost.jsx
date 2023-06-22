@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const Post = ( ProfileModal) => {
+const UserPost = ( ProfileModal) => {
   const [allboard, setAllBoard] = useState([]);
   const [memPic, setMemPic] = useState ([]);
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
@@ -160,4 +160,4 @@ const Post = ( ProfileModal) => {
   );
 };
 
-export default Post;
+export default UserPost;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Feed, Button, Header, Image, Modal } from 'semantic-ui-react';
 
-const Rank = () => {
+const UserRank = () => {
   
   const [open, setOpen] = useState(false);
   const [selectedSummary, setSelectedSummary] = useState('');
@@ -80,4 +80,4 @@ const Rank = () => {
   );
 };
 
-export default Rank;
+export default UserRank;

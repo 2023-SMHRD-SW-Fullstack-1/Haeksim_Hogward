@@ -1,6 +1,12 @@
 import axios from "axios";
 import "../../assets/css/MagicMap.css";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   CustomOverlayMap,
   Polygon,
@@ -11,15 +17,44 @@ import MapImageMarker from "./MapImageMarker";
 import AuthMenu from "./AuthMenu";
 import MarkerOverlay from "./MarkerOverlay";
 import { SessionContext } from "../../contexts/SessionContext";
-
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const MagicMap = () => {
-  // selectedThema, clickedLandmark,setClickedLandMark
-  // 테스트
+  const nav = useNavigate();
+
   const [selectedThema, setSelectedThema] = useState(4);
   // 현재 선택된 랜드마크
   const [clickedLandmark, setClickedLandMark] = useState();
   // 세션값 가져오기
   const { sessionUser } = useContext(SessionContext);
+  // 로그인 안할시 메인으로 보내기
+  if (sessionStorage.getItem("user")) {
+    console.log("aasdasdasd");
+  } else {
+    console.log("bbbsdfsdf");
+    Swal.fire({
+      icon: "error",
+      title: "인증 정보 불일치",
+      text: "로그인 해주세요.",
+      confirmButtonColor: "#e74c3c",
+      confirmButtonText: "확인",
+    });
+    nav("/");
+  }
+  // useEffect(() => {
+  //   if (sessionUser.email === "") {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "인증 정보 불일치",
+  //       text: "로그인 해주세요.",
+  //       confirmButtonColor: "#e74c3c",
+  //       confirmButtonText: "확인",
+  //     });
+  //     nav("/");
+  //   } else {
+  //     console.log("else : ", sessionUser.email);
+  //   }
+  // }, []);
 
   // 시군구 경계값 좌표
   const [areas, setAreas] = useState([]);
@@ -97,7 +132,7 @@ const MagicMap = () => {
     console.log("a", sessionUser);
     console.log("bababab", sessionUser.email);
     // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
-    if (sessionUser) {
+    if (sessionUser.email) {
       const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
       axios.get(url).then((res) => {
         console.log(res.data);
@@ -135,18 +170,67 @@ const MagicMap = () => {
   };
 
   // 카카오맵 반응형 만들기
-  const mapRef = useRef();
+  const mapRef = useRef(null);
+  const [cliWidth, setCliWidth] = useState(600);
+  const [cliHeight, setCliHeight] = useState(600);
+  const updateMapSize = () => {
+    setCliWidth(mapRef.current.offsetWidth);
+    setCliHeight(mapRef.current.offsetHeight);
+  };
+  useEffect(() => {
+    updateMapSize();
+    window.addEventListener("resize", updateMapSize);
 
+    return () => {
+      window.removeEventListener("resize", updateMapSize);
+    };
+  }, []);
+  useEffect(() => {
+    // 최대화 상태에서 창의 크기가 변경되면 카카오맵 크기를 업데이트
+    const handleResize = () => {
+      if (
+        window.innerWidth === window.screen.width &&
+        window.innerHeight === window.screen.height
+      ) {
+        updateMapSize();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="magicmap" ref={mapRef}>
       <div className="magicmap_themabtn">
-        <button onClick={() => setSelectedThema(3)}>지도만 보기</button>
-        <button onClick={() => setSelectedThema(0)}>전체보기</button>
-        <button onClick={() => setSelectedThema(1)}>테마1 : 문화재</button>
-        <button onClick={() => setSelectedThema(2)}>테마2 : 밥집,카페</button>
+        <button
+          onClick={() => setSelectedThema(3)}
+          className="btn btn-dark btn btn-lg"
+        >
+          지도만 보기
+        </button>
+        <button
+          onClick={() => setSelectedThema(0)}
+          className="btn btn-dark btn btn-lg"
+        >
+          전체보기
+        </button>
+        <button
+          onClick={() => setSelectedThema(1)}
+          className="btn btn-dark btn btn-lg"
+        >
+          테마1 : 문화재
+        </button>
+        <button
+          onClick={() => setSelectedThema(2)}
+          className="btn btn-dark btn btn-lg"
+        >
+          테마2 : 밥집,카페
+        </button>
       </div>
       <div className="kakaomap">
-        {console.dir(mapRef.current)}
         <Map // 지도를 표시할 Container
           id={`map`}
           center={{
@@ -156,9 +240,10 @@ const MagicMap = () => {
           }}
           style={{
             // 지도의 크기
-            width: "100%",
-            // width: mapRef.current.clientWidth + "px" || "100%",
-            height: "600px",
+            // width: "100%",
+            width: cliWidth,
+            // width: 1400,
+            height: cliHeight - 160,
             // height: mapRef.current.clientHeight + "px" || "600px",
           }}
           level={11} // 지도의 확대 레벨
@@ -274,7 +359,6 @@ const MagicMap = () => {
             </MapInfoWindow>
           )} */}
         </Map>
-
         <AuthMenu
           isOpen={isOpen}
           setIsOpen={setIsOpen}

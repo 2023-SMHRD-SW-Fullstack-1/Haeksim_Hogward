@@ -36,7 +36,7 @@ function NavbarElements() {
                   onClick={() => {
                     sessionStorage.clear();
                     setSessionUser({ email: "", nick: "" });
-                    navigate("/");
+                    window.location.reload();
                   }}
                 >
                   로그아웃

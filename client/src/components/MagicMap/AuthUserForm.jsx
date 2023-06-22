@@ -162,7 +162,11 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         alt="프로필 이미지"
         className="authform_preview"
       />
-      <label className="signup-profileImg-label" htmlFor="profileImg">
+      <label
+        className="signup-profileImg-label"
+        htmlFor="profileImg"
+        style={{ color: "rgb(152, 128, 167)" }}
+      >
         인증사진 추가하기
       </label>
       <input
@@ -174,7 +178,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
         ref={imgRef}
         name="b__file"
       />
-
       {/* 글 제목 */}
       <TextField
         label="제목"
@@ -222,7 +225,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
       <input type="hidden" readOnly value={uLat || 0} name="lat" />
       {/* 경도 */}
       <input type="hidden" readOnly value={uLng || 0} name="lng" />
-
       {/* 글 작성자 x  이메일*/}
       {/* 테스트용 */}
       <input
@@ -248,9 +250,9 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
           인증하기
         </Button>
       ) : (
-        <Button variant="outlined" color="error" onClick={handleIsOk}>
+        <button onClick={handleIsOk} className="btn btn-dark btn btn-lg">
           인증 위치 확인
-        </Button>
+        </button>
       )}
     </form>
   );

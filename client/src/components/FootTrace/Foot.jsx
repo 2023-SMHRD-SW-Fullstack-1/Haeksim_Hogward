@@ -28,7 +28,7 @@ const Foot = ({ coordLeft, coordTop, delay, startCoords, endCoords }) => {
             alt="footprint"
             style={{
               left: `${startCoords[0] + coordLeft}px`,
-              top: `${startCoords[1] - coordTop + 10}px`,
+              top: `${startCoords[1] - coordTop + 7}px`,
               animationDelay: `${delay}s`,
               transform: `rotateX(180deg) rotateZ(${
                 90 + calculateAngle(startCoords, endCoords)
@@ -42,7 +42,7 @@ const Foot = ({ coordLeft, coordTop, delay, startCoords, endCoords }) => {
             alt="footprint"
             style={{
               left: `${startCoords[0] + coordLeft}px`,
-              top: `${startCoords[1] - coordTop - 10}px`,
+              top: `${startCoords[1] - coordTop - 7}px`,
               animationDelay: `${delay + 0.15}s`,
               transform: `rotateZ(${
                 90 - calculateAngle(startCoords, endCoords)
@@ -60,7 +60,7 @@ const Foot = ({ coordLeft, coordTop, delay, startCoords, endCoords }) => {
             alt="footprint"
             style={{
               left: `${startCoords[0] + coordLeft}px`,
-              top: `${startCoords[1] - coordTop + 10}px`,
+              top: `${startCoords[1] - coordTop + 7}px`,
               animationDelay: `${delay}s`,
               transform: `rotateX(180deg) rotateZ(${
                 90 + calculateAngle(startCoords, endCoords)
@@ -74,7 +74,7 @@ const Foot = ({ coordLeft, coordTop, delay, startCoords, endCoords }) => {
             alt="footprint"
             style={{
               left: `${startCoords[0] + coordLeft}px`,
-              top: `${startCoords[1] - coordTop - 10}px`,
+              top: `${startCoords[1] - coordTop - 7}px`,
               animationDelay: `${delay + 0.15}s`,
               transform: `rotateZ(${
                 90 - calculateAngle(startCoords, endCoords)

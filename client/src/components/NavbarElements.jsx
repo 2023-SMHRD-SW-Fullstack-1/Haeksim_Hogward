@@ -22,8 +22,9 @@ function NavbarElements() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="justify-content-end flex-grow-1 pe-3">
             <Nav.Link href="/magicmap">마법지도</Nav.Link>
-            <Nav.Link href="/foottracer"></Nav.Link>
-            <Nav.Link href="/feed">피드</Nav.Link>
+            {/* <Nav.Link href="/foottracer"></Nav.Link> */}
+            <Nav.Link href="/userpage">피드</Nav.Link>
+            <Nav.Link href="/mypage">마이페이지</Nav.Link>
           </Nav>
           <Nav>
             {sessionValue ? (

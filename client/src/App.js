@@ -11,7 +11,10 @@ import GetCoords from "./modules/map/GetCoords";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
-import FeedPage from "./pages/FeedPage";
+
+import UserPage from "./pages/UserPage";
+import MyPage from "./pages/MyPage";
+
 import FootTracer from "./components/FootTrace/FootTracer";
 import NavbarElements from "./components/NavbarElements";
 import Footer from "./components/Footer";
@@ -43,9 +46,10 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/magicmap" element={<MagicMapPage />}></Route>
-          <Route path="/feed" element={<FeedPage />}></Route>
+          <Route path="/userpage" element={<UserPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/join" element={<JoinPage />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
 
           {/* 발자국지도 */}
           <Route path="/foottracer" element={<FootTracer />}></Route>

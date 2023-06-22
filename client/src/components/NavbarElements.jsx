@@ -27,7 +27,7 @@ function NavbarElements() {
             <Nav.Link href="/mypage">마이페이지</Nav.Link>
           </Nav>
           <Nav>
-            {sessionUser.email ? (
+            {sessionUser.email !== "" ? (
               <>
                 <Nav.Link style={{ color: "skyblue" }}>
                   {sessionUser.nick}

@@ -28,7 +28,10 @@ const MagicMap = () => {
   // 세션값 가져오기
   const { sessionUser } = useContext(SessionContext);
   // 로그인 안할시 메인으로 보내기
-  if (!sessionUser.email) {
+  if (sessionStorage.getItem("user")) {
+    console.log("aasdasdasd");
+  } else {
+    console.log("bbbsdfsdf");
     Swal.fire({
       icon: "error",
       title: "인증 정보 불일치",
@@ -38,6 +41,21 @@ const MagicMap = () => {
     });
     nav("/");
   }
+  // useEffect(() => {
+  //   if (sessionUser.email === "") {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "인증 정보 불일치",
+  //       text: "로그인 해주세요.",
+  //       confirmButtonColor: "#e74c3c",
+  //       confirmButtonText: "확인",
+  //     });
+  //     nav("/");
+  //   } else {
+  //     console.log("else : ", sessionUser.email);
+  //   }
+  // }, []);
+
   // 시군구 경계값 좌표
   const [areas, setAreas] = useState([]);
 

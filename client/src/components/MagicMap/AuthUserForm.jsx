@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../assets/css/AuthUserForm.css";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
+import { SessionContext } from "../../contexts/SessionContext";
 
 const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
-
+  const { sessionUser } = useContext(SessionContext);
   // 현재 위치 기반 인증여부 확인
   const [isLocOk, setIslocOk] = useState(false);
 
@@ -224,7 +225,12 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
 
       {/* 글 작성자 x  이메일*/}
       {/* 테스트용 */}
-      <input type="hidden" readOnly value="mem_email 01" name="mem_email" />
+      <input
+        type="hidden"
+        readOnly
+        value={sessionUser.email}
+        name="mem_email"
+      />
       {/* 랜드마크 식별자 */}
       <input
         type="hidden"

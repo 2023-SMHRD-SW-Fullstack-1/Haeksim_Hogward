@@ -27,7 +27,7 @@ function NavbarElements() {
             <Nav.Link href="/mypage">마이페이지</Nav.Link>
           </Nav>
           <Nav>
-            {sessionUser ? (
+            {sessionUser.email ? (
               <>
                 <Nav.Link style={{ color: "skyblue" }}>
                   {sessionUser.nick}
@@ -35,8 +35,8 @@ function NavbarElements() {
                 <Nav.Link
                   onClick={() => {
                     sessionStorage.clear();
-                    setSessionUser(null);
-                    navigate(-1);
+                    setSessionUser({ email: "", nick: "" });
+                    navigate("/");
                   }}
                 >
                   LOGOUT

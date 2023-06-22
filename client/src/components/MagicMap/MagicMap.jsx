@@ -17,16 +17,27 @@ import MapImageMarker from "./MapImageMarker";
 import AuthMenu from "./AuthMenu";
 import MarkerOverlay from "./MarkerOverlay";
 import { SessionContext } from "../../contexts/SessionContext";
-
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const MagicMap = () => {
-  // selectedThema, clickedLandmark,setClickedLandMark
-  // 테스트
+  const nav = useNavigate();
+
   const [selectedThema, setSelectedThema] = useState(4);
   // 현재 선택된 랜드마크
   const [clickedLandmark, setClickedLandMark] = useState();
   // 세션값 가져오기
   const { sessionUser } = useContext(SessionContext);
-
+  // 로그인 안할시 메인으로 보내기
+  if (!sessionUser.email) {
+    Swal.fire({
+      icon: "error",
+      title: "인증 정보 불일치",
+      text: "로그인 해주세요.",
+      confirmButtonColor: "#e74c3c",
+      confirmButtonText: "확인",
+    });
+    nav("/");
+  }
   // 시군구 경계값 좌표
   const [areas, setAreas] = useState([]);
 

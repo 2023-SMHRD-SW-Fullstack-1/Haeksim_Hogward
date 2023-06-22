@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../assets/css/FootTracer.css";
 import axios from "axios";
 import FootLandmark from "./FootLandmark";
 import Foot from "./Foot";
 import FootContainer from "./FootContainer";
+import { SessionContext } from "../../contexts/SessionContext";
 
 const FootTracer = () => {
+  // 세션 가져오기
+  const { sessionUser } = useContext(SessionContext);
   // 좌표 데이터 생성
   const [dataCoords, setDataCoords] = useState();
   // 지도 내 좌표 가져오기
@@ -19,7 +22,7 @@ const FootTracer = () => {
   const [userAuth, setUserAuth] = useState([]);
   const [nowAuthCoords, setNowAuthCoords] = useState(null);
   useEffect(() => {
-    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/mem_email 01`;
+    const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
     // 데이터 가공(광주 합치기)
     // 광주 광역시 추가
     if (dataCoords !== undefined) {

@@ -1,0 +1,14 @@
+.user-page {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-post {
+    display: flex;
+    margin-left: 20px; 
+  }
+  
+  .user-rank {
+    display: flex;
+  }
+  

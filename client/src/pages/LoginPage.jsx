@@ -7,7 +7,8 @@ import { SessionContext } from "../contexts/SessionContext";
 const LoginPage = () => {
   // 세션 context
   const { setSessionUser } = useContext(SessionContext);
-  // 이메일, 비밀번호 유효성 검사
+
+  // 이메일 유효성 검사
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -16,6 +17,7 @@ const LoginPage = () => {
       );
   };
 
+  //비밀번호 유효성 검사
   const validatePwd = (password) => {
     return password
       .toLowerCase()
@@ -35,30 +37,40 @@ const LoginPage = () => {
   const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
 
   //이메일 형식 확인
+
   const onChangeEmail = useCallback(async (e) => {
     const currEmail = e.target.value;
     setEmail(currEmail);
 
-    if (!validateEmail(currEmail)) {
+    if (currEmail == "") {
+      setEmailMsg("");
+    } else if (!validateEmail(currEmail)) {
       setEmailMsg("이메일 형식이 올바르지 않습니다.");
     } else {
-      // setEmailMsg("올바른 이메일 형식입니다.")
-      setEmailMsg(" ");
+      setEmailMsg("");
     }
-  });
+  }, []);
 
-  //비밀번호
-  const onChangePwd = useCallback((e) => {
+  //비밀번호 형식 확인
+  const onChangePwd = useCallback(async (e) => {
     const currPwd = e.target.value;
     setPassword(currPwd);
 
-    if (!validatePwd(currPwd)) {
+    if (currPwd == "") {
+      setPwdMsg("");
+    } else if (!validatePwd(currPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.");
     } else {
-      // setPwdMsg("안전한 비밀번호입니다.")
-      setPwdMsg(" ");
+      setPwdMsg("");
     }
   }, []);
+
+  // 유효성 검사 함수로 정리
+  const isEmailValid = validateEmail(email);
+  const isPwdValid = validatePwd(password);
+
+  // 유효성 검사 한번에 묶어주기
+  const isAllValid = isEmailValid && isPwdValid;
 
   //로그인 버튼 클릭
   const handleLogin = () => {
@@ -100,35 +112,36 @@ const LoginPage = () => {
         {/* 로고 */}
 
         {/* 로그인 제목 */}
-        <h1>HOGWARD</h1>
+        {/* <h1>HOGWARD</h1> */}
+        <h1>로그인</h1>
+        {/* <h1>Welcome to the</h1>
+        <h1>HOGWARD</h1> */}
 
         <form>
           {/* 아이디 입력란 */}
           <div className="user-box">
             <input
               className="input-box"
-              type="email"
-              // id="email"
               value={email}
               onChange={onChangeEmail}
               required=""
               placeholder="이메일을 입력해 주세요"
             />
-            <p className="red">{emailMsg}</p>
+            <p className="logincheck">{emailMsg}</p>
           </div>
           <br></br>
+
           {/* 비밀번호 입력란 */}
           <div className="user-box">
             <input
               className="input-box"
               type="password"
-              id="password"
               value={password}
               onChange={onChangePwd}
               required=""
               placeholder="비밀번호를 입력해 주세요"
             />
-            <p className="red">{pwdMsg}</p>
+            <p className="logincheck">{pwdMsg}</p>
           </div>
           <br></br>
           <br></br>
@@ -139,12 +152,13 @@ const LoginPage = () => {
               type="button"
               onClick={handleLogin}
               class="btn btn-dark btn btn-lg"
+              disabled={!isAllValid} // disabled 비활성화
             >
               <span></span>
               <span></span>
               <span></span>
               <span></span>
-              로그인
+              입장하기
             </button>
           </div>
         </form>

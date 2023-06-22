@@ -1,9 +1,19 @@
+/* 로그인 컨테이너  */
+.login-box-container {
+  background: url("../img/mainbg.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #3d3533;
+  height: 100vh;
+  position: relative;
+}
+
 /* 로그인 박스  */
 .login-box {
   position: absolute;
   top: 60% !important;
   left: 50%;
-  width: 600px;
+  /* width: 600px; */
   /* padding: 90px; */
   transform: translate(-50%, -50%);
   background: white;
@@ -19,7 +29,7 @@
   padding: 0;
   color: black;
   text-align: center;
-  font-size: 40px;
+  font-size: 55px;
 }
 
 /* 아이디 비번 입력 BOX */
@@ -37,16 +47,16 @@
   border-bottom: 1px solid lightgray;
   outline: none;
   background: transparent;
+  font-family: "Nanum Gothic", sans-serif !important;
 }
 
-.red {
-  color: rgb(240, 64, 64);
+.logincheck {
+  color: red;
+  font-family: "Nanum Gothic", sans-serif !important;
 }
-.login-box-container {
-  background: url("../img/mainbg.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: #3d3533;
-  height: 100vh;
-  position: relative;
+
+input[type="password"] {
+  font-family: "Nanum Gothic", sans-serif !important;
 }
+
+@import url("//fonts.googleapis.com/earlyaccess/nanumgothic.css");

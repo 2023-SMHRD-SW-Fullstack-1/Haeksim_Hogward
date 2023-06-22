@@ -1,6 +1,12 @@
 import axios from "axios";
 import "../../assets/css/MagicMap.css";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   CustomOverlayMap,
   Polygon,
@@ -135,18 +141,67 @@ const MagicMap = () => {
   };
 
   // 카카오맵 반응형 만들기
-  const mapRef = useRef();
+  const mapRef = useRef(null);
+  const [cliWidth, setCliWidth] = useState(600);
+  const [cliHeight, setCliHeight] = useState(600);
+  const updateMapSize = () => {
+    setCliWidth(mapRef.current.offsetWidth);
+    setCliHeight(mapRef.current.offsetHeight);
+  };
+  useEffect(() => {
+    updateMapSize();
+    window.addEventListener("resize", updateMapSize);
 
+    return () => {
+      window.removeEventListener("resize", updateMapSize);
+    };
+  }, []);
+  useEffect(() => {
+    // 최대화 상태에서 창의 크기가 변경되면 카카오맵 크기를 업데이트
+    const handleResize = () => {
+      if (
+        window.innerWidth === window.screen.width &&
+        window.innerHeight === window.screen.height
+      ) {
+        updateMapSize();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="magicmap" ref={mapRef}>
       <div className="magicmap_themabtn">
-        <button onClick={() => setSelectedThema(3)}>지도만 보기</button>
-        <button onClick={() => setSelectedThema(0)}>전체보기</button>
-        <button onClick={() => setSelectedThema(1)}>테마1 : 문화재</button>
-        <button onClick={() => setSelectedThema(2)}>테마2 : 밥집,카페</button>
+        <button
+          onClick={() => setSelectedThema(3)}
+          className="btn btn-dark btn btn-lg"
+        >
+          지도만 보기
+        </button>
+        <button
+          onClick={() => setSelectedThema(0)}
+          className="btn btn-dark btn btn-lg"
+        >
+          전체보기
+        </button>
+        <button
+          onClick={() => setSelectedThema(1)}
+          className="btn btn-dark btn btn-lg"
+        >
+          테마1 : 문화재
+        </button>
+        <button
+          onClick={() => setSelectedThema(2)}
+          className="btn btn-dark btn btn-lg"
+        >
+          테마2 : 밥집,카페
+        </button>
       </div>
       <div className="kakaomap">
-        {console.dir(mapRef.current)}
         <Map // 지도를 표시할 Container
           id={`map`}
           center={{
@@ -156,9 +211,10 @@ const MagicMap = () => {
           }}
           style={{
             // 지도의 크기
-            width: "100%",
-            // width: mapRef.current.clientWidth + "px" || "100%",
-            height: "600px",
+            // width: "100%",
+            width: cliWidth,
+            // width: 1400,
+            height: cliHeight - 160,
             // height: mapRef.current.clientHeight + "px" || "600px",
           }}
           level={11} // 지도의 확대 레벨
@@ -274,7 +330,6 @@ const MagicMap = () => {
             </MapInfoWindow>
           )} */}
         </Map>
-
         <AuthMenu
           isOpen={isOpen}
           setIsOpen={setIsOpen}

@@ -19,11 +19,21 @@ import FootTracer from "./components/FootTrace/FootTracer";
 import NavbarElements from "./components/NavbarElements";
 import Footer from "./components/Footer";
 import { useState } from "react";
-import SessionContext from "./contexts/SessionContext";
+import { SessionContext } from "./contexts/SessionContext";
 import { useEffect } from "react";
 
 function App() {
-  const [sessionUser, setSessionUser] = useState(null);
+  const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
+  // const user = sessionStorage.getItem("user");
+  // if (user) {
+  //   try {
+  //     const parsedUser = JSON.parse(user);
+  //     setSessionUser(parsedUser);
+  //     console.log("bbbb", parsedUser);
+  //   } catch (error) {
+  //     console.error("Failed to parse user data from session storage:", error);
+  //   }
+  // }
 
   useEffect(() => {
     const user = sessionStorage.getItem("user");
@@ -36,11 +46,11 @@ function App() {
         console.error("Failed to parse user data from session storage:", error);
       }
     }
-  }, [sessionStorage]);
+  }, []);
   return (
     <div className="App">
       {/* <Header /> */}
-      <SessionContext.Provider value={sessionUser}>
+      <SessionContext.Provider value={{ sessionUser, setSessionUser }}>
         <NavbarElements />
 
         <Routes>

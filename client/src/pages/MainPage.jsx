@@ -7,7 +7,7 @@ import FootTracer from "../components/FootTrace/FootTracer";
 
 const MainPage = () => {
   return (
-    <div>
+    <div className="mainpage">
       <div width="100px"></div>
       <div className="main_foottracer">
         <FootTracer />

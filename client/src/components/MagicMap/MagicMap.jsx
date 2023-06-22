@@ -10,12 +10,16 @@ import {
 import MapImageMarker from "./MapImageMarker";
 import AuthMenu from "./AuthMenu";
 import MarkerOverlay from "./MarkerOverlay";
-import SessionContext from "../../contexts/SessionContext";
+import { SessionContext } from "../../contexts/SessionContext";
 
-const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
+const MagicMap = () => {
+  // selectedThema, clickedLandmark,setClickedLandMark
+  // 테스트
+  const [selectedThema, setSelectedThema] = useState(4);
+  // 현재 선택된 랜드마크
+  const [clickedLandmark, setClickedLandMark] = useState();
   // 세션값 가져오기
-  const sessionValue = useContext(SessionContext);
-  console.log("abcdefg", sessionValue);
+  const { sessionUser } = useContext(SessionContext);
 
   // 시군구 경계값 좌표
   const [areas, setAreas] = useState([]);
@@ -90,11 +94,11 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
   const [memAuthCount, setMemAuthCount] = useState([]);
 
   const getMemberAuthCount = () => {
-    console.log("a", sessionValue);
-    console.log("b", sessionValue.email);
+    console.log("a", sessionUser);
+    console.log("bababab", sessionUser.email);
     // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
-    if (sessionValue) {
-      const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionValue.email}`;
+    if (sessionUser) {
+      const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
       axios.get(url).then((res) => {
         console.log(res.data);
         setMemAuthCount(res.data);
@@ -102,8 +106,10 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
     }
   };
   useEffect(() => {
-    getMemberAuthCount();
-  }, [sessionValue]);
+    if (sessionUser.email) {
+      getMemberAuthCount();
+    }
+  }, [sessionUser]);
 
   const filteredMemSite = memAuthCount.filter(
     (item) => item.certifiedLandmark.AUTHCOUNT !== 0
@@ -128,9 +134,19 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
     return brightness;
   };
 
+  // 카카오맵 반응형 만들기
+  const mapRef = useRef();
+
   return (
-    <div className="magicmap">
+    <div className="magicmap" ref={mapRef}>
+      <div className="magicmap_themabtn">
+        <button onClick={() => setSelectedThema(3)}>지도만 보기</button>
+        <button onClick={() => setSelectedThema(0)}>전체보기</button>
+        <button onClick={() => setSelectedThema(1)}>테마1 : 문화재</button>
+        <button onClick={() => setSelectedThema(2)}>테마2 : 밥집,카페</button>
+      </div>
       <div className="kakaomap">
+        {console.dir(mapRef.current)}
         <Map // 지도를 표시할 Container
           id={`map`}
           center={{
@@ -141,7 +157,9 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           style={{
             // 지도의 크기
             width: "100%",
+            // width: mapRef.current.clientWidth + "px" || "100%",
             height: "600px",
+            // height: mapRef.current.clientHeight + "px" || "600px",
           }}
           level={11} // 지도의 확대 레벨
           // draggable={false} // 지도 드래그 막기
@@ -149,7 +167,7 @@ const MagicMap = ({ selectedThema, clickedLandmark, setClickedLandMark }) => {
           //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화
           //   disableDoubleClickZoom: true, // 더블 클릭으로 확대 비활성화
           // }}
-          maxLevel={12}
+          maxLevel={11}
           onMouseMove={(_map, mouseEvent) =>
             setMousePosition({
               lat: mouseEvent.latLng.getLat(),

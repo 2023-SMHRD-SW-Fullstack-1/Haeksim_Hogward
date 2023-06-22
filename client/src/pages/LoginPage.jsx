@@ -1,9 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import axios from "axios";
 import "../assets/css/login.css";
 import { colors } from "@mui/material";
+import { SessionContext } from "../contexts/SessionContext";
 
 const LoginPage = () => {
+  // 세션 context
+  const { setSessionUser } = useContext(SessionContext);
   // 이메일, 비밀번호 유효성 검사
   const validateEmail = (email) => {
     return email
@@ -23,6 +26,7 @@ const LoginPage = () => {
   const handleLoginSession = async (user) => {
     // 사용자 정보를 세션 스토리지에 저장
     sessionStorage.setItem("user", JSON.stringify(user));
+    setSessionUser(user);
   };
 
   const [email, setEmail] = useState(""); // 아이디 입력 상태

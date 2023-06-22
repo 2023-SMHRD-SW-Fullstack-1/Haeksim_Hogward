@@ -1,11 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {Grid,Image,Card,Button,Modal,Container,Label,Icon} from "semantic-ui-react";
+import {
+  Grid,
+  Image,
+  Card,
+  Button,
+  Modal,
+  Container,
+  Label,
+  Icon,
+} from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import "../../assets/css/feed/FeedButton.css";
 
 
-import SessionContext from "../../contexts/SessionContext";
+//아이콘
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { SessionContext } from "../../contexts/SessionContext";
 
 const MyFeed = () => {
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
@@ -74,11 +86,7 @@ const MyFeed = () => {
           {/* 폼에서 보내야 할것 */}
           {/* 글 사진 */}
           <img
-            src={
-              imgFile
-                ? imgFile
-                : `????????`
-            }
+            src={imgFile ? imgFile : `????????`}
             alt="프로필 이미지"
             className="authform_preview"
           />
@@ -132,48 +140,55 @@ const MyFeed = () => {
     setOpen(true);
   };
 
-  const sessionValue = useContext(SessionContext);
-  console.log(sessionValue?.email);
+  const { sessionUser } = useContext(SessionContext);
+  console.log(sessionUser?.email);
   const [myFeed, setMyFeed] = useState([]);
   const getMyFeed = () => {
-    const url = `http://172.30.1.22:8087/hogward/myfeed/mem_email%2001`
-    axios.get(url).then( res => {
-      console.log("myfeed : ",res.data)
+    const url = `http://172.30.1.22:8087/hogward/myfeed/mem_email%2001`;
+    axios.get(url).then((res) => {
+      console.log("myfeed : ", res.data);
       setMyFeed(res.data);
-    })
-  }
+    });
+  };
   useEffect(() => {
-    getMyFeed()
-  },[])
-
-  return (  
-    
-    //프로필 
+    getMyFeed();
+  }, []);
+  return (
+    //프로필
     <div>
       <div style={{ display: "flex", padding: "100px" }}>
         <div style={{ flex: 1, padding: "10px" }}>
-          <Card  onClick={handleCardClick}>
-            {myFeed.length > 0 && 
-             <Image
-             src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
-             wrapped
-             ui={false}
-           />
-            }
-           
-           <Card.Content>
-    <Card.Header>{myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : '닉네임'}</Card.Header> {/* 닉네임 */}
-    <Card.Meta>
-      <span className="date">
-        {myFeed.length > 0 ? myFeed[0].myFeed.mem_joindate : '가입날짜'} {/* 가입 날짜 */}
-      </span>
-    </Card.Meta>
-    <Card.Description>
-      {myFeed.length > 0 ? myFeed[0].myFeed.mem_Introduce : '자기소개'} {/* 자기소개 */}
-    </Card.Description>
-  </Card.Content>
-  <Card.Content extra></Card.Content>
-</Card>
+          <Card onClick={handleCardClick}>
+            {myFeed.length > 0 && (
+              <Image
+                src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
+                wrapped
+                ui={false}
+              />
+            )}
+
+            <Card.Content>
+              <Card.Header>
+                {myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}
+              </Card.Header>{" "}
+              {/* 닉네임 */}
+              <Card.Meta>
+                <span className="date">
+                  {myFeed.length > 0
+                    ? myFeed[0].myFeed.mem_joindate
+                    : "가입날짜"}{" "}
+                  {/* 가입 날짜 */}
+                </span>
+              </Card.Meta>
+              <Card.Description>
+                {myFeed.length > 0
+                  ? myFeed[0].myFeed.mem_Introduce
+                  : "자기소개"}{" "}
+                {/* 자기소개 */}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra></Card.Content>
+          </Card>
         </div>
 
         {/* 게시글 버튼*/}

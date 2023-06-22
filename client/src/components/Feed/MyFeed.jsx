@@ -23,7 +23,6 @@ const MyFeed = () => {
       setImgFile(reader.result);
     };
   };
-
   // 모달을 닫는 함수
   const handleCloseModal = () => {
     setOpen(false);
@@ -35,13 +34,14 @@ const MyFeed = () => {
       <div>
         <form
           method="post"
-          action="http://172.30.1.22:8087/hogward/profileupdate/mem_email 01"
+          action='http://172.30.1.22:8087/hogward/profileupdate/${mem_email}'
           className="authform"
           encType="multipart/form-data"
         >
+
           {/* 선택된 프로필 이미지 미리보기 */}
           <img
-            src={imgFile}
+            src='http://172.30.1.22:8087/hogward/profileupdate/${mem_email}'
             alt="프로필 이미지"
             className="authform_preview"
           />
@@ -72,12 +72,16 @@ const MyFeed = () => {
   const handleGridItemClick = (b_seq) => {
     axios.get(`http://172.30.1.22:8087/hogward/boardOne/${b_seq}`).then((res) => {
       const oneb = res.data.oneBoard
-      console.log(oneb)
+      console.log("2",res.data.oneBoard)
 
       setModalContent(<div>
-          <h2>{oneb.b_title}</h2>
-        <p>{oneb.b_file}</p>
-        <p>{oneb.b_content}</p>
+        <h2>제목 : {oneb.b_title}</h2>
+        <p>사진 : {oneb.b_file}</p>
+        <p>장소 : {oneb.b_loc}</p>
+        <p>내용 : {oneb.b_content}</p>
+        <p>좋아요 : {oneb.b_likes}</p>
+        <p>태그 : {oneb.b_tag}</p>
+        
       </div>);
     })
     
@@ -101,6 +105,8 @@ const MyFeed = () => {
   useEffect(() => {
     getMyFeed();
   }, []);
+
+  useEffect(()=> {},[])
 
   return (
     <div>

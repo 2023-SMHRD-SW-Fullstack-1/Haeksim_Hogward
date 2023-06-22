@@ -169,29 +169,7 @@ const JoinPage = () => {
         console.log(formData);
       });
 
-    // 서버 post로 보내기
-    // axios
-    //   .post(url,
-    //   {
-    //     'mem_email' : email,
-    //     'mem_nick' : nick
-    //   })
-    //   .then(res)
-    // Spring =>  @RequestBody Mem
-    // Mem.mememail = email
-    // Mem.mem_pw = null
 
-    // 서버 get 으로 보내기
-    // axios
-    //  .get(url,
-    //   {
-    //     params : {
-    //       'mem_email' : email,
-    //       'mem_nick' : nick
-    //     }
-    //   })
-
-    //   Spring => @RequestParam('mem_email')
   };
 
   return (

@@ -5,7 +5,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 600px;
+  /* width: 600px; */
   /* padding: 90px; */
   transform: translate(-50%, -50%);
   background: white;
@@ -21,7 +21,7 @@
   padding: 0;
   color: black;
   text-align: center;
-  font-size: 40px;
+  font-size: 55px;
 }
 
 

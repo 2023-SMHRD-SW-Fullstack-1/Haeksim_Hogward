@@ -5,9 +5,11 @@ import { colors } from "@mui/material";
 import { SessionContext } from "../contexts/SessionContext";
 
 const LoginPage = () => {
+  
   // 세션 context
   const { setSessionUser } = useContext(SessionContext);
-  // 이메일, 비밀번호 유효성 검사
+  
+  // 이메일 유효성 검사
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -16,6 +18,7 @@ const LoginPage = () => {
       );
   };
 
+  //비밀번호 유효성 검사
   const validatePwd = (password) => {
     return password
       .toLowerCase()
@@ -24,31 +27,36 @@ const LoginPage = () => {
 
   // 세션
   const handleLoginSession = async (user) => {
+   
     // 사용자 정보를 세션 스토리지에 저장
     sessionStorage.setItem("user", JSON.stringify(user));
     setSessionUser(user);
   };
 
-  const [email, setEmail] = useState(""); // 아이디 입력 상태
-  const [emailMsg, setEmailMsg] = useState(""); //이메일 형식 확인
-  const [password, setPassword] = useState(""); //비밀번호
-  const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
+    const [email, setEmail] = useState(""); // 아이디 입력 상태
+    const [emailMsg, setEmailMsg] = useState(""); //이메일 형식 확인
+    const [password, setPassword] = useState(""); //비밀번호
+    const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
 
-  //이메일 형식 확인
+    //이메일 형식 확인
   const onChangeEmail = useCallback(async (e) => {
+    
     const currEmail = e.target.value;
-    setEmail(currEmail);
+     setEmail(currEmail);
 
-    if (!validateEmail(currEmail)) {
+     if (!validateEmail(currEmail) ) {
       setEmailMsg("이메일 형식이 올바르지 않습니다.");
-    } else {
+     } else if(currEmail == ""){
       // setEmailMsg("올바른 이메일 형식입니다.")
       setEmailMsg(" ");
-    }
+     } else {
+      setEmailMsg(" ");
+     }
   });
 
-  //비밀번호
+  //비밀번호 형식 확인 
   const onChangePwd = useCallback((e) => {
+    
     const currPwd = e.target.value;
     setPassword(currPwd);
 
@@ -62,6 +70,7 @@ const LoginPage = () => {
 
   //로그인 버튼 클릭
   const handleLogin = () => {
+    
     //아이디 비밀번호 일치 확인 여부
     const formData = new FormData();
     formData.append("mem_email", email);
@@ -96,18 +105,17 @@ const LoginPage = () => {
 
   return (
     <div className="login-box">
-      {/* 로고 */}
 
       {/* 로그인 제목 */}
-      <h1>HOGWARD</h1>
+      <h1>호그와드</h1>
 
       <form>
+
         {/* 아이디 입력란 */}
         <div className="user-box">
           <input
-            className="input-box"
+            className="input-box" 
             type="email"
-            // id="email"
             value={email}
             onChange={onChangeEmail}
             required=""
@@ -116,6 +124,7 @@ const LoginPage = () => {
           <p className="red">{emailMsg}</p>
         </div>
         <br></br>
+
         {/* 비밀번호 입력란 */}
         <div className="user-box">
           <input
@@ -129,6 +138,7 @@ const LoginPage = () => {
           />
           <p className="red">{pwdMsg}</p>
         </div>
+
         <br></br>
         <br></br>
 

@@ -145,24 +145,28 @@ public class BoardService {
 	
 	//본인피드 게시물 클릭시 해당게시물 사진,정보 보내기
 	public JSONObject boardOne(String b_seq) {
+		
 		T_Board board = boardMapper.boardOne(b_seq);
 		
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
-		String filePath = "classpath:/static/boardImg/"+board.getB_file();
-		Resource resource = resourceLoader.getResource(filePath); //파일의 메타데이터
+		File file = new File("c:\\uploadimage\\"+board.getB_file());
+		System.out.println(file);
+		
 		String fileStringValue = null;
 		try {
-			fileStringValue = converter.convert(resource.getFile());
+			fileStringValue = converter.convert(file);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		System.out.println(file);
 		board.setB_file(fileStringValue);
 		
 		JSONObject obj = new JSONObject();
-		obj.put("oneBoard", board);
+		obj.put("boardOne", board);
 		
 		return obj;
 		

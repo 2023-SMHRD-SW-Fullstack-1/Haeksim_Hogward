@@ -5,89 +5,49 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const UserPost = ( ProfileModal) => {
+const UserPost = ( ) => {
   const [allboard, setAllBoard] = useState([]);
   const [memPic, setMemPic] = useState ([]);
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
   const [modalContent, setModalContent] = useState(null); // 모달에 표시될 내용을 관리하는 state
 
-  // const feedData = [
-  //   // ... 기존 feedData
-  // //   {
-  // //     type: 'friend-addition',
-  // //     userName: 'Elliot Fu',
-  // //     avatar: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg',
-  // //     time: '1 Hour Ago',
-  // //     likes: 4
-  // //   },
-  // //   {
-  // //     type: 'new-illustrations',
-  // //     userName: 'Helen Troy',
-  // //     avatar: 'https://react.semantic-ui.com/images/avatar/small/helen.jpg',
-  // //     time: '4 days ago',
-  // //     contentImages: ['https://react.semantic-ui.com/images/wireframe/image.png', 'https://react.semantic-ui.com/images/wireframe/image.png'],
-  // //     likes: 1
-  // //   },
-  // //   {
-  // //     type: 'friend-addition',
-  // //     userName: 'Jenny Hess',
-  // //     avatar: 'https://react.semantic-ui.com/images/avatar/small/jenny.jpg',
-  // //     time: '2 Days Ago',
-  // //     likes: 8
-  // //   },
-  // //   {
-  // //     type: 'post',
-  // //     userName: 'Joe Henderson',
-  // //     avatar: 'https://react.semantic-ui.com/images/avatar/small/joe.jpg',
-  // //     time: '3 days ago',
-  // //     textContent: "Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all over again. Even if we don't run extra laps that day, we surely will come back for more of the same another day soon.",
-  // //     likes: 5
-  // //   },
-  // //   {
-  // //     type: 'new-photos',
-  // //     userName: 'Justen Kitsune',
-  // //     avatar: 'https://react.semantic-ui.com/images/avatar/small/justen.jpg',
-  // //     time: '4 days ago',
-  // //     contentImages: ['https://react.semantic-ui.com/images/wireframe/image.png', 'https://react.semantic-ui.com/images/wireframe/image.png'],
-  // //     likes: 41
-  // //   }
-  // // ];
+  
 
-  useEffect(() => {
-    const url = "board.json";
-    axios.get(url).then(res => {
-      setAllBoard(res.data);
-      console.log(res.data)
+  // useEffect(() => {
+  //   const url = "board.json";
+  //   axios.get(url).then(res => {
+  //     setAllBoard(res.data);
+  //     console.log(res.data)
 
-    });
-  }, []);
+  //   });
+  // }, []);
 
   // 다른사람 피드 최신순 데이터
   const [allfeed, setAllFeed] = useState(null);
   useEffect(() => {
     const url = "http://172.30.1.22:8087/hogward/usersfeed"
     // 다시 키기
-    // axios.get(url).then((res) => {
-    //   console.log("allfeed",res.data)
-    //   setAllFeed(res.data);
-    // })
+    axios.get(url).then((res) => {
+      console.log("allfeed",res.data)
+      setAllFeed(res.data);
+    })
   },[])
 
-  useEffect(() => {
-    const url = "member.json";
-    axios.get(url).then(res => {
-      setMemPic(res.data);
-      console.log(res.data)
+  // useEffect(() => {
+  //   const url = "member.json";
+  //   axios.get(url).then(res => {
+  //     setMemPic(res.data);
+  //     console.log(res.data)
 
-    });
-  }, []);
+  //   });
+  // }, []);
 
   // 프로필 사진을 클릭했을 때 실행될 핸들러 함수
   const handleProfileClick = (item) => {
     setModalContent(
       <div>
-        <Image src={item.board.b_file} size="small" />
-        <p>{item.board.mem_email}</p>
+        <Image src={item.usersFeed .b_file} size="small" />
+        <p>{item.usersFeed .mem_email}</p>
       </div>
     );
     setOpen(true); // 모달 열기

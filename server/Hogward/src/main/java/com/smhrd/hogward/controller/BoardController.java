@@ -52,7 +52,7 @@ public class BoardController {
 	
 	
 	//본인피드 게시물 클릭시 해당게시물 사진,정보
-	@GetMapping("/boardOne/{b_seq}")
+	@GetMapping("/boardone/{b_seq}")
 	public JSONObject boardOne(@PathVariable("b_seq")String b_seq ) {
 		
 		return boardService.boardOne(b_seq);

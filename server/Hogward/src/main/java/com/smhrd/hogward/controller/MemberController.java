@@ -106,7 +106,6 @@ public class MemberController {
 	//프로필 사진 수정
 	@PostMapping("/profileupdate/{mem_email}")
 	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, HttpServletResponse response) {
-		
 		System.out.println(mem_email);
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
 		try {

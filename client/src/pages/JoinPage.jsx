@@ -195,88 +195,90 @@ const JoinPage = () => {
   };
 
   return (
-    <div className="login-box">
-      <h1>HOGWARD</h1>
-      <form>
-        {/* 이메일 입력*/}
-        <div className="user-box">
-          <div className="info__id">
+    <div className="login-box-container">
+      <div className="login-box">
+        <h1>HOGWARD</h1>
+        <form>
+          {/* 이메일 입력*/}
+          <div className="user-box">
+            <div className="info__id">
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={onChangeEmail}
+                required=""
+                placeholder="이메일을 입력해 주세요"
+              />
+              <button type="button" class="btn btn-dark" onClick={onCheckEmail}>
+                중복확인
+              </button>
+            </div>
+            <p>{emailMsg}</p>
+          </div>
+
+          {/* 닉네임 입력 */}
+          <div className="user-box">
+            <div className="info__id">
+              <input
+                type="text"
+                id="nick"
+                value={nick}
+                onChange={onChangeNickname}
+                required=""
+                placeholder="닉네임을 입력해 주세요"
+              />
+              <button type="button" class="btn btn-dark" onClick={onCheckNick}>
+                중복확인
+              </button>
+            </div>
+            <p>{nicknameMsg}</p>
+          </div>
+
+          {/* 비밀번호 입력 */}
+          <div className="user-box">
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={onChangeEmail}
+              type="password"
+              id="password"
+              value={password}
+              onChange={onChangePwd}
               required=""
-              placeholder="이메일을 입력해 주세요"
+              placeholder="비밀번호를 입력해 주세요"
             />
-            <button type="button" class="btn btn-dark" onClick={onCheckEmail}>
-              중복확인
+            <p>{pwdMsg}</p>
+          </div>
+
+          {/* 비밀번호 다시 입력 */}
+          <div className="user-box">
+            <input
+              type="password"
+              id="confirmpassword"
+              value={confirmPassword}
+              onChange={onChangeConfirmPwd}
+              required=""
+              placeholder="비밀번호를 다시 입력해주세요"
+            />
+            <p>{confirmPwdMsg}</p>
+          </div>
+
+          <br></br>
+
+          <div class="d-grid gap-2">
+            <button
+              type="button"
+              href="/login"
+              class="btn btn-dark btn btn-lg"
+              onClick={onSubmitHandler}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              가입하기
             </button>
           </div>
-          <p>{emailMsg}</p>
-        </div>
-
-        {/* 닉네임 입력 */}
-        <div className="user-box">
-          <div className="info__id">
-            <input
-              type="text"
-              id="nick"
-              value={nick}
-              onChange={onChangeNickname}
-              required=""
-              placeholder="닉네임을 입력해 주세요"
-            />
-            <button type="button" class="btn btn-dark" onClick={onCheckNick}>
-              중복확인
-            </button>
-          </div>
-          <p>{nicknameMsg}</p>
-        </div>
-
-        {/* 비밀번호 입력 */}
-        <div className="user-box">
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={onChangePwd}
-            required=""
-            placeholder="비밀번호를 입력해 주세요"
-          />
-          <p>{pwdMsg}</p>
-        </div>
-
-        {/* 비밀번호 다시 입력 */}
-        <div className="user-box">
-          <input
-            type="password"
-            id="confirmpassword"
-            value={confirmPassword}
-            onChange={onChangeConfirmPwd}
-            required=""
-            placeholder="비밀번호를 다시 입력해주세요"
-          />
-          <p>{confirmPwdMsg}</p>
-        </div>
-
-        <br></br>
-
-        <div class="d-grid gap-2">
-          <button
-            type="button"
-            href="/login"
-            class="btn btn-dark btn btn-lg"
-            onClick={onSubmitHandler}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            가입하기
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

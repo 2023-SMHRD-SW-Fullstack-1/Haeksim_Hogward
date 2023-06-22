@@ -95,58 +95,60 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-box">
-      {/* 로고 */}
+    <div className="login-box-container">
+      <div className="login-box">
+        {/* 로고 */}
 
-      {/* 로그인 제목 */}
-      <h1>HOGWARD</h1>
+        {/* 로그인 제목 */}
+        <h1>HOGWARD</h1>
 
-      <form>
-        {/* 아이디 입력란 */}
-        <div className="user-box">
-          <input
-            className="input-box"
-            type="email"
-            // id="email"
-            value={email}
-            onChange={onChangeEmail}
-            required=""
-            placeholder="이메일을 입력해 주세요"
-          />
-          <p className="red">{emailMsg}</p>
-        </div>
-        <br></br>
-        {/* 비밀번호 입력란 */}
-        <div className="user-box">
-          <input
-            className="input-box"
-            type="password"
-            id="password"
-            value={password}
-            onChange={onChangePwd}
-            required=""
-            placeholder="비밀번호를 입력해 주세요"
-          />
-          <p className="red">{pwdMsg}</p>
-        </div>
-        <br></br>
-        <br></br>
+        <form>
+          {/* 아이디 입력란 */}
+          <div className="user-box">
+            <input
+              className="input-box"
+              type="email"
+              // id="email"
+              value={email}
+              onChange={onChangeEmail}
+              required=""
+              placeholder="이메일을 입력해 주세요"
+            />
+            <p className="red">{emailMsg}</p>
+          </div>
+          <br></br>
+          {/* 비밀번호 입력란 */}
+          <div className="user-box">
+            <input
+              className="input-box"
+              type="password"
+              id="password"
+              value={password}
+              onChange={onChangePwd}
+              required=""
+              placeholder="비밀번호를 입력해 주세요"
+            />
+            <p className="red">{pwdMsg}</p>
+          </div>
+          <br></br>
+          <br></br>
 
-        {/* 로그인 버튼 */}
-        <div class="d-grid gap-2">
-          <button
-            type="button"
-            onClick={handleLogin}
-            class="btn btn-dark btn btn-lg"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            로그인
-          </button>
-        </div>
-      </form>
+          {/* 로그인 버튼 */}
+          <div class="d-grid gap-2">
+            <button
+              type="button"
+              onClick={handleLogin}
+              class="btn btn-dark btn btn-lg"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              로그인
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

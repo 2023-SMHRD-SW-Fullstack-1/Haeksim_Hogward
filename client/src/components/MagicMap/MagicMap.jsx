@@ -243,7 +243,7 @@ const MagicMap = () => {
             // width: "100%",
             width: cliWidth,
             // width: 1400,
-            height: cliHeight - 160,
+            height: cliHeight - 250,
             // height: mapRef.current.clientHeight + "px" || "600px",
           }}
           level={11} // 지도의 확대 레벨

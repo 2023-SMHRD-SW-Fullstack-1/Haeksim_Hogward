@@ -1,17 +1,15 @@
-
-
 /* 로그인 박스  */
 .login-box {
   position: absolute;
-  top: 50%;
+  top: 60% !important;
   left: 50%;
   width: 600px;
   /* padding: 90px; */
   transform: translate(-50%, -50%);
   background: white;
-  border : 1px solid lightgray;
+  border: 1px solid lightgray;
   box-sizing: border-box;
-  border-radius: 10px; 
+  border-radius: 10px;
   flex-basis: 60%;
 }
 
@@ -23,7 +21,6 @@
   text-align: center;
   font-size: 40px;
 }
-
 
 /* 아이디 비번 입력 BOX */
 .login-box .user-box {
@@ -42,6 +39,14 @@
   background: transparent;
 }
 
-.red{
-  color:rgb(240, 64, 64);
+.red {
+  color: rgb(240, 64, 64);
+}
+.login-box-container {
+  background: url("../img/mainbg.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #3d3533;
+  height: 100vh;
+  position: relative;
 }

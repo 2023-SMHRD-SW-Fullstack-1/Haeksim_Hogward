@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
+import axios from "axios";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,14 @@ const UserRank = () => {
     },
   ];
 
+  // 랭킹 데이터 가져오기
+  const [userRankData, setUserRankData] = useState(null);
+  useEffect(() => {
+    const url = `http://172.30.1.22:8087/hogward/ranking`;
+    axios.get(url).then((res) => {
+      setUserRankData(res.data);
+    });
+  }, []);
   //랭킹 사진 클릭 했을 떼 ->
   const handleSummaryClick = (summary, image) => {
     setSelectedSummary(summary, image);
@@ -34,25 +43,25 @@ const UserRank = () => {
     <div className="userrank">
       <Card>
         <Card.Content>
-          <Card.Header>Ranking</Card.Header>
+          <Card.Header>랭킹</Card.Header>
         </Card.Content>
         <Card.Content>
           <Feed>
-            {feedEvents.map((event, index) => (
+            {userRankData?.map((item, index) => (
               <Feed.Event key={index}>
                 <Feed.Label
-                  image={event.image}
-                  onClick={() => handleSummaryClick(event.summary)}
+                  image={`data:image/;base64,${item.rankingTen.mem_photo}`}
+                  // onClick={() => handleSummaryClick(event.summary)}
                   style={{ cursor: "pointer" }}
                 />
 
                 <Feed.Content>
-                  <Feed.Date content={event.date} />
+                  <Feed.Date content={`${item.rankingTen.mem_nick}`} />
                   <Feed.Summary
-                    onClick={() => handleSummaryClick(event.summary)}
+                    // onClick={() => handleSummaryClick(event.summary)}
                     style={{ cursor: "pointer" }}
                   >
-                    {event.summary}
+                    {item.rankingTen.authcount}회
                   </Feed.Summary>
                 </Feed.Content>
               </Feed.Event>

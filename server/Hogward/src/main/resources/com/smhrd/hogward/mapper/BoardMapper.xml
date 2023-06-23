@@ -70,7 +70,7 @@
   	</select>
   	
   	<select id="rankingTen" resultType="com.smhrd.hogward.domain.Ranking">
-  		SELECT ROWNUM AS rank, A.mem_email, A.authcount, B.mem_photo
+  		SELECT ROWNUM AS rank, A.mem_email, A.authcount, B.mem_photo, B.mem_nick
 		FROM (
 			    SELECT M.mem_email, COUNT(*) AS authcount
 			    FROM t_board B

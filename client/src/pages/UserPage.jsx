@@ -20,10 +20,13 @@ const UserPage = () => {
   return (
     <div className="userpage">
       {/* 유저 게시글 부분 */}
-      <UserPost />
+      <div className="userpage_container">
+        <UserPost />
 
-      {/* 랭킹 부분 */}
-      <UserRank />
+        {/* 랭킹 부분 */}
+        <UserRank />
+      </div>
+
       <div className="userpage_totop" onClick={scrollToTop}>
         <FontAwesomeIcon icon={faArrowUpLong} />
       </div>

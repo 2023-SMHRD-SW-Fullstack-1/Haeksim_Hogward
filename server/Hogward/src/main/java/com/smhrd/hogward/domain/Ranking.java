@@ -17,5 +17,6 @@ public class Ranking {
 	private String mem_email;
 	private int authcount;
 	private String mem_photo;
-
+	private String mem_nick;
+	
 }

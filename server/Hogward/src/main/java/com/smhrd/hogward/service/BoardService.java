@@ -36,9 +36,10 @@ public class BoardService {
 	
 	
 	//유저 게시글 모두보기(유저피드)
-	public JSONArray usersFeed() {
-		List<UsersFeed> list = boardMapper.usersFeed();
-		System.out.println(list);
+	public JSONArray usersFeed(int s_paging_num, int e_paging_num) {
+		System.out.println("s_pagingnum : " + s_paging_num);
+		System.out.println("e_pagingnum : " + e_paging_num);
+		List<UsersFeed> list = boardMapper.usersFeed(s_paging_num,e_paging_num);
 		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();

@@ -17,7 +17,7 @@ public interface BoardMapper {
 	
 	
 	//유저피드
-	public List<UsersFeed> usersFeed();
+	public List<UsersFeed> usersFeed(int s_paging_num,int e_paging_num);
 	
 	//마이피드
 	public List<MyFeed> myFeed(String mem_email);

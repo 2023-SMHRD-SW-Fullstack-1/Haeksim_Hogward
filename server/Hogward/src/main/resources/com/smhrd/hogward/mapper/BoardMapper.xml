@@ -4,19 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.smhrd.hogward.mapper.BoardMapper">
-  	
-  	<select id="usersFeed" resultType="com.smhrd.hogward.domain.UsersFeed">
-		select A.mem_email 
-       		  ,A.mem_photo
-       		  , A.mem_nick
-       		  ,B.mem_email
-       		  , B.b_file
-       		  , B.b_content
-       		  , B.b_rep
-       		  , B.b_likes
- 		from t_member A
-       	   , t_board B
-		where A.mem_email = B.mem_email
+  
+	
+	<select id="usersFeed" resultType="com.smhrd.hogward.domain.UsersFeed">
+		SELECT *
+          FROM (
+                SELECT A.mem_email AS mem_email_A
+		           , A.mem_photo
+		           , A.mem_nick
+		           , B.mem_email AS mem_email_B
+		           , B.b_file, B.b_content
+		           , B.b_rep, B.b_likes
+		           , B.b_datetime
+		           , ROW_NUMBER() OVER (ORDER BY B.b_datetime DESC) AS RN
+        		FROM t_member A
+                JOIN t_board B ON A.mem_email = B.mem_email
+                )
+         WHERE RN BETWEEN #{s_paging_num} AND #{e_paging_num}
 	</select>
   
   	<select id="boardList" resultType="com.smhrd.hogward.domain.T_Board">

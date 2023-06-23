@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
+import "../assets/css/NavbarElements.css";
 
 function NavbarElements() {
   const { sessionUser, setSessionUser } = useContext(SessionContext);
@@ -14,9 +15,9 @@ function NavbarElements() {
       expand="lg"
       bg="transparent"
       variant="dark"
-      style={{ position: "absolute", width: "100%" }}
+      className="navbar_header"
     >
-      <Container style={{}}>
+      <Container>
         <Navbar.Brand href="/">호그와드</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -24,6 +25,8 @@ function NavbarElements() {
             <Nav.Link href="/magicmap">마법지도</Nav.Link>
             {/* <Nav.Link href="/foottracer"></Nav.Link> */}
             <Nav.Link href="/userpage">피드</Nav.Link>
+            <Nav.Link href="/userfeed">피드테스트</Nav.Link>
+
             <Nav.Link href="/mypage">마이페이지</Nav.Link>
           </Nav>
           <Nav>

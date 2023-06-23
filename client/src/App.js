@@ -21,6 +21,7 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import { SessionContext } from "./contexts/SessionContext";
 import { useEffect } from "react";
+import FeedTest from "./components/Feed/FeedTest";
 
 function App() {
   const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
@@ -57,13 +58,13 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/magicmap" element={<MagicMapPage />}></Route>
           <Route path="/userpage" element={<UserPage />}></Route>
+          {/* 테스트 유저피드 */}
+          <Route path="/userfeed" element={<FeedTest />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/join" element={<JoinPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-
           {/* 발자국지도 */}
           <Route path="/foottracer" element={<FootTracer />}></Route>
-
           {/*  */}
           {/* <Route path="/about" element={<About />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
@@ -71,7 +72,6 @@ function App() {
           {/* path 가 * 라면, 위의 경로 이외에 경로들을 처리 */}
           {/* <Route path="*" element={<NotFound />}></Route> */}
           {/* 임시  - 전처리*/}
-
           <Route path="/module/getregion" element={<GetDongRegionId />}></Route>
           <Route path="/module/getcoords" element={<GetCoords />}></Route>
         </Routes>

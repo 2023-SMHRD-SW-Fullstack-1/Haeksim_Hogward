@@ -23,5 +23,6 @@ public class UsersFeed {
 	private String b_content;
 	private String b_rep;
 	private int b_likes;
+	private String b_datetime;
 
 }

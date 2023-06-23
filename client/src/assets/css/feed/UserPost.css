@@ -1,0 +1,67 @@
+/* @font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+.userpost {
+  font-family: "Pretendard-Regular", sans-serif;
+} */
+.userpost .individualPost {
+  width: 100%;
+  /* height: 717px; */
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.userpost_header {
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+}
+.userpost_loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userpost_header_mem_photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.userpost_header_mem_nick {
+  margin-left: 15px;
+  font-size: 18px;
+}
+.userpost_feedContent {
+  padding: 20px;
+  font-size: 20px;
+}
+.icons_comment {
+  margin-left: 20px;
+}
+.userpost_userslikes {
+  font-size: 13px;
+  margin-top: 8px;
+}
+.userpost_usercontent > span:first-child {
+  font-size: 19px;
+}
+.userpost_usercontent > span:nth-child(2) {
+  margin-left: 10px;
+  font-size: 14px;
+}
+.loader {
+  margin: 0 0 2em;
+  height: 100px;
+  width: 20%;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}

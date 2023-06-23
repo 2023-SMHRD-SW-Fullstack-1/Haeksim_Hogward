@@ -29,9 +29,7 @@ const MagicMap = () => {
   const { sessionUser } = useContext(SessionContext);
   // 로그인 안할시 메인으로 보내기
   if (sessionStorage.getItem("user")) {
-    console.log("aasdasdasd");
   } else {
-    console.log("bbbsdfsdf");
     Swal.fire({
       icon: "error",
       title: "인증 정보 불일치",
@@ -118,7 +116,6 @@ const MagicMap = () => {
     const url = "http://172.30.1.22:8087/hogward/landmark/count";
     axios.get(url).then((res) => {
       setLandmarkAllCount(res.data);
-      console.log(res.data);
     });
   };
   useEffect(() => {
@@ -135,7 +132,6 @@ const MagicMap = () => {
     if (sessionUser.email) {
       const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
       axios.get(url).then((res) => {
-        console.log(res.data);
         setMemAuthCount(res.data);
       });
     }
@@ -276,7 +272,11 @@ const MagicMap = () => {
               ))
             : newLandMarks.map((lm, index) => (
                 <>
-                  <MapImageMarker key={`imgmarker-${lm.lm_seq}`} lm={lm} />
+                  <MapImageMarker
+                    key={`imgmarker-${lm.lm_seq}`}
+                    lm={lm}
+                    memAuthCount={memAuthCount}
+                  />
                   <MarkerOverlay
                     key={`overlay-${lm.lm_seq}`}
                     lm={lm}

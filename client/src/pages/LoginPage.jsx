@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   // 세션 context
   const { setSessionUser } = useContext(SessionContext);
-  
+
   // 이메일 유효성 검사
   const validateEmail = (email) => {
     return email
@@ -37,16 +37,17 @@ const LoginPage = () => {
 
   // 세션
   const handleLoginSession = async (user) => {
-   
     // 사용자 정보를 세션 스토리지에 저장
     sessionStorage.setItem("user", JSON.stringify(user));
     setSessionUser(user);
   };
 
-    const [email, setEmail] = useState(""); // 아이디 입력 상태
-    const [emailMsg, setEmailMsg] = useState(""); //이메일 형식 확인
-    const [password, setPassword] = useState(""); //비밀번호
-    const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
+  const [email, setEmail] = useState(""); // 아이디 입력 상태
+  const [emailMsg, setEmailMsg] = useState(""); //이메일 형식 확인
+  const [password, setPassword] = useState(""); //비밀번호
+  const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
+
+  //이메일 형식 확인
 
     //이메일 형식 확인
    

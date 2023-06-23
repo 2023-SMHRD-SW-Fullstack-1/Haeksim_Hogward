@@ -35,10 +35,11 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	//유저들의 게시글 불러오기(유저피드)   ---> 최신순으로 10개씩 보이게 수정하기.
-	@GetMapping("/usersfeed")
-	public JSONArray usersFeed() {
-		JSONArray array = boardService.usersFeed();
+	//유저들의 게시글 불러오기(유저피드)   ---> 페이징기법 적용
+	@GetMapping("/usersfeed/{paging_num}")
+	public JSONArray usersFeed(@PathVariable("paging_num") int paging_num) {
+		// 10개씩 페이징 알고리즘
+		JSONArray array = boardService.usersFeed(5 * (paging_num - 1) + 1, 5 * paging_num);
 		return array;		
 	}
 
@@ -99,6 +100,22 @@ public class BoardController {
 			return array;	
 			
 		}
+	
+	
+	//랭킹 top 10
+	@GetMapping("/ranking")
+	public JSONArray rankingTen() {
+		
+		JSONArray array = boardService.rankingTen();
+		return array;
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	//게시글 모두 보기  ---- 필요없는듯...

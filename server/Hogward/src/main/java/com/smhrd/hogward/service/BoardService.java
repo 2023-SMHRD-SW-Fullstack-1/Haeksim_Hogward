@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.MyFeed;
+import com.smhrd.hogward.domain.Ranking;
 import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.domain.UsersFeed;
 import com.smhrd.hogward.mapper.BoardMapper;
@@ -35,13 +36,13 @@ public class BoardService {
 	
 	
 	//유저 게시글 모두보기(유저피드)
-	public JSONArray usersFeed() {
-		List<UsersFeed> list = boardMapper.usersFeed();
-		System.out.println(list);
+	public JSONArray usersFeed(int s_paging_num, int e_paging_num) {
+		System.out.println("s_pagingnum : " + s_paging_num);
+		System.out.println("e_pagingnum : " + e_paging_num);
+		List<UsersFeed> list = boardMapper.usersFeed(s_paging_num,e_paging_num);
 		
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
-		
 		
 		for(UsersFeed userfeed : list) {
 			
@@ -82,12 +83,10 @@ public class BoardService {
 			
 			if(myfeed.getB_file() == null) {
 				
-				
 				//File file2 = new File("c:\\uploadimage\\" + "defaultphoto.jpg");
 				File file2 = new File("c:\\uploadimage\\" + myfeed.getMem_photo());
 				System.out.println(file2);
 
-			
 				String fileStringValue2 = null;
 				
 				try {
@@ -96,14 +95,12 @@ public class BoardService {
 					System.out.println(fileStringValue2);
 					
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 			
 				myfeed.setMem_photo(fileStringValue2);
-				
-				
+								
 				JSONObject obj = new JSONObject();
 				obj.put("myFeed", myfeed);
 				
@@ -112,7 +109,6 @@ public class BoardService {
 			}else {
 				File file1 = new File("c:\\uploadimage\\"+myfeed.getB_file());
 				File file2 = new File("c:\\uploadimage\\" +myfeed.getMem_photo());
-				//File file2 = new File("c:\\uploadimage\\" + "defaultphoto.jpg");
 				System.out.println(file2);
 
 				String fileStringValue1 = null;
@@ -124,7 +120,6 @@ public class BoardService {
 					System.out.println(fileStringValue2);
 					
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -158,7 +153,6 @@ public class BoardService {
 			fileStringValue = converter.convert(file);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -184,22 +178,17 @@ public class BoardService {
 		List<LandAllUserPhoto> list = boardMapper.allUserPhoto(lm_seq);
 		
 		JSONArray jsonArray = new JSONArray();
-		ImageConverter<File, String > converter = new ImageToBase64();
-		
+		ImageConverter<File, String > converter = new ImageToBase64();	
 	
 		for(LandAllUserPhoto userphoto : list) {
-			
-			
-			//File file = new File("c:\\uploadimage\\"+userphoto.getB_file()+".jpg");
+
 			File file = new File("c:\\uploadimage\\"+userphoto.getB_file());
-	
 			String fileStringValue = null;
 			
 			try {
 				fileStringValue = converter.convert(file);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -208,15 +197,45 @@ public class BoardService {
 			JSONObject obj = new JSONObject();
 			obj.put("allUserPhoto", userphoto);
 			
-			jsonArray.add(obj); 
-		
-
-		
+			jsonArray.add(obj);
 	}
 	return jsonArray;
-	
-	
 }
+	
+	
+	//랭킹 top 10
+	public JSONArray rankingTen() {
+		List<Ranking> list = boardMapper.rankingTen();
+		
+		JSONArray jsonArray = new JSONArray();
+		ImageConverter<File, String > converter = new ImageToBase64();	
+	
+		for(Ranking rank : list) {
+
+			File file = new File("c:\\uploadimage\\"+rank.getMem_photo());
+			String fileStringValue = null;
+			
+			try {
+				fileStringValue = converter.convert(file);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			rank.setMem_photo(fileStringValue);
+			
+			JSONObject obj = new JSONObject();
+			obj.put("rankingTen", rank);
+			
+			jsonArray.add(obj);
+	}
+	return jsonArray;
+		
+		
+	}
+	
+	
+	
 	
 	
 	

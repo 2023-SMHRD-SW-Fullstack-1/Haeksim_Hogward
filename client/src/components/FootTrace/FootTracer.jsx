@@ -121,7 +121,6 @@ const FootTracer = () => {
     const containers = [];
     containers.push(<div key="start"></div>);
     // 초기 깃발
-    console.log(nowAuthCoords);
     containers.push(
       <FootLandmark
         pingLeft={nowAuthCoords[0][0].divcoords.coords[0]}
@@ -142,6 +141,7 @@ const FootTracer = () => {
           <FootLandmark
             pingLeft={nowAuthCoords[i + 1][0].divcoords.coords[0]}
             pingTop={nowAuthCoords[i + 1][0].divcoords.coords[1]}
+            divDelay={i}
           />
         </div>
       );

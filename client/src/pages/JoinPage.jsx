@@ -187,8 +187,6 @@ const JoinPage = () => {
         console.log(error.res);
         console.log(formData);
       });
-
-
   };
 
   return (

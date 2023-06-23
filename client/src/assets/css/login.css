@@ -1,4 +1,3 @@
-
 /* 로그인 컨테이너  */
 .login-box-container {
   background: url("../img/mainbg.png");
@@ -8,7 +7,6 @@
   height: 100vh;
   position: relative;
 }
-
 
 /* 로그인 박스  */
 .login-box {

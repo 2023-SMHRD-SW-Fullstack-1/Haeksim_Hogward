@@ -1,53 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { Feed, Icon, Button, Image, Modal } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Feed, Button, Image, Modal } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import InfiniteScroll from "react-infinite-scroll-component";
+import "../../assets/css/feed/UserPost.css";
 
-const UserPost = ( ) => {
-  const [allboard, setAllBoard] = useState([]);
-  const [memPic, setMemPic] = useState ([]);
+// 로딩 버튼
+import {
+  BallTriangle,
+  Circles,
+  ColorRing,
+  Dna,
+  Hearts,
+  Puff,
+  Oval,
+} from "react-loader-spinner";
+import UserRank from "./UserRank";
+
+const UserPost = () => {
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
   const [modalContent, setModalContent] = useState(null); // 모달에 표시될 내용을 관리하는 state
 
-  
-
-  // useEffect(() => {
-  //   const url = "board.json";
-  //   axios.get(url).then(res => {
-  //     setAllBoard(res.data);
-  //     console.log(res.data)
-
-  //   });
-  // }, []);
-
   // 다른사람 피드 최신순 데이터
-  const [allfeed, setAllFeed] = useState(null);
+  const [allfeed, setAllFeed] = useState([]);
   useEffect(() => {
-    const url = "http://172.30.1.22:8087/hogward/usersfeed"
+    const url = "http://172.30.1.22:8087/hogward/usersfeed/1";
     // 다시 키기
     axios.get(url).then((res) => {
-      console.log("allfeed",res.data)
       setAllFeed(res.data);
-    })
-  },[])
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   const url = "member.json";
-  //   axios.get(url).then(res => {
-  //     setMemPic(res.data);
-  //     console.log(res.data)
-
-  //   });
-  // }, []);
+  // 페이징기법 적용 데이터 가져오기
+  const [pageCnt, setPageCnt] = useState(2);
+  const fetchMoreData = () => {
+    const url = `http://172.30.1.22:8087/hogward/usersfeed/${pageCnt}`;
+    setTimeout(() => {
+      axios.get(url).then((res) => {
+        setAllFeed([...allfeed, ...res.data]);
+      });
+    }, 1500);
+    setPageCnt(pageCnt + 1);
+  };
 
   // 프로필 사진을 클릭했을 때 실행될 핸들러 함수
   const handleProfileClick = (item) => {
     setModalContent(
       <div>
-        <Image src={item.usersFeed .b_file} size="small" />
-        <p>{item.usersFeed .mem_email}</p>
+        <Image src={item.usersFeed.b_file} size="small" />
+        <p>{item.usersFeed.mem_email}</p>
       </div>
     );
     setOpen(true); // 모달 열기
@@ -55,51 +58,105 @@ const UserPost = ( ) => {
 
   // 게시물을 클릭했을 때 실행될 핸들러 함수
   const handlePostClick = (item) => {
-    setModalContent(<div><p>{item.board.b_content}</p></div>);
+    setModalContent(
+      <div>
+        <p>{item.usersFeed.b_content}</p>
+      </div>
+    );
+    console.log("게시물 클릭 : ", handlePostClick);
     setOpen(true); // 모달 열기
   };
 
   return (
-    <div>
+    <div className="userpost">
       {/* feedData 배열을 순회하며 각 요소에 대한 JSX 구조를 동적으로 생성합니다. */}
-      {allfeed?.map((item, index) => (
-        <Feed.Event key={index}>
-          {/* 프로필 사진을 클릭하면 모달을 연다 */}
-          {console.log(item)}
-          <Feed.Label style={{ cursor: 'pointer'}} onClick={() => handleProfileClick(item)} >
-            <img src={item.usersFeed.b_file} alt="" style={{ width: '200px', height: '200px' }} />
-          </Feed.Label>
-          <Feed.Content>
-            <Feed.Summary>
-              <a>{item.usersFeed.mem_nick}</a>
-              {/* 각 타입에 따른 조건부 렌더링 */}
-              {item.type === 'friend-addition' && ' 님이 친구로 추가했습니다'}
-              {item.type === 'new-illustrations' && ' 님이 새로운 그림 2개를 추가했습니다'}
-              {item.type === 'new-photos' && ' 님이 당신의 새로운 사진 2장을 추가했습니다'}
-              {/* 게시물을 클릭하면 모달을 연다 */}
-              {item.type === 'post' && <span style={{ cursor: 'pointer' }} onClick={() => handlePostClick(item.textContent)}> 님이 페이지에 게시글을 작성했습니다</span>}
-              <Feed.Date>{item.usersFeed.b_datetime}</Feed.Date>
-            </Feed.Summary>
-            {item.usersFeed.b_content && <Feed.Extra text>{item.usersFeed.b_content}</Feed.Extra>}
-            {item.contentImages  && (
-              <Feed.Extra images>
-                {item.contentImages.map((imgSrc, imgIndex) => (
-                  <a key={imgIndex}>
-                    <img src={imgSrc} />
-                  </a>
-                ))}
-              </Feed.Extra>
-            )}
-            <Feed.Meta>
-              <Feed.Like>
-                {/* <Icon name='like' /> */}좋아요{" "}
-                <FontAwesomeIcon icon={faThumbsUp} />{" "}
-                {item.usersFeed.b_likes} 
-              </Feed.Like>
-            </Feed.Meta>
-          </Feed.Content>
-        </Feed.Event>
-      ))}
+      <InfiniteScroll
+        dataLength={allfeed.length}
+        next={fetchMoreData}
+        hasMore={true}
+        loader={
+          <div className="userpost_loader-container">
+            <Oval color="white" width={50} secondaryColor="black" />
+          </div>
+        }
+      >
+        {allfeed?.map((item, index) => (
+          <div className="individualPost" key={index}>
+            <div className="userpost_header">
+              <img
+                src={"data:image/;base64," + item.usersFeed.mem_photo}
+                alt="사진"
+                className="userpost_header_mem_photo"
+              />
+              <span className="userpost_header_mem_nick">
+                {item.usersFeed.mem_nick}
+              </span>
+            </div>
+            <Feed.Event>
+              {/* 프로필 사진을 클릭하면 모달을 연다 */}
+              <Feed.Label
+                style={{ cursor: "pointer" }}
+                onClick={() => handleProfileClick(item)}
+              >
+                <img
+                  src={"data:image/;base64," + item.usersFeed.b_file}
+                  alt=""
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </Feed.Label>
+              <div className="userpost_feedContent">
+                <div className="userpost_feedContent_icons">
+                  <FontAwesomeIcon icon={faHeart} />
+                  <FontAwesomeIcon icon={faComment} className="icons_comment" />
+                </div>
+                <div className="userpost_userslikes">
+                  {item.usersFeed.b_likes} likes
+                </div>
+                <div className="userpost_usercontent">
+                  {/* <span>{item.usersFeed.mem_nick}</span> */}
+                  <p
+                    style={{
+                      color: "black",
+                      fontSize: "14px",
+                      marginBottom: 0,
+                      marginTop: "7px",
+                    }}
+                  >
+                    {item.usersFeed.b_content}
+                  </p>
+                  <p style={{ fontSize: "10px", marginTop: "10px" }}>
+                    {item.usersFeed.b_datetime}
+                  </p>
+                  {/* 댓글 하면 */}
+                  {/* <div>
+                  댓글?<button className="">Post</button>
+                </div> */}
+                </div>
+                {/* <Feed.Content>
+                <Feed.Summary>
+                  {item.type === "friend-addition" &&
+                    " 님이 친구로 추가했습니다"}
+                  {item.type === "new-illustrations" &&
+                    " 님이 새로운 그림 2개를 추가했습니다"}
+                  {item.type === "new-photos" &&
+                    " 님이 당신의 새로운 사진 2장을 추가했습니다"}
+                  {item.type === "post" && (
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handlePostClick(item.textContent)}
+                    >
+                      {" "}
+                      님이 페이지에 게시글을 작성했습니다
+                    </span>
+                  )}
+                  <Feed.Date></Feed.Date>
+                </Feed.Summary>
+              </Feed.Content> */}
+              </div>
+            </Feed.Event>
+          </div>
+        ))}
+      </InfiniteScroll>
       {/* 모달 컴포넌트 */}
       <Modal
         onClose={() => setOpen(false)}
@@ -111,7 +168,7 @@ const UserPost = ( ) => {
           {/* {ProfileModal} */}
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={() => setOpen(false)}>
+          <Button color="black" onClick={() => setOpen(false)}>
             닫기
           </Button>
         </Modal.Actions>

@@ -4,7 +4,8 @@ import axios from "axios";
 import { Button } from "semantic-ui-react";
 
 const JoinPage = () => {
-  // 이메일, 비밀번호, 닉네임 유효성 검사
+  
+  // 이메일 유효성 검사 
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -12,13 +13,15 @@ const JoinPage = () => {
         /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
       );
   };
-
+  
+  //비밀번호 유효성 검사 
   const validatePwd = (password) => {
     return password
       .toLowerCase()
       .match(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,25}$/);
   };
 
+  //닉네임 유효성 검사 
   const validateNickname = (nick) => {
     return nick.toLowerCase().match(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|].{1,8}$/);
   };
@@ -33,36 +36,51 @@ const JoinPage = () => {
   const [confirmPwdMsg, setConfirmPwdMsg] = useState(""); //비밀번호 확인
   const [nicknameMsg, setNicknameMsg] = useState(""); //닉네임중복
 
-  // 유효성 검사 함수로 정리
-  const isEmailValid = validateEmail(email);
-  const isPwdValid = validatePwd(password);
-  const isConfirmPwd = password === confirmPassword;
-  const isNicknameValid = validateNickname(nick);
 
-  //이메일
-  const onChangeEmail = useCallback(async (e) => {
+
+  //이메일 
+ const onChangeEmail = useCallback(async (e) => {
     const currEmail = e.target.value;
     setEmail(currEmail);
 
-    //이메일 유효성 검사
-    if (!validateEmail(currEmail)) {
+    if (currEmail == "") {
+      setEmailMsg("");
+    } else if(!validateEmail(currEmail)){
       setEmailMsg("이메일 형식이 올바르지 않습니다.");
-    } else {
+    } else{
       setEmailMsg("올바른 이메일 형식입니다.");
     }
-  });
+  }, []);
 
-  //비밀번호 유효성 검사
-  const onChangePwd = useCallback((e) => {
+  //닉네임 
+  const onChangeNickname = useCallback((e) => {
+    const currNickname = e.target.value;
+    setNick(currNickname);
+  
+     if (currNickname == ""){
+      setNicknameMsg("");
+     } else if(!validateNickname(currNickname)) {
+      setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.");
+     } else {
+      setNicknameMsg("올바른 닉네임 형식입니다.");
+     }
+  }, []);
+
+
+  //비밀번호 
+  const onChangePwd = useCallback(async (e) => {
     const currPwd = e.target.value;
     setPassword(currPwd);
 
-    if (!validatePwd(currPwd)) {
+    if(currPwd == ""){
+      setPwdMsg("");
+    } else if (!validatePwd(currPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.");
     } else {
       setPwdMsg("안전한 비밀번호입니다.");
     }
   }, []);
+
 
   //비밀번호 확인
   const onChangeConfirmPwd = useCallback(
@@ -70,7 +88,9 @@ const JoinPage = () => {
       const currConfirmPwd = e.target.value;
       setConfirmPassword(currConfirmPwd);
 
-      if (currConfirmPwd !== password) {
+      if(currConfirmPwd == ""){
+        setConfirmPwdMsg("")
+      } else if(currConfirmPwd !== password) {
         setConfirmPwdMsg("비밀번호가 일치하지 않습니다.");
       } else {
         setConfirmPwdMsg("올바른 비밀번호입니다.");
@@ -79,17 +99,16 @@ const JoinPage = () => {
     [password]
   );
 
-  //닉네임 확인
-  const onChangeNickname = useCallback((e) => {
-    const currNickname = e.target.value;
-    setNick(currNickname);
 
-    if (!validateNickname(currNickname)) {
-      setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.");
-    } else {
-      setNicknameMsg("올바른 닉네임 형식입니다.");
-    }
-  }, []);
+
+    // 유효성 검사 함수로 정리
+    const isEmailValid = validateEmail(email);
+    const isPwdValid = validatePwd(password);
+    const isConfirmPwd = password === confirmPassword;
+    const isNicknameValid = validateNickname(nick);
+  
+    // 유효성 검사 한번에 묶어주기 
+    const isAllValid = isEmailValid && isPwdValid && isConfirmPwd && isNicknameValid;
 
   // 이메일서버로 보내기
   // 가져온값 0 이면 사용가능 , 1이면 사용불가능
@@ -173,88 +192,89 @@ const JoinPage = () => {
   };
 
   return (
-    <div className="login-box">
-      <h1>HOGWARD</h1>
-      <form>
-        {/* 이메일 입력*/}
-        <div className="user-box">
-          <div className="info__id">
+    <div className="login-box-container">
+      <div className="login-box">
+        <h1>회원가입</h1>
+        <h2>호그와드에 오신것을 환영합니다.</h2>
+        <h3>회원가입하신 후 다양한 서비스를 이용해보세요.</h3>
+        <form>
+          {/* 이메일 입력*/}
+          <div className="user-box">
+            <div className="info__id">
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={onChangeEmail}
+                required=""
+                placeholder="이메일을 입력해 주세요"
+              />
+              <button type="button" class="btn btn-dark" onClick={onCheckEmail}>
+                중복확인
+              </button>
+            </div>
+            <p className="joincheck">{emailMsg}</p>
+          </div>
+
+          {/* 닉네임 입력 */}
+          <div className="user-box">
+            <div className="info__id">
+              <input
+                type="text"
+                value={nick}
+                onChange={onChangeNickname}
+                required=""
+                placeholder="닉네임을 입력해 주세요"
+              />
+              <button type="button" class="btn btn-dark" onClick={onCheckNick}>
+                중복확인
+              </button>
+            </div>
+            <p className="joincheck">{nicknameMsg}</p>
+          </div>
+
+          {/* 비밀번호 입력 */}
+          <div className="user-box">
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={onChangeEmail}
+              value={password}
+              type ="password"
+              onChange={onChangePwd}
               required=""
-              placeholder="이메일을 입력해 주세요"
+              placeholder="비밀번호를 입력해 주세요"
             />
-            <button type="button" class="btn btn-dark" onClick={onCheckEmail}>
-              중복확인
+            <p className="joincheck">{pwdMsg}</p>
+          </div>
+
+          {/* 비밀번호 다시 입력 */}
+          <div className="user-box">
+            <input
+              value={confirmPassword}
+              type ="password"
+              onChange={onChangeConfirmPwd}
+              required=""
+              placeholder="비밀번호를 다시 입력해주세요"
+            />
+            <p className="joincheck">{confirmPwdMsg}</p>
+          </div>
+
+          <br></br>
+
+          <div class="d-grid gap-2">
+            <button
+              href="/login"
+              class="btn btn-dark btn btn-lg" 
+              onClick={onSubmitHandler}
+              disabled={!isAllValid} // disabled 비활성화 
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              가입하기
             </button>
           </div>
-          <p>{emailMsg}</p>
-        </div>
-
-        {/* 닉네임 입력 */}
-        <div className="user-box">
-          <div className="info__id">
-            <input
-              type="text"
-              id="nick"
-              value={nick}
-              onChange={onChangeNickname}
-              required=""
-              placeholder="닉네임을 입력해 주세요"
-            />
-            <button type="button" class="btn btn-dark" onClick={onCheckNick}>
-              중복확인
-            </button>
-          </div>
-          <p>{nicknameMsg}</p>
-        </div>
-
-        {/* 비밀번호 입력 */}
-        <div className="user-box">
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={onChangePwd}
-            required=""
-            placeholder="비밀번호를 입력해 주세요"
-          />
-          <p>{pwdMsg}</p>
-        </div>
-
-        {/* 비밀번호 다시 입력 */}
-        <div className="user-box">
-          <input
-            type="password"
-            id="confirmpassword"
-            value={confirmPassword}
-            onChange={onChangeConfirmPwd}
-            required=""
-            placeholder="비밀번호를 다시 입력해주세요"
-          />
-          <p>{confirmPwdMsg}</p>
-        </div>
-
-        <br></br>
-
-        <div class="d-grid gap-2">
-          <button
-            type="button"
-            href="/login"
-            class="btn btn-dark btn btn-lg"
-            onClick={onSubmitHandler}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            가입하기
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

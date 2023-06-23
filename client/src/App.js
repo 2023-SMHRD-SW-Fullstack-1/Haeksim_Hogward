@@ -9,6 +9,8 @@ import GetDongRegionId from "./modules/map/GetDongRegionId";
 import GetCoords from "./modules/map/GetCoords";
 
 import MainPage from "./pages/MainPage";
+
+//로그인 
 import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
 
@@ -21,6 +23,8 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import { SessionContext } from "./contexts/SessionContext";
 import { useEffect } from "react";
+
+
 
 function App() {
   const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
@@ -60,14 +64,14 @@ function App() {
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/join" element={<JoinPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-
+          
           {/* 발자국지도 */}
           <Route path="/foottracer" element={<FootTracer />}></Route>
 
           {/*  */}
           {/* <Route path="/about" element={<About />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/product/:num" element={<ProductDetail />}></Route> */}
+          <Route path="/mypage" element={<MyPage />}></Route>
+          <Route path="/product/:num" element={<ProductDetail />}></Route> */}
           {/* path 가 * 라면, 위의 경로 이외에 경로들을 처리 */}
           {/* <Route path="*" element={<NotFound />}></Route> */}
           {/* 임시  - 전처리*/}

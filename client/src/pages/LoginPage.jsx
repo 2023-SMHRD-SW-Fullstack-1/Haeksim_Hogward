@@ -3,9 +3,19 @@ import axios from "axios";
 import "../assets/css/login.css";
 import { colors } from "@mui/material";
 import { SessionContext } from "../contexts/SessionContext";
+import GoogleLogin from '../components/google'
+import NaverLogin from '../components/naver'
+import KakaoLogin from '../components/kakao'
+
 
 const LoginPage = () => {
+
+  const onSuccessHandler = res => {
+    console.log(res)
+
+  }
   
+
   // 세션 context
   const { setSessionUser } = useContext(SessionContext);
   
@@ -39,37 +49,47 @@ const LoginPage = () => {
     const [pwdMsg, setPwdMsg] = useState(""); //비밀번호 형식
 
     //이메일 형식 확인
-  const onChangeEmail = useCallback(async (e) => {
-    
-    const currEmail = e.target.value;
-     setEmail(currEmail);
-
-     if (!validateEmail(currEmail) ) {
-      setEmailMsg("이메일 형식이 올바르지 않습니다.");
-     } else if(currEmail == ""){
-      // setEmailMsg("올바른 이메일 형식입니다.")
-      setEmailMsg(" ");
-     } else {
-      setEmailMsg(" ");
-     }
-  });
+   
+    const onChangeEmail = useCallback(async (e) => {
+      const currEmail = e.target.value;
+      setEmail(currEmail);
+  
+      if (currEmail == "") {
+        setEmailMsg("");
+      } else if(!validateEmail(currEmail)){
+        setEmailMsg("이메일 형식이 올바르지 않습니다.");
+      } else{
+        setEmailMsg("");
+      }
+    }, []);
+   
 
   //비밀번호 형식 확인 
-  const onChangePwd = useCallback((e) => {
-    
+  const onChangePwd = useCallback(async (e) => {
     const currPwd = e.target.value;
     setPassword(currPwd);
 
-    if (!validatePwd(currPwd)) {
+    if(currPwd == ""){
+      setPwdMsg("");
+    } else if (!validatePwd(currPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.");
     } else {
-      // setPwdMsg("안전한 비밀번호입니다.")
-      setPwdMsg(" ");
+      setPwdMsg("");
     }
   }, []);
 
+
+
+    // 유효성 검사 함수로 정리
+    const isEmailValid = validateEmail(email);
+    const isPwdValid = validatePwd(password);
+  
+    // 유효성 검사 한번에 묶어주기 
+    const isAllValid = isEmailValid && isPwdValid ;
+
+
   //로그인 버튼 클릭
-  const handleLogin = () => {
+    const handleLogin = () => {
     
     //아이디 비밀번호 일치 확인 여부
     const formData = new FormData();
@@ -104,59 +124,79 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-box">
+    <div className="login-box-container">
+      <div className="login-box">
+        {/* 로고 */}
 
-      {/* 로그인 제목 */}
-      <h1>호그와드</h1>
+        {/* 로그인 제목 */}
+        {/* <h1>HOGWARD</h1> */}
+        <h1>로그인</h1>
+        {/* <h1>Welcome to the</h1>
+        <h1>HOGWARD</h1> */}
 
-      <form>
+        <form>
 
-        {/* 아이디 입력란 */}
-        <div className="user-box">
-          <input
-            className="input-box" 
-            type="email"
-            value={email}
-            onChange={onChangeEmail}
-            required=""
-            placeholder="이메일을 입력해 주세요"
-          />
-          <p className="red">{emailMsg}</p>
-        </div>
-        <br></br>
+          {/* 아이디 입력란 */}
+          <div className="user-box">
+            <input
+              className="input-box"
+              value={email}
+              onChange={onChangeEmail}
+              required=""
+              placeholder="이메일을 입력해 주세요"
+            />
+            <p className="logincheck">{emailMsg}</p>
+          </div>
+          <br></br>
 
-        {/* 비밀번호 입력란 */}
-        <div className="user-box">
-          <input
-            className="input-box"
-            type="password"
-            id="password"
-            value={password}
-            onChange={onChangePwd}
-            required=""
-            placeholder="비밀번호를 입력해 주세요"
-          />
-          <p className="red">{pwdMsg}</p>
-        </div>
+          {/* 비밀번호 입력란 */}
+          <div className="user-box">
+            <input
+              className="input-box"
+              type ="password"
+              value={password}
+              onChange={onChangePwd}
+              required=""
+              placeholder="비밀번호를 입력해 주세요"
+            />
+            <p className="logincheck">{pwdMsg}</p>
+          </div>
+          <br></br>
+          <br></br>
 
-        <br></br>
-        <br></br>
+          {/* 로그인 버튼 */}
+          <div class="d-grid gap-2 col-5 mx-auto">
+            <button
+              type="button"
+              onClick={handleLogin}
+              class="btn btn-dark btn btn-lg"
+              disabled={!isAllValid} // disabled 비활성화 
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              입장하기
+            </button>
 
-        {/* 로그인 버튼 */}
-        <div class="d-grid gap-2">
-          <button
-            type="button"
-            onClick={handleLogin}
-            class="btn btn-dark btn btn-lg"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            로그인
-          </button>
-        </div>
-      </form>
+            {/* <div>
+              <GoogleLogin
+                success={onSuccessHandler}
+                fail={res => console.log(res)}
+              />
+              <NaverLogin
+                success={onSuccessHandler}
+                fail={res => console.log(res)}
+              />
+              <KakaoLogin
+                success={onSuccessHandler}
+                fail={res => console.log(res)}
+              />
+            </div> */}
+       
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

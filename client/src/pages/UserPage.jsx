@@ -8,6 +8,9 @@ import { animateScroll as scroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpLong } from "@fortawesome/free-solid-svg-icons";
 
+// sticky
+import { StickyContainer, Sticky } from "react-sticky";
+
 const UserPage = () => {
   const scrollToTop = () => {
     scroll.scrollToTop({
@@ -20,12 +23,28 @@ const UserPage = () => {
   return (
     <div className="userpage">
       {/* 유저 게시글 부분 */}
-      <div className="userpage_container">
-        <UserPost />
+      <UserPost />
+
+      <StickyContainer>
+        <Sticky>
+          {({
+            style,
+
+            // the following are also available but unused in this example
+            isSticky,
+            wasSticky,
+            distanceFromTop,
+            distanceFromBottom,
+            calculatedHeight,
+          }) => (
+            <div style={style}>
+              <UserRank />
+            </div>
+          )}
+        </Sticky>
 
         {/* 랭킹 부분 */}
-        <UserRank />
-      </div>
+      </StickyContainer>
 
       <div className="userpage_totop" onClick={scrollToTop}>
         <FontAwesomeIcon icon={faArrowUpLong} />

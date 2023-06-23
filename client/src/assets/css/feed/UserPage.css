@@ -4,14 +4,10 @@
   background-color: #3d3533;
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 20px;
 }
 .userpost {
   width: 540px;
-}
-.userrank {
-  position: sticky;
-  top: 0;
 }
 
 .userpage_totop {

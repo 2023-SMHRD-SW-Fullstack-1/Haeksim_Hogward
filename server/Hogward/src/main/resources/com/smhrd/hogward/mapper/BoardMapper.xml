@@ -64,5 +64,19 @@
 		    ON A.mem_email = B.mem_email
 		 WHERE A.mem_email = #{mem_email}
   	</select>
+  	
+  	<select id="rankingTen" resultType="com.smhrd.hogward.domain.Ranking">
+  		SELECT ROWNUM AS rank, A.mem_email, A.authcount, B.mem_photo
+		FROM (
+			    SELECT M.mem_email, COUNT(*) AS authcount
+			    FROM t_board B
+			    INNER JOIN t_member M ON B.mem_email = M.mem_email
+			    GROUP BY M.mem_email
+			    ORDER BY authcount DESC
+			  ) A
+		INNER JOIN t_member B ON A.mem_email = B.mem_email
+		WHERE ROWNUM &lt;= 10
+  	
+  	</select>
   
   </mapper>

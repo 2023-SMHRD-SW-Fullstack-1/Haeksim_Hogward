@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.MyFeed;
+import com.smhrd.hogward.domain.Ranking;
 import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.domain.UsersFeed;
 
@@ -29,6 +30,10 @@ public interface BoardMapper {
 	
 	//마법지도에서 랜드마크 클릭시 해당랜드마크 인증한 유저들의 사진들만 모두 보내주기
 	public List<LandAllUserPhoto> allUserPhoto(String lm_seq);
+	
+	//랭킹 top 10
+	public List<Ranking> rankingTen();
+	
 
 	
 	//public List<T_Board> boardList();

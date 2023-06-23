@@ -106,6 +106,7 @@ public class MemberController {
 	//프로필 사진 수정
 	@PostMapping("/profileupdate/{mem_email}")
 	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, HttpServletResponse response) {
+		
 		System.out.println(mem_email);
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
 		try {
@@ -118,7 +119,6 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		//member.setMem_photo(newFileName);
 		
 		int cnt = memService.profileUpdate(newFileName, mem_email);
@@ -130,7 +130,6 @@ public class MemberController {
 	    	try {
 				response.sendRedirect(redirect_uri);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	return 1;
@@ -146,9 +145,6 @@ public class MemberController {
 	//회원정보 수정시 비밀번호 제외한 내용 보내주기
 	
 	
-	
-	
-	//인증 랭킹 10위까지 프로필사진, 닉네임 보내기
 	
 	
 }

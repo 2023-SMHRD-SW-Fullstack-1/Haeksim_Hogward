@@ -13,7 +13,6 @@ public class MemService {
 	private MemMapper memMapper;
 	
 	
-
 	//이메일 중복체크
 	public int emailCheck(String mem_email) {
 		return memMapper.emailCheck(mem_email);

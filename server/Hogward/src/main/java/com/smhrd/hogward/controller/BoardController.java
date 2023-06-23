@@ -101,6 +101,22 @@ public class BoardController {
 		}
 	
 	
+	//랭킹 top 10
+	@GetMapping("/ranking")
+	public JSONArray rankingTen() {
+		
+		JSONArray array = boardService.rankingTen();
+		return array;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	//게시글 모두 보기  ---- 필요없는듯...
 //	@GetMapping("/allboard")
 //	public JSONArray boardList() {

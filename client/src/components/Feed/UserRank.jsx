@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  Feed,
-  Button,
-  Header,
-  Image,
-  Modal,
-  ModalContent,
-} from "semantic-ui-react";
+import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
 import axios from "axios";
+import KakaoChatButton from "./KakaoChatButton";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
@@ -46,6 +39,14 @@ const UserRank = () => {
     });
     console.log("유저포스트: ", userPosts);
     setOpen(true);
+  };
+
+  //맨 위로 올려주기
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -85,7 +86,7 @@ const UserRank = () => {
             <Modal.Content>
               <Modal.Description>
                 <Header>{selectedSummary}</Header>
-                <div>
+                <div className="rankpage">
                   {userPosts.map((post, index) => (
                     <div key={index}>
                       {/* <h3>{post.rankingTen.mem_nick}</h3> */}
@@ -102,7 +103,11 @@ const UserRank = () => {
             </Modal.Actions>
           </Modal>
         </Card.Content>
+        {/* 맨 위로 가는 버튼 */}
+        <Button onClick={scrollToTop}>맨위로</Button>
       </Card>
+
+      <KakaoChatButton />
     </div>
   );
 };

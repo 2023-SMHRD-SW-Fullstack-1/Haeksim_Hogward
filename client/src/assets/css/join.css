@@ -1,5 +1,53 @@
 
-/* 로그인 박스  */
+
+/* 아이폰미니12 기준 */
+@media all and (max-width: 800px) {
+  .login-box-container {
+    height: auto;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .login-box {
+    /* 로그인 박스에 대한 스타일 설정 */
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
+    width: 75% !important ;
+    padding: 30px !important;
+  }
+  
+  .login-box h1 {
+    /* 로그인 제목에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 30px !important;
+  }
+
+  .login-box h2 {
+    /* 로그인 제목에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 15px !important;
+  }
+
+  .login-box h3 {
+    /* 로그인 제목에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 10px !important;
+  }
+  
+  .login-box .user-box input {
+    /* 아이디 및 비밀번호 입력란에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 13px !important;
+  }
+  
+  .joincheck {
+    font-size: 13px !important;
+  }
+
+}
+
+
+/* 회원가입 컨테이너  */
 .login-box-container {
   background: url("../img/mainbg.png");
   background-repeat: no-repeat;
@@ -9,6 +57,8 @@
   position: relative;  
  
 }
+
+/* 회원가입 박스  */
 .login-box {
   position: absolute;
   top: 50%;
@@ -31,6 +81,7 @@
     font-size: 50px;
   }
 
+  /* 호그와드에 오신것을 환영합니다 */
   .login-box h2 {
     margin: 0 0 10px;
     padding: 0;
@@ -39,6 +90,7 @@
     font-size: 20px;
   }
 
+  /* 회원가입하신후에 ~  */
   .login-box h3 {
     margin: 0 0 50px;
     padding: 0;
@@ -48,12 +100,12 @@
   }
   
 
-/* 아이디 비번 입력 BOX */
+/* 이메일, 닉네임, 비밀번호, 비밀번호확인 입력  BOX */
 .login-box .user-box {
   position: relative;
 }
 
-/* 아이디 비번 입력 BOX */
+/* 이메일, 닉네임, 비밀번호, 비밀번호확인 입력  BOX */
 .login-box .user-box input {
   width: 100%;
   padding: 25px 0;

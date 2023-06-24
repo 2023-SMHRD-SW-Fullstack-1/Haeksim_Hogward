@@ -55,3 +55,55 @@
   margin-left: 10px;
   font-size: 14px;
 }
+.userpost_reply {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 15px;
+}
+.userpost_reply_replys {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.userpost_reply_post {
+  display: flex;
+  align-items: center;
+}
+
+.userpost_reply_mem_photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.userpost_reply_mem_nick {
+  margin-left: 10px;
+  font-size: 16px;
+}
+.userpost_reply_mem_comment {
+  margin-left: 10px;
+  font-size: 10px;
+}
+.userpost_reply_write {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+}
+.userpost_reply_write_input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userpost_reply_write input {
+  border: none;
+  font-size: 12px;
+  width: 100%;
+  outline: none;
+}
+.userpost_reply_submit {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  white-space: nowrap;
+}

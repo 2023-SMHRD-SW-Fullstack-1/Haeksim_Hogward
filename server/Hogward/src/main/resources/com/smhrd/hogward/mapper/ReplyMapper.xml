@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.smhrd.hogward.mapper.ReplyMapper">
+  
+	
+	<insert id="writeReply" parameterType="com.smhrd.hogward.domain.T_Reply">
+		insert into t_reply 
+		    ( 
+		        MEM_EMAIL
+		      , B_SEQ
+		      , B_Comment 
+		     ) VALUES (
+		        #{mem_email}
+		      , #{b_seq}
+		      , #{b_comment}
+		     )
+	</insert>
+	
+	<select id="replylist" resultType="com.smhrd.hogward.domain.ReplyDTO">
+		SELECT A.mem_email, A.mem_photo , B.b_comment, B.r_datetime, B_seq
+		  FROM t_member A, t_reply B
+		 WHERE A.mem_email = B.mem_email
+		   AND B.B_seq = #{b_seq}
+		 ORDER BY B.r_datetime ASC
+	</select>
+  
+  </mapper>

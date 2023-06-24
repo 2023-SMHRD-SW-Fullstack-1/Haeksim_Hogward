@@ -5,8 +5,6 @@ import axios from "axios";
 import { SessionContext } from "../../contexts/SessionContext";
 import "../../assets/css/feed/MyFeed.css";
 
-import "../../assets/css/feed/Modal.css";
-
 const MyFeed = () => {
   // 모달의 표시 여부와 내용을 관리하는 상태
   const [open, setOpen] = useState(false);

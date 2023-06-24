@@ -37,7 +37,7 @@ const UserPage = () => {
             distanceFromBottom,
             calculatedHeight,
           }) => (
-            <div style={style}>
+            <div style={style} className="userpage_sticky">
               <UserRank />
             </div>
           )}

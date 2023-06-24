@@ -135,7 +135,7 @@ const FootTracer = () => {
             key={`container${i}`}
             startCoords={nowAuthCoords[i][0].divcoords.coords}
             endCoords={nowAuthCoords[i + 1][0].divcoords.coords}
-            conDelay={3 * i}
+            // conDelay={3 * i}
             divDelay={i}
           />
           <FootLandmark

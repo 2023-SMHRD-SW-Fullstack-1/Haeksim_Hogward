@@ -22,10 +22,6 @@
   padding-top: 5px;
   cursor: pointer;
 }
-<<<<<<< HEAD
-.userpage_sticky {
-  width: auto !important;
-=======
 
 /* 모달 창 css */
 .ui.modal {
@@ -40,13 +36,12 @@
 
 /* 모달 창 안에 내용css */
 .ui.modal .content {
-  width: auto;  /* or set it to a specific size like 50% or 500px */
+  width: auto; /* or set it to a specific size like 50% or 500px */
   height: auto; /* or set it to a specific size like 50% or 500px */
 }
 
 /* 모달 창 안에 사진 css */
 .ui.modal .content img {
-  max-width: 100%;   /* This will make sure image width don't exceed the width of modal */
-  height: auto;      /* This will preserve the aspect ratio */
->>>>>>> origin/kimterman
+  max-width: 100%; /* This will make sure image width don't exceed the width of modal */
+  height: auto; /* This will preserve the aspect ratio */
 }

@@ -50,7 +50,7 @@ const UserPost = () => {
     setModalContent(
       <div>
         <Image src={item.usersFeed.b_file} size="small" />
-        <p>{item.usersFeed.mem_email}</p>
+        <p>{item.usersFeed.mem_nick}</p>
       </div>
     );
     setOpen(true); // 모달 열기
@@ -61,6 +61,7 @@ const UserPost = () => {
     setModalContent(
       <div>
         <p>{item.usersFeed.b_content}</p>
+        <Image src={"data:image/;base64," + item.usersFeed.b_file} size="" />
       </div>
     );
     console.log("게시물 클릭 : ", handlePostClick);
@@ -93,10 +94,11 @@ const UserPost = () => {
               </span>
             </div>
             <Feed.Event>
-              {/* 프로필 사진을 클릭하면 모달을 연다 */}
+        
+              {/* 게시물 클릭시 상세보기 창 */}
               <Feed.Label
                 style={{ cursor: "pointer" }}
-                onClick={() => handleProfileClick(item)}
+                onClick={() => handlePostClick(item)}
               >
                 <img
                   src={"data:image/;base64," + item.usersFeed.b_file}

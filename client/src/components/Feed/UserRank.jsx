@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
+import { Card, Feed, Button, Header, Image, Modal, ModalContent } from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
 import axios from "axios";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
   const [selectedSummary, setSelectedSummary] = useState("");
+  const [userPosts, setUserPosts] = useState([]);
 
-  const feedEvents = [
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/jenny.jpg",
-      date: "1 day ago",
-      summary: "You added Jenny Hess to your coworker group.",
-    },
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/molly.png",
-      date: "3 days ago",
-      summary: "You added Molly Malone as a friend.",
-    },
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/elliot.jpg",
-      date: "4 days ago",
-      summary: "You added Elliot Baker to your musicians group.",
-    },
-  ];
+  //     더미데이터
+  // const feedEvents = [
+  //   {
+  //     image: "https://react.semantic-ui.com/images/avatar/small/jenny.jpg",
+  //     date: "1 day ago",
+  //     summary: "You added Jenny Hess to your coworker group.",
+  //   },
+  //   {
+  //     image: "https://react.semantic-ui.com/images/avatar/small/molly.png",
+  //     date: "3 days ago",
+  //     summary: "You added Molly Malone as a friend.",
+  //   },
+  //   {
+  //     image: "https://react.semantic-ui.com/images/avatar/small/elliot.jpg",
+  //     date: "4 days ago",
+  //     summary: "You added Elliot Baker to your musicians group.",
+  //   },
+  // ];
 
   // 랭킹 데이터 가져오기
   const [userRankData, setUserRankData] = useState(null);
@@ -31,11 +33,27 @@ const UserRank = () => {
     const url = `http://172.30.1.22:8087/hogward/ranking`;
     axios.get(url).then((res) => {
       setUserRankData(res.data);
+      console.log("랭킹데이터가져오기 :",res.data);
     });
   }, []);
+
   //랭킹 사진 클릭 했을 떼 ->
-  const handleSummaryClick = (summary, image) => {
-    setSelectedSummary(summary, image);
+  const handleSummaryClick = (item) => {
+    setSelectedSummary(<div>
+      <p>{item.rankingTen.mem_nick}</p>
+      <Image src={"data:image/;base64," + item.rankingTen.mem_photo} size="" />
+    </div>);
+    console.log("랭킹클릭 : ",handleSummaryClick);
+    console.log("셀렉서머리클릭 :",selectedSummary);
+      
+    //랭킹 클릭시 데이터 가져오는 axios
+    axios
+    .get(`http://172.30.1.22:8087/hogward/ranking`)
+    .then((res) => {
+      setUserPosts(res.data);
+      
+    });
+    console.log("유저포스트: ",userPosts);
     setOpen(true);
   };
 
@@ -46,17 +64,19 @@ const UserRank = () => {
           <Card.Header>랭킹</Card.Header>
         </Card.Content>
         <Card.Content>
-          <Feed>
+          <Feed  >
             {userRankData?.map((item, index) => (
-              <Feed.Event key={index}>
+              <Feed.Event key={index} onClick={() => handleSummaryClick(item)} >
                 <Feed.Label
                   image={`data:image/;base64,${item.rankingTen.mem_photo}`}
                   // onClick={() => handleSummaryClick(event.summary)}
                   style={{ cursor: "pointer" }}
+                  
                 />
-
+                  
                 <Feed.Content>
                   <Feed.Date content={`${item.rankingTen.mem_nick}`} />
+                
                   <Feed.Summary
                     // onClick={() => handleSummaryClick(event.summary)}
                     style={{ cursor: "pointer" }}
@@ -69,11 +89,20 @@ const UserRank = () => {
           </Feed>
 
           <Modal onClose={() => setOpen(false)} open={open}>
-            <Modal.Header>Summary Details</Modal.Header>
+            <Modal.Header>랭킹</Modal.Header>
             <Modal.Content>
               <Modal.Description>
                 <Header>{selectedSummary}</Header>
+                <div>
+                {userPosts.map((post, index) => (
+                  <div key={index}>
+                    {/* <h3>{post.rankingTen.mem_nick}</h3> */}
+                    <p>{post.content}</p>
+                  </div>
+                ))}
+                </div>
               </Modal.Description>
+             
             </Modal.Content>
             <Modal.Actions>
               <Button color="black" onClick={() => setOpen(false)}>

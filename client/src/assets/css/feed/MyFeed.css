@@ -51,9 +51,13 @@
     color: rgb(188, 151, 225);
 }
 
-.pfmodal{
-    background-color: pink;
+
+.profile-nick, .profile-introduce{
+    width: 80%;
+    height: 80px;
+    font-size: 18px;
+    color: #736b69;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid lightgray;
 }
-
-
-

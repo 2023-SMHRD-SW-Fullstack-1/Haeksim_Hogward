@@ -60,8 +60,9 @@ const UserPost = () => {
   const handlePostClick = (item) => {
     setModalContent(
       <div>
-        <p>{item.usersFeed.b_content}</p>
+        
         <Image src={"data:image/;base64," + item.usersFeed.b_file} size="" />
+        <p>{item.usersFeed.b_content}</p>
       </div>
     );
     console.log("게시물 클릭 : ", handlePostClick);

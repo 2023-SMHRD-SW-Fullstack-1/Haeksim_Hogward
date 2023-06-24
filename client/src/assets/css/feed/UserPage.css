@@ -23,3 +23,26 @@
   padding-top: 5px;
   cursor: pointer;
 }
+
+/* 모달 창 css */
+.ui.modal {
+  position: fixed;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  width: auto;
+  height: auto;
+}
+
+/* 모달 창 안에 내용css */
+.ui.modal .content {
+  width: auto;  /* or set it to a specific size like 50% or 500px */
+  height: auto; /* or set it to a specific size like 50% or 500px */
+}
+
+/* 모달 창 안에 사진 css */
+.ui.modal .content img {
+  max-width: 100%;   /* This will make sure image width don't exceed the width of modal */
+  height: auto;      /* This will preserve the aspect ratio */
+}

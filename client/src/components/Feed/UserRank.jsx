@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
+import {
+  Card,
+  Feed,
+  Button,
+  Header,
+  Image,
+  Modal,
+  ModalContent,
+} from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
 import axios from "axios";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
   const [selectedSummary, setSelectedSummary] = useState("");
+  const [userPosts, setUserPosts] = useState([]);
 
   // 랭킹 데이터 가져오기
   const [userRankData, setUserRankData] = useState(null);
@@ -13,11 +22,29 @@ const UserRank = () => {
     const url = `http://172.30.1.22:8087/hogward/ranking`;
     axios.get(url).then((res) => {
       setUserRankData(res.data);
+      console.log("랭킹데이터가져오기 :", res.data);
     });
   }, []);
+
   //랭킹 사진 클릭 했을 떼 ->
-  const handleSummaryClick = (summary, image) => {
-    setSelectedSummary(summary, image);
+  const handleSummaryClick = (item) => {
+    setSelectedSummary(
+      <div>
+        <p>{item.rankingTen.mem_nick}</p>
+        <Image
+          src={"data:image/;base64," + item.rankingTen.mem_photo}
+          size=""
+        />
+      </div>
+    );
+    console.log("랭킹클릭 : ", handleSummaryClick);
+    console.log("셀렉서머리클릭 :", selectedSummary);
+
+    //랭킹 클릭시 데이터 가져오는 axios
+    axios.get(`http://172.30.1.22:8087/hogward/ranking`).then((res) => {
+      setUserPosts(res.data);
+    });
+    console.log("유저포스트: ", userPosts);
     setOpen(true);
   };
 
@@ -30,7 +57,7 @@ const UserRank = () => {
         <Card.Content>
           <Feed>
             {userRankData?.map((item, index) => (
-              <Feed.Event key={index}>
+              <Feed.Event key={index} onClick={() => handleSummaryClick(item)}>
                 <Feed.Label
                   image={`data:image/;base64,${item.rankingTen.mem_photo}`}
                   // onClick={() => handleSummaryClick(event.summary)}
@@ -53,11 +80,19 @@ const UserRank = () => {
             ))}
           </Feed>
 
-          {/* <Modal onClose={() => setOpen(false)} open={open}>
-            <Modal.Header>Summary Details</Modal.Header>
+          <Modal onClose={() => setOpen(false)} open={open}>
+            <Modal.Header>랭킹</Modal.Header>
             <Modal.Content>
               <Modal.Description>
                 <Header>{selectedSummary}</Header>
+                <div>
+                  {userPosts.map((post, index) => (
+                    <div key={index}>
+                      {/* <h3>{post.rankingTen.mem_nick}</h3> */}
+                      <p>{post.content}</p>
+                    </div>
+                  ))}
+                </div>
               </Modal.Description>
             </Modal.Content>
             <Modal.Actions>
@@ -65,7 +100,7 @@ const UserRank = () => {
                 닫기
               </Button>
             </Modal.Actions>
-          </Modal> */}
+          </Modal>
         </Card.Content>
       </Card>
     </div>

@@ -124,7 +124,7 @@ const UserPost = () => {
               </span>
             </div>
             <Feed.Event>
-              {/* 프로필 사진을 클릭하면 모달을 연다 */}
+              {/* 게시물 클릭시 상세보기 창 */}
               <Feed.Label
                 style={{ cursor: "pointer" }}
                 // onClick={() => handleProfileClick(item)}

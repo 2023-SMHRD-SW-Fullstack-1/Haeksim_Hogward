@@ -52,6 +52,7 @@ const JoinPage = () => {
     }
   }, []);
 
+  
   //닉네임 
   const onChangeNickname = useCallback((e) => {
     const currNickname = e.target.value;

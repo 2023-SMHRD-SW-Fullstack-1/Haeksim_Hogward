@@ -7,24 +7,6 @@ const UserRank = () => {
   const [open, setOpen] = useState(false);
   const [selectedSummary, setSelectedSummary] = useState("");
 
-  const feedEvents = [
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/jenny.jpg",
-      date: "1 day ago",
-      summary: "You added Jenny Hess to your coworker group.",
-    },
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/molly.png",
-      date: "3 days ago",
-      summary: "You added Molly Malone as a friend.",
-    },
-    {
-      image: "https://react.semantic-ui.com/images/avatar/small/elliot.jpg",
-      date: "4 days ago",
-      summary: "You added Elliot Baker to your musicians group.",
-    },
-  ];
-
   // 랭킹 데이터 가져오기
   const [userRankData, setUserRankData] = useState(null);
   useEffect(() => {
@@ -40,7 +22,7 @@ const UserRank = () => {
   };
 
   return (
-    <div className="userrank">
+    <div className="userrank" style={{ position: "fixed" }}>
       <Card>
         <Card.Content>
           <Card.Header>랭킹</Card.Header>
@@ -56,10 +38,13 @@ const UserRank = () => {
                 />
 
                 <Feed.Content>
-                  <Feed.Date content={`${item.rankingTen.mem_nick}`} />
+                  <Feed.Date
+                    content={`${item.rankingTen.mem_nick}`}
+                    style={{ color: "black" }}
+                  />
                   <Feed.Summary
-                    // onClick={() => handleSummaryClick(event.summary)}
-                    style={{ cursor: "pointer" }}
+                  // onClick={() => handleSummaryClick(event.summary)}
+                  // style={{ cursor: "pointer" }}
                   >
                     {item.rankingTen.authcount}회
                   </Feed.Summary>
@@ -68,7 +53,7 @@ const UserRank = () => {
             ))}
           </Feed>
 
-          <Modal onClose={() => setOpen(false)} open={open}>
+          {/* <Modal onClose={() => setOpen(false)} open={open}>
             <Modal.Header>Summary Details</Modal.Header>
             <Modal.Content>
               <Modal.Description>
@@ -80,7 +65,7 @@ const UserRank = () => {
                 닫기
               </Button>
             </Modal.Actions>
-          </Modal>
+          </Modal> */}
         </Card.Content>
       </Card>
     </div>

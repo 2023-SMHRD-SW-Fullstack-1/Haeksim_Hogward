@@ -10,7 +10,7 @@ import GetCoords from "./modules/map/GetCoords";
 
 import MainPage from "./pages/MainPage";
 
-//로그인 
+//로그인
 import LoginPage from "./pages/LoginPage";
 import JoinPage from "./pages/JoinPage";
 
@@ -23,9 +23,6 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import { SessionContext } from "./contexts/SessionContext";
 import { useEffect } from "react";
-import FeedTest from "./components/Feed/FeedTest";
-
-
 
 function App() {
   const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
@@ -63,11 +60,10 @@ function App() {
           <Route path="/magicmap" element={<MagicMapPage />}></Route>
           <Route path="/userpage" element={<UserPage />}></Route>
           {/* 테스트 유저피드 */}
-          <Route path="/userfeed" element={<FeedTest />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/join" element={<JoinPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          
+
           {/* 발자국지도 */}
           <Route path="/foottracer" element={<FootTracer />}></Route>
           {/*  */}

@@ -37,8 +37,6 @@ public class BoardService {
 	
 	//유저 게시글 모두보기(유저피드)
 	public JSONArray usersFeed(int s_paging_num, int e_paging_num) {
-		System.out.println("s_pagingnum : " + s_paging_num);
-		System.out.println("e_pagingnum : " + e_paging_num);
 		List<UsersFeed> list = boardMapper.usersFeed(s_paging_num,e_paging_num);
 		
 		JSONArray jsonArray = new JSONArray();
@@ -85,14 +83,12 @@ public class BoardService {
 				
 				//File file2 = new File("c:\\uploadimage\\" + "defaultphoto.jpg");
 				File file2 = new File("c:\\uploadimage\\" + myfeed.getMem_photo());
-				System.out.println(file2);
 
 				String fileStringValue2 = null;
 				
 				try {
 					
 					fileStringValue2 = converter.convert(file2);
-					System.out.println(fileStringValue2);
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -117,7 +113,6 @@ public class BoardService {
 				try {
 					fileStringValue1 = converter.convert(file1);
 					fileStringValue2 = converter.convert(file2);
-					System.out.println(fileStringValue2);
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -146,7 +141,6 @@ public class BoardService {
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
 		File file = new File("c:\\uploadimage\\"+board.getB_file());
-		System.out.println(file);
 		
 		String fileStringValue = null;
 		try {

@@ -25,7 +25,6 @@ function NavbarElements() {
             <Nav.Link href="/magicmap">마법지도</Nav.Link>
             {/* <Nav.Link href="/foottracer"></Nav.Link> */}
             <Nav.Link href="/userpage">피드</Nav.Link>
-            <Nav.Link href="/userfeed">피드테스트</Nav.Link>
 
             <Nav.Link href="/mypage">마이페이지</Nav.Link>
           </Nav>

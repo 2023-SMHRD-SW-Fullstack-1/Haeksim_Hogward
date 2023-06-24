@@ -127,43 +127,28 @@ const MyFeed = () => {
     <div>
       <div style={{ display: "flex", padding: "100px" }}>
         <div style={{ flex: 3, padding: "10px" }}>
-
-        <div className="profile"> 
-
-              {/* 프로필 이미지 */}
-              { myFeed.length > 0 ? (
-              <img className="profileImg"
-              src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
-
-              wrapped
-              ui={false}
+          <div className="profile">
+            {/* 프로필 이미지 */}
+            {myFeed.length > 0 ? (
+              <img
+                className="profileImg"
+                src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
+                wrapped
+                ui={false}
               />
-              ) : (
+            ) : (
               // 프로필 사진 없을 때 기본 프로필 사진
-              <img className="profileImg"
-              src=" "
-              wrapped
-              ui={false}
-              />
-              )}
-              </div>
+              <img className="profileImg" src=" " wrapped ui={false} />
+            )}
+          </div>
 
-
-              {/* 프로필 정보 (닉네임, 가입 날짜, 자기 소개) */}
-              <div className="Information">
-              <p>{myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}</p>
-              <span className="date">
-              {myFeed.length > 0
-              ? myFeed[0].myFeed.mem_joindate
-              : "가입날짜"} 
-              </span>
-
-
-              </div>
-
-
-
-
+          {/* 프로필 정보 (닉네임, 가입 날짜, 자기 소개) */}
+          <div className="Information">
+            <p>{myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}</p>
+            <span className="date">
+              {myFeed.length > 0 ? myFeed[0].myFeed.mem_joindate : "가입날짜"}
+            </span>
+          </div>
 
           {/* 프로필 카드 */}
           <Card onClick={handleCardClick}>

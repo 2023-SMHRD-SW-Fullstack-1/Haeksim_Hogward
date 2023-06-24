@@ -16,6 +16,7 @@
 		           , B.b_file, B.b_content
 		           , B.b_rep, B.b_likes
 		           , B.b_datetime
+		           , B.b_seq
 		           , ROW_NUMBER() OVER (ORDER BY B.b_datetime DESC) AS RN
         		FROM t_member A
                 JOIN t_board B ON A.mem_email = B.mem_email

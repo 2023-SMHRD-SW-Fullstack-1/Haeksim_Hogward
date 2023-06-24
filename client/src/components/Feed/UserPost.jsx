@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Feed, Button, Image, Modal } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import {
+  faComment,
+  faHeart,
+  faSmile,
+} from "@fortawesome/free-regular-svg-icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../assets/css/feed/UserPost.css";
 
@@ -18,12 +22,17 @@ import {
   Oval,
 } from "react-loader-spinner";
 import UserRank from "./UserRank";
+import { SessionContext } from "../../contexts/SessionContext";
+import Swal from "sweetalert2";
 
 const UserPost = () => {
+  // 세션 구현
+  const { sessionUser } = useContext(SessionContext);
+
   const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
   const [modalContent, setModalContent] = useState(null); // 모달에 표시될 내용을 관리하는 state
 
-  // 다른사람 피드 최신순 데이터
+  // 다른사람 피드,댓글 최신순 데이터
   const [allfeed, setAllFeed] = useState([]);
   useEffect(() => {
     const url = "http://172.30.1.22:8087/hogward/usersfeed/1";
@@ -45,31 +54,53 @@ const UserPost = () => {
     setPageCnt(pageCnt + 1);
   };
 
-  // 프로필 사진을 클릭했을 때 실행될 핸들러 함수
-  const handleProfileClick = (item) => {
-    setModalContent(
-      <div>
-        <Image src={item.usersFeed.b_file} size="small" />
-        <p>{item.usersFeed.mem_email}</p>
-      </div>
-    );
-    setOpen(true); // 모달 열기
+  // 댓글 작성 함수
+  const [reply, setReply] = useState("");
+  const insertReply = (b_seq) => {
+    if (reply !== "") {
+      const url = "http://172.30.1.22:8087/hogward/writereply";
+      axios({
+        method: "post",
+        url,
+        data: {
+          mem_email: sessionUser.email,
+          b_seq,
+          b_comment: reply,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "로그인 필요",
+        text: "댓글을 작성하는데 로그인이 필요합니다",
+        confirmButtonColor: "#e74c3c",
+        confirmButtonText: "확인",
+      });
+    }
   };
 
-  // 게시물을 클릭했을 때 실행될 핸들러 함수
-  const handlePostClick = (item) => {
-    setModalContent(
-      <div>
-        <p>{item.usersFeed.b_content}</p>
-      </div>
-    );
-    console.log("게시물 클릭 : ", handlePostClick);
-    setOpen(true); // 모달 열기
+  // 댓글 가져오는 함수
+  const getUserFeed = async (b_seq) => {
+    const url = `http://172.30.1.22:8087/hogward/replylist/${b_seq}`;
+    const res = await axios.get(url);
+    console.log("res", res.data);
+    return res.data;
   };
+
+  // inputRef
+  const replyInputRef = useRef();
 
   return (
     <div className="userpost">
-      {/* feedData 배열을 순회하며 각 요소에 대한 JSX 구조를 동적으로 생성합니다. */}
       <InfiniteScroll
         dataLength={allfeed.length}
         next={fetchMoreData}
@@ -96,7 +127,7 @@ const UserPost = () => {
               {/* 프로필 사진을 클릭하면 모달을 연다 */}
               <Feed.Label
                 style={{ cursor: "pointer" }}
-                onClick={() => handleProfileClick(item)}
+                // onClick={() => handleProfileClick(item)}
               >
                 <img
                   src={"data:image/;base64," + item.usersFeed.b_file}
@@ -107,7 +138,6 @@ const UserPost = () => {
               <div className="userpost_feedContent">
                 <div className="userpost_feedContent_icons">
                   <FontAwesomeIcon icon={faHeart} />
-                  <FontAwesomeIcon icon={faComment} className="icons_comment" />
                 </div>
                 <div className="userpost_userslikes">
                   {item.usersFeed.b_likes} likes
@@ -128,9 +158,64 @@ const UserPost = () => {
                     {item.usersFeed.b_datetime}
                   </p>
                   {/* 댓글 하면 */}
-                  {/* <div>
-                  댓글?<button className="">Post</button>
-                </div> */}
+                  <div className="userpost_reply">
+                    <div className="userpost_reply_replys">
+                      {console.log(getUserFeed(item.usersFeed.b_seq))}
+                      {/* 댓글, 사진 map돌리기 */}
+                      <div className="userpost_reply_post">
+                        <img
+                          src={"data:image/;base64," + item.usersFeed.mem_photo}
+                          alt="사진"
+                          className="userpost_reply_mem_photo"
+                        />
+                        <span className="userpost_reply_mem_nick">다요미</span>
+                        <span className="userpost_reply_mem_comment">
+                          안녕하세요
+                        </span>
+                      </div>
+                      {/* 구분 */}
+                      <div className="userpost_reply_post">
+                        <img
+                          src={"data:image/;base64," + item.usersFeed.mem_photo}
+                          alt="사진"
+                          className="userpost_reply_mem_photo"
+                        />
+                        <span className="userpost_reply_mem_nick">다요미</span>
+                        <span className="userpost_reply_mem_comment">
+                          안녕하세요 반가워요
+                        </span>
+                      </div>
+                    </div>
+                    <div className="userpost_reply_write">
+                      <span>
+                        <FontAwesomeIcon icon={faSmile} />
+                      </span>
+                      {sessionUser.email === "" ? (
+                        <input
+                          type="text"
+                          placeholder="로그인 해주세요"
+                          onChange={(e) => setReply(e.target.value)}
+                        />
+                      ) : (
+                        <input
+                          type="text"
+                          placeholder="댓글을 남겨주세요"
+                          refs={replyInputRef}
+                          onChange={(e) => setReply(e.target.value)}
+                        />
+                      )}
+
+                      <button
+                        className="userpost_reply_submit"
+                        onClick={(e) => {
+                          insertReply(item.usersFeed.b_seq);
+                          console.log(replyInputRef.current);
+                        }}
+                      >
+                        작성
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 {/* <Feed.Content>
                 <Feed.Summary>
@@ -158,21 +243,20 @@ const UserPost = () => {
         ))}
       </InfiniteScroll>
       {/* 모달 컴포넌트 */}
-      <Modal
+      {/* <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
       >
         <Modal.Content>
           {modalContent}
-          {/* {ProfileModal} */}
         </Modal.Content>
         <Modal.Actions>
           <Button color="black" onClick={() => setOpen(false)}>
             닫기
           </Button>
         </Modal.Actions>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

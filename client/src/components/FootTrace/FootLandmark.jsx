@@ -12,7 +12,7 @@ const FootLandmark = ({ pingLeft, pingTop, divDelay }) => {
     // divDelay * 3 + i * 0.3
 
     return () => clearTimeout(timeout);
-  }, [divDelay]);
+  }, []);
 
   return (
     <>

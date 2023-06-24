@@ -3,18 +3,9 @@ import axios from "axios";
 import "../assets/css/login.css";
 import { colors } from "@mui/material";
 import { SessionContext } from "../contexts/SessionContext";
-import GoogleLogin from '../components/google'
-import NaverLogin from '../components/naver'
-import KakaoLogin from '../components/kakao'
 
 
 const LoginPage = () => {
-
-  const onSuccessHandler = res => {
-    console.log(res)
-
-  }
-  
 
   // 세션 context
   const { setSessionUser } = useContext(SessionContext);
@@ -166,12 +157,12 @@ const LoginPage = () => {
           <br></br>
 
           {/* 로그인 버튼 */}
-          <div class="d-grid gap-2 col-5 mx-auto">
+          <div class="d-grid gap-2">
             <button
               type="button"
               onClick={handleLogin}
               class="btn btn-dark btn btn-lg"
-              disabled={!isAllValid} // disabled 비활성화 
+              // disabled={!isAllValid} // disabled 비활성화 
             >
               <span></span>
               <span></span>
@@ -179,21 +170,6 @@ const LoginPage = () => {
               <span></span>
               입장하기
             </button>
-
-            {/* <div>
-              <GoogleLogin
-                success={onSuccessHandler}
-                fail={res => console.log(res)}
-              />
-              <NaverLogin
-                success={onSuccessHandler}
-                fail={res => console.log(res)}
-              />
-              <KakaoLogin
-                success={onSuccessHandler}
-                fail={res => console.log(res)}
-              />
-            </div> */}
        
           </div>
         </form>

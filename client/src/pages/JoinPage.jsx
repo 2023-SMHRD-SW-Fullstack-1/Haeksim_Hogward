@@ -137,7 +137,7 @@ const JoinPage = () => {
     formData.append("mem_nick", nick);
 
     axios
-      .post("http://172.30.1.20:8087/hogward/nickcheck", formData)
+      .post("http://172.30.1.22:8087/hogward/nickcheck", formData)
       .then((res) => {
         if (res.data == 0) {
           alert("사용 가능한 닉네임 입니다.");
@@ -262,7 +262,7 @@ const JoinPage = () => {
               href="/login"
               class="btn btn-dark btn btn-lg" 
               onClick={onSubmitHandler}
-              disabled={!isAllValid} // disabled 비활성화 
+              // disabled={!isAllValid} // disabled 비활성화 
             >
               <span></span>
               <span></span>

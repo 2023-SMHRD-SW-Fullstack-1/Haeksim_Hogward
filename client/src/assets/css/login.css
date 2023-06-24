@@ -1,3 +1,39 @@
+
+/* 아이폰미니12 기준 */
+@media all and (max-width: 800px) {
+  .login-box-container {
+    height: auto;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .login-box {
+    /* 로그인 박스에 대한 스타일 설정 */
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
+    width: 75% !important ;
+    padding: 30px !important;
+  }
+  
+  .login-box h1 {
+    /* 로그인 제목에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 30px !important;
+  }
+  
+  .login-box .user-box input {
+    /* 아이디 및 비밀번호 입력란에 대한 스타일 설정 */
+    /* 예: 폰트 크기 조정 */
+    font-size: 13px !important;
+  }
+  
+  .logincheck {
+    font-size: 13px !important;
+  }
+
+}
+
+
 /* 로그인 컨테이너  */
 .login-box-container {
   background: url("../img/mainbg.png");
@@ -13,8 +49,6 @@
   position: absolute;
   top: 60% !important;
   left: 50%;
-  /* width: 50%; */
-  /* padding: 90px; */
   transform: translate(-50%, -50%);
   background: white;
   border: 1px solid lightgray;
@@ -61,5 +95,6 @@ input[type=password]{
 }  
 
 @import url("//fonts.googleapis.com/earlyaccess/nanumgothic.css" )
+
 
 

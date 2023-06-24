@@ -164,7 +164,7 @@ const JoinPage = () => {
     formData.append("mem_pw", password);
 
     axios
-      .post("http://172.30.1.20:8087/hogward/joinmember", formData)
+      .post("http://172.30.1.22:8087/hogward/joinmember", formData)
       .then((res) => {
         console.log(res.data);
 
@@ -176,10 +176,7 @@ const JoinPage = () => {
           // 0이면 회원가입 실패
           alert("회원가입에 실패했습니다. 다시 시도해주세요.");
         }
-
-        // res.data = 1 & window.location.href = '/join''
-        // res.data = 1 & window.location.href =
-        // alert('등록되었습니다.');
+        
       })
       .catch((error) => {
         console.error(error);
@@ -259,9 +256,8 @@ const JoinPage = () => {
 
           <div class="d-grid gap-2">
             <button
-              href="/login"
               class="btn btn-dark btn btn-lg" 
-              onClick={onSubmitHandler}
+              onClick={(e) => {onSubmitHandler(); e.preventDefault()}}
               // disabled={!isAllValid} // disabled 비활성화 
             >
               <span></span>

@@ -34,6 +34,7 @@ const UserPost = () => {
 
   // 다른사람 피드,댓글 최신순 데이터
   const [allfeed, setAllFeed] = useState([]);
+
   useEffect(() => {
     const url = "http://172.30.1.22:8087/hogward/usersfeed/1";
     // 다시 키기
@@ -54,10 +55,35 @@ const UserPost = () => {
     setPageCnt(pageCnt + 1);
   };
 
+  // 유저 사진만 불러오기
+  const [userPicture, setUserPicture] = useState("");
+  useEffect(() => {
+    if (sessionUser.email !== "") {
+      const url = `http://172.30.1.22:8087/hogward/userphoto/${sessionUser.email}`;
+      axios.get(url).then((res) => {
+        setUserPicture(res.data);
+      });
+      console.log("check");
+    }
+  }, [sessionUser.email]);
   // 댓글 작성 함수
   const [reply, setReply] = useState("");
   const insertReply = (b_seq) => {
     if (reply !== "") {
+      // 임시 댓글 저장
+      setTempReply([
+        ...tempReply,
+        {
+          relyCount: {
+            mem_nick: sessionUser.nick,
+            b_comment: reply,
+            mem_photo: userPicture,
+            b_seq: b_seq,
+          },
+        },
+      ]);
+
+      // db 에 저장
       const url = "http://172.30.1.22:8087/hogward/writereply";
       axios({
         method: "post",
@@ -88,16 +114,11 @@ const UserPost = () => {
     }
   };
 
-  // 댓글 가져오는 함수
-  const getUserFeed = async (b_seq) => {
-    const url = `http://172.30.1.22:8087/hogward/replylist/${b_seq}`;
-    const res = await axios.get(url);
-    console.log("res", res.data);
-    return res.data;
-  };
-
   // inputRef
   const replyInputRef = useRef();
+
+  // 임시댓글 띄우기
+  const [tempReply, setTempReply] = useState("");
 
   return (
     <div className="userpost">
@@ -160,31 +181,47 @@ const UserPost = () => {
                   {/* 댓글 하면 */}
                   <div className="userpost_reply">
                     <div className="userpost_reply_replys">
-                      {console.log(getUserFeed(item.usersFeed.b_seq))}
-                      {/* 댓글, 사진 map돌리기 */}
-                      <div className="userpost_reply_post">
-                        <img
-                          src={"data:image/;base64," + item.usersFeed.mem_photo}
-                          alt="사진"
-                          className="userpost_reply_mem_photo"
-                        />
-                        <span className="userpost_reply_mem_nick">다요미</span>
-                        <span className="userpost_reply_mem_comment">
-                          안녕하세요
-                        </span>
-                      </div>
-                      {/* 구분 */}
-                      <div className="userpost_reply_post">
-                        <img
-                          src={"data:image/;base64," + item.usersFeed.mem_photo}
-                          alt="사진"
-                          className="userpost_reply_mem_photo"
-                        />
-                        <span className="userpost_reply_mem_nick">다요미</span>
-                        <span className="userpost_reply_mem_comment">
-                          안녕하세요 반가워요
-                        </span>
-                      </div>
+                      {item.usersFeed.replyList.map((elem) => (
+                        <div className="userpost_reply_post">
+                          <img
+                            src={"data:image/;base64," + elem.mem_photo}
+                            alt="사진"
+                            className="userpost_reply_mem_photo"
+                          />
+                          <span className="userpost_reply_mem_nick">
+                            {elem.mem_nick}
+                          </span>
+                          <span className="userpost_reply_mem_comment">
+                            {elem.b_comment}
+                          </span>
+                        </div>
+                      ))}
+                      {/* 임시 화면 댓글 띄우기 */}
+
+                      {tempReply !== "" &&
+                        tempReply
+                          .filter(
+                            (temp) =>
+                              temp.relyCount.b_seq === item.usersFeed.b_seq
+                          )
+                          .map((elem) => (
+                            <div className="userpost_reply_post">
+                              <img
+                                src={
+                                  "data:image/;base64," +
+                                  elem.relyCount.mem_photo
+                                }
+                                alt="사진"
+                                className="userpost_reply_mem_photo"
+                              />
+                              <span className="userpost_reply_mem_nick">
+                                {elem.relyCount.mem_nick}
+                              </span>
+                              <span className="userpost_reply_mem_comment">
+                                {elem.relyCount.b_comment}
+                              </span>
+                            </div>
+                          ))}
                     </div>
                     <div className="userpost_reply_write">
                       <span>
@@ -209,6 +246,7 @@ const UserPost = () => {
                         className="userpost_reply_submit"
                         onClick={(e) => {
                           insertReply(item.usersFeed.b_seq);
+                          setReply("");
                           console.log(replyInputRef.current);
                         }}
                       >

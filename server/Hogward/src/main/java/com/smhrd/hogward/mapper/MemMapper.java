@@ -11,6 +11,8 @@ import java.util.HashMap;
 @Mapper
 public interface MemMapper {
 	
+	// 멤버 사진주기
+	public String userPhoto(String email);
 	
 	//이메일 중복체크
 	public int emailCheck(String mem_email);

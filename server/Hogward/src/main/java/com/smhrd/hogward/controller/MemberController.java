@@ -28,6 +28,11 @@ public class MemberController {
 	@Autowired
 	public MemService memService;
 	
+	@GetMapping("/userphoto/{mem_email}")
+	public String userPhoto(@PathVariable("mem_email") String email) {
+		return memService.userPhoto(email);
+	}
+	
 	
 	//이메일 중복체크
 	@PostMapping("/emailcheck")

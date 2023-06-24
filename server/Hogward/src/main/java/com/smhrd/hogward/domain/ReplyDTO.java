@@ -17,4 +17,5 @@ public class ReplyDTO {
 	private String b_comment;
 	private String r_datetime;
 	private int b_seq;
+	private String mem_nick;
 }

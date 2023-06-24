@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Grid, Image, Card, Button, Modal } from "semantic-ui-react";
+import { Card, Button, Modal } from "semantic-ui-react";
 import axios from "axios";
 import { SessionContext } from "../../contexts/SessionContext";
 import "../../assets/css/feed/MyFeed.css";
-import "../../assets/css/feed/Modal.css";
+import Box from "@mui/material/Box";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 const MyFeed = () => {
   // 모달의 표시 여부와 내용을 관리하는 상태
@@ -108,7 +110,7 @@ const MyFeed = () => {
   // 사용자 피드 데이터를 가져오는 상태와 함수
   const [myFeed, setMyFeed] = useState([]);
   const getMyFeed = () => {
-    const url = `http://172.30.1.22:8087/hogward/myfeed/23423@naver.com`;
+    const url = `http://172.30.1.22:8087/hogward/myfeed/aaaaaaa@naver.com`;
 
     axios.get(url).then((res) => {
       setMyFeed(res.data);
@@ -124,99 +126,69 @@ const MyFeed = () => {
   useEffect(() => {}, []);
 
   return (
-    <div>
-      <div style={{ display: "flex", padding: "100px" }}>
-        <div style={{ flex: 3, padding: "10px" }}>
+    <div className="myfeed">
+      <div style={{ display: "flex", padding: "50px" }}>
+        <div style={{ flex: 3, padding: "5px" }}>
           <div className="profile">
-            {/* 프로필 이미지 */}
-            {myFeed.length > 0 ? (
-              <img
-                className="profileImg"
-                src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
-                wrapped
-                ui={false}
-              />
-            ) : (
-              // 프로필 사진 없을 때 기본 프로필 사진
-              <img className="profileImg" src=" " wrapped ui={false} />
-            )}
+            <Card onClick={handleCardClick} className="profileline">
+              <div>
+                {myFeed.length > 0 ? (
+                  <img
+                    className="profileImg"
+                    src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
+
+                    // wrapped
+                    // ui={false}
+                  />
+                ) : (
+                  // 프로필 사진 없을 때 기본 프로필 사진
+                  <img
+                    className="profileImg"
+                    src=" "
+                    // wrapped
+                    // ui={false}
+                  />
+                )}
+              </div>
+            </Card>
           </div>
 
           {/* 프로필 정보 (닉네임, 가입 날짜, 자기 소개) */}
           <div className="Information">
-            <p>{myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}</p>
-            <span className="date">
-              {myFeed.length > 0 ? myFeed[0].myFeed.mem_joindate : "가입날짜"}
-            </span>
-          </div>
-
-          {/* 프로필 카드 */}
-          <Card onClick={handleCardClick}>
-            {/* 프로필 이미지 */}
-            {/* { myFeed.length > 0 ? (
-                <Image
-                  src={"data:image/;base64," + myFeed[0].myFeed.mem_photo}
-                
-                  wrapped
-                  ui={false}
-                />
-              ) : (
-                // 프로필 사진 없을 때 기본 프로필 사진
-                <Image
-                  src=" "
-                  wrapped
-                  ui={false}
-                />
-              )} */}
-
-            {/* 프로필 정보 (닉네임, 가입 날짜, 자기 소개) */}
-            <Card.Content>
-              <Card.Header>
-                {myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}
-              </Card.Header>
-              <Card.Meta>
-                <span className="date">
-                  {myFeed.length > 0
+            <p className="name">
+              {myFeed.length > 0 ? myFeed[0].myFeed.mem_nick : "닉네임"}
+            </p>
+            {/* <p className="date">
+                    {myFeed.length > 0
                     ? myFeed[0].myFeed.mem_joindate
-                    : "가입날짜"}
-                </span>
-              </Card.Meta>
-              <Card.Description>
-                {myFeed.length > 0
-                  ? myFeed[0].myFeed.mem_Introduce
-                  : "자기소개"}
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        </div>
+                    : "가입날짜"} 
+                    </p> */}
 
-        {/* 내정보수정 버튼*/}
-        <div style={{ flex: 1, padding: "50px" }}>
-          <Button
-            color="black"
-            content="내 정보수정"
-            icon="check circle"
-            onClick={handleCardClick}
-            style={{ fontSize: "14px" }}
-          />
+            <p className="introduce">
+              {myFeed.length > 0 ? myFeed[0].myFeed.mem_Introduce : "자기소개"}
+            </p>
+          </div>
         </div>
       </div>
 
       {/* 사용자 게시물 */}
-      <div>
-        <Grid style={{ display: "flex" }}>
-          <Grid.Row>
+
+      <div className="photolist">
+        <Box sx={{ width: 1200, height: 800, overflowY: "scroll" }}>
+          <ImageList variant="masonry" cols={3} gap={8}>
             {myFeed.map((post, index) => (
-              <Grid.Column
+              <ImageListItem
                 key={index}
                 onClick={() => handleGridItemClick(post.myFeed.b_seq)}
-                style={{ width: "25%" }}
               >
-                <Image src={"data:image/;base64," + post.myFeed.b_file} />
-              </Grid.Column>
+                <img
+                  src={"data:image/;base64," + post.myFeed.b_file}
+                  loading="lazy"
+                />
+              </ImageListItem>
             ))}
-          </Grid.Row>
-        </Grid>
+          </ImageList>
+        </Box>
       </div>
 
       {/* 모달 */}
@@ -229,6 +201,11 @@ const MyFeed = () => {
       >
         <Modal.Content>{modalContent}</Modal.Content>
       </Modal>
+
+      {/* 억지렌더링 */}
+      {console.log(imgFile)}
+      {console.log(member)}
+      {console.log(sessionUser)}
     </div>
   );
 };

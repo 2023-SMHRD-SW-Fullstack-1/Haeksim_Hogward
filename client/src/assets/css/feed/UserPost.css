@@ -67,6 +67,7 @@
 .userpost_reply_post {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .userpost_reply_mem_photo {
@@ -106,4 +107,7 @@
   border: none;
   font-size: 18px;
   white-space: nowrap;
+}
+.user_reply_datetime {
+  font-size: 10px;
 }

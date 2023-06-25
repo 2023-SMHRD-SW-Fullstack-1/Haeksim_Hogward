@@ -23,10 +23,24 @@ const MagicMap = () => {
   const nav = useNavigate();
 
   const [selectedThema, setSelectedThema] = useState(4);
-  // 현재 선택된 랜드마크
   const [clickedLandmark, setClickedLandMark] = useState();
-  // 세션값 가져오기
   const { sessionUser } = useContext(SessionContext);
+  const [areas, setAreas] = useState([]);
+  const [landmarks, setLandMarks] = useState([]);
+  const [newLandMarks, setNewLandMarks] = useState([]);
+  const [mousePosition, setMousePosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
+  const [clickedArea, setClickedArea] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const districtRef = useRef([]);
+
+  const [landmarkAllCount, setLandmarkAllCount] = useState([]);
+  const [reren, setReren] = useState(true);
+  const [memAuthCount, setMemAuthCount] = useState([]);
+
   // 로그인 안할시 메인으로 보내기
   if (sessionStorage.getItem("user")) {
   } else {
@@ -39,46 +53,6 @@ const MagicMap = () => {
     });
     nav("/");
   }
-  // useEffect(() => {
-  //   if (sessionUser.email === "") {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "인증 정보 불일치",
-  //       text: "로그인 해주세요.",
-  //       confirmButtonColor: "#e74c3c",
-  //       confirmButtonText: "확인",
-  //     });
-  //     nav("/");
-  //   } else {
-  //     console.log("else : ", sessionUser.email);
-  //   }
-  // }, []);
-
-  // 시군구 경계값 좌표
-  const [areas, setAreas] = useState([]);
-
-  // 랜드마크 데이터
-  const [landmarks, setLandMarks] = useState([]);
-  const [newLandMarks, setNewLandMarks] = useState([]);
-
-  // 카카오맵 관련 state
-  const [mousePosition, setMousePosition] = useState({
-    lat: 0,
-    lng: 0,
-  });
-
-  // 클리이벤트 state
-  const [clickedArea, setClickedArea] = useState();
-
-  // sidebar onoff state
-  const [isOpen, setIsOpen] = useState(false);
-
-  // 경계값 ref
-  const districtRef = useRef([]);
-
-  // 전체 랜드마크 카운트 state
-  const [landmarkAllCount, setLandmarkAllCount] = useState([]);
-  const [reren, setReren] = useState(true);
 
   // 경계값 데이터 가져오는 함수
   const getDistrictAPI = () =>
@@ -123,11 +97,8 @@ const MagicMap = () => {
   }, []);
 
   // 회원별 랜드마크 인증수 카운트
-  const [memAuthCount, setMemAuthCount] = useState([]);
 
   const getMemberAuthCount = () => {
-    console.log("a", sessionUser);
-    console.log("bababab", sessionUser.email);
     // const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${mem_email}`;
     if (sessionUser.email) {
       const url = `http://172.30.1.22:8087/hogward/certifiedlandmarks/${sessionUser.email}`;
@@ -236,18 +207,10 @@ const MagicMap = () => {
           }}
           style={{
             // 지도의 크기
-            // width: "100%",
             width: cliWidth,
-            // width: 1400,
             height: cliHeight - 250,
-            // height: mapRef.current.clientHeight + "px" || "600px",
           }}
           level={11} // 지도의 확대 레벨
-          // draggable={false} // 지도 드래그 막기
-          // options={{
-          //   scrollwheel: false, // 마우스 휠로 확대와 축소 비활성화
-          //   disableDoubleClickZoom: true, // 더블 클릭으로 확대 비활성화
-          // }}
           maxLevel={11}
           onMouseMove={(_map, mouseEvent) =>
             setMousePosition({
@@ -334,30 +297,6 @@ const MagicMap = () => {
               </div>
             </CustomOverlayMap>
           )}
-          {/* 지역 클릭 이벤트 */}
-          {/* {clickedArea && (
-            <MapInfoWindow position={clickedArea.position}>
-              <img
-                alt="close"
-                width="14"
-                height="13"
-                src="http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
-                style={{
-                  position: "absolute",
-                  right: "5px",
-                  top: "5px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setClickedArea(null)}
-              ></img>
-              <div className="info">
-                <div className="title">{clickedArea.name}</div>
-                <div className="size">
-                  총 면적 : 약 {clickedArea.area})m<sup>2</sup>
-                </div>
-              </div>
-            </MapInfoWindow>
-          )} */}
         </Map>
         <AuthMenu
           isOpen={isOpen}

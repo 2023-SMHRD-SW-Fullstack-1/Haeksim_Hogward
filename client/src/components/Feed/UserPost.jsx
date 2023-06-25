@@ -1,40 +1,31 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Feed, Button, Image, Modal } from "semantic-ui-react";
+import { Feed } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faComment,
-  faHeart,
-  faSmile,
-} from "@fortawesome/free-regular-svg-icons";
+import { faHeart, faSmile } from "@fortawesome/free-regular-svg-icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../../assets/css/feed/UserPost.css";
 
 // 로딩 버튼
-import {
-  BallTriangle,
-  Circles,
-  ColorRing,
-  Dna,
-  Hearts,
-  Puff,
-  Oval,
-} from "react-loader-spinner";
-import UserRank from "./UserRank";
+import { Oval } from "react-loader-spinner";
 import { SessionContext } from "../../contexts/SessionContext";
 import Swal from "sweetalert2";
 
 const UserPost = () => {
-  // 세션 구현
+  // 세션
   const { sessionUser } = useContext(SessionContext);
-
-  const [open, setOpen] = useState(false); // 모달의 상태를 관리하는 state
-  const [modalContent, setModalContent] = useState(null); // 모달에 표시될 내용을 관리하는 state
 
   // 다른사람 피드,댓글 최신순 데이터
   const [allfeed, setAllFeed] = useState([]);
+  const [pageCnt, setPageCnt] = useState(2);
+  const [userPicture, setUserPicture] = useState("");
+  const [reply, setReply] = useState("");
+  const [tempReply, setTempReply] = useState("");
 
+  const replyInputRef = useRef();
+
+  // 초기 렌더링시 피드데이터 가져오기
   useEffect(() => {
     const url = "http://172.30.1.22:8087/hogward/usersfeed/1";
     // 다시 키기
@@ -44,7 +35,6 @@ const UserPost = () => {
   }, []);
 
   // 페이징기법 적용 데이터 가져오기
-  const [pageCnt, setPageCnt] = useState(2);
   const fetchMoreData = () => {
     const url = `http://172.30.1.22:8087/hogward/usersfeed/${pageCnt}`;
     setTimeout(() => {
@@ -56,53 +46,54 @@ const UserPost = () => {
   };
 
   // 유저 사진만 불러오기
-  const [userPicture, setUserPicture] = useState("");
   useEffect(() => {
     if (sessionUser.email !== "") {
       const url = `http://172.30.1.22:8087/hogward/userphoto/${sessionUser.email}`;
       axios.get(url).then((res) => {
         setUserPicture(res.data);
       });
-      console.log("check");
     }
   }, [sessionUser.email]);
-  // 댓글 작성 함수
-  const [reply, setReply] = useState("");
-  const insertReply = (b_seq) => {
-    if (reply !== "") {
-      // 임시 댓글 저장
-      setTempReply([
-        ...tempReply,
-        {
-          relyCount: {
-            mem_nick: sessionUser.nick,
-            b_comment: reply,
-            mem_photo: userPicture,
-            b_seq: b_seq,
-          },
-        },
-      ]);
 
-      // db 에 저장
-      const url = "http://172.30.1.22:8087/hogward/writereply";
-      axios({
-        method: "post",
-        url,
-        data: {
-          mem_email: sessionUser.email,
-          b_seq,
-          b_comment: reply,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
+  // 댓글 작성 함수
+  const insertReply = (b_seq) => {
+    // 비로그인시 작성 막는 함수
+    if (sessionUser.email !== "") {
+      if (reply !== "") {
+        // 임시 댓글 저장
+        setTempReply([
+          ...tempReply,
+          {
+            relyCount: {
+              mem_nick: sessionUser.nick,
+              b_comment: reply,
+              mem_photo: userPicture,
+              b_seq: b_seq,
+            },
+          },
+        ]);
+
+        // db 에 저장
+        const url = "http://172.30.1.22:8087/hogward/writereply";
+        axios({
+          method: "post",
+          url,
+          data: {
+            mem_email: sessionUser.email,
+            b_seq,
+            b_comment: reply,
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-        .catch((error) => {
-          console.error(error);
-        });
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -114,13 +105,7 @@ const UserPost = () => {
     }
   };
 
-  // inputRef
-  const replyInputRef = useRef();
-
-  // 임시댓글 띄우기
-  const [tempReply, setTempReply] = useState("");
-
-  // 날짜
+  // 현재 날짜 가져오는 함수
   const getCurrentTime = () => {
     const currentDateTime = new Date();
     const year = currentDateTime.getFullYear();
@@ -191,7 +176,7 @@ const UserPost = () => {
                   <p style={{ fontSize: "10px", marginTop: "10px" }}>
                     {item.usersFeed.b_datetime}
                   </p>
-                  {/* 댓글 하면 */}
+                  {/* 댓글 창 */}
                   <div className="userpost_reply">
                     <div className="userpost_reply_replys">
                       {item.usersFeed.replyList.map((elem) => (
@@ -217,8 +202,7 @@ const UserPost = () => {
                           </span>
                         </div>
                       ))}
-                      {/* 임시 화면 댓글 띄우기 */}
-
+                      {/* 임시 댓글 띄우기 */}
                       {tempReply !== "" &&
                         tempReply
                           .filter(
@@ -279,7 +263,6 @@ const UserPost = () => {
                         onClick={(e) => {
                           insertReply(item.usersFeed.b_seq);
                           setReply("");
-                          console.log(replyInputRef.current);
                         }}
                       >
                         작성
@@ -287,46 +270,11 @@ const UserPost = () => {
                     </div>
                   </div>
                 </div>
-                {/* <Feed.Content>
-                <Feed.Summary>
-                  {item.type === "friend-addition" &&
-                    " 님이 친구로 추가했습니다"}
-                  {item.type === "new-illustrations" &&
-                    " 님이 새로운 그림 2개를 추가했습니다"}
-                  {item.type === "new-photos" &&
-                    " 님이 당신의 새로운 사진 2장을 추가했습니다"}
-                  {item.type === "post" && (
-                    <span
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handlePostClick(item.textContent)}
-                    >
-                      {" "}
-                      님이 페이지에 게시글을 작성했습니다
-                    </span>
-                  )}
-                  <Feed.Date></Feed.Date>
-                </Feed.Summary>
-              </Feed.Content> */}
               </div>
             </Feed.Event>
           </div>
         ))}
       </InfiniteScroll>
-      {/* 모달 컴포넌트 */}
-      {/* <Modal
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
-        open={open}
-      >
-        <Modal.Content>
-          {modalContent}
-        </Modal.Content>
-        <Modal.Actions>
-          <Button color="black" onClick={() => setOpen(false)}>
-            닫기
-          </Button>
-        </Modal.Actions>
-      </Modal> */}
     </div>
   );
 };

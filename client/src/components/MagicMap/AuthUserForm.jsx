@@ -10,11 +10,14 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
   const { sessionUser } = useContext(SessionContext);
-  // 현재 위치 기반 인증여부 확인
+  const [selectedTags, setSelectedTags] = useState([]);
   const [isLocOk, setIslocOk] = useState(false);
+  const [isImgUploaded, setIsImgUploaded] = useState(false);
+  // 현재 내 위치 정보 state
+  const [uLat, setUlat] = useState(null);
+  const [uLng, setUlng] = useState(null);
 
   // 이미지 업로드 검사(파일 업로드 안할시 인증하기 막음)
-  const [isImgUploaded, setIsImgUploaded] = useState(false);
   const handleIsImgUploaded = () => {
     setIsImgUploaded(true);
   };
@@ -30,19 +33,12 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
   };
 
   // 태그 갯수 제한
-  const [selectedTags, setSelectedTags] = useState([]);
 
   const handleTagChange = (event, value) => {
     if (value.length <= 3) {
-      console.log("v", value);
       setSelectedTags(value);
     }
-    console.log("s", selectedTags);
   };
-
-  // 현재 내 위치 정보 state
-  const [uLat, setUlat] = useState(null);
-  const [uLng, setUlng] = useState(null);
 
   // 현재 사용자 lat, lng 가져오기
   const getUserLocation = () => {
@@ -153,7 +149,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
       action="http://172.30.1.22:8087/hogward/insertboard"
       className="authform"
       encType="multipart/form-data"
-      onSubmit={(e) => console.log(e)}
     >
       {/* 폼에서 보내야 할것 */}
       {/* 글 사진 */}
@@ -225,8 +220,7 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
       <input type="hidden" readOnly value={uLat || 0} name="lat" />
       {/* 경도 */}
       <input type="hidden" readOnly value={uLng || 0} name="lng" />
-      {/* 글 작성자 x  이메일*/}
-      {/* 테스트용 */}
+      {/* 글 작성자 보내는용도 */}
       <input
         type="hidden"
         readOnly

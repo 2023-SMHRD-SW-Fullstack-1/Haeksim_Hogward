@@ -15,7 +15,6 @@ const UserRank = () => {
     const url = `http://172.30.1.22:8087/hogward/ranking`;
     axios.get(url).then((res) => {
       setUserRankData(res.data);
-      console.log("랭킹데이터가져오기 :", res.data);
     });
   }, []);
 
@@ -30,18 +29,15 @@ const UserRank = () => {
         />
       </div>
     );
-    console.log("랭킹클릭 : ", handleSummaryClick);
-    console.log("셀렉서머리클릭 :", selectedSummary);
 
     //랭킹 클릭시 데이터 가져오는 axios
     axios.get(`http://172.30.1.22:8087/hogward/ranking`).then((res) => {
       setUserPosts(res.data);
     });
-    console.log("유저포스트: ", userPosts);
     setOpen(true);
   };
 
-  //맨 위로 올려주기
+  // 페이지 맨 위로 올려주는 함수
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

@@ -2,8 +2,6 @@ import React from "react";
 import { MapMarker } from "react-kakao-maps-sdk";
 import moonimage from "../../assets/img/moonauthmark.png";
 import babimage from "../../assets/img/riceauthmark.png";
-import lockmark from "../../assets/img/lockmark.png";
-import unlockmark from "../../assets/img/unlockmark.png";
 
 const MapImageMarker = ({ lm }) => {
   // 지도 안의 마커 생성

@@ -9,7 +9,9 @@ import AuthUserForm from "./AuthUserForm";
 
 // 지도페이지 우측 인증사이드바
 const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark, reren, setReren }) => {
+  const [open, setOpen] = React.useState(false);
   const authRef = useRef();
+
   // 사이드 On/Off 구현
   useEffect(() => {
     if (isOpen) {
@@ -26,7 +28,6 @@ const AuthMenu = ({ isOpen, setIsOpen, clickedLandmark, reren, setReren }) => {
   }, []);
 
   // 인증하기 창 관련
-  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);

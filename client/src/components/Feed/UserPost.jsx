@@ -120,6 +120,19 @@ const UserPost = () => {
   // 임시댓글 띄우기
   const [tempReply, setTempReply] = useState("");
 
+  // 날짜
+  const getCurrentTime = () => {
+    const currentDateTime = new Date();
+    const year = currentDateTime.getFullYear();
+    const month = String(currentDateTime.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDateTime.getDate()).padStart(2, "0");
+    const hour = String(currentDateTime.getHours()).padStart(2, "0");
+    const minute = String(currentDateTime.getMinutes()).padStart(2, "0");
+    const second = String(currentDateTime.getSeconds()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  };
+
   return (
     <div className="userpost">
       <InfiniteScroll
@@ -183,16 +196,24 @@ const UserPost = () => {
                     <div className="userpost_reply_replys">
                       {item.usersFeed.replyList.map((elem) => (
                         <div className="userpost_reply_post">
-                          <img
-                            src={"data:image/;base64," + elem.mem_photo}
-                            alt="사진"
-                            className="userpost_reply_mem_photo"
-                          />
-                          <span className="userpost_reply_mem_nick">
-                            {elem.mem_nick}
-                          </span>
-                          <span className="userpost_reply_mem_comment">
-                            {elem.b_comment}
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <img
+                              src={"data:image/;base64," + elem.mem_photo}
+                              alt="사진"
+                              className="userpost_reply_mem_photo"
+                            />
+                            <span className="userpost_reply_mem_nick">
+                              {elem.mem_nick}
+                            </span>
+                            <span className="userpost_reply_mem_comment">
+                              {elem.b_comment}
+                            </span>
+                          </div>
+
+                          <span className="user_reply_datetime">
+                            {elem.r_datetime}
                           </span>
                         </div>
                       ))}
@@ -206,19 +227,30 @@ const UserPost = () => {
                           )
                           .map((elem) => (
                             <div className="userpost_reply_post">
-                              <img
-                                src={
-                                  "data:image/;base64," +
-                                  elem.relyCount.mem_photo
-                                }
-                                alt="사진"
-                                className="userpost_reply_mem_photo"
-                              />
-                              <span className="userpost_reply_mem_nick">
-                                {elem.relyCount.mem_nick}
-                              </span>
-                              <span className="userpost_reply_mem_comment">
-                                {elem.relyCount.b_comment}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <img
+                                  src={
+                                    "data:image/;base64," +
+                                    elem.relyCount.mem_photo
+                                  }
+                                  alt="사진"
+                                  className="userpost_reply_mem_photo"
+                                />
+                                <span className="userpost_reply_mem_nick">
+                                  {elem.relyCount.mem_nick}
+                                </span>
+                                <span className="userpost_reply_mem_comment">
+                                  {elem.relyCount.b_comment}
+                                </span>
+                              </div>
+
+                              <span className="user_reply_datetime">
+                                {getCurrentTime()}
                               </span>
                             </div>
                           ))}

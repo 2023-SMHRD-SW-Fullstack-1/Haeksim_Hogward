@@ -168,22 +168,25 @@ const MyFeed = () => {
 
   // 사용자 세션 컨텍스트
   const { sessionUser } = useContext(SessionContext);
+  console.log("abvc",sessionUser)
 
   // 사용자 피드 데이터를 가져오는 상태와 함수
   const [myFeed, setMyFeed] = useState([]);
   const getMyFeed = () => {
-    const url = `http://172.30.1.22:8087/hogward/myfeed/aaaaaaa@naver.com`;
-
-    axios.get(url).then((res) => {
-      setMyFeed(res.data);
-      console.log(res.data);
-    });
+    if(sessionUser.email !== ""){
+      const url = `http://172.30.1.22:8087/hogward/myfeed/${sessionUser.email}`;
+      // const url = `http://172.30.1.22:8087/hogward/myfeed/ekekek@naver.com`;
+      axios.get(url).then((res) => {
+        setMyFeed(res.data);
+        console.log(res.data);
+      });
+    }
   };
 
   // 컴포넌트 마운트 시 사용자 피드 데이터 가져오기
   useEffect(() => {
     getMyFeed();
-  }, []);
+  }, [sessionUser]);
 
   useEffect(() => {}, []);
 

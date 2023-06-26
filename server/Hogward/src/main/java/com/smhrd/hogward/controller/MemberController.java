@@ -110,9 +110,10 @@ public class MemberController {
 
 	//프로필 사진 수정
 	@PostMapping("/profileupdate/{mem_email}")
-	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, HttpServletResponse response) {
-		
-		System.out.println(mem_email);
+	public int profileUpdate(@RequestPart("b_file") MultipartFile file, @PathVariable("mem_email")String mem_email, @RequestParam("mem_nick")String mem_nick,  @RequestParam("mem_introduce") String mem_introduce ,HttpServletResponse response) {
+		System.out.println("123123");
+		System.out.println(mem_introduce);
+		System.out.println(mem_nick);
 		String newFileName = UUID.randomUUID().toString() + file.getOriginalFilename();
 		try {
 			//이미지 file -> 저장(지정된 경로에)
@@ -126,11 +127,11 @@ public class MemberController {
 		}
 		//member.setMem_photo(newFileName);
 		
-		int cnt = memService.profileUpdate(newFileName, mem_email);
+		int cnt = memService.profileUpdate(newFileName, mem_email,mem_nick, mem_introduce);
 		
 		if(cnt>0) {
 			System.out.println("프로필 수정 완료");
-			String redirect_uri="http://localhost:3000/feed";
+			String redirect_uri="http://localhost:3000/mypage";
 			
 	    	try {
 				response.sendRedirect(redirect_uri);

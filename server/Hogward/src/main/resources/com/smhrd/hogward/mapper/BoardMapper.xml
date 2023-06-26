@@ -14,7 +14,6 @@
 		           , A.mem_nick
 		           , B.mem_email AS mem_email_B
 		           , B.b_file, B.b_content
-		           , B.b_title
 		           , B.b_rep, B.b_likes
 		           , B.b_datetime
 		           , B.b_seq

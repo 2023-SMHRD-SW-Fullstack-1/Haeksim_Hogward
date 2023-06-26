@@ -29,7 +29,11 @@
   	</select>
   	
   	<update id="profileUpdate" parameterType="com.smhrd.hogward.mapper.MemMapper" >
-  		update t_member set mem_photo=#{newFileName} where mem_email=#{mem_email}
+  		update t_member set 
+  		      mem_photo=#{newFileName},
+  		      mem_nick = #{mem_nick},
+  		      mem_introduce = #{mem_introduce} 
+  		 where mem_email=#{mem_email}
   	</update>
   	
   

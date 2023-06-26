@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/NavbarElements.css";
+import KakaoChatButton from "./Feed/KakaoChatButton";
 
 function NavbarElements() {
   const { sessionUser, setSessionUser } = useContext(SessionContext);
@@ -54,6 +55,7 @@ function NavbarElements() {
               </>
             )}
           </Nav>
+          <Nav><KakaoChatButton/></Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

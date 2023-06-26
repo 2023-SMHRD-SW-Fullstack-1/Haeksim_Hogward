@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
 import axios from "axios";
-import KakaoChatButton from "./KakaoChatButton";
+// import KakaoChatButton from "./KakaoChatButton";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
@@ -129,8 +129,8 @@ const UserRank = () => {
         {/* 맨 위로 가는 버튼 */}
         <Button onClick={scrollToTop}>맨위로</Button>
       </Card>
-
-      <KakaoChatButton/>
+      {/* 카카오고객센터 */}
+      {/* <KakaoChatButton /> */}
 
     </div>
   );

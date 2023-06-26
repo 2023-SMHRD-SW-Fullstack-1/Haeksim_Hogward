@@ -21,7 +21,6 @@ public class UsersFeed {
 
 	private String mem_photo;
 	private String mem_nick;
-	private String b_title;
 	private String b_file;
 	private String b_content;
 	private String b_rep;

@@ -10,6 +10,10 @@ import ImageListItem from '@mui/material/ImageListItem';
 
 
 const MyFeed = () => {
+
+    // 사용자 세션 컨텍스트
+    const { sessionUser } = useContext(SessionContext);
+    console.log("abvc",sessionUser)
   // 모달의 표시 여부와 내용을 관리하는 상태
   const [open, setOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -18,6 +22,7 @@ const MyFeed = () => {
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
 
+
   // 선택된 이미지 파일을 저장하는 함수
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
@@ -25,24 +30,33 @@ const MyFeed = () => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImgFile(reader.result);
+      previewRef.current.src = reader.result;
     };
   };
   // 모달을 닫는 함수
   const handleCloseModal = () => {
     setOpen(false);
+    previewRef.current.src = "/defaultphpto.jpg"
+    setImgFile(`data:image/;base64,${myFeed[0]?.myFeed.mem_photo}`)
+  
   };
   const [member, setMember] = useState(null);
 
 
   const [nick, setNick] = useState(""); // 닉네임
+  const handleNickCheck = (e) => {
+    setNick(e.target.value)
+  }
   // //닉네임 중복확인
   const onCheckNick = (e) => {
     const formData = new FormData();
-    formData.append("mem_nick", nick);
+    console.log("nickck" ,nickRef.current.value )
+    formData.append("mem_nick", nickRef.current.value);
 
     axios
       .post("http://172.30.1.22:8087/hogward/nickcheck", formData)
       .then((res) => {
+        console.log(res)        
         if (res.data == 0) {
           alert("사용 가능한 닉네임 입니다.");
         } else {
@@ -54,21 +68,27 @@ const MyFeed = () => {
       });
   };
 
+  // ref
+  const previewRef = useRef();
+  const nickRef = useRef();
+ 
   // 프로필 카드 클릭 이벤트 핸들러
   const handleCardClick = () => {
     setModalContent(
       <div className="pfmodal">
         <form
           method="post"
-          action="http://172.30.1.22:8087/hogward/profileupdate/admin"
+          action={`http://172.30.1.22:8087/hogward/profileupdate/${sessionUser.email}`}
           className="authform"
           encType="multipart/form-data"
         >
           {/* 선택된 프로필 이미지 미리보기 */}
+          
           <img
-            src={`data:image/;base64,${myFeed[0]?.myFeed.mem_photo}`}
+            src={imgFile ? imgFile :`data:image/;base64,${myFeed[0]?.myFeed.mem_photo}`}
             alt="프로필 이미지"
             className="authform_preview"
+            ref={previewRef}
             //사진 꾸미기
             style={{
               width: "200px",
@@ -100,6 +120,8 @@ const MyFeed = () => {
               placeholder={`${myFeed.length > 0
                 ? myFeed[0].myFeed.mem_nick
                 : "수정할 닉네임"}`}
+              onChange={handleNickCheck}
+              ref={nickRef}
             /> 
             <button type="button" class="btn btn-dark" onClick={onCheckNick}>
                 중복확인
@@ -151,13 +173,13 @@ const MyFeed = () => {
         setMember(res.data.boardOne);
         setModalContent(
           <div>
-            <h2>제목 : {oneb.b_title}</h2>
+            <h2>{oneb.b_title}</h2>
             <p>
-              Photo: <img src={`data:image/;base64,${oneb.b_file}`} />
+              <img src={`data:image/;base64,${oneb.b_file}`} />
             </p>
             <p>장소 : {oneb.b_loc}</p>
             <p>내용 : {oneb.b_content}</p>
-            <p>좋아요 : {oneb.b_likes}</p>
+            {/* <p>좋아요 : {oneb.b_likes}</p> */}
             <p>태그 : {oneb.b_tag}</p>
           </div>
         );
@@ -166,9 +188,7 @@ const MyFeed = () => {
     setOpen(true);
   };
 
-  // 사용자 세션 컨텍스트
-  const { sessionUser } = useContext(SessionContext);
-  console.log("abvc",sessionUser)
+
 
   // 사용자 피드 데이터를 가져오는 상태와 함수
   const [myFeed, setMyFeed] = useState([]);
@@ -209,9 +229,9 @@ const MyFeed = () => {
                             ) : (
                             // 프로필 사진 없을 때 기본 프로필 사진
                             <img className="profileImg"
-                            src=" "
+                            src="/defaultphoto.jpg"
                             // wrapped
-                            // ui={false}
+                            // ui={false} 
                             />
                             )}
                     </div>
@@ -250,11 +270,12 @@ const MyFeed = () => {
         {myFeed.map((post, index) => (
           <ImageListItem key={index} onClick={() => handleGridItemClick(post.myFeed.b_seq)}>
             <img
-              src={"data:image/;base64," + post.myFeed.b_file}
-      
+              src={"data:image/;base64," + post.myFeed.b_file }
+              
              
               loading="lazy"
             />
+            
           </ImageListItem>
         ))}
       </ImageList>

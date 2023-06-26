@@ -56,8 +56,8 @@ public class MemService {
 	}
 	
 	//프로필 사진 수정
-	public int profileUpdate(String newFileName, String mem_email) {
-		return memMapper.profileUpdate(newFileName, mem_email);
+	public int profileUpdate(String newFileName, String mem_email, String mem_nick ,String mem_introduce) {
+		return memMapper.profileUpdate(newFileName, mem_email,mem_nick, mem_introduce);
 	}
 	
 

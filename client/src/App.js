@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import { SessionContext } from "./contexts/SessionContext";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 function App() {
   const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
@@ -35,6 +36,7 @@ function App() {
       }
     }
   }, []);
+
   return (
     <div className="App">
       {/* <Header /> */}

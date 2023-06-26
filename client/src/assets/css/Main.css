@@ -21,7 +21,14 @@ https://templatemo.com/tm-583-festava-live
 .section1 {
   text-align: center;
 }
+/* 팝업창 */
+/* .custom-swal-container {
+  width: 800px;
+} */
 
+.custom-swal-popup {
+  width: 60%;
+}
 .slider-container {
   display: flex;
   justify-content: center;

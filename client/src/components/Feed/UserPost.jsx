@@ -155,12 +155,16 @@ const UserPost = () => {
                 />
               </Feed.Label>
               <div className="userpost_feedContent">
-                <div className="userpost_feedContent_icons">
-                  <FontAwesomeIcon icon={faHeart} />
+                <div
+                  className="userpost_feedContent_icons"
+                  style={{ marginBottom: "20px" }}
+                >
+                  {item.usersFeed.b_title}
                 </div>
-                <div className="userpost_userslikes">
+                {/* 좋아요 */}
+                {/* <div className="userpost_userslikes">
                   {item.usersFeed.b_likes} likes
-                </div>
+                </div> */}
                 <div className="userpost_usercontent">
                   {/* <span>{item.usersFeed.mem_nick}</span> */}
                   <p

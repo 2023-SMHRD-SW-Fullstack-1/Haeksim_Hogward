@@ -46,7 +46,7 @@ function NavbarElements() {
               <>
                 <Nav.Link style={{ color: "skyblue" }}>
                   {sessionUser.nick}
-                  <span> {userlevel}레벨</span>
+                  <span style={{ color: "red" }}> Lv.{userlevel}</span>
                 </Nav.Link>
                 <Nav.Link
                   onClick={() => {

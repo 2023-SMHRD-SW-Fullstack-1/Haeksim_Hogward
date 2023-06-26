@@ -22,6 +22,7 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     setIsImgUploaded(true);
   };
 
+  // 사진 미리보기
   const saveImgFile = () => {
     handleIsImgUploaded();
     const file = imgRef.current.files[0];
@@ -61,13 +62,40 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     getUserLocation();
   }, []);
 
-  // 사용자 위치 vs 선택된 랜드마크 맞나 비교 알고리즘
-  // 스마트인재 개발원 = {lat : 35.149926, lng : 126.919749}
-  // 반지름 : 코사마트조대점 : {lat :35.145027, lng : 126.924962}
-  // 반경 변수
-  const dis = 0.006;
+  // // 사용자 위치 vs 선택된 랜드마크 맞나 비교 알고리즘
+  // // 반경 변수
+  // const dis = 0.03;
 
-  // 비교 알고리즘 현재 위치 반경
+  // // 비교 알고리즘 현재 위치 반경
+  // const isValidLocation = (
+  //   landmarkLat,
+  //   landmarkLng,
+  //   userLat,
+  //   userLng,
+  //   maxDistance
+  // ) => {
+  //   console.log(userLat);
+  //   console.log(userLng);
+  //   // 랜드마크와 유저 사이의 거리
+  //   const distance = Math.sqrt(
+  //     Math.pow(landmarkLat - userLat, 2) + Math.pow(landmarkLng - userLng, 2)
+  //   );
+  //   console.log("dis : ", distance);
+
+  //   const radius = Math.sqrt(
+  //     Math.pow(landmarkLat + maxDistance - landmarkLat, 2) +
+  //       Math.pow(landmarkLng + maxDistance - landmarkLng, 2)
+  //   );
+  //   console.log("radius : ", radius);
+
+  //   // return distance <= maxDistance;
+  //   return maxDistance > distance;
+  // };
+
+  // 사용자 위치 vs 선택된 랜드마크 거리 비교 알고리즘
+  // 반경 변수 (km)
+  const dis = 5;
+  // 비교 알고리즘 현재 위치 반경 (km 기준)
   const isValidLocation = (
     landmarkLat,
     landmarkLng,
@@ -75,21 +103,31 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     userLng,
     maxDistance
   ) => {
-    const distance = Math.sqrt(
-      Math.pow(landmarkLat - userLat, 2) + Math.pow(landmarkLng - userLng, 2)
-    );
-    const radius = Math.sqrt(
-      Math.pow(landmarkLat + maxDistance - landmarkLat, 2) +
-        Math.pow(landmarkLng + maxDistance - landmarkLng, 2)
-    );
+    // 위도, 경도를 라디안으로 변환
+    const toRadians = (deg) => (deg * Math.PI) / 180;
+    const lat1 = toRadians(userLat);
+    const lat2 = toRadians(landmarkLat);
+    const deltaLat = toRadians(landmarkLat - userLat);
+    const deltaLng = toRadians(landmarkLng - userLng);
 
-    return distance <= radius;
+    // Haversine Formula를 사용하여 거리 계산
+    // 위도와 경도로 기술된, 구면 좌표계 상의 두 점 사이의 대원 거리를 구하는 공식.
+    const a =
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(lat1) *
+        Math.cos(lat2) *
+        Math.sin(deltaLng / 2) *
+        Math.sin(deltaLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = 6371 * c; // 지구의 반지름(6371km)을 곱해서 거리를 계산
+
+    return maxDistance > distance;
   };
-
   // 인증확인 버튼 핸들러
   const handleIsOk = (e) => {
     // 랜드마크가 인증반경 내부에 있으면 인증확인버튼 on
     e.preventDefault();
+    console.log(isValidLocation);
     if (
       isValidLocation(
         clickedLandmark.t_landmark.lat,
@@ -110,7 +148,6 @@ const AuthUserForm = ({ clickedLandmark, reren, setReren }) => {
     } else {
       // 테스트용 (인증 비활성화)
       setIslocOk(true);
-
       Swal.fire({
         icon: "error",
         title: "인증 위치 불일치",

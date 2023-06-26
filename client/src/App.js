@@ -5,9 +5,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import MagicMapPage from "./pages/MagicMapPage";
 
-import GetDongRegionId from "./modules/map/GetDongRegionId";
-import GetCoords from "./modules/map/GetCoords";
-
 import MainPage from "./pages/MainPage";
 
 //로그인
@@ -33,7 +30,6 @@ function App() {
       try {
         const parsedUser = JSON.parse(user);
         setSessionUser(parsedUser);
-        console.log("bbbb", parsedUser);
       } catch (error) {
         console.error("Failed to parse user data from session storage:", error);
       }

@@ -108,18 +108,18 @@ const MagicMap = () => {
     }
   };
   useEffect(() => {
-    if (sessionUser.email) {
+    if (sessionUser.email !== "") {
       getMemberAuthCount();
     }
   }, [sessionUser]);
 
+  // 인증 안된 랜드마크 필터링
   const filteredMemSite = memAuthCount.filter(
     (item) => item.certifiedLandmark.AUTHCOUNT !== 0
   );
   // 구역 밝기 조절
   const handleDistrictBrightness = (name) => {
     // name = "영암군"...
-    // console.log(filteredMemSite);
     let brightness = 0.8;
     // 알고리즘
     if (
@@ -253,12 +253,13 @@ const MagicMap = () => {
           {areas.map((area, index) => (
             <Polygon
               key={`area-${area.name}`}
+              // 경계값 데이터 적용
               path={area.path}
               strokeWeight={2}
               strokeColor={"#ffffff"}
               strokeOpacity={0.8}
               fillColor={area.isMouseover ? "#09f" : "#474747"}
-              // opacity 그대로 state로 변경
+              // 화면 밝기 조절하는 기능
               fillOpacity={handleDistrictBrightness(area.name)}
               onMouseover={() =>
                 setAreas((prev) => [
@@ -298,6 +299,7 @@ const MagicMap = () => {
             </CustomOverlayMap>
           )}
         </Map>
+        {/* 인증사이드바 */}
         <AuthMenu
           isOpen={isOpen}
           setIsOpen={setIsOpen}

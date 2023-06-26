@@ -1,5 +1,7 @@
 package com.smhrd.hogward.domain;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.smhrd.hogward.mapper.LandmarkMapper;
@@ -25,5 +27,6 @@ public class UsersFeed {
 	private int b_likes;
 	private int b_seq;
 	private String b_datetime;
+	private List<ReplyDTO> replyList;
 
 }

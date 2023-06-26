@@ -26,16 +26,6 @@ import { useEffect } from "react";
 
 function App() {
   const [sessionUser, setSessionUser] = useState({ email: "", nick: "" });
-  // const user = sessionStorage.getItem("user");
-  // if (user) {
-  //   try {
-  //     const parsedUser = JSON.parse(user);
-  //     setSessionUser(parsedUser);
-  //     console.log("bbbb", parsedUser);
-  //   } catch (error) {
-  //     console.error("Failed to parse user data from session storage:", error);
-  //   }
-  // }
 
   useEffect(() => {
     const user = sessionStorage.getItem("user");
@@ -67,14 +57,6 @@ function App() {
           {/* 발자국지도 */}
           <Route path="/foottracer" element={<FootTracer />}></Route>
           {/*  */}
-          {/* <Route path="/about" element={<About />}></Route>
-          <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/product/:num" element={<ProductDetail />}></Route> */}
-          {/* path 가 * 라면, 위의 경로 이외에 경로들을 처리 */}
-          {/* <Route path="*" element={<NotFound />}></Route> */}
-          {/* 임시  - 전처리*/}
-          <Route path="/module/getregion" element={<GetDongRegionId />}></Route>
-          <Route path="/module/getcoords" element={<GetCoords />}></Route>
         </Routes>
         <Footer />
       </SessionContext.Provider>

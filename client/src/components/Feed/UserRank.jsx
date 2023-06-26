@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  Feed,
-  Button,
-  Header,
-  Image,
-  Modal,
-  ModalContent,
-} from "semantic-ui-react";
+import { Card, Feed, Button, Header, Image, Modal } from "semantic-ui-react";
 import "../../assets/css/feed/UserRank.css";
 import axios from "axios";
+import KakaoChatButton from "./KakaoChatButton";
 
 const UserRank = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +15,6 @@ const UserRank = () => {
     const url = `http://172.30.1.22:8087/hogward/ranking`;
     axios.get(url).then((res) => {
       setUserRankData(res.data);
-      console.log("랭킹데이터가져오기 :", res.data);
     });
   }, []);
 
@@ -37,15 +29,20 @@ const UserRank = () => {
         />
       </div>
     );
-    console.log("랭킹클릭 : ", handleSummaryClick);
-    console.log("셀렉서머리클릭 :", selectedSummary);
 
     //랭킹 클릭시 데이터 가져오는 axios
     axios.get(`http://172.30.1.22:8087/hogward/ranking`).then((res) => {
       setUserPosts(res.data);
     });
-    console.log("유저포스트: ", userPosts);
     setOpen(true);
+  };
+
+  // 페이지 맨 위로 올려주는 함수
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -85,7 +82,7 @@ const UserRank = () => {
             <Modal.Content>
               <Modal.Description>
                 <Header>{selectedSummary}</Header>
-                <div>
+                <div className="rankpage">
                   {userPosts.map((post, index) => (
                     <div key={index}>
                       {/* <h3>{post.rankingTen.mem_nick}</h3> */}
@@ -102,7 +99,11 @@ const UserRank = () => {
             </Modal.Actions>
           </Modal>
         </Card.Content>
+        {/* 맨 위로 가는 버튼 */}
+        <Button onClick={scrollToTop}>맨위로</Button>
       </Card>
+
+      <KakaoChatButton />
     </div>
   );
 };

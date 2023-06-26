@@ -17,9 +17,11 @@ import org.springframework.stereotype.Service;
 import com.smhrd.hogward.domain.LandAllUserPhoto;
 import com.smhrd.hogward.domain.MyFeed;
 import com.smhrd.hogward.domain.Ranking;
+import com.smhrd.hogward.domain.ReplyDTO;
 import com.smhrd.hogward.domain.T_Board;
 import com.smhrd.hogward.domain.UsersFeed;
 import com.smhrd.hogward.mapper.BoardMapper;
+import com.smhrd.hogward.mapper.ReplyMapper;
 import com.smhrd.shop.converter.ImageConverter;
 import com.smhrd.shop.converter.ImageToBase64;
 
@@ -34,16 +36,18 @@ public class BoardService {
 	@Autowired
 	public BoardMapper boardMapper;
 	
+	@Autowired
+	public ReplyMapper replyMapper;
 	
 	//유저 게시글 모두보기(유저피드)
 	public JSONArray usersFeed(int s_paging_num, int e_paging_num) {
 		List<UsersFeed> list = boardMapper.usersFeed(s_paging_num,e_paging_num);
-		
+
 		JSONArray jsonArray = new JSONArray();
 		ImageConverter<File, String> converter = new ImageToBase64();
 		
 		for(UsersFeed userfeed : list) {
-			
+			System.out.println(userfeed.getB_seq());
 			File file1 = new File("c:\\uploadimage\\"+userfeed.getB_file());
 			File file2 = new File("c:\\uploadimage\\"+userfeed.getMem_photo());
 	
@@ -58,12 +62,27 @@ public class BoardService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+//			리플 데이터 추가
+			List<ReplyDTO> replyList = replyMapper.replylist(userfeed.getB_seq());
+			for(ReplyDTO replydto : replyList) {
+				File file3 = new File("c:\\uploadimage\\"+replydto.getMem_photo());
+				String fileStringValue3 = null;
+				
+				try {
+					fileStringValue3 = converter.convert(file3);	
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				replydto.setMem_photo(fileStringValue3);			
+				
+			}
 			userfeed.setB_file(fileStringValue1);
 			userfeed.setMem_photo(fileStringValue2);
-			
+			userfeed.setReplyList(replyList);
 			JSONObject obj = new JSONObject();
 			obj.put("usersFeed", userfeed);
+			
 			
 			jsonArray.add(obj); 
 		}

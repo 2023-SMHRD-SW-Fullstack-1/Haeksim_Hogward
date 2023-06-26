@@ -20,7 +20,7 @@
 	</insert>
 	
 	<select id="replylist" resultType="com.smhrd.hogward.domain.ReplyDTO">
-		SELECT A.mem_email, A.mem_photo , B.b_comment, B.r_datetime, B_seq
+		SELECT A.mem_email, A.mem_photo , B.b_comment, B.r_datetime, B_seq, A.mem_nick
 		  FROM t_member A, t_reply B
 		 WHERE A.mem_email = B.mem_email
 		   AND B.B_seq = #{b_seq}

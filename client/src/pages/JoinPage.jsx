@@ -4,8 +4,7 @@ import axios from "axios";
 import { Button } from "semantic-ui-react";
 
 const JoinPage = () => {
-  
-  // 이메일 유효성 검사 
+  // 이메일 유효성 검사
   const validateEmail = (email) => {
     return email
       .toLowerCase()
@@ -13,15 +12,15 @@ const JoinPage = () => {
         /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
       );
   };
-  
-  //비밀번호 유효성 검사 
+
+  //비밀번호 유효성 검사
   const validatePwd = (password) => {
     return password
       .toLowerCase()
       .match(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,25}$/);
   };
 
-  //닉네임 유효성 검사 
+  //닉네임 유효성 검사
   const validateNickname = (nick) => {
     return nick.toLowerCase().match(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|].{1,8}$/);
   };
@@ -36,43 +35,40 @@ const JoinPage = () => {
   const [confirmPwdMsg, setConfirmPwdMsg] = useState(""); //비밀번호 확인
   const [nicknameMsg, setNicknameMsg] = useState(""); //닉네임중복
 
-
-
-  //이메일 
- const onChangeEmail = useCallback(async (e) => {
+  //이메일
+  const onChangeEmail = useCallback(async (e) => {
     const currEmail = e.target.value;
     setEmail(currEmail);
 
     if (currEmail == "") {
       setEmailMsg("");
-    } else if(!validateEmail(currEmail)){
+    } else if (!validateEmail(currEmail)) {
       setEmailMsg("이메일 형식이 올바르지 않습니다.");
-    } else{
+    } else {
       setEmailMsg("올바른 이메일 형식입니다.");
     }
   }, []);
 
-  //닉네임 
+  //닉네임
   const onChangeNickname = useCallback((e) => {
     const currNickname = e.target.value;
     setNick(currNickname);
-  
-     if (currNickname == ""){
+
+    if (currNickname == "") {
       setNicknameMsg("");
-     } else if(!validateNickname(currNickname)) {
+    } else if (!validateNickname(currNickname)) {
       setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.");
-     } else {
+    } else {
       setNicknameMsg("올바른 닉네임 형식입니다.");
-     }
+    }
   }, []);
 
-
-  //비밀번호 
+  //비밀번호
   const onChangePwd = useCallback(async (e) => {
     const currPwd = e.target.value;
     setPassword(currPwd);
 
-    if(currPwd == ""){
+    if (currPwd == "") {
       setPwdMsg("");
     } else if (!validatePwd(currPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 10자리 이상 입력해주세요.");
@@ -81,16 +77,15 @@ const JoinPage = () => {
     }
   }, []);
 
-
   //비밀번호 확인
   const onChangeConfirmPwd = useCallback(
     (e) => {
       const currConfirmPwd = e.target.value;
       setConfirmPassword(currConfirmPwd);
 
-      if(currConfirmPwd == ""){
-        setConfirmPwdMsg("")
-      } else if(currConfirmPwd !== password) {
+      if (currConfirmPwd == "") {
+        setConfirmPwdMsg("");
+      } else if (currConfirmPwd !== password) {
         setConfirmPwdMsg("비밀번호가 일치하지 않습니다.");
       } else {
         setConfirmPwdMsg("올바른 비밀번호입니다.");
@@ -99,16 +94,15 @@ const JoinPage = () => {
     [password]
   );
 
+  // 유효성 검사 함수로 정리
+  const isEmailValid = validateEmail(email);
+  const isPwdValid = validatePwd(password);
+  const isConfirmPwd = password === confirmPassword;
+  const isNicknameValid = validateNickname(nick);
 
-
-    // 유효성 검사 함수로 정리
-    const isEmailValid = validateEmail(email);
-    const isPwdValid = validatePwd(password);
-    const isConfirmPwd = password === confirmPassword;
-    const isNicknameValid = validateNickname(nick);
-  
-    // 유효성 검사 한번에 묶어주기 
-    const isAllValid = isEmailValid && isPwdValid && isConfirmPwd && isNicknameValid;
+  // 유효성 검사 한번에 묶어주기
+  const isAllValid =
+    isEmailValid && isPwdValid && isConfirmPwd && isNicknameValid;
 
   // 이메일서버로 보내기
   // 가져온값 0 이면 사용가능 , 1이면 사용불가능
@@ -232,7 +226,7 @@ const JoinPage = () => {
           <div className="user-box">
             <input
               value={password}
-              type ="password"
+              type="password"
               onChange={onChangePwd}
               required=""
               placeholder="비밀번호를 입력해 주세요"
@@ -244,7 +238,7 @@ const JoinPage = () => {
           <div className="user-box">
             <input
               value={confirmPassword}
-              type ="password"
+              type="password"
               onChange={onChangeConfirmPwd}
               required=""
               placeholder="비밀번호를 다시 입력해주세요"

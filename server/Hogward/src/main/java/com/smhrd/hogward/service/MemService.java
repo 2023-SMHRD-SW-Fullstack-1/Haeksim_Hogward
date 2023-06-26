@@ -1,10 +1,15 @@
 package com.smhrd.hogward.service;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smhrd.hogward.domain.T_Member;
 import com.smhrd.hogward.mapper.MemMapper;
+import com.smhrd.shop.converter.ImageConverter;
+import com.smhrd.shop.converter.ImageToBase64;
 
 @Service
 public class MemService {
@@ -12,6 +17,23 @@ public class MemService {
 	@Autowired
 	private MemMapper memMapper;
 	
+    //멤버 사진주기
+	public String userPhoto(String email){
+		
+		String photo = memMapper.userPhoto(email);
+		File file1 = new File("c:\\uploadimage\\"+photo);
+		String fileStringValue = null;
+		ImageConverter<File, String> converter = new ImageToBase64();
+		
+		try {
+			fileStringValue = converter.convert(file1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return fileStringValue;
+	}
 	
 	//이메일 중복체크
 	public int emailCheck(String mem_email) {
@@ -38,5 +60,6 @@ public class MemService {
 		return memMapper.profileUpdate(newFileName, mem_email);
 	}
 	
+
 
 }

@@ -5,6 +5,9 @@
   
   <mapper namespace="com.smhrd.hogward.mapper.MemMapper">
   
+  	<select id="userPhoto">
+  		select mem_photo from t_member where mem_email = #{email}
+  	</select>
   	
   	<select id="emailCheck">
   		select count(*) from t_member where mem_email=#{mem_email}

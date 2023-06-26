@@ -5,11 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/NavbarElements.css";
-<<<<<<< HEAD
 import axios from "axios";
-=======
 import KakaoChatButton from "./Feed/KakaoChatButton";
->>>>>>> origin/kimterman
 
 function NavbarElements() {
   // 세션
@@ -71,7 +68,9 @@ function NavbarElements() {
               </>
             )}
           </Nav>
-          <Nav><KakaoChatButton/></Nav>
+          <Nav>
+            <KakaoChatButton />
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -174,25 +174,25 @@ const MagicMap = () => {
       <div className="magicmap_themabtn">
         <button
           onClick={() => setSelectedThema(3)}
-          className="btn btn-dark btn btn-lg"
+          className="btn btn-light btn btn-lg"
         >
           지도만 보기
         </button>
         <button
           onClick={() => setSelectedThema(0)}
-          className="btn btn-dark btn btn-lg"
+          className="btn btn-light btn btn-lg"
         >
           전체보기
         </button>
         <button
           onClick={() => setSelectedThema(1)}
-          className="btn btn-dark btn btn-lg"
+          className="btn btn-light btn btn-lg"
         >
           테마1 : 문화재
         </button>
         <button
           onClick={() => setSelectedThema(2)}
-          className="btn btn-dark btn btn-lg"
+          className="btn btn-light btn btn-lg"
         >
           테마2 : 밥집,카페
         </button>

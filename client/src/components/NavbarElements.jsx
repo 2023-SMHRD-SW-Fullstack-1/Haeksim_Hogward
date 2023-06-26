@@ -45,9 +45,27 @@ function NavbarElements() {
           <Nav>
             {sessionUser.email !== "" ? (
               <>
-                <Nav.Link style={{ color: "skyblue" }}>
-                  {sessionUser.nick}
-                  <span style={{ color: "red" }}> Lv.{userlevel}</span>
+                <Nav.Link>
+                  <span style={{ color: "#FF78C4", fontSize: "16px" }}>
+                    Lv.{userlevel}
+                    {"  "}
+                  </span>
+                  <span
+                    style={{
+                      color: "#E1AEFF",
+                    }}
+                  >
+                    {sessionUser.nick}
+                  </span>
+                  <span
+                    style={{
+                      color: "#E1AEFF",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {" "}
+                    마법사
+                  </span>
                 </Nav.Link>
                 <Nav.Link
                   onClick={() => {

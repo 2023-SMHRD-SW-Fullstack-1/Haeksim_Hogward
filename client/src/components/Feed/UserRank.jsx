@@ -99,8 +99,6 @@ const UserRank = () => {
             </Modal.Actions>
           </Modal>
         </Card.Content>
-        {/* 맨 위로 가는 버튼 */}
-        <Button onClick={scrollToTop}>맨위로</Button>
       </Card>
 
       <KakaoChatButton />

@@ -1,63 +1,67 @@
-.myfeed{
-    padding-top: 150PX;
-    background-color: #3d3533;
+.myfeed {
+  padding-top: 150px;
+  /* background-color: #3d3533; */
+  background: linear-gradient(
+    180deg,
+    rgba(43, 39, 40, 1) 0%,
+    rgba(61, 57, 80, 1) 47%,
+    rgba(80, 71, 120, 1) 100%
+  );
 }
 
-.profile{
-    padding-left: 350px;
+.profile {
+  padding-left: 350px;
 }
 
-.profileline{
-    width: 300px !important;
-    height: 300px !important;
-    border-radius: 50% !important;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.profileline {
+  width: 300px !important;
+  height: 300px !important;
+  border-radius: 50% !important;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.profileImg{
- 
-    width: 290px;
-    height: 290px;
-    border-radius: 50%;
+.profileImg {
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
 }
 
-
-.Information{
-    padding-left: 350px;
-    padding-top: 20px;
-    width: 1780px;
-    height: 90px;
-    background-color: 3d3533;
-    color: white;
-    
+.Information {
+  padding-left: 350px;
+  padding-top: 20px;
+  width: 1780px;
+  height: 90px;
+  background-color: 3d3533;
+  color: white;
 }
 
-.photolist{
-    padding-left: 350px;
+.photolist {
+  padding-left: 350px;
 }
 
-.name,.introduce{
-    color: white;
+.name,
+.introduce {
+  color: white;
 }
 
-.name{
-    font-size: 900;
+.name {
+  font-size: 900;
 }
 
-.introduce{
-    color: rgb(188, 151, 225);
+.introduce {
+  color: rgb(188, 151, 225);
 }
 
-
-.profile-nick, .profile-introduce{
-    width: 80%;
-    height: 80px;
-    font-size: 18px;
-    color: #736b69;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid lightgray;
+.profile-nick,
+.profile-introduce {
+  width: 80%;
+  height: 80px;
+  font-size: 18px;
+  color: #736b69;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid lightgray;
 }

@@ -1,9 +1,16 @@
 .userpage {
   padding-top: 150px;
-  background-color: #3d3533;
+  /* background-color: #3d3533; */
   display: flex;
   justify-content: center;
   gap: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(43, 39, 40, 1) 0%,
+    rgba(61, 57, 80, 1) 47%,
+    rgba(80, 71, 120, 1) 100%
+  );
+  transition: all 1s;
 }
 .userpost {
   width: 540px;

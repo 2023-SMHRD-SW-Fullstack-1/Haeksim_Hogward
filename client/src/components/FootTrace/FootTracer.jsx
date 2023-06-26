@@ -82,6 +82,7 @@ const FootTracer = () => {
     for (let i = 0; i < nowAuthCoords.length - 1; i++) {
       containers.push(
         <div>
+          {/* 발자국 생성 */}
           <FootContainer
             key={`container${i}`}
             startCoords={nowAuthCoords[i][0].divcoords.coords}

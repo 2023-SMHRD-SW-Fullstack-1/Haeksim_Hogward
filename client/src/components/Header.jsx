@@ -56,7 +56,11 @@ const Header = () => {
             {/* <button type="button" class="btn btn-primary" href="/loin">로그인</button>
             <span class="button-space"></span>        
             <button type="button" class="btn btn-primary" href="/join">회원가입</button>  */}
+
+
+           
           </div>
+            
         </div>
       </nav>
     </div>

@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import KakaoRound from '../../assets/img/KakaoRound.png'
+import KakaoYellow from '../../assets/img/KakaoYellow.png'
+
 
 const KakaoChatButton = () => {
   const kakaoSdkScript = document.createElement('script');
@@ -26,8 +29,8 @@ const KakaoChatButton = () => {
   return (
     <div >
       <a id="chat-channel-button" href="#" onClick={chatChannel}>
-        <img src="https://t1.daumcdn.net/crms/symbol_img/symbol_%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EC%B1%84%EB%84%90%EA%B4%80%EB%A6%AC%EC%9E%90.png"
-          width='100px'alt="Kakao Talk chat button" />
+        <img src={KakaoYellow}
+         width='50px' height='50px'  />
       </a>
     </div>
   );

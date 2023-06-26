@@ -2,3 +2,7 @@
   position: fixed;
   margin-left: 100px;
 }
+.userrank .circular-image > img {
+  width: 40px !important;
+  height: 40px !important;
+}

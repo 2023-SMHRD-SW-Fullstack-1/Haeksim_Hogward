@@ -59,6 +59,7 @@ const UserRank = () => {
                   image={`data:image/;base64,${item.rankingTen.mem_photo}`}
                   // onClick={() => handleSummaryClick(event.summary)}
                   style={{ cursor: "pointer" }}
+                  className="circular-image"
                 />
 
                 <Feed.Content>

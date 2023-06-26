@@ -130,7 +130,7 @@ public class MemberController {
 		
 		if(cnt>0) {
 			System.out.println("프로필 수정 완료");
-			String redirect_uri="http://localhost:3000/feed";
+			String redirect_uri="http://localhost:3000/mypage";
 			
 	    	try {
 				response.sendRedirect(redirect_uri);

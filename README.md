@@ -1,4 +1,4 @@
-#호그와드
+# 호그와드
 <br>
 
 ## 👀 지도API를 활용한 소셜인증 서비스
@@ -14,10 +14,6 @@
 * 카카오맵API 를 활용한 동적 지도 구현
 * 사용자의 위치에 따른 인증 활성화기능
 * 사용자의 인증ㅅ와드
-<br>
-
-## 👀 지도API를 활용한 소셜인증 서비스
-![메인페이지](https://github.com/2023-SMHRD-SW-Fullstack-1/Haeksim_Hogward/assets/107793363/6cfdf45d-a43b-4be6-afce-4864dcda75bf)
 <br>
 
 ## 📅 프로젝트 기간

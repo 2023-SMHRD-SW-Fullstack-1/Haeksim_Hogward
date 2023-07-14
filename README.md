@@ -115,14 +115,16 @@ https://github.com/2023-SMHRD-SW-Fullstack-1/Haeksim_Hogward/assets/107793363/6b
 ### * 김다영
 
 #### D.A/M
-- 랜드마크 데이터 수집
+- 공공데이터 및 검색엔진을 통한 랜드마크 데이터 수집
 
 #### Front-End
-- 로그인 기능 구현 
 - 회원가입 기능 구현 
+- 로그인 기능 구현
+- axios 를 이용한 서버API 가져오기
+- 로그인 유효성 검사 알고리즘 설계
 - ID, 닉네임 중복확인 기능 구현 
-- Header 템플릿 적용
-- Footer 구현 
+- Header 페이지 구현 및 bootstrap 을 이용한 디자인
+- Footer 페이지 구현 및 디자인
 
 #### 산출문서 작성
 #### PPT 작성
@@ -133,16 +135,17 @@ https://github.com/2023-SMHRD-SW-Fullstack-1/Haeksim_Hogward/assets/107793363/6b
 ### * 정다운
 
 #### Front-End
-- 메인페이지 및 디자인 작업
-- 마이페이지 수정
+- 메인페이지 및 전체적인 디자인 작업
+- 마이페이지 구현
   
 #### Back-end
-- 이메일 닉네임 중복체크, 회원가입 로그인 기능
-- 마이피드, 유저피드 정보 제공 및 정보 DB저장
-- 랜드마크 위치 사진 등 정보 제공
+- MVC 패턴 설계
+- 이메일 닉네임 중복체크, 회원가입 로그인 기능 
+- 마이피드, 유저피드 정보 제공 및 정보
+- 랜드마크 사진 파일 전송API 설계
 - 랭킹 정보제공
+- 전체적인 SQL 문 작성
 - 회원정보 수정기능
-- 랜드마크 데이터 수집 및 DB저장
 
 ## 🤾‍♂️ 트러블슈팅
 ![032](https://github.com/2023-SMHRD-SW-Fullstack-1/Haeksim_Hogward/assets/107793363/bab5aff1-8f27-4ae1-a6e1-63df28c92d6c)
